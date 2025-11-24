@@ -1,4 +1,4 @@
 package getcooked.viewer;
 
-public class Viewer {
+public abstract class Viewer<T> {
 }
