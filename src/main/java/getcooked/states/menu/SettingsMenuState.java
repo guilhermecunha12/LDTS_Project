@@ -1,6 +1,7 @@
-package getcooked.states;
+package getcooked.states.menu;
 
 import getcooked.controller.Controller;
+import getcooked.states.State;
 import getcooked.viewer.Viewer;
 
 public class SettingsMenuState extends State<SettingsMenu> {

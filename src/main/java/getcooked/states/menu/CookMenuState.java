@@ -1,9 +1,10 @@
-package getcooked.states;
+package getcooked.states.menu;
 
 import getcooked.controller.Controller;
+import getcooked.states.State;
 import getcooked.viewer.Viewer;
 
-public class CookMenuState extends State<CookMenu>{
+public class CookMenuState extends State<CookMenu> {
     public CookMenuState(CookMenu model) {
         super(model);
     }

@@ -1,9 +1,10 @@
-package getcooked.states;
+package getcooked.states.menu;
 
 import getcooked.controller.Controller;
+import getcooked.states.State;
 import getcooked.viewer.Viewer;
 
-public class EscapeMenuState extends State<EscapeMenu>{
+public class EscapeMenuState extends State<EscapeMenu> {
     public EscapeMenuState(EscapeMenu model) {
         super(model);
     }
