@@ -2,7 +2,7 @@ package getcooked.gui;
 import getcooked.model.Position;
 
 public interface GUI { // intermediate class to represent a general GUI
-    enum ACTION {UP, DOWN, RIGHT, LEFT, SELECT, NONE}
+    enum ACTION {UP1, UP2, DOWN1, DOWN2, RIGHT1, RIGHT2, LEFT1, LEFT2, SELECT1, SELECT2 , NONE}
 
     ACTION getNextAction();
     void drawText(); // for menu's text

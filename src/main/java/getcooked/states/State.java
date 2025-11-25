@@ -1,6 +1,7 @@
 package getcooked.states;
 import getcooked.Game;
 import getcooked.controller.Controller;
+import getcooked.gui.GUI;
 import getcooked.viewer.Viewer;
 
 public abstract class State<T> {

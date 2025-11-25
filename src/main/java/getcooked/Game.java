@@ -2,16 +2,20 @@ package getcooked;
 import getcooked.gui.LanternaGUI;
 import getcooked.states.State;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class Game {
     private State state;
     private final LanternaGUI gui;
 
-    public Game() {
+    public Game() throws IOException, URISyntaxException, FontFormatException {
         this.state = new MainMenuState();
-        this.gui = new LanternaGUI();
+        this.gui = new LanternaGUI(20, 20);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         new Game().start();
     }
 
