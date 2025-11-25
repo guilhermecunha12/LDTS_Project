@@ -22,11 +22,8 @@ public class MainMenuViewer extends Viewer<MainMenu> {
             // incrementing y using i multiplied by a factor 4
             Position topLeftPos = new Position(middleX - (entry.length() / 2), 10 + 4*i);
 
-            if (getModel().isSelected(i)) {
-                gui.drawTextBox(topLeftPos, getModel().getEntry(i), "#ffffff", "#ffff00", 1);
-            } else {
-                gui.drawTextBox(topLeftPos, getModel().getEntry(i), "#ffffff", "#eeeeee", 1);
-            }
+            gui.drawTextBox(topLeftPos, getModel().getEntry(i), "#ffffff",
+                   getModel().isSelected(i)? "#ffff00" : "#eeeeee", 1);
         }
     }
 }

@@ -17,7 +17,7 @@ public abstract class Viewer<T> {
 
     public void draw(GUI gui) throws IOException {
         gui.clear();
-        drawElements(gui); // implemented by concrete viewers
+        this.drawElements(gui); // implemented by concrete viewers
         gui.refresh();
     }
 
