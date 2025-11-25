@@ -20,6 +20,10 @@ public abstract class State<T> {
     protected abstract Viewer<T> getViewer();
     protected abstract Controller<T> getController();
 
+    public T getModel() {
+        return model;
+    }
+
     // public T getModel();
 
     public void step(Game game, GUI gui, long time) {
