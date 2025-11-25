@@ -4,6 +4,7 @@ import getcooked.controller.Controller;
 import getcooked.model.menu.MainMenu;
 import getcooked.states.State;
 import getcooked.viewer.Viewer;
+import getcooked.viewer.menu.MainMenuViewer;
 
 public class MainMenuState extends State<MainMenu> {
     public MainMenuState(MainMenu model) {

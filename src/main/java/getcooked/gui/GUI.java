@@ -9,6 +9,9 @@ public interface GUI { // intermediate class to represent a general GUI
     enum ACTION {PLAYER1_UP, PLAYER2_UP, PLAYER1_DOWN, PLAYER2_DOWN, PLAYER1_RIGHT,
         PLAYER2_RIGHT, PLAYER1_LEFT, PLAYER2_LEFT, PLAYER1_SELECT, PLAYER2_SELECT}
 
+    int getHeight();
+    int getWidth();
+
     Set<ACTION> getNextAction();
 
     // draw elements of the game
@@ -44,7 +47,8 @@ public interface GUI { // intermediate class to represent a general GUI
     void drawCutter(Position position);
 
     void drawText(Position position, String text, String color);
-    void drawTextBox(Screen screen, Position position, String text, String fgColor, String bgColor, int padding);
+    void drawTextBox(Position position, String text, String textColor, String bgColor, int padding);
+    void changeBackgroundColor(String newColor);
 
     void clear();
     void refresh() throws IOException;

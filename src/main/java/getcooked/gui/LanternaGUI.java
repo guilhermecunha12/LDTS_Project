@@ -21,17 +21,23 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LanternaGUI implements GUI{
+public class LanternaGUI implements GUI {
 
+    private final int height; // for now, final
+    private final int width; // for now, final
     private final Screen screen;
     private final Set<Integer> activeInputs;
 
     public LanternaGUI(Screen screen){
         this.screen = screen;
+        this.height = screen.getTerminalSize().getRows();
+        this.width = screen.getTerminalSize().getColumns();
         this.activeInputs = new HashSet<>();
     };
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
+        this.width = width;
+        this.height = height;
         AWTTerminalFontConfiguration fontConfig = loadSegoeFont();
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
@@ -49,8 +55,8 @@ public class LanternaGUI implements GUI{
                 activeInputs.remove(e.getKeyCode());
             }
         });
-
     }
+
 
     public  Screen createScreen(Terminal terminal) throws IOException{
         final Screen screen;
@@ -84,6 +90,16 @@ public class LanternaGUI implements GUI{
         Font loadedFont = font.deriveFont(Font.PLAIN, 25);
         AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
         return fontConfig;
+    }
+
+    @Override
+    public int getHeight() {
+        return this.height;
+    }
+
+    @Override
+    public int getWidth() {
+        return this.width;
     }
 
     @Override
@@ -269,8 +285,8 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawTextBox(Screen screen, Position position, String text,
-                            String fgColor, String bgColor, int padding) {
+    public void drawTextBox(Position position, String text,
+                            String textColor, String bgColor, int padding) {
         TextGraphics tg = screen.newTextGraphics();
 
         int width = text.length() + 2 * padding;
@@ -282,7 +298,14 @@ public class LanternaGUI implements GUI{
         tg.fillRectangle(new TerminalPosition(position.getX(), position.getY()),
                 new TerminalSize(width, height), ' ');
 
-        drawText(position, text, fgColor);
+        drawText(position, text, textColor);
+    }
+
+    @Override
+    public void changeBackgroundColor(String newColor) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(TextColor.Factory.fromString(newColor));
+        tg.fill(' '); // fill the whole screen with the new background color
     }
 
     @Override
