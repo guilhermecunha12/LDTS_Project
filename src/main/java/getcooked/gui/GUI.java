@@ -1,10 +1,13 @@
 package getcooked.gui;
 import getcooked.model.Position;
 
-public interface GUI { // intermediate class to represent a general GUI
-    enum ACTION {UP1, UP2, DOWN1, DOWN2, RIGHT1, RIGHT2, LEFT1, LEFT2, SELECT1, SELECT2 , NONE}
+import java.util.Set;
 
-    ACTION getNextAction();
+public interface GUI { // intermediate class to represent a general GUI
+    enum ACTION {PLAYER1_UP, PLAYER2_UP, PLAYER1_DOWN, PLAYER2_DOWN, PLAYER1_RIGHT,
+        PLAYER2_RIGHT, PLAYER1_LEFT, PLAYER2_LEFT, PLAYER1_SELECT, PLAYER2_SELECT}
+
+    Set<ACTION> getNextAction();
     void drawText(); // for menu's text
     void drawTextBox();
 

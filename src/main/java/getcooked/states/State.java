@@ -4,6 +4,8 @@ import getcooked.controller.Controller;
 import getcooked.gui.GUI;
 import getcooked.viewer.Viewer;
 
+import java.util.Set;
+
 public abstract class State<T> {
     private T model;
     private Viewer<T> viewer;
@@ -21,7 +23,7 @@ public abstract class State<T> {
     // public T getModel();
 
     public void step(Game game, GUI gui, long time) {
-        GUI.ACTION action = gui.getNextAction();
+        Set<GUI.ACTION> action = gui.getNextAction();
         this.controller.step(game, action, time);
         this.viewer.draw(gui);
     }

@@ -9,25 +9,48 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-public class LanternaGUI {
+public class LanternaGUI implements GUI{
 
     private final Screen screen;
+    private final Set<Integer> activeInputs;
 
     public LanternaGUI(Screen screen){
         this.screen = screen;
+        this.activeInputs = new HashSet<>();
     };
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
         AWTTerminalFontConfiguration fontConfig = loadSegoeFont();
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
+        // Consider synchronized set if needed
+        this.activeInputs = new HashSet<>();
+
+        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                activeInputs.add(e.getKeyCode());
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                activeInputs.remove(e.getKeyCode());
+            }
+        });
 
     }
 
@@ -65,6 +88,20 @@ public class LanternaGUI {
         return fontConfig;
     }
 
-
+    @Override
+    public Set<GUI.ACTION> getNextAction(){
+        // Transforming a set of key codes into a set of GUI actions
+        Set<GUI.ACTION> actions = new HashSet<>();
+        if(activeInputs.contains(KeyEvent.VK_W)) actions.add(ACTION.PLAYER1_UP);
+        if(activeInputs.contains(KeyEvent.VK_A)) actions.add(ACTION.PLAYER1_LEFT);
+        if(activeInputs.contains(KeyEvent.VK_S)) actions.add(ACTION.PLAYER1_DOWN);
+        if(activeInputs.contains(KeyEvent.VK_D)) actions.add(ACTION.PLAYER1_RIGHT);
+        if(activeInputs.contains(KeyEvent.VK_SPACE)) actions.add(ACTION.PLAYER1_SELECT);
+        if(activeInputs.contains(KeyEvent.VK_UP)) actions.add(ACTION.PLAYER2_UP);
+        if(activeInputs.contains(KeyEvent.VK_LEFT)) actions.add(ACTION.PLAYER2_LEFT);
+        if(activeInputs.contains(KeyEvent.VK_DOWN)) actions.add(ACTION.PLAYER2_DOWN);
+        if(activeInputs.contains(KeyEvent.VK_RIGHT)) actions.add(ACTION.PLAYER2_RIGHT);
+        if(activeInputs.contains(KeyEvent.VK_ENTER)) actions.add(ACTION.PLAYER2_SELECT);
+    }
 
 }
