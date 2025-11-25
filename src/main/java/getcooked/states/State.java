@@ -23,8 +23,8 @@ public abstract class State<T> {
     // public T getModel();
 
     public void step(Game game, GUI gui, long time) {
-        Set<GUI.ACTION> action = gui.getNextAction();
-        this.controller.step(game, action, time);
+        Set<GUI.ACTION> actions = gui.getNextAction();
+        this.controller.step(game, actions, time);
         this.viewer.draw(gui);
     }
 }
