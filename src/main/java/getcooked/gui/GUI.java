@@ -1,6 +1,8 @@
 package getcooked.gui;
+import com.googlecode.lanterna.screen.Screen;
 import getcooked.model.Position;
 
+import java.io.IOException;
 import java.util.Set;
 
 public interface GUI { // intermediate class to represent a general GUI
@@ -8,11 +10,10 @@ public interface GUI { // intermediate class to represent a general GUI
         PLAYER2_RIGHT, PLAYER1_LEFT, PLAYER2_LEFT, PLAYER1_SELECT, PLAYER2_SELECT}
 
     Set<ACTION> getNextAction();
-    void drawText(); // for menu's text
-    void drawTextBox();
 
     // draw elements of the game
-    void drawChef(Position position);
+    void drawChef1(Position position);
+    void drawChef2(Position position);
     void drawOrder(Position position);
     void drawTrash(Position position);
     void drawDelivery(Position position);
@@ -42,7 +43,10 @@ public interface GUI { // intermediate class to represent a general GUI
     void drawGrill(Position position);
     void drawCutter(Position position);
 
+    void drawText(Position position, String text, String color);
+    void drawTextBox(Screen screen, Position position, String text, String fgColor, String bgColor, int padding);
+
     void clear();
-    void refresh();
-    void close();
+    void refresh() throws IOException;
+    void close() throws IOException;
 }
