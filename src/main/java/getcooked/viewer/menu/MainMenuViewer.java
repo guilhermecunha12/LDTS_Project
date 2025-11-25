@@ -1,6 +1,7 @@
 package getcooked.viewer.menu;
 
 import getcooked.model.Position;
+import getcooked.model.menu.MainMenu;
 import getcooked.viewer.Viewer;
 import getcooked.gui.GUI;
 
@@ -20,9 +21,9 @@ public class MainMenuViewer extends Viewer<MainMenu> {
             Position posToDraw = new Position(middleX, 10 + 4*i);
 
             if (getModel().isSelected(i)) {
-                gui.drawTextBox(posToDraw, getModel().getEntry(i), "#ffffff", "#ffff00");
+                gui.drawTextBox(posToDraw, getModel().getEntry(i), "#ffffff", "#ffff00", 1);
             } else {
-                gui.drawTextBox(posToDraw, getModel().getEntry(i), "#ffffff", "#eeeeee");
+                gui.drawTextBox(posToDraw, getModel().getEntry(i), "#ffffff", "#eeeeee", 1);
             }
         }
     }
