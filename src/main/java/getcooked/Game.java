@@ -1,6 +1,8 @@
 package getcooked;
 import getcooked.gui.LanternaGUI;
+import getcooked.model.menu.MainMenu;
 import getcooked.states.State;
+import getcooked.states.menu.MainMenuState;
 
 import java.awt.*;
 import java.io.IOException;
@@ -11,7 +13,7 @@ public class Game {
     private final LanternaGUI gui;
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
-        this.state = new MainMenuState();
+        this.state = new MainMenuState(new MainMenu());
         this.gui = new LanternaGUI(20, 20);
     }
 
