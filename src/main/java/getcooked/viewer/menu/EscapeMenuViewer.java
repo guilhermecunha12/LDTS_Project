@@ -14,8 +14,6 @@ public class EscapeMenuViewer extends Viewer<EscapeMenu> {
 
     @Override
     public void drawElements(GUI gui) {
-        gui.darken(); // darken the kitchen
-
         int rectangleWidth = 10;
         int rectangleHeight = 20;
         Position topleftPos = new Position(gui.getWidth()/2 - rectangleWidth/2, gui.getHeight()/2 - rectangleHeight/2);
