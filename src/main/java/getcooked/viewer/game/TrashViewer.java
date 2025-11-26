@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.game.kitchen.elements.interactable.Trash;
 
 public class TrashViewer implements ElementViewer<Trash> {
     @Override

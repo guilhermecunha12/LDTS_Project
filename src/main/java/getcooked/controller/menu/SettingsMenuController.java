@@ -30,7 +30,11 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
                     if(getModel().isSelectedVolume()) {
                         // Toggles the menu
                         getModel().toggleVolume();
-                        // TODO: Changes the music inside game
+                        if (getModel().isVolumeOn()) {
+                            game.getBackgroundMusicPlayer().start();
+                        } else {
+                            game.getBackgroundMusicPlayer().stop();
+                        }
                     }
                     if (getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
             }

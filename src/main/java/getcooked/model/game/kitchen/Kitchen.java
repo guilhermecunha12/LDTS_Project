@@ -1,12 +1,18 @@
 package getcooked.model.game.kitchen;
 
 
+import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.interactable.Interactable;
+
+import java.util.List;
+
 public class Kitchen {
     private final int width;
     private final int height;
     private boolean escapeMenuOn;
 
-    // Create the objects regarding the elements that are part of the kitchen
+    private List<Chef> chefs;
+    private List<Interactable> interactables;
 
 
     public Kitchen(int width, int height) {
@@ -21,6 +27,15 @@ public class Kitchen {
     public int getHeight() {
         return height;
     }
+
+    public List<Interactable> getInteractables() {
+        return interactables;
+    }
+
+    public List<Chef> getChefs() {
+        return chefs;
+    }
+
     public boolean isEscapeMenuOn() {
         return escapeMenuOn;
     }

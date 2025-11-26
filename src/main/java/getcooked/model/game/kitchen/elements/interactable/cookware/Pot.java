@@ -42,10 +42,12 @@ public class Pot extends Cookware{
         cooked =  hasChoppedPotato && hasChoppedCarrot;
     }
 
+
     @Override
-    protected Grabable createFinishDish(){
+    protected Grabable createFinishedDish(){
         if(!cooked) return null;
         //TODO: Generate a soup and
         contents.clear();
+        return null;
     }
 }
