@@ -5,7 +5,7 @@ import getcooked.model.game.kitchen.elements.grabable.Grabable;
 import getcooked.model.game.kitchen.elements.interactable.Interactable;
 
 public abstract class Dispenser extends Interactable {
-    //Strategys are imutable of each dispenser
+    // Strategies are immutable of each dispenser
     protected final executeBehaviour strategy;
 
     public Dispenser(int x, int y) {

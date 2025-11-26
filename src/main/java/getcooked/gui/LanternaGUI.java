@@ -310,7 +310,7 @@ public class LanternaGUI implements GUI {
                 new TerminalSize(width, height), ' ');
 
         // center the text in the box
-        Position textPosition = new Position(position.getX(), position.getY() + padding);
+        Position textPosition = new Position(position.getX() + padding, position.getY() + padding);
         drawText(textPosition, text, textColor, bgColor);
     }
 

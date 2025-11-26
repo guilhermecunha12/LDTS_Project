@@ -24,7 +24,7 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
         }
 
         // draw back button
-        Position posBack = new Position(gui.getWidth() - 10, gui.getHeight() - 2);
+        Position posBack = new Position(gui.getWidth() - 10, gui.getHeight() - 3);
         gui.drawTextBox(posBack, getModel().getEntry(i), "#000000",
                 getModel().isSelected(i)? "#ffff00" : "#a9a9a9", 1);
     }
