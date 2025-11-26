@@ -14,12 +14,13 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
     public void drawElements(GUI gui) {
         gui.changeBackgroundColor("#468499"); // background color
         int middleX = gui.getWidth() / 2;
-        gui.drawText(new Position(middleX - 6, 5), "Settings Menu", "#ffcf40");
+        String bgColor = gui.getBackgroundColor();
+        gui.drawText(new Position(middleX - 6, 5), "Settings Menu", "#ffcf40", bgColor);
 
         int i = 0;
         for (; i < getModel().getNumberEntries() - 1; i++) { // draw the options
             gui.drawText(new Position(5, 10 + 4*i), getModel().getEntry(i),
-                    getModel().isSelected(i)? "#ffff00" : "#ffffff");
+                    getModel().isSelected(i)? "#ffff00" : "#ffffff", bgColor);
         }
 
         // draw back button
