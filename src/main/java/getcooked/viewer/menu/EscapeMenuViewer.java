@@ -14,7 +14,7 @@ public class EscapeMenuViewer extends Viewer<EscapeMenu> {
 
     @Override
     public void drawElements(GUI gui) {
-        int rectangleWidth = 10;
+        int rectangleWidth = 20;
         int rectangleHeight = 20;
         Position topleftPos = new Position(gui.getWidth()/2 - rectangleWidth/2, gui.getHeight()/2 - rectangleHeight/2);
         String rectangleColor = "#808080"; // gray

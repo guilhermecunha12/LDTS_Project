@@ -18,7 +18,7 @@ public class Game {
 
     public Game() throws Exception{
         this.state = new MainMenuState(new MainMenu());
-        this.gui = new LanternaGUI(30,30);
+        this.gui = new LanternaGUI(50,30);
         this.backgroundMusicPlayer = new BackgroundMusicPlayer(new MusicLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/music.wav"))), AudioSystem.getClip()));
     }
 
