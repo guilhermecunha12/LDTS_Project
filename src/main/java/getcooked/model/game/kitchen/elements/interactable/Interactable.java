@@ -10,5 +10,5 @@ public abstract class Interactable extends Element {
     }
 
     // Each interactable defines what happens to the chef
-    abstract public void interact(Chef chef);
+    public abstract void interact(Chef chef);
 }

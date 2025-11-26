@@ -9,7 +9,6 @@ import java.util.List;
 public class Kitchen {
     private final int width;
     private final int height;
-    private boolean escapeMenuOn;
 
     private List<Chef> chefs;
     private List<Interactable> interactables;
@@ -18,7 +17,6 @@ public class Kitchen {
     public Kitchen(int width, int height) {
         this.width = width;
         this.height = height;
-        this.escapeMenuOn = false;
     }
 
     public int getWidth() {
@@ -42,10 +40,6 @@ public class Kitchen {
 
     public void setInteractables(List<Interactable> interactables) {
         this.interactables = interactables;
-    }
-
-    public boolean isEscapeMenuOn() {
-        return escapeMenuOn;
     }
 
 }
