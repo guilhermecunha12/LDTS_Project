@@ -22,10 +22,17 @@ public class CookMenuController extends Controller<CookMenu> {
             switch (action) {
                 // Considering arrow movement to select options from the menu
                 case PLAYER2_LEFT:
-                    getModel().previousEntry();
+                    if (getModel().isSelected2Player()) getModel().previousEntry();
                     break;
                 case PLAYER2_RIGHT:
-                    getModel().nextEntry();
+                    if (getModel().isSelected1Player()) getModel().nextEntry();
+                    break;
+                case PLAYER2_DOWN:
+                    if (getModel().isSelected1Player()) getModel().previousEntry();
+                    else if (getModel().isSelected2Player()) getModel().nextEntry();
+                    break;
+                case PLAYER2_UP:
+                    if (getModel().isSelectedBack()) getModel().previousEntry();
                     break;
                 case PLAYER2_SELECT:
                     // Add support for both one player and two player in a PlayingState
