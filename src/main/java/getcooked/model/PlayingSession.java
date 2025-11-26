@@ -27,7 +27,7 @@ public class PlayingSession {
         return paused;
     }
 
-    public void setPaused(boolean paused) {
-        this.paused = paused;
+    public void togglePause() {
+        this.paused = !this.paused;
     }
 }

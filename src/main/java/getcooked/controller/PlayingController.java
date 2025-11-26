@@ -16,15 +16,15 @@ public class PlayingController extends Controller<PlayingSession> {
 
     public PlayingController(PlayingSession playingSession) {
         super(playingSession);
-        this.kitchenController = new KitchenController(playingSession.getKitchen());
-        this.escapeMenuController = new EscapeMenuController(playingSession.getEscapeMenu());
+        this.kitchenController = new KitchenController(playingSession.getKitchen(), playingSession);
+        this.escapeMenuController = new EscapeMenuController(playingSession.getEscapeMenu(), playingSession);
     }
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
         if (getModel().isPaused()) {
             // IMPORTANT: pass the playingSession as argument because the EscapeMenuController can modify the paused state of the playingSession
-            this.escapeMenuController.step(game, getModel(), actions, time);
+            this.escapeMenuController.step(game, actions, time);
         } else {
             // IMPORTANT: pass the playingSession as argument because the KitchenController can modify the paused state of the playingSession
             this.kitchenController.step(game, getModel(), actions, time);
