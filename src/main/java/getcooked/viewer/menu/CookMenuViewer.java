@@ -28,8 +28,8 @@ public class CookMenuViewer extends Viewer<CookMenu> {
             if (i == 1) curPos = pos2Player;
             else if (i == 2) curPos = posBack;
 
-            gui.drawTextBox(curPos, getModel().getEntry(i), "#ffffff",
-                    getModel().isSelected(i)? "#ffff00": "#eeeeee", 1);
+            gui.drawTextBox(curPos, getModel().getEntry(i), "#000000",
+                    getModel().isSelected(i)? "#ffff00": "#a9a9a9", 1);
         }
     }
 }

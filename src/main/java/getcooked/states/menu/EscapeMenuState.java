@@ -4,6 +4,7 @@ import getcooked.controller.Controller;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.states.State;
 import getcooked.viewer.Viewer;
+import getcooked.viewer.menu.EscapeMenuViewer;
 
 public class EscapeMenuState extends State<EscapeMenu> {
     public EscapeMenuState(EscapeMenu model) {
