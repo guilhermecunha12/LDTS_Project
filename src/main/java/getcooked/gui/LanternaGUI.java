@@ -1,6 +1,7 @@
 package getcooked.gui;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -27,7 +28,7 @@ public class LanternaGUI implements GUI {
     private final int width; // for now, final
     private final Screen screen;
     private final Set<Integer> activeInputs;
-    private TextColor backgroundColor; // to remember current background color
+    private String backgroundColor; // to remember current background color
 
 
     public LanternaGUI(Screen screen){
@@ -35,7 +36,7 @@ public class LanternaGUI implements GUI {
         this.height = screen.getTerminalSize().getRows();
         this.width = screen.getTerminalSize().getColumns();
         this.activeInputs = new HashSet<>();
-        this.backgroundColor = TextColor.Factory.fromString("#ffffff");
+        this.backgroundColor = "#ffffff";
     };
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
@@ -46,7 +47,7 @@ public class LanternaGUI implements GUI {
         this.screen = createScreen(terminal);
         // Consider synchronized set if needed
         this.activeInputs = new HashSet<>();
-        this.backgroundColor = TextColor.Factory.fromString("#ffffff");
+        this.backgroundColor = "#ffffff";
 
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
@@ -97,6 +98,11 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
+    public String getBackgroundColor() {
+        return backgroundColor.toString();
+    }
+
+    @Override
     public int getHeight() {
         return this.height;
     }
@@ -126,7 +132,7 @@ public class LanternaGUI implements GUI {
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(this.backgroundColor);
+        tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
         tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(x, y + 1, "" + c);
     }
@@ -283,9 +289,9 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawText(Position position, String text, String color) {
+    public void drawText(Position position, String text, String color, String bgColor) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(this.backgroundColor);
+        tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
         tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(position.getX(), position.getY(), text);
     }
@@ -297,8 +303,7 @@ public class LanternaGUI implements GUI {
         int width = text.length() + 2 * padding;
         int height = 1 + 2 * padding;
 
-        TextColor bgColorFormatted = TextColor.Factory.fromString(bgColor);
-        tg.setBackgroundColor(bgColorFormatted);
+        tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
 
         // Check if it's drawing the textbox
         tg.fillRectangle(new TerminalPosition(position.getX(), position.getY()),
@@ -306,19 +311,62 @@ public class LanternaGUI implements GUI {
 
         // center the text in the box
         Position textPosition = new Position(position.getX(), position.getY() + padding);
-        TextColor temp = this.backgroundColor;
-        this.backgroundColor = bgColorFormatted; // temporarily set the background color to the text box's color
-        drawText(textPosition, text, textColor);
-        this.backgroundColor = temp; // restore the original background color
+        drawText(textPosition, text, textColor, bgColor);
+    }
+
+    @Override
+    public void drawRectangle(Position position, int width, int height, String color) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(TextColor.Factory.fromString(color));
+
+        tg.fillRectangle(new TerminalPosition(position.getX(), position.getY()),
+                new TerminalSize(width, height), ' ');
+    }
+
+    @Override
+    public void darken() {
+        TextGraphics tg = screen.newTextGraphics();
+
+        tg.setForegroundColor(new TextColor.RGB(50, 50, 50));  // dark gray color
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT); // TODO: check this later
+
+        for (int y = 0; y < width; y++) {
+            for (int x = 0; x < height; x++) {
+                tg.putString(x, y, "▒");  // shading block
+            }
+        }
+
+
+        /* other approach that might not work
+        for (int i = 0; i < this.width; i++) {
+            for (int j = 0; j < this.height; j++) {
+                TextCharacter textCharacter = this.screen.getFrontCharacter(i, j);
+                TextColor fgColor = textCharacter.getForegroundColor();
+                TextColor bgColor = textCharacter.getBackgroundColor();
+
+                int newfgRed = (int)(fgColor.getRed() * 0.5);
+                int newfgGreen = (int)(fgColor.getGreen() * 0.5);
+                int newfgBlue = (int)(fgColor.getBlue() * 0.5);
+
+                int newbgRed = (int)(bgColor.getRed() * 0.5);
+                int newbgGreen = (int)(bgColor.getGreen() * 0.5);
+                int newbgBlue = (int)(bgColor.getBlue() * 0.5);
+
+                TextGraphics tg = this.screen.newTextGraphics();
+                tg.setBackgroundColor(new TextColor.RGB(newbgRed, newbgGreen, newbgBlue));
+                tg.setForegroundColor(new TextColor.RGB(newfgRed, newfgGreen, newfgBlue));
+                tg.putString(i, j, String.valueOf(textCharacter.getCharacter()));
+            }
+        }
+        */
     }
 
     @Override
     public void changeBackgroundColor(String newColor) {
         TextGraphics tg = screen.newTextGraphics();
-        TextColor newColorFormatted = TextColor.Factory.fromString(newColor);
-        tg.setBackgroundColor(newColorFormatted);
+        tg.setBackgroundColor(TextColor.Factory.fromString(newColor));
         tg.fill(' '); // fill the whole screen with the new background color
-        this.backgroundColor = newColorFormatted;
+        this.backgroundColor = newColor;
     }
 
     @Override
