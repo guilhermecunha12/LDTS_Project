@@ -4,7 +4,14 @@ import java.util.List;
 
 public class ControlsInfoMenu extends Menu{
 
-    public ControlsInfoMenu() {
+    private final boolean onePlayer;
+
+    public ControlsInfoMenu(boolean is1Player) {
         super(List.of());
+        this.onePlayer = is1Player;
+    }
+
+    public boolean isOnePlayer() {
+        return onePlayer;
     }
 }

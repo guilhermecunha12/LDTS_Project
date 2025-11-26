@@ -21,7 +21,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());
         if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
 
-        drawElements(gui, getModel().getTrashes(), new TrashViewer());
+        //drawElements(gui, getModel().getTrashes(), new TrashViewer());
         // TODO: draw all the other elements...
 
         // and then, check if the EscapeMenu is on

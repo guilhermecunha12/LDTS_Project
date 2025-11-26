@@ -3,7 +3,11 @@ package getcooked.controller.menu;
 import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
+import getcooked.model.PlayingSession;
+import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.menu.ControlsInfoMenu;
+import getcooked.model.menu.EscapeMenu;
+import getcooked.states.PlayingState;
 
 import java.io.IOException;
 import java.util.Set;
@@ -20,6 +24,10 @@ public class ControlsInfoMenuController extends Controller<ControlsInfoMenu> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
-        if(framesWaited == FRAMES_TO_WAIT) {};
+        if(framesWaited == FRAMES_TO_WAIT) {
+            game.changeState(new PlayingState(new PlayingSession(new Kitchen(10, 10), new EscapeMenu())));
+            framesWaited = 0;
+        };
+        framesWaited++;
     }
 }
