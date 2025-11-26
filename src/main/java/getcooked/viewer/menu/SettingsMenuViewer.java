@@ -15,7 +15,7 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
         gui.changeBackgroundColor("#468499"); // background color
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 6, 5), "Settings Menu", "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 6, gui.getHeight()/12), "Settings Menu", "#ffcf40", bgColor);
 
         int i = 0;
         for (; i < getModel().getNumberEntries() - 1; i++) { // draw the options

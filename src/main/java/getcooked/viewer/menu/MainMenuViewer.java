@@ -16,7 +16,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
         // draw game title in the middle
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 5, 5), "Get Cooked", "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 5, gui.getHeight()/12), "Get Cooked", "#ffcf40", bgColor);
 
         for (int i = 0; i < getModel().getNumberEntries(); i++) {
             String entry = getModel().getEntry(i);
