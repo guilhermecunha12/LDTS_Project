@@ -25,6 +25,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         // TODO: draw all the other elements...
 
         // and then, check if the EscapeMenu is on
+        // TODO: review if EscapeMenu should exists as a state (in reality, the state is Playing)
         if (getModel().isEscapeMenuOn()) {
             EscapeMenuViewer escapeMenuViewer = new EscapeMenuViewer(new EscapeMenu());
             escapeMenuViewer.drawElements(gui);
