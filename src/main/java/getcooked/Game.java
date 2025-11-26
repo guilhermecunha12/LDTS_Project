@@ -27,7 +27,7 @@ public class Game {
     }
 
     private void start() throws IOException { // fps missing / update frequency
-        int FPS = 10;
+        int FPS = 30;
         int frameTime = 1000 / FPS; // time in milisseconds to spend in one frame
 
         while (state != null) {
