@@ -1,6 +1,7 @@
 package getcooked.gui;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -327,6 +328,7 @@ public class LanternaGUI implements GUI {
                 new TerminalSize(width, height), ' ');
     }
 
+    //TODO: review this method
     @Override
     public void darken() {
         TextGraphics tg = screen.newTextGraphics();
@@ -334,14 +336,6 @@ public class LanternaGUI implements GUI {
         tg.setForegroundColor(new TextColor.RGB(50, 50, 50));  // dark gray color
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT); // TODO: check this later
 
-        for (int y = 0; y < width; y++) {
-            for (int x = 0; x < height; x++) {
-                tg.putString(x, y, "▒");  // shading block
-            }
-        }
-
-
-        /* other approach that might not work
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
                 TextCharacter textCharacter = this.screen.getFrontCharacter(i, j);
@@ -356,13 +350,11 @@ public class LanternaGUI implements GUI {
                 int newbgGreen = (int)(bgColor.getGreen() * 0.5);
                 int newbgBlue = (int)(bgColor.getBlue() * 0.5);
 
-                TextGraphics tg = this.screen.newTextGraphics();
                 tg.setBackgroundColor(new TextColor.RGB(newbgRed, newbgGreen, newbgBlue));
                 tg.setForegroundColor(new TextColor.RGB(newfgRed, newfgGreen, newfgBlue));
                 tg.putString(i, j, String.valueOf(textCharacter.getCharacter()));
             }
         }
-        */
     }
 
     @Override
