@@ -1,7 +1,6 @@
 package getcooked.gui;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -37,7 +36,7 @@ public class LanternaGUI implements GUI {
         this.width = screen.getTerminalSize().getColumns();
         this.activeInputs = new HashSet<>();
         this.backgroundColor = "#ffffff";
-    };
+    }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
         this.width = width;
@@ -126,7 +125,12 @@ public class LanternaGUI implements GUI {
         if(activeInputs.contains(KeyEvent.VK_DOWN)) actions.add(ACTION.PLAYER2_DOWN);
         if(activeInputs.contains(KeyEvent.VK_RIGHT)) actions.add(ACTION.PLAYER2_RIGHT);
         if(activeInputs.contains(KeyEvent.VK_ENTER)) actions.add(ACTION.PLAYER2_SELECT);
-
+        if(activeInputs.contains(KeyEvent.VK_ESCAPE)) actions.add(ACTION.ESCAPE);
+        // We must clear the activeInputs set each iteration
+        // Example: User pressed the down arrow in a certain frame.
+        // If he doesn't release the key in time, that same key is still active in the next frame, making the action
+        // appear "doubled" (it will be processed again)
+        activeInputs.clear();
         return actions;
     }
 
@@ -310,7 +314,7 @@ public class LanternaGUI implements GUI {
                 new TerminalSize(width, height), ' ');
 
         // center the text in the box
-        Position textPosition = new Position(position.getX(), position.getY() + padding);
+        Position textPosition = new Position(position.getX() + padding, position.getY() + padding);
         drawText(textPosition, text, textColor, bgColor);
     }
 
