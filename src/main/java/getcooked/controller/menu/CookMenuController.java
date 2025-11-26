@@ -3,8 +3,10 @@ package getcooked.controller.menu;
 import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
+import getcooked.model.menu.ControlsInfoMenu;
 import getcooked.model.menu.CookMenu;
 import getcooked.model.menu.MainMenu;
+import getcooked.states.menu.ControlsInfoState;
 import getcooked.states.menu.MainMenuState;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class CookMenuController extends Controller<CookMenu> {
                     break;
                 case PLAYER2_SELECT:
                     // Add support for both one player and two player in a PlayingState
-                    // if(getModel().isSelected1Player())
+                    if(getModel().isSelected1Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu()));
                     // if(getModel().isSelected2Player())
                     if(getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
             }

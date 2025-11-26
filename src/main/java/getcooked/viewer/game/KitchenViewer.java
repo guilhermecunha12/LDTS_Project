@@ -18,8 +18,8 @@ public class KitchenViewer extends Viewer<Kitchen> {
     @Override
     public void drawElements(GUI gui) {
         List<Chef> chefs = getModel().getChefs();
-        drawElement(gui, chefs[0], new Chef1Viewer());
-        if (chefs.size() > 1) drawElement(gui, chefs[1], new Chef2Viewer());
+        drawElement(gui, chefs.getFirst(), new Chef1Viewer());
+        if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
 
         drawElements(gui, getModel().getTrashes(), new TrashViewer());
         // TODO: draw all the other elements...

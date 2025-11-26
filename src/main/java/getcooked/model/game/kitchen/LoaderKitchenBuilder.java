@@ -1,5 +1,12 @@
 package getcooked.model.game.kitchen;
 
+import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.interactable.Counter;
+import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
+import getcooked.model.game.kitchen.elements.interactable.Interactable;
+import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -43,5 +50,35 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
     @Override
     protected int getHeight() {
         return lines.size();
+    }
+
+    @Override
+    protected List<Interactable> createInteractables() {
+        List<Interactable> interactables = new ArrayList<>();
+        for(int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for(int x = 0; x < line.length(); x++) {
+                // Creates interactable based on the symbol
+                if(line.charAt(x) == '#') interactables.add(new Counter(x, y));
+                else if (line.charAt(x) == 'p') interactables.add(new PotatoDispenser(x, y));
+                // Plate dispenser else if (line.charAt(x) == 'P') interactables.add
+                else if(line.charAt(x) == 'T') interactables.add(new Trash(x, y));
+                else if (line.charAt(x) == 'D') interactables.add(new DeliverySpot(x, y));
+                // Pot else if (line.charAt(x) == 'Q') interactables.add(new)
+            }
+        }
+        return interactables;
+    }
+
+    @Override
+    protected List<Chef> createChefs() {
+        List<Chef> chefs = new ArrayList<>();
+        for(int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for(int x = 0; x < line.length(); x++) {
+                if(line.charAt(x) == 'C') chefs.add(new Chef(x, y));
+            }
+        }
+        return chefs;
     }
 }
