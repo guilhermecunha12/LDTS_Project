@@ -27,12 +27,15 @@ public class LanternaGUI implements GUI {
     private final int width; // for now, final
     private final Screen screen;
     private final Set<Integer> activeInputs;
+    private TextColor backgroundColor; // to remember current background color
+
 
     public LanternaGUI(Screen screen){
         this.screen = screen;
         this.height = screen.getTerminalSize().getRows();
         this.width = screen.getTerminalSize().getColumns();
         this.activeInputs = new HashSet<>();
+        this.backgroundColor = TextColor.Factory.fromString("#ffffff");
     };
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
@@ -43,6 +46,7 @@ public class LanternaGUI implements GUI {
         this.screen = createScreen(terminal);
         // Consider synchronized set if needed
         this.activeInputs = new HashSet<>();
+        this.backgroundColor = TextColor.Factory.fromString("#ffffff");
 
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
@@ -122,6 +126,7 @@ public class LanternaGUI implements GUI {
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(this.backgroundColor);
         tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(x, y + 1, "" + c);
     }
@@ -280,32 +285,40 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawText(Position position, String text, String color) {
         TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(this.backgroundColor);
         tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(position.getX(), position.getY(), text);
     }
 
     @Override
-    public void drawTextBox(Position position, String text,
-                            String textColor, String bgColor, int padding) {
+    public void drawTextBox(Position position, String text, String textColor, String bgColor, int padding) {
         TextGraphics tg = screen.newTextGraphics();
 
         int width = text.length() + 2 * padding;
         int height = 1 + 2 * padding;
 
-        tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
+        TextColor bgColorFormatted = TextColor.Factory.fromString(bgColor);
+        tg.setBackgroundColor(bgColorFormatted);
 
         // Check if it's drawing the textbox
         tg.fillRectangle(new TerminalPosition(position.getX(), position.getY()),
                 new TerminalSize(width, height), ' ');
 
-        drawText(position, text, textColor);
+        // center the text in the box
+        Position textPosition = new Position(position.getX(), position.getY() + padding);
+        TextColor temp = this.backgroundColor;
+        this.backgroundColor = bgColorFormatted; // temporarily set the background color to the text box's color
+        drawText(textPosition, text, textColor);
+        this.backgroundColor = temp; // restore the original background color
     }
 
     @Override
     public void changeBackgroundColor(String newColor) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(newColor));
+        TextColor newColorFormatted = TextColor.Factory.fromString(newColor);
+        tg.setBackgroundColor(newColorFormatted);
         tg.fill(' '); // fill the whole screen with the new background color
+        this.backgroundColor = newColorFormatted;
     }
 
     @Override
