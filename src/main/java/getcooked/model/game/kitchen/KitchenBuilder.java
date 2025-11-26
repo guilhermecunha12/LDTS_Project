@@ -10,7 +10,8 @@ public abstract class KitchenBuilder {
         Kitchen kitchen = new Kitchen(getWidth(), getHeight());
 
         // Set the different elements inside the kitchen
-
+        kitchen.setChefs(createChefs());
+        kitchen.setInteractables(createInteractables());
 
         return kitchen;
     }
