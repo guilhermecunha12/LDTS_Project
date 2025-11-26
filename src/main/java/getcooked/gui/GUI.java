@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface GUI { // intermediate class to represent a general GUI
     enum ACTION {PLAYER1_UP, PLAYER2_UP, PLAYER1_DOWN, PLAYER2_DOWN, PLAYER1_RIGHT,
-        PLAYER2_RIGHT, PLAYER1_LEFT, PLAYER2_LEFT, PLAYER1_SELECT, PLAYER2_SELECT}
+        PLAYER2_RIGHT, PLAYER1_LEFT, PLAYER2_LEFT, PLAYER1_SELECT, PLAYER2_SELECT, ESCAPE}
 
     int getHeight();
     int getWidth();
