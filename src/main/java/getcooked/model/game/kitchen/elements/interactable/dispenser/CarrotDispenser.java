@@ -1,6 +1,7 @@
 package getcooked.model.game.kitchen.elements.interactable.dispenser;
 
 import getcooked.model.game.kitchen.elements.grabable.Grabable;
+import getcooked.model.game.kitchen.elements.grabable.food.Carrot;
 
 public class CarrotDispenser extends Dispenser {
 
