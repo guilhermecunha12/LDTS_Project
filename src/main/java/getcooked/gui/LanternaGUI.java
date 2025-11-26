@@ -1,7 +1,6 @@
 package getcooked.gui;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -37,7 +36,7 @@ public class LanternaGUI implements GUI {
         this.width = screen.getTerminalSize().getColumns();
         this.activeInputs = new HashSet<>();
         this.backgroundColor = "#ffffff";
-    };
+    }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
         this.width = width;
