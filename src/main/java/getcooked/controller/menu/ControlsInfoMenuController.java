@@ -4,7 +4,7 @@ import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
 import getcooked.model.PlayingSession;
-import getcooked.model.game.kitchen.Kitchen;
+import getcooked.model.game.kitchen.LoaderKitchenBuilder;
 import getcooked.model.menu.ControlsInfoMenu;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.states.PlayingState;
@@ -25,7 +25,7 @@ public class ControlsInfoMenuController extends Controller<ControlsInfoMenu> {
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
         if(framesWaited == FRAMES_TO_WAIT) {
-            game.changeState(new PlayingState(new PlayingSession(new Kitchen(10, 10), new EscapeMenu())));
+            game.changeState(new PlayingState(new PlayingSession(new LoaderKitchenBuilder(1).createKitchen(), new EscapeMenu())));
             framesWaited = 0;
         };
         framesWaited++;

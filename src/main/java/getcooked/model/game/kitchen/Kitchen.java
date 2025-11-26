@@ -36,6 +36,14 @@ public class Kitchen {
         return chefs;
     }
 
+    public void setChefs(List<Chef> chefs) {
+        this.chefs = chefs;
+    }
+
+    public void setInteractables(List<Interactable> interactables) {
+        this.interactables = interactables;
+    }
+
     public boolean isEscapeMenuOn() {
         return escapeMenuOn;
     }
