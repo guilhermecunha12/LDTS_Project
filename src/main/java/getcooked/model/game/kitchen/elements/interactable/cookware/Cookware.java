@@ -53,7 +53,6 @@ public abstract class Cookware extends Interactable {
 
     @Override
     public void interact(Chef chef) {
-        if (chef == null) return;
         if (chef.isHoldingSomething()){
             Grabable held = chef.getItem();
 
