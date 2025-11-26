@@ -32,6 +32,7 @@ public class EscapeMenuController extends Controller<EscapeMenu> {
                 case PLAYER2_SELECT:
                     if (getModel().isSelectedResume()) this.playingSession.togglePause();
                     else if (getModel().isSelectedExitToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
+                    break;
                 case ESCAPE:
                     this.playingSession.togglePause();
             }
