@@ -1,6 +1,7 @@
 package getcooked.model.game.kitchen.elements.interactable;
 
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.grabable.Grabable;
 
 public class Trash extends Interactable{
 
@@ -10,6 +11,7 @@ public class Trash extends Interactable{
 
     @Override
     public void interact(Chef chef) {
-        chef.drop();
+        Grabable tmp = chef.drop();
+        tmp.setHolder(null);
     }
 }

@@ -1,9 +1,11 @@
 package getcooked.model.game.kitchen.elements.interactable;
 
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.grabable.Grabable;
 
 public abstract class Dispenser extends Interactable {
-    executeBehaviour strategy;
+    //Strategys are imutable of each dispenser
+    protected final executeBehaviour strategy;
 
     public Dispenser(int x, int y) {
         super(x, y);
@@ -19,7 +21,4 @@ public abstract class Dispenser extends Interactable {
         }
     }
 
-    public void setStrategy(ExecuteBehaviour strategy) {
-        this.strategy = strategy;
-    }
 }

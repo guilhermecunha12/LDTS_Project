@@ -4,13 +4,14 @@ import getcooked.model.Position;
 import getcooked.model.game.kitchen.elements.Chef;
 
 public abstract class Grabable {
+    //TODO: Check if this position method is the best for class grabable
     private Position placedPosition;
     private Chef holder;
 
     public boolean isHeld() { return holder != null; }
     public boolean isPlaced() { return placedPosition != null && holder == null; }
 
-    public Position getWorldPosition() {
+    public Position getPosition() {
         if (isHeld()) return holder.getPosition();
         return placedPosition;
     }

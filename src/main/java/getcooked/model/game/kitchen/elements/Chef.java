@@ -1,5 +1,7 @@
 package getcooked.model.game.kitchen.elements;
 
+import getcooked.model.game.kitchen.elements.grabable.Grabable;
+
 public class Chef extends Element{
 
     private Grabable item;
@@ -9,21 +11,26 @@ public class Chef extends Element{
         item = null;
     }
 
-    public Grabable getItem(){
-        return item;
-    }
+    public Grabable getItem() { return item; }
 
     //boolean in order to later change states of cookware
-    public boolean pickUp(Grabbable item) {
-        if (this.item != null) return false;
-        this.item = item;
-        return true;
+    public boolean pickUp(Grabable item) {
+        if (!isHoldingSomething()){
+            item.setHolder(this);
+            this.item = item;
+            return true;
+        }
+        return false;
     }
 
     public Grabable drop(){
-        Grabable temp = item;
-        this.item = null;
-        return temp;
+        if (isHoldingSomething()){
+            Grabable tmp = item;
+            tmp.setHolder(null);
+            this.item = null;
+            return tmp;
+        }
+        return null;
     }
 
     public boolean isHoldingSomething(){
