@@ -4,6 +4,11 @@ import getcooked.gui.GUI;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Element;
+import getcooked.model.game.kitchen.elements.interactable.Counter;
+import getcooked.model.game.kitchen.elements.interactable.Interactable;
+import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
+import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.viewer.Viewer;
 import getcooked.viewer.menu.EscapeMenuViewer;
@@ -21,14 +26,24 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());
         if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
 
-        //drawElements(gui, getModel().getTrashes(), new TrashViewer());
         // TODO: draw all the other elements...
+        List<Interactable> interactables = getModel().getInteractables();
+        for(Interactable interactable : interactables) {
+            if(interactable instanceof Trash) {
+                Trash trash = (Trash) interactable;
+                drawElement(gui, trash, new TrashViewer());
+            }
+            else if (interactable instanceof Counter) {
+                Counter counter = (Counter) interactable;
+                drawElement(gui, counter, new CounterViewer());
+            }
+            else if(interactable instanceof Dispenser){
+                Dispenser dispenser = (Dispenser) interactable;
+                PotatoDispenser potatoDispenser = (PotatoDispenser) dispenser;
+                drawElement(gui, potatoDispenser, new PotatoDispenserViewer() );
+            }
 
-        // and then, check if the EscapeMenu is on
-        // TODO: review if EscapeMenu should exists as a state (in reality, the state is Playing)
-        if (getModel().isEscapeMenuOn()) {
-            EscapeMenuViewer escapeMenuViewer = new EscapeMenuViewer(new EscapeMenu());
-            escapeMenuViewer.drawElements(gui);
+
         }
     }
 
