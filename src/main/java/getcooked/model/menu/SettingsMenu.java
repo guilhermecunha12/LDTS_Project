@@ -24,4 +24,5 @@ public class SettingsMenu extends Menu {
 
     public boolean isSelectedVolume() { return isSelected(0); }
     public boolean isSelectedBack() { return isSelected(1); }
+    public boolean isVolumeOn() { return volumeOn; }
 }

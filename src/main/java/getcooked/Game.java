@@ -1,25 +1,33 @@
 package getcooked;
 import getcooked.gui.LanternaGUI;
 import getcooked.model.menu.MainMenu;
+import getcooked.sound.BackgroundMusicPlayer;
+import getcooked.sound.MusicLoader;
 import getcooked.states.State;
 import getcooked.states.menu.MainMenuState;
 
+import javax.sound.sampled.AudioSystem;
 import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.Objects;
 
 public class Game {
     private State state;
     private final LanternaGUI gui;
-    // Add field to control the background Volume
+    private final BackgroundMusicPlayer backgroundMusicPlayer;
 
-    public Game() throws IOException, URISyntaxException, FontFormatException {
+    public Game() throws Exception{
         this.state = new MainMenuState(new MainMenu());
-        this.gui = new LanternaGUI(50, 30);
+        this.gui = new LanternaGUI(50,30);
+        this.backgroundMusicPlayer = new BackgroundMusicPlayer(new MusicLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/music.wav"))), AudioSystem.getClip()));
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws Exception {
         new Game().start();
+    }
+
+    public BackgroundMusicPlayer getBackgroundMusicPlayer() {
+        return backgroundMusicPlayer;
     }
 
     public void changeState(State state) {
@@ -30,6 +38,7 @@ public class Game {
         int FPS = 30;
         int frameTime = 1000 / FPS; // time in milisseconds to spend in one frame
 
+        backgroundMusicPlayer.start();
         while (state != null) {
             long startTime = System.currentTimeMillis(); // needed for limiting chef's moving velocity
 
@@ -46,6 +55,7 @@ public class Game {
                 }
             }
         }
+        backgroundMusicPlayer.stop();
         gui.close();
     }
 }
