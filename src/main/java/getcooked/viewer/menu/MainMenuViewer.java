@@ -15,16 +15,15 @@ public class MainMenuViewer extends Viewer<MainMenu> {
         gui.changeBackgroundColor("#468499"); // background color
         // draw game title in the middle
         int middleX = gui.getWidth() / 2;
-        gui.drawText(new Position(middleX, 5), "Get Cooked", "#ffcf40");
+        gui.drawText(new Position(middleX - 5, 5), "Get Cooked", "#ffcf40");
 
         for (int i = 0; i < getModel().getNumberEntries(); i++) {
-            Position posToDraw = new Position(middleX, 10 + 4*i);
+            String entry = getModel().getEntry(i);
+            // incrementing y using i multiplied by a factor 4
+            Position topLeftPos = new Position(middleX - (entry.length() / 2), 10 + 4*i);
 
-            if (getModel().isSelected(i)) {
-                gui.drawTextBox(posToDraw, getModel().getEntry(i), "#ffffff", "#ffff00", 1);
-            } else {
-                gui.drawTextBox(posToDraw, getModel().getEntry(i), "#ffffff", "#eeeeee", 1);
-            }
+            gui.drawTextBox(topLeftPos, getModel().getEntry(i), "#ffffff",
+                   getModel().isSelected(i)? "#ffff00" : "#eeeeee", 1);
         }
     }
 }
