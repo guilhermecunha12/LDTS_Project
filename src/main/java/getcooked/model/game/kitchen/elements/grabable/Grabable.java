@@ -8,6 +8,11 @@ public abstract class Grabable {
     private Position placedPosition;
     private Chef holder;
 
+    public Grabable(int x, int y) {
+        this.placedPosition = new Position(x, y);
+        this.holder = null;
+    }
+
     public boolean isHeld() { return holder != null; }
     public boolean isPlaced() { return placedPosition != null && holder == null; }
 
@@ -25,7 +30,9 @@ public abstract class Grabable {
     // mark held; clears placed position
     public void setHolder(Chef chef) {
         this.holder = chef;
-        this.placedPosition = null;
+        if(chef != null) {
+            this.placedPosition = null;
+        }
     }
 
     public Chef getHolder() { return holder; }
