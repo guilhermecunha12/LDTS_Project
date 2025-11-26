@@ -1,7 +1,8 @@
-package getcooked.model.game.kitchen.elements.interactable;
+package getcooked.model.game.kitchen.elements.interactable.dispenser;
 
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.grabable.Grabable;
+import getcooked.model.game.kitchen.elements.interactable.Interactable;
 
 public abstract class Dispenser extends Interactable {
     //Strategys are imutable of each dispenser
