@@ -42,7 +42,7 @@ public class LanternaGUI implements GUI {
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
         this.width = width;
         this.height = height;
-        AWTTerminalFontConfiguration fontConfig = loadSegoeFont();
+        AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
         // Consider synchronized set if needed
@@ -83,8 +83,8 @@ public class LanternaGUI implements GUI {
         return terminal;
     }
 
-    private AWTTerminalFontConfiguration loadSegoeFont() throws URISyntaxException, FontFormatException, IOException{
-        URL resource = getClass().getClassLoader().getResource("fonts/segoe.ttf");
+    private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException{
+        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 

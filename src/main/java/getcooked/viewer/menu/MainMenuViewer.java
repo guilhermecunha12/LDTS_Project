@@ -23,8 +23,8 @@ public class MainMenuViewer extends Viewer<MainMenu> {
             // incrementing y using i multiplied by a factor 4
             Position topLeftPos = new Position(middleX - (entry.length() / 2), 10 + 4*i);
 
-            gui.drawTextBox(topLeftPos, entry, "#ffffff",
-                   getModel().isSelected(i)? "#ffff00" : "#eeeeee", 1);
+            gui.drawTextBox(topLeftPos, entry, "#000000",
+                   getModel().isSelected(i)? "#ffff00" : "#a9a9a9", 1);
         }
     }
 }

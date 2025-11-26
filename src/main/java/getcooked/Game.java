@@ -11,10 +11,11 @@ import java.net.URISyntaxException;
 public class Game {
     private State state;
     private final LanternaGUI gui;
+    // Add field to control the background Volume
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.state = new MainMenuState(new MainMenu());
-        this.gui = new LanternaGUI(20, 20);
+        this.gui = new LanternaGUI(50, 50);
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
@@ -25,8 +26,8 @@ public class Game {
         this.state = state;
     }
 
-    private void start() { // fps missing / update frequency
-        int FPS = 20;
+    private void start() throws IOException { // fps missing / update frequency
+        int FPS = 10;
         int frameTime = 1000 / FPS; // time in milisseconds to spend in one frame
 
         while (state != null) {
@@ -45,5 +46,6 @@ public class Game {
                 }
             }
         }
+        gui.close();
     }
 }

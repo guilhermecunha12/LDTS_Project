@@ -1,6 +1,7 @@
 package getcooked.states.menu;
 
 import getcooked.controller.Controller;
+import getcooked.controller.menu.MainMenuController;
 import getcooked.model.menu.MainMenu;
 import getcooked.states.State;
 import getcooked.viewer.Viewer;
