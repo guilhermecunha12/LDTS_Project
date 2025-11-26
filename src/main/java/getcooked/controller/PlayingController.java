@@ -1,6 +1,7 @@
 package getcooked.controller;
 
 import getcooked.Game;
+import getcooked.controller.game.KitchenController;
 import getcooked.controller.menu.EscapeMenuController;
 import getcooked.gui.GUI;
 import getcooked.model.PlayingSession;
@@ -27,7 +28,7 @@ public class PlayingController extends Controller<PlayingSession> {
             this.escapeMenuController.step(game, actions, time);
         } else {
             // IMPORTANT: pass the playingSession as argument because the KitchenController can modify the paused state of the playingSession
-            this.kitchenController.step(game, getModel(), actions, time);
+            this.kitchenController.step(game, actions, time);
         }
     }
 }
