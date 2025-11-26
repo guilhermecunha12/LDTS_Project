@@ -18,7 +18,6 @@ public class PlayingViewer extends Viewer<PlayingSession> {
         this.escapeMenuViewer = new EscapeMenuViewer(playingSession.getEscapeMenu());
     }
 
-
     @Override
     public void drawElements(GUI gui) {
         this.kitchenViewer.drawElements(gui);

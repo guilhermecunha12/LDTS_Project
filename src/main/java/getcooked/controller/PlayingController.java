@@ -1,6 +1,7 @@
 package getcooked.controller;
 
 import getcooked.Game;
+import getcooked.controller.menu.EscapeMenuController;
 import getcooked.gui.GUI;
 import getcooked.model.PlayingSession;
 import getcooked.model.game.kitchen.Kitchen;

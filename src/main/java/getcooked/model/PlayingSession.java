@@ -3,7 +3,8 @@ package getcooked.model;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.menu.EscapeMenu;
 
-public class PlayingSession { // model that contains the kitchen model and the escape menu model
+// model that contains the Kitchen model and the EscapeMenu model
+public class PlayingSession {
     private final Kitchen kitchen;
     private final EscapeMenu escapeMenu;
     private boolean paused;

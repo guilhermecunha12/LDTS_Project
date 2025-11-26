@@ -1,7 +1,9 @@
 package getcooked.states;
 
 import getcooked.controller.Controller;
+import getcooked.controller.PlayingController;
 import getcooked.model.PlayingSession;
+import getcooked.viewer.PlayingViewer;
 import getcooked.viewer.Viewer;
 
 public class PlayingState extends State<PlayingSession> {
