@@ -19,11 +19,12 @@ public abstract class KitchenBuilder {
 
     public Kitchen createKitchen() {
         Kitchen kitchen = new Kitchen(getWidth(), getHeight());
-
         // Set the different elements inside the kitchen
         kitchen.setChefs(createChefs());
         kitchen.setTiles(createTiles());
         kitchen.setOrders(createOrders());
+        kitchen.setLevel(this.level); // initial level
+        kitchen.setLives(3); // initial lives
         return kitchen;
     }
 
@@ -32,9 +33,6 @@ public abstract class KitchenBuilder {
 
     protected abstract int getHeight();
 
-    public int getLevel() {
-        return level;
-    }
 
     protected abstract List<Tile> createTiles();
 

@@ -2,6 +2,7 @@ package getcooked.states;
 import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
+import getcooked.model.menu.CookMenu;
 import getcooked.viewer.Viewer;
 
 import java.io.IOException;
