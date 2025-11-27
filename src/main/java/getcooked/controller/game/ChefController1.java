@@ -6,8 +6,16 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.Floor;
+import getcooked.model.game.kitchen.elements.Tile;
+import getcooked.model.game.kitchen.elements.interactable.Counter;
+import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
 
 import java.io.IOException;
+import java.io.PipedOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ChefController1 extends Controller<Kitchen> {
@@ -23,7 +31,7 @@ public class ChefController1 extends Controller<Kitchen> {
     }
 
     public void moveChefUp(){
-        moveChef(getModel().getChefs().get(0).getPosition().getRight());
+        moveChef(getModel().getChefs().get(0).getPosition().getUp());
     }
 
     public void moveChefDown(){
@@ -35,16 +43,35 @@ public class ChefController1 extends Controller<Kitchen> {
     }
 
     public void moveChef(Position position){
-        //TODO: implement using Kitchen model
+        if(getModel().getTile(position) instanceof Floor){
+            chef.setPosition(position);
+        }
     }
 
     public void ChefSelect(){
-        if(chef.isHoldingSomething()){
-            //drop, if there's a counter, a cookware,delivery and trash
-            return;
-        }else{
-            //pick up, from dispenser or cookware
-            return;
+        // Define a Order, so that first comes objects bellow -> left -> up -> right
+        Position position_up = chef.getPosition().getUp();
+        Position position_down = chef.getPosition().getDown();
+        Position position_left = chef.getPosition().getLeft();
+        Position position_right = chef.getPosition().getRight();
+        List<Position> positions = new ArrayList<>();
+        positions = List.of(position_down, position_left, position_up, position_right);
+        for(Position position : positions){
+            if(getModel().getTile(position) instanceof Counter) {
+                Counter counter = (Counter) getModel().getTile(position);
+                counter.interact(chef);
+                return;
+            }
+            else if(getModel().getTile(position) instanceof Trash){
+                Trash trash = (Trash) getModel().getTile(position);
+                trash.interact(chef);
+                return;
+            }
+            else if(getModel().getTile(position) instanceof Dispenser){
+                Dispenser dispenser = (Dispenser) getModel().getTile(position);
+                dispenser.interact(chef);
+                return;
+            }
         }
     }
 
