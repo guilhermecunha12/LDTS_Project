@@ -10,7 +10,7 @@ public class PotatoDispenser extends Dispenser {
     }
 
     @Override
-    public Grabable createItem(){
+    public Grabable createItem(int x, int y) {
         return new Potato(getX(), getY());
     }
 }
