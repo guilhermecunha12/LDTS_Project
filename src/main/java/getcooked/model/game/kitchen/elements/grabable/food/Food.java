@@ -4,7 +4,7 @@ import getcooked.model.game.kitchen.elements.grabable.Grabable;
 
 public abstract class Food extends Grabable {
 
-    public enum FoodState {RAW, CHOPPED, COOKED}
+    public enum FoodState {RAW, CHOPPED, COOKED, FRIED}
 
     protected FoodState state;
 

@@ -1,6 +1,7 @@
 package getcooked.model.game.kitchen;
 
 
+import getcooked.model.Position;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Tile;
 
@@ -56,5 +57,25 @@ public class Kitchen {
 
     public List<Order> getActiveOrders() {
         return activeOrders;
+      
+    // Return the object of the tile
+    public Tile getTile(Position position) {
+        for(Tile tile : tiles){
+            if(tile.getPosition().equals(position))
+                return tile;
+        }
+        return null;
+    }
+
+    public boolean isEmpty(Position position) {
+        for(Tile tile : tiles){
+            if(tile.getPosition().equals(position) && !(tile instanceof Floor))
+                return false;
+        }
+        for(Chef chef : chefs){
+            if(chef.getPosition().equals(position))
+                return false;
+        }
+        return true;
     }
 }
