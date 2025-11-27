@@ -76,7 +76,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
         return tiles;
     }
 
-    @Override
+    @Override //TODO: add exception that verifies if the number of chefs read is either 1 or 2
     protected List<Chef> createChefs() {
         List<Chef> chefs = new ArrayList<>();
         for(int y = 0; y < lines.size(); y++) {
@@ -85,6 +85,17 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                 if(line.charAt(x) == 'C') chefs.add(new Chef(x, y));
             }
         }
-        return chefs;
+
+        /* like this...
+        try {
+            if (chefs.isEmpty() || chefs.size() > 2) {
+                throw new Exception();
+            }
+            return chefs;
+        } catch (Exception e) {
+            System.out.println("Error loading the game: there should be 1 or 2 chefs.");
+        }
+        */
+
     }
 }

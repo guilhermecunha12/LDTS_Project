@@ -44,16 +44,8 @@ public class KitchenController extends Controller<Kitchen> {
             if (action == GUI.ACTION.ESCAPE) {
                 this.playingSession.togglePause();
             }
-            if(action == GUI.ACTION.PLAYER1_LEFT || action == GUI.ACTION.PLAYER1_RIGHT
-            || action == GUI.ACTION.PLAYER1_UP || action == GUI.ACTION.PLAYER1_DOWN
-            || action == GUI.ACTION.PLAYER1_SELECT) {
-                chefControllers.get(0).step(game, actions, time);
-            }
-            if(action == GUI.ACTION.PLAYER2_LEFT || action == GUI.ACTION.PLAYER2_RIGHT
-            || action == GUI.ACTION.PLAYER2_UP || action == GUI.ACTION.PLAYER2_DOWN
-            || action == GUI.ACTION.PLAYER2_SELECT) {
-                chefControllers.get(1).step(game, actions, time);
-            }
+            chefControllers.get(0).step(game, actions, time);
+            if (chefControllers.size() == 2) chefControllers.get(1).step(game, actions, time);
         }
     }
 }
