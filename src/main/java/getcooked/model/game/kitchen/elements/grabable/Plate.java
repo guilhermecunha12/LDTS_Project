@@ -2,7 +2,7 @@ package getcooked.model.game.kitchen.elements.grabable;
 
 public class Plate extends Grabable {
 
-    private Grabable content;
+    private Dish content;
 
     public Plate(int x, int y) {
         super(x, y);
@@ -12,11 +12,11 @@ public class Plate extends Grabable {
         return content != null;
     }
 
-    public Grabable getContent(){
+    public Dish getContent(){
         return content;
     }
 
-    public boolean put(Grabable g) {
+    public boolean put(Dish g) {
         if (g == null) return false;
         if (content != null) return false;
         content = g;

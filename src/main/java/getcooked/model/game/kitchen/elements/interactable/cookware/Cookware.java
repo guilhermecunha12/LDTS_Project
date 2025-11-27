@@ -1,6 +1,7 @@
 package getcooked.model.game.kitchen.elements.interactable.cookware;
 
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.grabable.Dish;
 import getcooked.model.game.kitchen.elements.grabable.Grabable;
 import getcooked.model.game.kitchen.elements.grabable.Plate;
 import getcooked.model.game.kitchen.elements.grabable.food.Food;
@@ -65,7 +66,7 @@ public abstract class Cookware extends Interactable {
             }
 
             if (held instanceof Plate) {
-                Grabable result = createFinishedDish();
+                Dish result = createFinishedDish();
                 if (result == null) return;
                 Plate plate = (Plate) held;
                 boolean placedOnPlate = plate.put(result);
@@ -74,5 +75,5 @@ public abstract class Cookware extends Interactable {
     }
     protected abstract boolean accepts(Food food);
     protected abstract void tryCook();
-    protected abstract Grabable createFinishedDish();
+    protected abstract Dish createFinishedDish();
 }
