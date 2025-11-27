@@ -10,13 +10,13 @@ public abstract class Dispenser extends Interactable {
         super(x, y);
     }
 
-    protected abstract Grabable createItem();
+    protected abstract Grabable createItem(int x, int y);
 
     @Override
     public void interact(Chef chef){
         if(!chef.isHoldingSomething()){
             //missing somehting for the execBehaviour
-            chef.pickUp(createItem());
+            chef.pickUp(createItem(chef.getX(),chef.getY()));
         }
     }
 
