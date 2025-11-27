@@ -9,7 +9,9 @@ import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Floor;
 import getcooked.model.game.kitchen.elements.Tile;
 import getcooked.model.game.kitchen.elements.interactable.Counter;
+import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
 import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.kitchen.elements.interactable.cookware.Cookware;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
 
 import java.io.IOException;
@@ -62,14 +64,28 @@ public class ChefController1 extends Controller<Kitchen> {
                 counter.interact(chef);
                 return;
             }
+
             else if(getModel().getTile(position) instanceof Trash){
                 Trash trash = (Trash) getModel().getTile(position);
                 trash.interact(chef);
                 return;
             }
+
             else if(getModel().getTile(position) instanceof Dispenser){
                 Dispenser dispenser = (Dispenser) getModel().getTile(position);
                 dispenser.interact(chef);
+                return;
+            }
+
+            else if (getModel().getTile(position) instanceof Cookware) {
+                Cookware cookware = (Cookware) getModel().getTile(position);
+                cookware.interact(chef);
+                return;
+            }
+
+            else if (getModel().getTile(position) instanceof DeliverySpot){
+                DeliverySpot deliverySpot = (DeliverySpot) getModel().getTile(position);
+                deliverySpot.interact(chef);
                 return;
             }
         }
