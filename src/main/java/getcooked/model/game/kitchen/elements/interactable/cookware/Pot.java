@@ -1,6 +1,7 @@
 package getcooked.model.game.kitchen.elements.interactable.cookware;
 
 import getcooked.model.game.kitchen.elements.grabable.Dish;
+import getcooked.model.game.kitchen.elements.grabable.DishType;
 import getcooked.model.game.kitchen.elements.grabable.Grabable;
 import getcooked.model.game.kitchen.elements.grabable.food.Carrot;
 import getcooked.model.game.kitchen.elements.grabable.food.Food;
@@ -57,9 +58,9 @@ public class Pot extends Cookware{
 
         Dish result;
         if (hasPotato) {
-            result = new Dish(Dish.DishType.POTATO_SOUP);
+            result = new Dish(DishType.POTATO_SOUP);
         } else if (hasCarrot) {
-            result = new Dish(Dish.DishType.CARROT_SOUP);
+            result = new Dish(DishType.CARROT_SOUP);
         } else {
             return null; // should not happen
         }
