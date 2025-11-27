@@ -29,7 +29,6 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());
         if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
 
-        // TODO: draw all the other elements...
         List<Interactable> interactables = getModel().getInteractables();
         drawElements(gui, filterOfType(Counter.class, interactables), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, interactables), new PotatoDispenserViewer());
