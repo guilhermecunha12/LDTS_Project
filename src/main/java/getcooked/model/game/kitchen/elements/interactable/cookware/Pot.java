@@ -1,5 +1,6 @@
 package getcooked.model.game.kitchen.elements.interactable.cookware;
 
+import getcooked.model.game.kitchen.elements.grabable.Dish;
 import getcooked.model.game.kitchen.elements.grabable.Grabable;
 import getcooked.model.game.kitchen.elements.grabable.food.Carrot;
 import getcooked.model.game.kitchen.elements.grabable.food.Food;
@@ -14,8 +15,10 @@ public class Pot extends Cookware{
     @Override
     protected boolean accepts(Food food){
         //only chopped potatos and chopped Carrot
-        boolean isChoppedPotato = (food instanceof Potato) && (food.getState() == Food.FoodState.CHOPPED);
-        boolean isChoppedCarrot = (food instanceof Carrot) && (food.getState() == Food.FoodState.CHOPPED);
+        boolean isPotato = (food instanceof Potato) && (food.getState() == Food.FoodState.RAW);
+        boolean isCarrot = (food instanceof Carrot) && (food.getState() == Food.FoodState.RAW);
+
+        if (!isPotato && !isCarrot) return false;
 
         int potatoes = 0, carrots = 0;
         for(Food f : contents){
@@ -23,31 +26,44 @@ public class Pot extends Cookware{
             if(f instanceof Carrot) carrots++;
         }
 
-        if (isChoppedPotato && potatoes >= 1) return false;
-        if (isChoppedCarrot && carrots >= 1) return false;
+        if (potatoes + carrots >= 1) return false;
 
         return true;
     }
 
     @Override
     protected void tryCook(){
-        boolean hasChoppedPotato = false;
-        boolean hasChoppedCarrot = false;
+        boolean hasPotato = false;
+        boolean hasCarrot = false;
 
         for (Food f : contents) {
-            if (f instanceof Potato && f.getState() == Food.FoodState.CHOPPED) hasChoppedPotato = true;
-            if (f instanceof Carrot && f.getState() == Food.FoodState.CHOPPED) hasChoppedCarrot = true;
+            if (f instanceof Potato) hasPotato = true;
+            if (f instanceof Carrot) hasCarrot = true;
         }
-
-        cooked =  hasChoppedPotato && hasChoppedCarrot;
+        // XOR
+        cooked =  (hasPotato ^ hasCarrot);
     }
 
 
     @Override
     protected Grabable createFinishedDish(){
         if(!cooked) return null;
-        //TODO: Generate a soup and
+        boolean hasPotato = false, hasCarrot = false;
+        for (Food f : contents) {
+            if (f instanceof Potato) hasPotato = true;
+            if (f instanceof Carrot) hasCarrot = true;
+        }
+
+        Dish result;
+        if (hasPotato) {
+            result = new Dish(this.getX(), this.getY(), Dish.DishType.POTATO_SOUP);
+        } else if (hasCarrot) {
+            result = new Dish(this.getX(), this.getY(), Dish.DishType.CARROT_SOUP);
+        } else {
+            return null; // should not happen
+        }
         contents.clear();
-        return null;
+        cooked = false;
+        return result;
     }
 }
