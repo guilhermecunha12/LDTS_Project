@@ -6,6 +6,7 @@ import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
 import getcooked.model.game.kitchen.elements.interactable.Interactable;
 import getcooked.model.game.kitchen.elements.interactable.Trash;
 import getcooked.model.game.kitchen.elements.interactable.cookware.Pot;
+import getcooked.model.game.kitchen.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
 
 import java.io.BufferedReader;
@@ -63,7 +64,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                 switch (line.charAt(x)) {
                     case '#' : interactables.add(new Counter(x, y)); break;
                     case 'p': interactables.add(new PotatoDispenser(x, y)); break;
-                        //else if (line.charAt(x) == 'P') interactables.add(new PLateDispenser(x, y));
+                    case 'P': interactables.add(new PlateDispenser(x, y));
                     case 'T' : interactables.add(new Trash(x, y)); break;
                     case 'D' : interactables.add(new DeliverySpot(x, y)); break;
                     case 'Q' : interactables.add(new Pot(x, y));

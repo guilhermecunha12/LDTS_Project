@@ -9,11 +9,9 @@ import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
 import getcooked.model.game.kitchen.elements.interactable.Interactable;
 import getcooked.model.game.kitchen.elements.interactable.Trash;
 import getcooked.model.game.kitchen.elements.interactable.cookware.Pot;
-import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
+import getcooked.model.game.kitchen.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
-import getcooked.model.menu.EscapeMenu;
 import getcooked.viewer.Viewer;
-import getcooked.viewer.menu.EscapeMenuViewer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +33,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(DeliverySpot.class, interactables), new DeliverySpotViewer());
         drawElements(gui, filterOfType(Trash.class, interactables), new TrashViewer());
         drawElements(gui, filterOfType(Pot.class, interactables), new PotViewer());
+        drawElements(gui, filterOfType(PlateDispenser.class, interactables), new PlateDispenserViewer());
     }
 
     // generic method with type T
