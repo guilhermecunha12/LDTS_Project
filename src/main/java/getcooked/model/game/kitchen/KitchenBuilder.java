@@ -14,7 +14,7 @@ public abstract class KitchenBuilder {
     public KitchenBuilder(int level) {
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
-        this.availableDishTypes = List.of(); // empty list
+        this.availableDishTypes = new ArrayList<>(); // empty list
     }
 
     public Kitchen createKitchen() {
