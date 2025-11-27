@@ -1,5 +1,7 @@
 package getcooked.model.game.kitchen;
 
+import getcooked.model.game.kitchen.elements.grabable.Dish;
+
 public class Order {
 
     private final Dish desiredDish;
