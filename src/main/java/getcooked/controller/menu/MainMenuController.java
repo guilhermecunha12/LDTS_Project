@@ -32,7 +32,7 @@ public class MainMenuController extends Controller<MainMenu> {
                     break;
                 case PLAYER2_SELECT:
                     if(getModel().isSelectedCook()) game.changeState(new CookMenuState(new CookMenu()));
-                    if(getModel().isSelectedSettings()) game.changeState(new SettingsMenuState(new SettingsMenu()));
+                    if(getModel().isSelectedSettings()) game.changeState(new SettingsMenuState(new SettingsMenu(game.getAudioManager())));
                     if(getModel().isSelectedExit()) game.changeState(null);
             }
         }

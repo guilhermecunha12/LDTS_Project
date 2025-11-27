@@ -5,6 +5,7 @@ import getcooked.controller.Controller;
 import getcooked.gui.GUI;
 import getcooked.model.menu.MainMenu;
 import getcooked.model.menu.SettingsMenu;
+import getcooked.sound.AudioManager;
 import getcooked.states.menu.MainMenuState;
 
 import java.io.IOException;
@@ -28,12 +29,14 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
                     break;
                 case PLAYER2_SELECT:
                     if(getModel().isSelectedVolume()) {
-                        // Toggles the menu
-                        getModel().toggleVolume();
-                        if (getModel().isVolumeOn()) {
-                            game.getBackgroundMusicPlayer().start();
-                        } else {
-                            game.getBackgroundMusicPlayer().stop();
+                        AudioManager audioManager = game.getAudioManager();
+                        if (audioManager.isBackgroundMusicOn()) {
+                            audioManager.stopBackgroundMusic();
+                            getModel().updateEntries();
+                        }
+                        else {
+                            audioManager.playBackgroundMusic();
+                            getModel().updateEntries();
                         }
                     }
                     if (getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
