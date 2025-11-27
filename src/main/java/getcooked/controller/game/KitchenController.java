@@ -6,6 +6,7 @@ import getcooked.controller.PlayingController;
 import getcooked.gui.GUI;
 import getcooked.model.PlayingSession;
 import getcooked.model.game.kitchen.Kitchen;
+import getcooked.model.game.kitchen.Order;
 import getcooked.model.game.kitchen.elements.Chef;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class KitchenController extends Controller<Kitchen> {
     private final PlayingSession playingSession; // hold a reference to the playingSession to change its paused state
     private final List<Controller<Kitchen>> chefControllers = new ArrayList<>();
+    private final OrdersController ordersController;
 
     public KitchenController(Kitchen kitchen, PlayingSession playingSession) {
         super(kitchen);
@@ -28,6 +30,9 @@ public class KitchenController extends Controller<Kitchen> {
         if (chefs.size() >= 2) {
             chefControllers.add(new ChefController2(chefs.get(1), kitchen));
         }
+
+        this.ordersController = new OrdersController(kitchen);
+
     }
 
     @Override
