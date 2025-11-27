@@ -58,7 +58,8 @@ public class Kitchen {
 
     public List<Order> getActiveOrders() {
         return activeOrders;
-      
+    }
+
     // Return the object of the tile
     public Tile getTile(Position position) {
         for(Tile tile : tiles){
