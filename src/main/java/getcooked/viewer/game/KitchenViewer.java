@@ -18,14 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenViewer extends Viewer<Kitchen> {
+    private OrdersViewer ordersViewer;
+
     public KitchenViewer(Kitchen kitchen) {
         super(kitchen); // initialise model field via superclass
+        this.ordersViewer = new OrdersViewer(kitchen.getActiveOrders());
     }
 
     @Override
     public void drawElements(GUI gui) {
         List<Tile> tiles = getModel().getTiles();
 
+        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
+        ordersViewer.drawElements(gui);
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer());
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer());
