@@ -6,10 +6,13 @@ import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Floor;
 import getcooked.model.game.kitchen.elements.Tile;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
 public class Kitchen {
+    public static final int MAX_ACTIVE_ORDERS = 3;
     private final int width;
     private final int height;
 
@@ -17,10 +20,30 @@ public class Kitchen {
     private List<Tile> tiles;
     private Deque<Order> orders;
     private List<Order> activeOrders;
+    private int level;
+    private int lives;
 
     public Kitchen(int width, int height) {
         this.width = width;
         this.height = height;
+        this.orders = new ArrayDeque<>();
+        this.activeOrders = new ArrayList<>();
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public  void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     public int getWidth() {
