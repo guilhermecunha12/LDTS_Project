@@ -4,6 +4,7 @@ package getcooked.model.game.kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Tile;
 
+import java.util.Deque;
 import java.util.List;
 
 public class Kitchen {
@@ -12,7 +13,8 @@ public class Kitchen {
 
     private List<Chef> chefs;
     private List<Tile> tiles;
-    private List<Order> orders;
+    private Deque<Order> orders;
+    private List<Order> activeOrders;
 
     public Kitchen(int width, int height) {
         this.width = width;
@@ -42,11 +44,17 @@ public class Kitchen {
         this.tiles = tiles;
     }
 
-    public List<Order> getOrders() { return orders; }
+    public Deque<Order> getOrders() { return orders; }
 
-    public void setOrders(List<Order> orders) { this.orders = orders; }
+    public void setOrders(Deque<Order> orders) { this.orders = orders; }
 
     // Probably add orders in here
-    public void addOrder(Order order) { this.orders.add(order); }
+    public void addActiveOrder(Order order) { this.activeOrders.add(order); }
+    public void removeActiveOrder(Order order) {
+        this.activeOrders.remove(order);
+    }
 
+    public List<Order> getActiveOrders() {
+        return activeOrders;
+    }
 }

@@ -3,9 +3,9 @@ package getcooked.model.game.kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Floor;
 import getcooked.model.game.kitchen.elements.Tile;
+import getcooked.model.game.kitchen.elements.grabable.DishType;
 import getcooked.model.game.kitchen.elements.interactable.Counter;
 import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
-import getcooked.model.game.kitchen.elements.interactable.Interactable;
 import getcooked.model.game.kitchen.elements.interactable.Trash;
 import getcooked.model.game.kitchen.elements.interactable.cookware.Pot;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.PlateDispenser;
@@ -19,17 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoaderKitchenBuilder extends KitchenBuilder{
-    private final int level;
     private final List<String> lines;
 
     public LoaderKitchenBuilder(int level) throws IOException{
-        // After the level 10 the kitchen to be drawn is always the same
-        this.level = Math.min(level, 10);
+        super(level);
 
         URL resource = LoaderKitchenBuilder.class.getResource("/kitchen/level" + this.level + ".lvl");
-
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-
         lines = readLines(br);
     }
 
@@ -40,7 +36,6 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
         }
         return lines;
     }
-
 
     @Override
     protected int getWidth() {
@@ -66,7 +61,11 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                 switch (line.charAt(x)) {
                     case ' ': tiles.add(new Floor(x, y)); break;
                     case '#' : tiles.add(new Counter(x, y)); break;
-                    case 'p': tiles.add(new PotatoDispenser(x, y)); break;
+                    case 'p':
+                        tiles.add(new PotatoDispenser(x, y));
+                        this.availableDishTypes.add(DishType.POTATO_SOUP); // for generating orders
+                        //TODO: this.availableDishTypes.add(Dish.DishType.FRIED_POTATO);
+                        break;
                     case 'P': tiles.add(new PlateDispenser(x, y));
                     case 'T' : tiles.add(new Trash(x, y)); break;
                     case 'D' : tiles.add(new DeliverySpot(x, y)); break;

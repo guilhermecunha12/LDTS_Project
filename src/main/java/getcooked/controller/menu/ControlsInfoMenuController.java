@@ -27,7 +27,7 @@ public class ControlsInfoMenuController extends Controller<ControlsInfoMenu> {
         if(framesWaited == FRAMES_TO_WAIT) {
             game.changeState(new PlayingState(new PlayingSession(new LoaderKitchenBuilder(1).createKitchen(), new EscapeMenu())));
             framesWaited = 0;
-        };
+        }
         framesWaited++;
     }
 }

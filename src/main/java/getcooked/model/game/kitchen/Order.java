@@ -23,7 +23,7 @@ public class Order {
     }
 
     public void tick(){
-        if(remainingTime > 0){
+        if (remainingTime > 0){
             remainingTime--;
         }
     }
