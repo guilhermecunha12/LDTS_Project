@@ -17,6 +17,7 @@ public interface GUI { // intermediate class to represent a general GUI
     Set<ACTION> getNextAction();
 
     // draw elements of the game
+    void drawFloor(Position position);
     void drawChef1(Position position);
     void drawChef2(Position position);
     void drawOrder(Position position);
@@ -54,6 +55,7 @@ public interface GUI { // intermediate class to represent a general GUI
     void darken();
 
     void changeBackgroundColor(String newColor);
+    void paint(); // paint whole gui with background color
     String getBackgroundColor();
 
     void clear();

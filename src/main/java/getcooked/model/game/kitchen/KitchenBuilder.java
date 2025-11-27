@@ -1,7 +1,7 @@
 package getcooked.model.game.kitchen;
 
 import getcooked.model.game.kitchen.elements.Chef;
-import getcooked.model.game.kitchen.elements.interactable.Interactable;
+import getcooked.model.game.kitchen.elements.Tile;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public abstract class KitchenBuilder {
 
         // Set the different elements inside the kitchen
         kitchen.setChefs(createChefs());
-        kitchen.setInteractables(createInteractables());
+        kitchen.setTiles(createTiles());
 
         return kitchen;
     }
@@ -21,7 +21,7 @@ public abstract class KitchenBuilder {
 
     protected abstract int getHeight();
 
-    protected abstract List<Interactable> createInteractables();
+    protected abstract List<Tile> createTiles();
 
     protected abstract List<Chef> createChefs();
 

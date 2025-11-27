@@ -2,8 +2,7 @@ package getcooked.model.game.kitchen;
 
 
 import getcooked.model.game.kitchen.elements.Chef;
-import getcooked.model.game.kitchen.elements.interactable.Interactable;
-import getcooked.model.game.kitchen.Order;
+import getcooked.model.game.kitchen.elements.Tile;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class Kitchen {
     private final int height;
 
     private List<Chef> chefs;
-    private List<Interactable> interactables;
+    private List<Tile> tiles;
     private List<Order> orders;
 
     public Kitchen(int width, int height) {
@@ -27,8 +26,8 @@ public class Kitchen {
         return height;
     }
 
-    public List<Interactable> getInteractables() {
-        return interactables;
+    public List<Tile> getTiles() {
+        return tiles;
     }
 
     public List<Chef> getChefs() {
@@ -39,8 +38,8 @@ public class Kitchen {
         this.chefs = chefs;
     }
 
-    public void setInteractables(List<Interactable> interactables) {
-        this.interactables = interactables;
+    public void setTiles(List<Tile> tiles) {
+        this.tiles = tiles;
     }
 
     public List<Order> getOrders() { return orders; }

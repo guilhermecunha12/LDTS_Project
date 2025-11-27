@@ -1,9 +1,9 @@
 package getcooked.model.game.kitchen.elements.interactable;
 
 import getcooked.model.game.kitchen.elements.Chef;
-import getcooked.model.game.kitchen.elements.Element;
+import getcooked.model.game.kitchen.elements.Tile;
 
-public abstract class Interactable extends Element {
+public abstract class Interactable extends Tile {
 
     public Interactable(int x, int y){
         super(x,y);

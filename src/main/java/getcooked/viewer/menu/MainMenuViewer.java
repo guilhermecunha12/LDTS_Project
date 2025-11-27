@@ -13,6 +13,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
     @Override
     public void drawElements(GUI gui) {
         gui.changeBackgroundColor("#468499"); // background color
+        gui.paint();
         // draw game title in the middle
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();

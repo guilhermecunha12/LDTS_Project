@@ -2,7 +2,7 @@ package getcooked.model.game.kitchen.elements;
 
 import getcooked.model.Position;
 
-public class Element {
+public abstract class Element {
 
     private Position position;
 
