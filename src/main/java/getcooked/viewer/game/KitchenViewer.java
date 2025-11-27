@@ -5,14 +5,17 @@ import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Element;
 import getcooked.model.game.kitchen.elements.interactable.Counter;
+import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
 import getcooked.model.game.kitchen.elements.interactable.Interactable;
 import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.kitchen.elements.interactable.cookware.Pot;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.viewer.Viewer;
 import getcooked.viewer.menu.EscapeMenuViewer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenViewer extends Viewer<Kitchen> {
@@ -28,23 +31,11 @@ public class KitchenViewer extends Viewer<Kitchen> {
 
         // TODO: draw all the other elements...
         List<Interactable> interactables = getModel().getInteractables();
-        for(Interactable interactable : interactables) {
-            if(interactable instanceof Trash) {
-                Trash trash = (Trash) interactable;
-                drawElement(gui, trash, new TrashViewer());
-            }
-            else if (interactable instanceof Counter) {
-                Counter counter = (Counter) interactable;
-                drawElement(gui, counter, new CounterViewer());
-            }
-            else if(interactable instanceof Dispenser){
-                Dispenser dispenser = (Dispenser) interactable;
-                PotatoDispenser potatoDispenser = (PotatoDispenser) dispenser;
-                drawElement(gui, potatoDispenser, new PotatoDispenserViewer() );
-            }
-
-
-        }
+        drawElements(gui, filterOfType(Counter.class, interactables), new CounterViewer());
+        drawElements(gui, filterOfType(PotatoDispenser.class, interactables), new PotatoDispenserViewer());
+        drawElements(gui, filterOfType(DeliverySpot.class, interactables), new DeliverySpotViewer());
+        drawElements(gui, filterOfType(Trash.class, interactables), new TrashViewer());
+        drawElements(gui, filterOfType(Pot.class, interactables), new PotViewer());
     }
 
     // generic method with type T
@@ -58,4 +49,17 @@ public class KitchenViewer extends Viewer<Kitchen> {
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
         viewer.draw(element, gui);
     }
+
+    // This is a filter that will aid on drawing each type of element from the interactables list
+    private <T extends Interactable> List<T> filterOfType(Class<T> interactableClass, List<Interactable> all) {
+        List<T> result = new ArrayList<>();
+        // Filters interactable by their class
+        for (Interactable i : all) {
+            // If the interactable is an instance of that class, we cast the interactable and return a parameterized
+            // list of that type
+            if (interactableClass.isInstance(i)) result.add(interactableClass.cast(i));
+        }
+        return result;
+    }
+
 }

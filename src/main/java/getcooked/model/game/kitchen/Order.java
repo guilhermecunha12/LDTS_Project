@@ -1,5 +1,6 @@
 package getcooked.model.game.kitchen;
 
+
 public class Order {
 
     private final Dish desiredDish;
@@ -29,3 +30,4 @@ public class Order {
         return remainingTime <= 0;
     }
 }
+
