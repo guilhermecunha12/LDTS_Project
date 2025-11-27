@@ -3,6 +3,7 @@ package getcooked.controller.game;
 import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
+import getcooked.model.Position;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 
@@ -18,27 +19,33 @@ public class ChefController1 extends Controller<Kitchen> {
     }
 
     public void moveChefLeft(){
-
+        moveChef(getModel().getChefs().get(0).getPosition().getLeft());
     }
 
     public void moveChefUp(){
-
+        moveChef(getModel().getChefs().get(0).getPosition().getRight());
     }
 
     public void moveChefDown(){
-
+        moveChef(getModel().getChefs().get(0).getPosition().getDown());
     }
 
     public void moveChefRight(){
-
+        moveChef(getModel().getChefs().get(0).getPosition().getRight());
     }
 
-    public void moveChef(){
-
+    public void moveChef(Position position){
+        //TODO: implement using Kitchen model
     }
 
     public void ChefSelect(){
-
+        if(chef.isHoldingSomething()){
+            //drop, if there's a counter, a cookware,delivery and trash
+            return;
+        }else{
+            //pick up, from dispenser or cookware
+            return;
+        }
     }
 
     @Override
