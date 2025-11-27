@@ -8,10 +8,8 @@ import getcooked.model.game.kitchen.elements.grabable.food.Food;
 import getcooked.model.game.kitchen.elements.grabable.food.Potato;
 
 public class Pot extends Cookware{
-    //TODO: review this:
-    // only 1 chopped potato and 1 chopped carrot
     public Pot(int x, int y){
-        super(x,y,2);
+        super(x,y,1);
     }
 
     @Override
@@ -21,35 +19,20 @@ public class Pot extends Cookware{
         boolean isCarrot = (food instanceof Carrot) && (food.getState() == Food.FoodState.RAW);
 
         if (!isPotato && !isCarrot) return false;
-
-        int potatoes = 0, carrots = 0;
-        for(Food f : contents){
-            if(f instanceof Potato) potatoes++;
-            if(f instanceof Carrot) carrots++;
-        }
-
-        if (potatoes + carrots >= 1) return false;
+        if (contents.size() >= 1) return false;
 
         return true;
     }
 
     @Override
     protected void tryCook(){
-        boolean hasPotato = false;
-        boolean hasCarrot = false;
-
-        for (Food f : contents) {
-            if (f instanceof Potato) hasPotato = true;
-            if (f instanceof Carrot) hasCarrot = true;
-        }
-        // XOR
-        cooked =  (hasPotato ^ hasCarrot);
+        cooked =  !contents.isEmpty();
     }
-
 
     @Override
     protected Dish createFinishedDish(){
         if(!cooked) return null;
+
         boolean hasPotato = false, hasCarrot = false;
         for (Food f : contents) {
             if (f instanceof Potato) hasPotato = true;
@@ -64,6 +47,7 @@ public class Pot extends Cookware{
         } else {
             return null; // should not happen
         }
+
         contents.clear();
         cooked = false;
         return result;
