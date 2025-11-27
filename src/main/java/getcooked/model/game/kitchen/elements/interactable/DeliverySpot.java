@@ -12,7 +12,7 @@ public class DeliverySpot extends Interactable {
     @Override
     public void interact(Chef chef) {
         if(chef.isHoldingSomething()){
-            //TODO
+            //TODO: Check if it corresponds to the orders
             Grabable item = chef.drop();
         }
     }

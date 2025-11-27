@@ -11,6 +11,10 @@ public class Counter extends Interactable{
         super(x,y);
     }
 
+    public Grabable getItem() {
+        return item;
+    }
+
     @Override
     public void interact(Chef chef) {
         //pegar da counter

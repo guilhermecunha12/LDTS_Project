@@ -3,6 +3,7 @@ package getcooked.model.game.kitchen;
 
 import getcooked.model.Position;
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.Floor;
 import getcooked.model.game.kitchen.elements.Tile;
 
 import java.util.Deque;
