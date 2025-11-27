@@ -1,16 +1,10 @@
 package getcooked.model.game.kitchen.elements.grabable;
 
-public class Dish extends Grabable {
-
-    public enum DishType {
-        POTATO_SOUP,
-        CARROT_SOUP;
-    }
+public class Dish {
 
     private final DishType type;
 
-    public Dish(int x, int y, DishType type) {
-        super(x, y);
+    public Dish(DishType type) {
         this.type = type;
     }
 
