@@ -9,7 +9,7 @@ public class Carrot extends Food {
     @Override
     public boolean chop(){
         if(state == FoodState.RAW){
-            state = FoodState.COOKED;
+            state = FoodState.CHOPPED;
             return true;
         }
         return false;
