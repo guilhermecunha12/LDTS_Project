@@ -7,6 +7,7 @@ import getcooked.model.game.kitchen.elements.grabable.food.Food;
 import getcooked.model.game.kitchen.elements.grabable.food.Potato;
 
 public class Pot extends Cookware{
+    //TODO: review this:
     // only 1 chopped potato and 1 chopped carrot
     public Pot(int x, int y){
         super(x,y,2);
@@ -46,7 +47,7 @@ public class Pot extends Cookware{
 
 
     @Override
-    protected Grabable createFinishedDish(){
+    protected Dish createFinishedDish(){
         if(!cooked) return null;
         boolean hasPotato = false, hasCarrot = false;
         for (Food f : contents) {
@@ -56,9 +57,9 @@ public class Pot extends Cookware{
 
         Dish result;
         if (hasPotato) {
-            result = new Dish(this.getX(), this.getY(), Dish.DishType.POTATO_SOUP);
+            result = new Dish(Dish.DishType.POTATO_SOUP);
         } else if (hasCarrot) {
-            result = new Dish(this.getX(), this.getY(), Dish.DishType.CARROT_SOUP);
+            result = new Dish(Dish.DishType.CARROT_SOUP);
         } else {
             return null; // should not happen
         }
