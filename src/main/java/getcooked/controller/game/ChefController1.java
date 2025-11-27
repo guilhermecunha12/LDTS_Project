@@ -78,7 +78,7 @@ public class ChefController1 extends Controller<Kitchen> {
             }
 
             else if (getModel().getTile(position) instanceof DeliverySpot){
-                ((DeliverySpot) getModel().getTile(position)).interact(chef);
+                ((DeliverySpot) getModel().getTile(position)).interact(chef,getModel());
                 return;
             }
         }
