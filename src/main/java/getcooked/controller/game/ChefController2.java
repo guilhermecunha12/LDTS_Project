@@ -43,7 +43,7 @@ public class ChefController2 extends Controller<Kitchen> {
     }
 
     public void moveChef(Position position){
-        if(getModel().getTile(position) instanceof Floor){
+        if(getModel().isEmpty(position)){
             chef.setPosition(position);
         }
     }
@@ -58,32 +58,27 @@ public class ChefController2 extends Controller<Kitchen> {
         positions = List.of(position_down, position_left, position_up, position_right);
         for(Position position : positions){
             if(getModel().getTile(position) instanceof Counter) {
-                Counter counter = (Counter) getModel().getTile(position);
-                counter.interact(chef);
+                ((Counter) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if(getModel().getTile(position) instanceof Trash){
-                Trash trash = (Trash) getModel().getTile(position);
-                trash.interact(chef);
+                ((Trash) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if(getModel().getTile(position) instanceof Dispenser){
-                Dispenser dispenser = (Dispenser) getModel().getTile(position);
-                dispenser.interact(chef);
+                ((Dispenser) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if (getModel().getTile(position) instanceof Cookware) {
-                Cookware cookware = (Cookware) getModel().getTile(position);
-                cookware.interact(chef);
+                ((Cookware) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if (getModel().getTile(position) instanceof DeliverySpot){
-                DeliverySpot deliverySpot = (DeliverySpot) getModel().getTile(position);
-                deliverySpot.interact(chef);
+                ((DeliverySpot) getModel().getTile(position)).interact(chef);
                 return;
             }
         }

@@ -7,7 +7,6 @@ import getcooked.model.Position;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Floor;
-import getcooked.model.game.kitchen.elements.Tile;
 import getcooked.model.game.kitchen.elements.interactable.Counter;
 import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
 import getcooked.model.game.kitchen.elements.interactable.Trash;
@@ -15,7 +14,6 @@ import getcooked.model.game.kitchen.elements.interactable.cookware.Cookware;
 import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
 
 import java.io.IOException;
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +43,7 @@ public class ChefController1 extends Controller<Kitchen> {
     }
 
     public void moveChef(Position position){
-        if(getModel().getTile(position) instanceof Floor){
+        if(getModel().isEmpty(position)){
             chef.setPosition(position);
         }
     }
@@ -60,32 +58,27 @@ public class ChefController1 extends Controller<Kitchen> {
         positions = List.of(position_down, position_left, position_up, position_right);
         for(Position position : positions){
             if(getModel().getTile(position) instanceof Counter) {
-                Counter counter = (Counter) getModel().getTile(position);
-                counter.interact(chef);
+                ((Counter) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if(getModel().getTile(position) instanceof Trash){
-                Trash trash = (Trash) getModel().getTile(position);
-                trash.interact(chef);
+                ((Trash) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if(getModel().getTile(position) instanceof Dispenser){
-                Dispenser dispenser = (Dispenser) getModel().getTile(position);
-                dispenser.interact(chef);
+                ((Dispenser) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if (getModel().getTile(position) instanceof Cookware) {
-                Cookware cookware = (Cookware) getModel().getTile(position);
-                cookware.interact(chef);
+                ((Cookware) getModel().getTile(position)).interact(chef);
                 return;
             }
 
             else if (getModel().getTile(position) instanceof DeliverySpot){
-                DeliverySpot deliverySpot = (DeliverySpot) getModel().getTile(position);
-                deliverySpot.interact(chef);
+                ((DeliverySpot) getModel().getTile(position)).interact(chef);
                 return;
             }
         }

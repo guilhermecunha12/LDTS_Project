@@ -3,6 +3,7 @@ package getcooked.model.game.kitchen;
 
 import getcooked.model.Position;
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.Floor;
 import getcooked.model.game.kitchen.elements.Tile;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class Kitchen {
 
     public boolean isEmpty(Position position) {
         for(Tile tile : tiles){
-            if(tile.getPosition().equals(position))
+            if(tile.getPosition().equals(position) && !(tile instanceof Floor))
                 return false;
         }
         for(Chef chef : chefs){
