@@ -1,6 +1,8 @@
 package getcooked.model.game.kitchen;
 
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.Floor;
+import getcooked.model.game.kitchen.elements.Tile;
 import getcooked.model.game.kitchen.elements.interactable.Counter;
 import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
 import getcooked.model.game.kitchen.elements.interactable.Interactable;
@@ -55,23 +57,24 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
     }
 
     @Override
-    protected List<Interactable> createInteractables() {
-        List<Interactable> interactables = new ArrayList<>();
+    protected List<Tile> createTiles() {
+        List<Tile> tiles = new ArrayList<>();
         for(int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for(int x = 0; x < line.length(); x++) {
                 // Creates interactable based on the symbol
                 switch (line.charAt(x)) {
-                    case '#' : interactables.add(new Counter(x, y)); break;
-                    case 'p': interactables.add(new PotatoDispenser(x, y)); break;
-                    case 'P': interactables.add(new PlateDispenser(x, y));
-                    case 'T' : interactables.add(new Trash(x, y)); break;
-                    case 'D' : interactables.add(new DeliverySpot(x, y)); break;
-                    case 'Q' : interactables.add(new Pot(x, y));
+                    case ' ': tiles.add(new Floor(x, y)); break;
+                    case '#' : tiles.add(new Counter(x, y)); break;
+                    case 'p': tiles.add(new PotatoDispenser(x, y)); break;
+                    case 'P': tiles.add(new PlateDispenser(x, y));
+                    case 'T' : tiles.add(new Trash(x, y)); break;
+                    case 'D' : tiles.add(new DeliverySpot(x, y)); break;
+                    case 'Q' : tiles.add(new Pot(x, y));
                 }
             }
         }
-        return interactables;
+        return tiles;
     }
 
     @Override

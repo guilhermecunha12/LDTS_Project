@@ -30,7 +30,6 @@ public class LanternaGUI implements GUI {
     private final Set<Integer> activeInputs;
     private String backgroundColor; // to remember current background color
 
-
     public LanternaGUI(Screen screen){
         this.screen = screen;
         this.height = screen.getTerminalSize().getRows();
@@ -135,162 +134,168 @@ public class LanternaGUI implements GUI {
         return actions;
     }
 
-    private void drawCharacter(int x, int y, char c, String color) {
+    private void drawCharacter(Position position, char c, String color, String bgColor) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
+        tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
         tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.putString(x, y + 1, "" + c);
+        tg.putString(position.getX(), position.getY(), String.valueOf(c));
+    }
+
+    @Override
+    public void drawFloor(Position position) {
+        changeBackgroundColor("#c4a484"); // change the gui's background color
+        drawCharacter(position, ' ', "#468499", this.backgroundColor);
     }
 
     @Override
     public void drawChef1(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'C', "#9b7bc7");
+        drawCharacter(position, 'C', "#9b7bc7", this.backgroundColor);
     }
 
     @Override
     public void drawChef2(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'C', "#d5e6f2");
+        drawCharacter(position, 'C', "#d5e6f2", this.backgroundColor);
     }
 
     @Override
     //not correct implementation
     public void drawOrder(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'C', "#FFD700");
+        drawCharacter(position, 'C', "#FFD700", this.backgroundColor);
     }
 
     @Override
     public void drawTrash(Position position){
-        drawCharacter(position.getX(), position.getY(), 'T', "#c0c0c0");
+        drawCharacter(position, 'T', "#c0c0c0", "#468499");
     }
 
     @Override
     public void drawDelivery(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'D', "#ffd700");
+        drawCharacter(position, 'D', "#ffd700", "#468499");
     }
 
     @Override
     public void drawCounter(Position position){
-        drawCharacter(position.getX(), position.getY(), '#', "#eeeeee");
+        drawCharacter(position, '#', "#000000", "#468499");
     }
 
     @Override
     public void drawSodaDispenser(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'S', "#FF0000");
+        drawCharacter(position, 'S', "#FF0000", "#468499");
     }
 
     @Override
     public void drawKebabDispenser(Position position){
-        drawCharacter(position.getX(), position.getY(), 'K', "#FF0000");
+        drawCharacter(position, 'K', "#FF0000", "#468499");
     }
 
     @Override
     public void drawSaladDispenser(Position position){
-        drawCharacter(position.getX(), position.getY(), 'S', "#FF0000");
+        drawCharacter(position, 'S', "#FF0000", "#468499");
     }
 
     @Override
     public void drawCarrotDispenser(Position position){
-        drawCharacter(position.getX(), position.getY(), 'C', "#FF0000");
+        drawCharacter(position, 'C', "#FF0000", "#468499");
     }
 
     @Override
     public void drawPlateDispenser(Position position){
-        drawCharacter(position.getX(), position.getY(), 'P', "#FF0000");
+        drawCharacter(position, 'P', "#FF0000", "#468499");
     }
 
     @Override
     public void drawPotatoDispenser(Position position){
-        drawCharacter(position.getX(), position.getY(), 'p', "#FF0000");
+        drawCharacter(position, 'p', "#FF0000", "#468499");
     }
 
     @Override
     public void drawRawBeefDispenser(Position position){
-        drawCharacter(position.getX(), position.getY(), 'B', "#FF0000");
+        drawCharacter(position, 'B', "#FF0000", "#468499");
     }
 
     @Override
     public void drawSoda(Position position){
-        drawCharacter(position.getX(), position.getY(), 'S', "#420420");
+        drawCharacter(position, 'S', "#420420", "#468499");
     }
 
     @Override
     public void drawKebab(Position position){
-        drawCharacter(position.getX(), position.getY(), 'K', "#cc0000");
+        drawCharacter(position, 'K', "#cc0000", "#468499");
     }
 
     @Override
     public void drawSalad(Position position){
-        drawCharacter(position.getX(), position.getY(), 'S', "#008000");
+        drawCharacter(position, 'S', "#008000", "#468499");
     }
 
     @Override
     public void drawCarrot(Position position){
-        drawCharacter(position.getX(), position.getY(), 'C', "#ffa500");
+        drawCharacter(position, 'C', "#ffa500","#468499");
     }
 
     @Override
     public void drawChoppedCarrot(Position position){
-        drawCharacter(position.getX(), position.getY(), 'c', "#ffa500");
+        drawCharacter(position, 'c', "#ffa500","#468499");
     }
 
     @Override
     public void drawPlate(Position position){
-        drawCharacter(position.getX(), position.getY(), 'O', "#Fffff");
+        drawCharacter(position, 'O', "#Fffff", "#468499");
     }
 
     @Override
     public void drawPotato(Position position){
-        drawCharacter(position.getX(), position.getY(), 'P', "#daa520");
+        drawCharacter(position, 'P', "#daa520", "#468499");
     }
 
     @Override
     public void drawChoppedPotato(Position position){
-        drawCharacter(position.getX(), position.getY(), 'P', "#daa520");
+        drawCharacter(position, 'P', "#daa520", "#468499");
     }
 
     @Override
     public void drawFriedPotato(Position position){
-        drawCharacter(position.getX(), position.getY(), 'F', "#fff68f");
+        drawCharacter(position, 'F', "#fff68f", "#468499");
     }
 
     @Override
     public void drawBurntPotato(Position position){
-        drawCharacter(position.getX(), position.getY(), 'P', "#333333");
+        drawCharacter(position, 'P', "#333333", "#468499");
     }
 
     @Override
     public void drawRawBeef(Position position){
-        drawCharacter(position.getX(), position.getY(), 'B', "#800000");
+        drawCharacter(position, 'B', "#800000", "#468499");
     }
 
     @Override
     public void drawGrilledBeef(Position position){
-        drawCharacter(position.getX(), position.getY(), 'B', "#faebd7");
+        drawCharacter(position, 'B', "#faebd7","#468499");
     }
 
     @Override
     public void drawBurntBeef(Position position){
-        drawCharacter(position.getX(), position.getY(), 'B', "#333333");
+        drawCharacter(position, 'B', "#333333", "#468499");
     }
 
     @Override
     public void drawFryer(Position position){
-        drawCharacter(position.getX(), position.getY(), 'F', "#666666");
+        drawCharacter(position, 'F', "#666666","#468499");
     }
 
     @Override
     public void drawPot(Position position){
-        drawCharacter(position.getX(), position.getY(), 'Q', "#666666");
+        drawCharacter(position, 'Q', "#666666", "#468499");
     }
 
     @Override
     public void drawGrill(Position position){
-        drawCharacter(position.getX(), position.getY(), 'G', "#666666");
+        drawCharacter(position, 'G', "#666666", "#468499");
     }
 
     @Override
     public void drawCutter(Position position){
-        drawCharacter(position.getX(), position.getY(), 'C', "#666666");
+        drawCharacter(position, 'C', "#666666", "#468499");
     }
 
     @Override
@@ -359,10 +364,14 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void changeBackgroundColor(String newColor) {
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(newColor));
-        tg.fill(' '); // fill the whole screen with the new background color
         this.backgroundColor = newColor;
+    }
+
+    @Override
+    public void paint() {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
+        tg.fill(' '); // fill the whole screen with the new background color
     }
 
     @Override

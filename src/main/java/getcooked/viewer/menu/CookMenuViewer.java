@@ -13,6 +13,7 @@ public class CookMenuViewer extends Viewer<CookMenu> {
     @Override
     public void drawElements(GUI gui) {
         gui.changeBackgroundColor("#468499"); // background color
+        gui.paint();
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
         gui.drawText(new Position(middleX - 9, gui.getHeight()/12), "Get Ready To Cook", "#ffcf40", bgColor);

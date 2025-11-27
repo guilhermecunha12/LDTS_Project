@@ -14,6 +14,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
     @Override
     protected void drawElements(GUI gui) {
         gui.changeBackgroundColor("#468499"); // background color
+        gui.paint();
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
         gui.drawText(new Position(middleX - 4, gui.getHeight()/12), "Controls", "#ffcf40", bgColor);
