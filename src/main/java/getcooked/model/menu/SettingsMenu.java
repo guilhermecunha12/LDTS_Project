@@ -1,28 +1,22 @@
 package getcooked.model.menu;
 
+import getcooked.sound.AudioManager;
+
 import java.util.Arrays;
 
 public class SettingsMenu extends Menu {
-    private boolean volumeOn;
+    private final AudioManager audioManager;
 
-    public SettingsMenu() {
-        super(Arrays.asList("Volume ON", "Back")); // logical entries
-        this.volumeOn = true;
+    public SettingsMenu(AudioManager audioManager) {
+        super(Arrays.asList(audioManager.isBackgroundMusicOn()? "Background Music ON" : "Background Music OFF", "Back")); // logical entries
+        this.audioManager = audioManager;
     }
 
-    public void toggleVolume() {
-        // Changes the internal state of the volume
-        this.volumeOn = !this.volumeOn;
-        // Calls the methods that will perform those changes in the entries
-        if(volumeOn){
-            entries.set(0, "Volume ON");
-        }
-        else{
-            entries.set(0, "Volume OFF");
-        }
+    public void updateEntries() {
+        if (audioManager.isBackgroundMusicOn()) entries.set(0, "Background Music ON");
+        else entries.set(0, "Background Music OFF");
     }
 
     public boolean isSelectedVolume() { return isSelected(0); }
     public boolean isSelectedBack() { return isSelected(1); }
-    public boolean isVolumeOn() { return volumeOn; }
 }
