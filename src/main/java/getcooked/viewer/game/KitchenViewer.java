@@ -19,10 +19,12 @@ import java.util.List;
 
 public class KitchenViewer extends Viewer<Kitchen> {
     private OrdersViewer ordersViewer;
+    private LivesViewer livesViewer;
 
     public KitchenViewer(Kitchen kitchen) {
         super(kitchen); // initialise model field via superclass
         this.ordersViewer = new OrdersViewer(kitchen.getActiveOrders());
+        this.livesViewer = new LivesViewer(kitchen);
     }
 
     @Override
@@ -37,12 +39,15 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
 
-        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
-        ordersViewer.drawElements(gui);
-
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());
         if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
+
+        // update the viewers because the active orders and lives could have changed
+        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
+        ordersViewer.drawElements(gui);
+        this.livesViewer = new LivesViewer(getModel());
+        livesViewer.drawElements(gui);
     }
 
     // generic method with type T
