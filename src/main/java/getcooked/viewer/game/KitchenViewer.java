@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.Position;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Element;
@@ -19,14 +20,20 @@ import java.util.List;
 
 public class KitchenViewer extends Viewer<Kitchen> {
     private OrdersViewer ordersViewer;
+    private LivesViewer livesViewer;
 
     public KitchenViewer(Kitchen kitchen) {
         super(kitchen); // initialise model field via superclass
         this.ordersViewer = new OrdersViewer(kitchen.getActiveOrders());
+        this.livesViewer = new LivesViewer(kitchen);
     }
 
     @Override
     public void drawElements(GUI gui) {
+        // TODO: adjust the position of the level text according to the current level to avoid it going out of the screen
+        gui.drawText(new Position(gui.getWidth() - 10, 2),
+                "Level: " + getModel().getLevel(), "#ffffff", "#000000");
+
         List<Tile> tiles = getModel().getTiles();
 
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer());
@@ -37,12 +44,15 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
 
-        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
-        ordersViewer.drawElements(gui);
-
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());
         if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
+
+        // update the viewers because the active orders and lives could have changed
+        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
+        ordersViewer.drawElements(gui);
+        this.livesViewer = new LivesViewer(getModel());
+        livesViewer.drawElements(gui);
     }
 
     // generic method with type T
