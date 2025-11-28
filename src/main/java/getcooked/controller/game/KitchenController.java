@@ -37,6 +37,7 @@ public class KitchenController extends Controller<Kitchen> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
+        ordersController.step(game, actions, time);
         if (actions == null || actions.isEmpty()) return;
 
         // handle global actions (pause)

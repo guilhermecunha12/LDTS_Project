@@ -18,8 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenViewer extends Viewer<Kitchen> {
+    private OrdersViewer ordersViewer;
+
     public KitchenViewer(Kitchen kitchen) {
         super(kitchen); // initialise model field via superclass
+        this.ordersViewer = new OrdersViewer(kitchen.getActiveOrders());
     }
 
     @Override
@@ -33,6 +36,9 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer());
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
+
+        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
+        ordersViewer.drawElements(gui);
 
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());

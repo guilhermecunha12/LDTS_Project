@@ -44,7 +44,7 @@ public abstract class KitchenBuilder {
 
         for (int i = 0; i < numOrders; i++) {
             DishType randomDishType = getRandomDishType();
-            Order order = new Order(new Dish(randomDishType), 1000);
+            Order order = new Order(new Dish(randomDishType), 200); //TODO: change the timeLimit according to the current level
             res.addFirst(order);
         }
         return res;
