@@ -2,14 +2,16 @@ package getcooked.model.game.kitchen.elements.grabable;
 
 import getcooked.model.Position;
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.game.kitchen.elements.Element;
 
-// TODO: Grabable should extend Element...
-public abstract class Grabable {
+
+public abstract class Grabable extends Element {
     //TODO: Check if this position method is the best for class grabable
     private Position placedPosition;
     private Chef holder;
 
     public Grabable(int x, int y) {
+        super(x,y);
         this.placedPosition = new Position(x, y);
         this.holder = null;
     }
