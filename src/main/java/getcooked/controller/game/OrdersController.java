@@ -57,7 +57,7 @@ public class OrdersController extends Controller<Kitchen> {
             // Change level
             kitchen.setLevel(kitchen.getLevel() + 1);
             // Create new kitchen
-            kitchen = new LoaderKitchenBuilder(kitchen.getLevel()).createKitchen();
+            kitchen = new LoaderKitchenBuilder(kitchen.getLevel(), kitchen.getNumPlayers()).createKitchen();
         }
     }
 }

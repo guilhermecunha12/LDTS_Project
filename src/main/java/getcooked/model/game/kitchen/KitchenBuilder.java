@@ -9,11 +9,13 @@ import java.util.*;
 
 public abstract class KitchenBuilder {
     protected final int level;
+    protected final int numPlayers;
     protected List<DishType> availableDishTypes; // used Class because food has a position and that is not important here
 
-    public KitchenBuilder(int level) {
+    public KitchenBuilder(int level, int numPlayers) {
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
+        this.numPlayers = numPlayers;
         this.availableDishTypes = new ArrayList<>(); // empty list
     }
 
@@ -24,6 +26,7 @@ public abstract class KitchenBuilder {
         kitchen.setTiles(createTiles());
         kitchen.setOrders(createOrders());
         kitchen.setLevel(this.level); // initial level
+        kitchen.setNumPlayers(this.numPlayers);
         kitchen.setLives(3); // initial lives
         return kitchen;
     }
@@ -33,10 +36,22 @@ public abstract class KitchenBuilder {
 
     protected abstract int getHeight();
 
-
     protected abstract List<Tile> createTiles();
 
-    protected abstract List<Chef> createChefs();
+    //TODO: add exception that verifies that the chefs are on floor tiles positions
+    private List<Chef> createChefs() {
+        List<Chef> chefs = new ArrayList<>();
+        int middleY = getHeight()/2;
+        int middleX = getWidth()/2;
+
+        if (this.numPlayers == 1) {
+            chefs.add(new Chef(middleX, middleY));
+        } else {
+            chefs.add(new Chef(middleX-2, middleY));
+            chefs.add(new Chef(middleX+1, middleY));
+        }
+        return chefs;
+    }
 
     private Deque<Order> createOrders() {
         Deque<Order> res = new ArrayDeque<>(); // empty list

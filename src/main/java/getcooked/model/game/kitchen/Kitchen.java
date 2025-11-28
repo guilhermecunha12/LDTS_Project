@@ -18,10 +18,11 @@ public class Kitchen {
 
     private List<Chef> chefs;
     private List<Tile> tiles;
-    private Deque<Order> orders;
-    private List<Order> activeOrders;
+    private Deque<Order> orders; // TODO: for each kitchen, this also should be final... pass through the constructor?
+    private final List<Order> activeOrders;
     private int level;
     private int lives;
+    private int numPlayers; // TODO: this should be final... pass through the constructor?
 
     public Kitchen(int width, int height) {
         this.width = width;
@@ -46,9 +47,18 @@ public class Kitchen {
         return lives;
     }
 
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
     public int getWidth() {
         return width;
     }
+
     public int getHeight() {
         return height;
     }

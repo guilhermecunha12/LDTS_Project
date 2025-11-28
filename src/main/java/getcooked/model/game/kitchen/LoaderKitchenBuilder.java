@@ -1,6 +1,5 @@
 package getcooked.model.game.kitchen;
 
-import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Floor;
 import getcooked.model.game.kitchen.elements.Tile;
 import getcooked.model.game.kitchen.elements.grabable.DishType;
@@ -21,8 +20,8 @@ import java.util.List;
 public class LoaderKitchenBuilder extends KitchenBuilder{
     private final List<String> lines;
 
-    public LoaderKitchenBuilder(int level) throws IOException{
-        super(level);
+    public LoaderKitchenBuilder(int level, int numPlayers) throws IOException{
+        super(level, numPlayers);
 
         URL resource = LoaderKitchenBuilder.class.getResource("/kitchen/level" + this.level + ".lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
@@ -74,28 +73,5 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
             }
         }
         return tiles;
-    }
-
-    @Override //TODO: add exception that verifies if the number of chefs read is either 1 or 2
-    protected List<Chef> createChefs() {
-        List<Chef> chefs = new ArrayList<>();
-        for(int y = 0; y < lines.size(); y++) {
-            String line = lines.get(y);
-            for(int x = 0; x < line.length(); x++) {
-                if(line.charAt(x) == 'C') chefs.add(new Chef(x, y));
-            }
-        }
-        return chefs;
-        /* like this...
-        try {
-            if (chefs.isEmpty() || chefs.size() > 2) {
-                throw new Exception();
-            }
-            return chefs;
-        } catch (Exception e) {
-            System.out.println("Error loading the game: there should be 1 or 2 chefs.");
-        }
-        */
-
     }
 }

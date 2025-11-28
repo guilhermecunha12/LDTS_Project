@@ -25,7 +25,10 @@ public class ControlsInfoMenuController extends Controller<ControlsInfoMenu> {
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
         if(framesWaited == FRAMES_TO_WAIT) {
-            game.changeState(new PlayingState(new PlayingSession(new LoaderKitchenBuilder(1).createKitchen(), new EscapeMenu())));
+            if (getModel().isOnePlayer())
+                game.changeState(new PlayingState(new PlayingSession(new LoaderKitchenBuilder(1, 1).createKitchen(), new EscapeMenu())));
+            else
+                game.changeState(new PlayingState(new PlayingSession(new LoaderKitchenBuilder(1, 2).createKitchen(), new EscapeMenu())));
             framesWaited = 0;
         }
         framesWaited++;
