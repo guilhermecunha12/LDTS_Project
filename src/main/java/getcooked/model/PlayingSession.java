@@ -5,7 +5,7 @@ import getcooked.model.menu.EscapeMenu;
 
 // model that contains the Kitchen model and the EscapeMenu model
 public class PlayingSession {
-    private final Kitchen kitchen;
+    private Kitchen kitchen; // not final, because kitchen will change during levels
     private final EscapeMenu escapeMenu;
     private boolean paused;
 
@@ -17,6 +17,10 @@ public class PlayingSession {
 
     public Kitchen getKitchen() {
         return kitchen;
+    }
+
+    public void setKitchen(Kitchen kitchen) {
+        this.kitchen = kitchen;
     }
 
     public EscapeMenu getEscapeMenu() {

@@ -15,25 +15,23 @@ public class Kitchen {
     public static final int MAX_ACTIVE_ORDERS = 3;
     private final int width;
     private final int height;
+    private final int level;
 
     private List<Chef> chefs;
     private List<Tile> tiles;
     private Deque<Order> orders; // TODO: for each kitchen, this also should be final... pass through the constructor?
     private final List<Order> activeOrders;
-    private int level;
     private int lives;
     private int numPlayers; // TODO: this should be final... pass through the constructor?
 
-    public Kitchen(int width, int height) {
+    public Kitchen(int width, int height, int level) {
         this.width = width;
         this.height = height;
+        this.level = level;
         this.orders = new ArrayDeque<>();
         this.activeOrders = new ArrayList<>();
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     public int getLevel() {
         return level;

@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.Position;
 import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.game.kitchen.elements.Chef;
 import getcooked.model.game.kitchen.elements.Element;
@@ -29,6 +30,10 @@ public class KitchenViewer extends Viewer<Kitchen> {
 
     @Override
     public void drawElements(GUI gui) {
+        // TODO: adjust the position of the level text according to the current level to avoid it going out of the screen
+        gui.drawText(new Position(gui.getWidth() - 10, gui.getHeight() - 2),
+                "Level: " + getModel().getLevel(), "#ffffff", "#000000");
+
         List<Tile> tiles = getModel().getTiles();
 
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer());

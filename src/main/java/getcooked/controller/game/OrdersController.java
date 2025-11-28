@@ -52,12 +52,5 @@ public class OrdersController extends Controller<Kitchen> {
             game.changeState(new GameOverState(new GameOverMenu()));
             return;
         }
-
-        if (kitchen.getOrders().isEmpty() && kitchen.getActiveOrders().isEmpty()) {
-            // Change level
-            kitchen.setLevel(kitchen.getLevel() + 1);
-            // Create new kitchen
-            kitchen = new LoaderKitchenBuilder(kitchen.getLevel(), kitchen.getNumPlayers()).createKitchen();
-        }
     }
 }
