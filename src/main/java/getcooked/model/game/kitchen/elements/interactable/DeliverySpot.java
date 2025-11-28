@@ -23,10 +23,11 @@ public class DeliverySpot extends Interactable {
     @Override
     public void interact(Chef chef) {
         if(chef.isHoldingSomething() && chef.getItem() instanceof Plate) {
-            Plate plate = (Plate) chef.drop();
+            Plate plate = (Plate) chef.getItem();
             List<Order> orders = kitchen.getActiveOrders();
             for(Order order : orders){
                 if(plate.hasContent() && plate.getContent().getType() == order.getDesiredDish().getType()){
+                    chef.drop();
                     kitchen.removeActiveOrder(order);
                     return;
                 }
