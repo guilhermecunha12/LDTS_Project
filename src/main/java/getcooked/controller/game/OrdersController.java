@@ -28,7 +28,7 @@ public class OrdersController extends Controller<Kitchen> {
         List<Order> activeOrders = kitchen.getActiveOrders();
         Iterator<Order> iterator = activeOrders.iterator();
 
-        // Used iterators in order
+        // Used iterators because elements are being removed from the iterable, causing errors in a for-each loop
         while (iterator.hasNext()) {
             Order activeOrder = iterator.next();
             activeOrder.tick();
@@ -50,7 +50,7 @@ public class OrdersController extends Controller<Kitchen> {
         if (kitchen.getLives() == 0){
             // When the player loses all lives go to the GameOverMenu
             game.changeState(new GameOverState(new GameOverMenu()));
-            return;
+            return; // TODO: review
         }
     }
 }

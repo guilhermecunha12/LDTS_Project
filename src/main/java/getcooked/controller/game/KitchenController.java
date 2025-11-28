@@ -42,10 +42,7 @@ public class KitchenController extends Controller<Kitchen> {
         ordersController.step(game, actions, time);
 
         if (kitchen.getOrders().isEmpty() && kitchen.getActiveOrders().isEmpty()) {
-            game.changeState(new PlayingState(new PlayingSession(
-                    new LoaderKitchenBuilder(kitchen.getLevel() + 1, kitchen.getNumPlayers()).createKitchen(), new EscapeMenu())));
-            // TODO: we should be able to set a new kitchen and not creating a new playing session
-            // this.playingSession.setKitchen(new LoaderKitchenBuilder(kitchen.getLevel() + 1, kitchen.getNumPlayers()).createKitchen());
+            this.playingSession.nextLevel();
         }
 
         if (actions == null || actions.isEmpty()) return;
