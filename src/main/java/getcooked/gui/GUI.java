@@ -48,6 +48,7 @@ public interface GUI { // intermediate class to represent a general GUI
     void drawPot(Position position);
     void drawGrill(Position position);
     void drawCutter(Position position);
+    void drawPotatoSoup(Position position);
 
     void drawText(Position position, String text, String color, String bgColor);
     void drawTextBox(Position position, String text, String textColor, String bgColor, int padding);

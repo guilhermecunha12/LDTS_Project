@@ -240,7 +240,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawPlate(Position position){
-        drawCharacter(position, 'O', "#Fffff", "#468499");
+        drawCharacter(position, 'O', "#ffffff", "#468499");
     }
 
     @Override
@@ -297,6 +297,9 @@ public class LanternaGUI implements GUI {
     public void drawCutter(Position position){
         drawCharacter(position, 'C', "#666666", "#468499");
     }
+
+    @Override
+    public void drawPotatoSoup(Position position){ drawCharacter(position, '*', "#ffa500", "#ffffff");}
 
     @Override
     public void drawText(Position position, String text, String color, String bgColor) {
