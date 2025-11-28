@@ -20,14 +20,13 @@ public abstract class KitchenBuilder {
     }
 
     public Kitchen createKitchen() {
-        Kitchen kitchen = new Kitchen(getWidth(), getHeight());
+        Kitchen kitchen = new Kitchen(getWidth(), getHeight(), this.level);
         // Set the different elements inside the kitchen
         kitchen.setChefs(createChefs());
         kitchen.setTiles(createTiles());
         kitchen.setOrders(createOrders());
-        kitchen.setLevel(this.level); // initial level
         kitchen.setNumPlayers(this.numPlayers);
-        kitchen.setLives(3); // initial lives
+        kitchen.setLives(3); // TODO: lives should belong to the playing session, otherwise lives are reset everytime the kitchen is created
         return kitchen;
     }
 

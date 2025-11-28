@@ -2,12 +2,13 @@ package getcooked.controller.game;
 
 import getcooked.Game;
 import getcooked.controller.Controller;
-import getcooked.controller.PlayingController;
 import getcooked.gui.GUI;
 import getcooked.model.PlayingSession;
 import getcooked.model.game.kitchen.Kitchen;
-import getcooked.model.game.kitchen.Order;
+import getcooked.model.game.kitchen.LoaderKitchenBuilder;
 import getcooked.model.game.kitchen.elements.Chef;
+import getcooked.model.menu.EscapeMenu;
+import getcooked.states.PlayingState;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +38,13 @@ public class KitchenController extends Controller<Kitchen> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
+        Kitchen kitchen = getModel();
         ordersController.step(game, actions, time);
+
+        if (kitchen.getOrders().isEmpty() && kitchen.getActiveOrders().isEmpty()) {
+            this.playingSession.nextLevel();
+        }
+
         if (actions == null || actions.isEmpty()) return;
 
         // handle global actions (pause)
