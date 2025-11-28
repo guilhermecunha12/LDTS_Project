@@ -85,7 +85,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                 if(line.charAt(x) == 'C') chefs.add(new Chef(x, y));
             }
         }
-
+        return chefs;
         /* like this...
         try {
             if (chefs.isEmpty() || chefs.size() > 2) {

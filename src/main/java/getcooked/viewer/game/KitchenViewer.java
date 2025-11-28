@@ -29,8 +29,6 @@ public class KitchenViewer extends Viewer<Kitchen> {
     public void drawElements(GUI gui) {
         List<Tile> tiles = getModel().getTiles();
 
-        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
-        ordersViewer.drawElements(gui);
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer());
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer());
@@ -38,6 +36,9 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer());
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
+
+        this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
+        ordersViewer.drawElements(gui);
 
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());
