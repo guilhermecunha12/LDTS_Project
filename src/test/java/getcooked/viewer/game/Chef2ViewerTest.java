@@ -15,13 +15,13 @@ import static org.mockito.Mockito.*;
 public class Chef2ViewerTest {
     private GUI gui;
     private Chef chef;
-    private Chef1Viewer chef2Viewer;
+    private Chef2Viewer chef2Viewer;
 
     @BeforeEach
     void setUp() {
         this.gui = mock(GUI.class);
         this.chef = mock(Chef.class);
-        this.chef2Viewer = new Chef1Viewer();
+        this.chef2Viewer = new Chef2Viewer();
     }
 
     @Test
