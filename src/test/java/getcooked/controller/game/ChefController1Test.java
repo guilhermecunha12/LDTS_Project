@@ -134,5 +134,42 @@ public class ChefController1Test {
         verify(trash).interact(chef);
     }
 
-    //TODO: Test step
+    @Test
+    void testChefStep() throws IOException {
+        Position posDown = mock(Position.class);
+        Position posLeft = mock(Position.class);
+        Position posUp = mock(Position.class);
+        Position posRight = mock(Position.class);
+        Position currentPos = mock(Position.class);
+        Chef kitchenChef = mock(Chef.class);
+
+        when(chef.getPosition()).thenReturn(currentPos);
+        when(currentPos.getDown()).thenReturn(posDown);
+        when(currentPos.getLeft()).thenReturn(posLeft);
+        when(currentPos.getUp()).thenReturn(posUp);
+        when(currentPos.getRight()).thenReturn(posRight);
+
+        when(kitchenChef.getPosition()).thenReturn(currentPos);
+        when(kitchen.getChefs()).thenReturn(List.of(kitchenChef));
+
+        when(kitchen.isEmpty(posUp)).thenReturn(true);
+        when(kitchen.isEmpty(posRight)).thenReturn(true);
+        when(kitchen.isEmpty(posDown)).thenReturn(true);
+        when(kitchen.isEmpty(posLeft)).thenReturn(true);
+
+        Set<GUI.ACTION> actions = Set.of(
+                GUI.ACTION.PLAYER1_UP,
+                GUI.ACTION.PLAYER1_DOWN,
+                GUI.ACTION.PLAYER1_LEFT,
+                GUI.ACTION.PLAYER1_RIGHT
+        );
+
+        chefController.step(game, actions, 0);
+
+        verify(chef).setPosition(posUp);
+        verify(chef).setPosition(posDown);
+        verify(chef).setPosition(posLeft);
+        verify(chef).setPosition(posRight);
+        verify(chef, times(4)).setPosition(any());
+    }
 }
