@@ -1,7 +1,7 @@
 package getcooked.controller.game;
 
 import getcooked.Game;
-import getcooked.model.game.kitchen.Kitchen;
+import getcooked.model.game.Kitchen;
 import org.junit.jupiter.api.BeforeEach;
 
 
