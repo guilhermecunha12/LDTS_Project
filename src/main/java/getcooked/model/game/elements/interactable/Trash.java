@@ -11,7 +11,7 @@ public class Trash extends Interactable{
 
     @Override
     public void interact(Chef chef) {
-        Grabable tmp = chef.drop();
-        if(tmp != null) tmp.setHolder(null);
+        Grabable grabable = chef.drop();
+        if (grabable != null) grabable.setHolder(null);
     }
 }
