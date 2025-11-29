@@ -1,7 +1,7 @@
 package getcooked.model.game;
 
 
-import getcooked.model.game.elements.grabable.Dish;
+import getcooked.model.game.dish.Dish;
 
 public class Order {
 

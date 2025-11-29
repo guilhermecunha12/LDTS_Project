@@ -2,7 +2,7 @@ package getcooked.model.game;
 
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
-import getcooked.model.game.elements.grabable.DishType;
+import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;

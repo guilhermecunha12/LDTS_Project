@@ -1,4 +1,4 @@
-package getcooked.model.game.elements.grabable;
+package getcooked.model.game.dish;
 
 public class Dish {
 
