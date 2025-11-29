@@ -2,7 +2,7 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

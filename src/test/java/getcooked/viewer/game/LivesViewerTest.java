@@ -1,7 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.kitchen.Kitchen;
+import getcooked.model.game.Kitchen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
