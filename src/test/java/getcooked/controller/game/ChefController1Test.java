@@ -3,11 +3,11 @@ package getcooked.controller.game;
 import getcooked.Game;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.Kitchen;
-import getcooked.model.game.kitchen.elements.Chef;
-import getcooked.model.game.kitchen.elements.interactable.Counter;
-import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
-import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.Kitchen;
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.interactable.Counter;
+import getcooked.model.game.elements.interactable.DeliverySpot;
+import getcooked.model.game.elements.interactable.Trash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
