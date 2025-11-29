@@ -3,17 +3,14 @@ package getcooked.controller.game;
 import getcooked.Game;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.Kitchen;
-import getcooked.model.game.kitchen.elements.Chef;
-import getcooked.model.game.kitchen.elements.interactable.cookware.Cookware;
-import getcooked.model.game.kitchen.elements.interactable.dispenser.Dispenser;
+import getcooked.model.game.Kitchen;
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.interactable.cookware.Cookware;
+import getcooked.model.game.elements.interactable.dispenser.Dispenser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
