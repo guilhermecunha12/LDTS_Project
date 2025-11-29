@@ -27,10 +27,10 @@ public class Counter extends Interactable{
             this.item = null;
         }
         else if(chef.isHoldingSomething() && item == null){
-            Grabable tmp = chef.drop();
+            Grabable grabable = chef.drop();
             //Passar a posição deste counter
-            tmp.placeAt(getPosition());
-            this.item = tmp;
+            grabable.placeAt(getPosition());
+            this.item = grabable;
         }
     }
 }
