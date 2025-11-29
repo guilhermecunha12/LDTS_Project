@@ -2,8 +2,8 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.game.Order;
-import getcooked.model.game.elements.grabable.Dish;
-import getcooked.model.game.elements.grabable.DishType;
+import getcooked.model.game.dish.Dish;
+import getcooked.model.game.dish.DishType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
