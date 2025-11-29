@@ -2,17 +2,17 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.Kitchen;
-import getcooked.model.game.kitchen.elements.Chef;
-import getcooked.model.game.kitchen.elements.Element;
-import getcooked.model.game.kitchen.elements.Floor;
-import getcooked.model.game.kitchen.elements.Tile;
-import getcooked.model.game.kitchen.elements.interactable.Counter;
-import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
-import getcooked.model.game.kitchen.elements.interactable.Trash;
-import getcooked.model.game.kitchen.elements.interactable.cookware.Pot;
-import getcooked.model.game.kitchen.elements.interactable.dispenser.PlateDispenser;
-import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.Kitchen;
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Element;
+import getcooked.model.game.elements.Floor;
+import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.interactable.Counter;
+import getcooked.model.game.elements.interactable.DeliverySpot;
+import getcooked.model.game.elements.interactable.Trash;
+import getcooked.model.game.elements.interactable.cookware.Pot;
+import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
+import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.viewer.Viewer;
 
 import java.util.ArrayList;

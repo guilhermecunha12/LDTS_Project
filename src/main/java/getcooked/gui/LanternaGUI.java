@@ -336,35 +336,6 @@ public class LanternaGUI implements GUI {
                 new TerminalSize(width, height), ' ');
     }
 
-    //TODO: review this method
-    @Override
-    public void darken() {
-        TextGraphics tg = screen.newTextGraphics();
-
-        tg.setForegroundColor(new TextColor.RGB(50, 50, 50));  // dark gray color
-        tg.setBackgroundColor(TextColor.ANSI.DEFAULT); // TODO: check this later
-
-        for (int i = 0; i < this.width; i++) {
-            for (int j = 0; j < this.height; j++) {
-                TextCharacter textCharacter = this.screen.getFrontCharacter(i, j);
-                TextColor fgColor = textCharacter.getForegroundColor();
-                TextColor bgColor = textCharacter.getBackgroundColor();
-
-                int newfgRed = (int)(fgColor.getRed() * 0.5);
-                int newfgGreen = (int)(fgColor.getGreen() * 0.5);
-                int newfgBlue = (int)(fgColor.getBlue() * 0.5);
-
-                int newbgRed = (int)(bgColor.getRed() * 0.5);
-                int newbgGreen = (int)(bgColor.getGreen() * 0.5);
-                int newbgBlue = (int)(bgColor.getBlue() * 0.5);
-
-                tg.setBackgroundColor(new TextColor.RGB(newbgRed, newbgGreen, newbgBlue));
-                tg.setForegroundColor(new TextColor.RGB(newfgRed, newfgGreen, newfgBlue));
-                tg.putString(i, j, String.valueOf(textCharacter.getCharacter()));
-            }
-        }
-    }
-
     @Override
     public void changeBackgroundColor(String newColor) {
         this.backgroundColor = newColor;

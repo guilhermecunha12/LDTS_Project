@@ -1,9 +1,7 @@
 package getcooked.viewer.menu;
 
-import com.googlecode.lanterna.TextColor;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.Kitchen;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.viewer.Viewer;
 

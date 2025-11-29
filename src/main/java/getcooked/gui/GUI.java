@@ -53,7 +53,6 @@ public interface GUI { // intermediate class to represent a general GUI
     void drawText(Position position, String text, String color, String bgColor);
     void drawTextBox(Position position, String text, String textColor, String bgColor, int padding);
     void drawRectangle(Position position, int width, int height, String color);
-    void darken();
 
     void changeBackgroundColor(String newColor);
     void paint(); // paint whole gui with background color

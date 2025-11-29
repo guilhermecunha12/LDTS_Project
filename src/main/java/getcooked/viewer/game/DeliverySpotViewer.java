@@ -1,7 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.kitchen.elements.interactable.DeliverySpot;
+import getcooked.model.game.elements.interactable.DeliverySpot;
 
 public class DeliverySpotViewer implements ElementViewer<DeliverySpot>{
 
