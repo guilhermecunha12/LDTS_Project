@@ -16,13 +16,17 @@ public abstract class Cookware extends Interactable {
     protected int capacity;
     protected boolean cooked = false;
 
-    public Cookware(int x, int y, int capacity) {
+    protected Cookware(int x, int y, int capacity) {
         super(x, y);
         this.capacity = capacity;
     }
 
     public List<Food> getContents() {
         return contents;
+    }
+
+    public void setContents(List<Food> contents) {
+        this.contents = contents;
     }
 
     public boolean isCooked() {
@@ -65,11 +69,10 @@ public abstract class Cookware extends Interactable {
                 return;
             }
 
-            if (held instanceof Plate) {
+            if (held instanceof Plate plate) {
                 Dish result = createFinishedDish();
                 if (result == null) return;
-                Plate plate = (Plate) held;
-                boolean placedOnPlate = plate.put(result);
+                plate.put(result);
             }
         }
     }
