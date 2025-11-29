@@ -1,5 +1,7 @@
 package getcooked.model.game.elements.grabable;
 
+import getcooked.model.game.dish.Dish;
+
 public class Plate extends Grabable {
 
     private Dish content;

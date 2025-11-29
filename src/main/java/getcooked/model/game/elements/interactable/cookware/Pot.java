@@ -1,7 +1,7 @@
 package getcooked.model.game.elements.interactable.cookware;
 
-import getcooked.model.game.elements.grabable.Dish;
-import getcooked.model.game.elements.grabable.DishType;
+import getcooked.model.game.dish.Dish;
+import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.Potato;

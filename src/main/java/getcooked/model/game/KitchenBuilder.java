@@ -2,8 +2,8 @@ package getcooked.model.game;
 
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Tile;
-import getcooked.model.game.elements.grabable.Dish;
-import getcooked.model.game.elements.grabable.DishType;
+import getcooked.model.game.dish.Dish;
+import getcooked.model.game.dish.DishType;
 
 import java.util.*;
 
