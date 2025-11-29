@@ -1,7 +1,6 @@
 package getcooked.gui;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -19,7 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class LanternaGUI implements GUI {
@@ -27,7 +28,10 @@ public class LanternaGUI implements GUI {
     private final int height; // for now, final
     private final int width; // for now, final
     private final Screen screen;
-    private final Set<Integer> activeInputs;
+    private final Set<Integer> activeInputs; // Currently pressed keys
+    private final Set<Integer> previousInputs; // Pressed keys in the previous frame
+    private final Map<Integer, Long> lastActionTimes; // Last action times for keys
+    private static final long MIN_HOLD_TIME = 75;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor; // to remember current background color
 
     public LanternaGUI(Screen screen){
@@ -35,6 +39,8 @@ public class LanternaGUI implements GUI {
         this.height = screen.getTerminalSize().getRows();
         this.width = screen.getTerminalSize().getColumns();
         this.activeInputs = new HashSet<>();
+        this.previousInputs = new HashSet<>();
+        this.lastActionTimes = new HashMap<>();
         this.backgroundColor = "#ffffff";
     }
 
@@ -46,6 +52,8 @@ public class LanternaGUI implements GUI {
         this.screen = createScreen(terminal);
         // Consider synchronized set if needed
         this.activeInputs = new HashSet<>();
+        this.previousInputs = new HashSet<>();
+        this.lastActionTimes = new HashMap<>();
         this.backgroundColor = "#ffffff";
 
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
@@ -57,6 +65,8 @@ public class LanternaGUI implements GUI {
             @Override
             public void keyReleased(KeyEvent e) {
                 activeInputs.remove(e.getKeyCode());
+                // When the key is released, wipe the last action time
+                lastActionTimes.remove(e.getKeyCode());
             }
         });
     }
@@ -113,24 +123,61 @@ public class LanternaGUI implements GUI {
 
     @Override
     public Set<GUI.ACTION> getNextAction() {
-        // Transforming a set of key codes into a set of GUI actions
         Set<GUI.ACTION> actions = new HashSet<>();
-        if(activeInputs.contains(KeyEvent.VK_W)) actions.add(ACTION.PLAYER1_UP);
-        if(activeInputs.contains(KeyEvent.VK_A)) actions.add(ACTION.PLAYER1_LEFT);
-        if(activeInputs.contains(KeyEvent.VK_S)) actions.add(ACTION.PLAYER1_DOWN);
-        if(activeInputs.contains(KeyEvent.VK_D)) actions.add(ACTION.PLAYER1_RIGHT);
-        if(activeInputs.contains(KeyEvent.VK_SPACE)) actions.add(ACTION.PLAYER1_SELECT);
-        if(activeInputs.contains(KeyEvent.VK_UP)) actions.add(ACTION.PLAYER2_UP);
-        if(activeInputs.contains(KeyEvent.VK_LEFT)) actions.add(ACTION.PLAYER2_LEFT);
-        if(activeInputs.contains(KeyEvent.VK_DOWN)) actions.add(ACTION.PLAYER2_DOWN);
-        if(activeInputs.contains(KeyEvent.VK_RIGHT)) actions.add(ACTION.PLAYER2_RIGHT);
-        if(activeInputs.contains(KeyEvent.VK_ENTER)) actions.add(ACTION.PLAYER2_SELECT);
-        if(activeInputs.contains(KeyEvent.VK_ESCAPE)) actions.add(ACTION.ESCAPE);
-        // We must clear the activeInputs set each iteration
-        // Example: User pressed the down arrow in a certain frame.
-        // If he doesn't release the key in time, that same key is still active in the next frame, making the action
-        // appear "doubled" (it will be processed again)
-        activeInputs.clear();
+        // Current time of action processing
+        long currentTime = System.currentTimeMillis();
+
+        // BIConsumer operates through side effects: for each call of processKey.accept, the function will execute
+        // for that user input
+        java.util.function.BiConsumer<Integer, ACTION> processKey = (keyCode, action) -> {
+            // We only care about keys that are active inputs in the frame (added through the KeyPress method)
+            if (activeInputs.contains(keyCode)) {
+                // Just pressed checks if the current key is a new input -> it wasn't pressed in the previous
+                // frame activeInputs
+                boolean justPressed = !previousInputs.contains(keyCode);
+                // If it's a new key that is being pressed, add them to actions and update the time it was pressed
+                if (justPressed) {
+                    // When a certain action occurs, the time of the action is updated
+                    actions.add(action);
+                    lastActionTimes.put(keyCode, currentTime);
+                } else {
+                    // Obtain the last time the action occurred, since it's still held
+                    Long lastActionTime = lastActionTimes.get(keyCode);
+                    // Calculate the time between the current actionProcessTime and the last press time
+                    long heldTime = currentTime - lastActionTime;
+                    // If the time is greater than repeatDelay (we have a valid hold and the action wil be repeated)
+                    // If the time is too short, actions will not be updated
+                    if (heldTime > MIN_HOLD_TIME) {
+                        // When a certain action occurs, the time of the action is updated
+                        actions.add(action);
+                        lastActionTimes.put(keyCode, currentTime);
+                    }
+                }
+            }
+        };
+
+        // PLAYER 1
+        processKey.accept(KeyEvent.VK_W, ACTION.PLAYER1_UP);
+        processKey.accept(KeyEvent.VK_A, ACTION.PLAYER1_LEFT);
+        processKey.accept(KeyEvent.VK_S, ACTION.PLAYER1_DOWN);
+        processKey.accept(KeyEvent.VK_D, ACTION.PLAYER1_RIGHT);
+        processKey.accept(KeyEvent.VK_SPACE, ACTION.PLAYER1_SELECT);
+
+        // PLAYER 2
+        processKey.accept(KeyEvent.VK_UP, ACTION.PLAYER2_UP);
+        processKey.accept(KeyEvent.VK_LEFT, ACTION.PLAYER2_LEFT);
+        processKey.accept(KeyEvent.VK_DOWN, ACTION.PLAYER2_DOWN);
+        processKey.accept(KeyEvent.VK_RIGHT, ACTION.PLAYER2_RIGHT);
+        processKey.accept(KeyEvent.VK_ENTER, ACTION.PLAYER2_SELECT);
+
+        // ESCAPE
+        processKey.accept(KeyEvent.VK_ESCAPE, ACTION.ESCAPE);
+
+        // Prepare previousInputs set for next frame
+        previousInputs.clear();
+        // Adds all active inputs of the frame as they will become the previous inputs in the next one
+        previousInputs.addAll(activeInputs);
+
         return actions;
     }
 
