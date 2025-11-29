@@ -1,11 +1,9 @@
 package getcooked.model.game.elements.interactable;
 
-import getcooked.model.Position;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.CompositeRowProcessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
