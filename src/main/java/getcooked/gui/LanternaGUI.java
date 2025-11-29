@@ -143,14 +143,17 @@ public class LanternaGUI implements GUI {
                 } else {
                     // Obtain the last time the action occurred, since it's still held
                     Long lastActionTime = lastActionTimes.get(keyCode);
-                    // Calculate the time between the current actionProcessTime and the last press time
-                    long heldTime = currentTime - lastActionTime;
-                    // If the time is greater than repeatDelay (we have a valid hold and the action wil be repeated)
-                    // If the time is too short, actions will not be updated
-                    if (heldTime > MIN_HOLD_TIME) {
-                        // When a certain action occurs, the time of the action is updated
-                        actions.add(action);
-                        lastActionTimes.put(keyCode, currentTime);
+                    // Ensures that even if that key is released during the execution of this function we don't have an error
+                    if (lastActionTime != null) {
+                        // Calculate the time between the current actionProcessTime and the last press time
+                        long heldTime = currentTime - lastActionTime;
+                        // If the time is greater than repeatDelay (we have a valid hold and the action wil be repeated)
+                        // If the time is too short, actions will not be updated
+                        if (heldTime > MIN_HOLD_TIME) {
+                            // When a certain action occurs, the time of the action is updated
+                            actions.add(action);
+                            lastActionTimes.put(keyCode, currentTime);
+                        }
                     }
                 }
             }
