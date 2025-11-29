@@ -13,6 +13,7 @@ class DispenserTest {
 
     @BeforeEach
     void setUp() {
+
         dispenser = new Dispenser(1, 2) {
             @Override
             protected Grabable createItem(int x, int y) {
