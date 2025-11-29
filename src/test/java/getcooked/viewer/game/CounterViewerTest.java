@@ -2,11 +2,11 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.elements.grabable.Dish;
-import getcooked.model.game.kitchen.elements.grabable.DishType;
-import getcooked.model.game.kitchen.elements.grabable.Plate;
-import getcooked.model.game.kitchen.elements.grabable.food.Potato;
-import getcooked.model.game.kitchen.elements.interactable.Counter;
+import getcooked.model.game.elements.grabable.Dish;
+import getcooked.model.game.elements.grabable.DishType;
+import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.model.game.elements.interactable.Counter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

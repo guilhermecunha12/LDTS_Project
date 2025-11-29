@@ -1,10 +1,9 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.Position;
-import getcooked.model.game.kitchen.Order;
-import getcooked.model.game.kitchen.elements.grabable.Dish;
-import getcooked.model.game.kitchen.elements.grabable.DishType;
+import getcooked.model.game.Order;
+import getcooked.model.game.elements.grabable.Dish;
+import getcooked.model.game.elements.grabable.DishType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,28 +22,21 @@ public class OrdersViewerTest {
         orders = mock(List.class);
         ordersViewer = new OrdersViewer(orders);
     }
-
-    //TODO: do drawElements test in OrdersViewer
     @Test
-    void testDrawElementsOnlyCounts() {
-        when(gui.getHeight()).thenReturn(20);
-        when(orders.size()).thenReturn(1);
-
+    void testDrawOrders() {
         Order order = mock(Order.class);
+        Dish dish = new Dish(DishType.POTATO_SOUP);
+
+        when(orders.size()).thenReturn(1);
         when(orders.get(0)).thenReturn(order);
-
-        Dish dish = mock(Dish.class);
         when(order.getDesiredDish()).thenReturn(dish);
-
-        // do not mock the final enum class; return a real enum constant instead
-        when(dish.getType()).thenReturn(DishType.POTATO_SOUP);
-
-        when(order.getRemainingTime()).thenReturn(90);
+        when(order.getRemainingTime()).thenReturn(150); // 5 seconds if divided by 30
 
         ordersViewer.drawElements(gui);
 
-        verify(gui, times(1)).drawText(any(), anyString(), anyString(), anyString());
-        verify(gui, times(1)).drawRectangle(any(), anyInt(), anyInt(), anyString());
-        verify(gui, times(3)).drawText(any(), anyString(), anyString(), anyString());
+        verify(gui,times(1)).drawText(new getcooked.model.Position(1, gui.getHeight() - 3), "Orders: ", "#ffffff", "#000000");
+        verify(gui,times(1)).drawRectangle(new getcooked.model.Position(9, gui.getHeight() - 5), 12, 4, "#ffff88");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(9, gui.getHeight() - 5), "POTATO_SOUP", "#000000", "#ffff88");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(9, gui.getHeight() - 2), "5", "#000000", "#ffff88");
     }
 }

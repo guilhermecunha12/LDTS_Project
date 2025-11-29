@@ -2,7 +2,7 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.elements.interactable.Trash;
+import getcooked.model.game.elements.interactable.Trash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,14 +14,14 @@ public class TrashViewerTest {
     private TrashViewer trashViewer;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         gui = mock(GUI.class);
         trash = mock(Trash.class);
         trashViewer = new TrashViewer();
     }
 
     @Test
-    public void testDraw() {
+    void testDraw() {
         Position position = mock(Position.class);
 
         when(trash.getPosition()).thenReturn(position);
