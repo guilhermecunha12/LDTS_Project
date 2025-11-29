@@ -10,7 +10,7 @@ import java.util.*;
 public abstract class KitchenBuilder {
     protected final int level;
     protected final int lives;
-    protected List<DishType> availableDishTypes; // used Class because food has a position and that is not important here
+    protected final List<DishType> availableDishTypes;
     private final int numPlayers;
 
     public KitchenBuilder(int level, int numPlayers, int lives) {
@@ -31,7 +31,12 @@ public abstract class KitchenBuilder {
 
     protected abstract int getHeight();
 
+
     protected abstract List<Tile> createTiles();
+
+    protected void addAvailableDishType(DishType dishType) {
+        this.availableDishTypes.add(dishType);
+    }
 
     //TODO: add exception that verifies that the chefs are on floor tiles positions
     private List<Chef> createChefs() {
@@ -64,5 +69,14 @@ public abstract class KitchenBuilder {
         Random random = new Random();
         int randomIndex = random.nextInt(this.availableDishTypes.size());
         return this.availableDishTypes.get(randomIndex);
+    }
+
+    // constructor for testing, injecting availableDishTypes
+    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes) {
+        // After the level 10 the kitchen to be drawn is always the same
+        this.level = Math.min(level, 10);
+        this.numPlayers = numPlayers;
+        this.lives = lives;
+        this.availableDishTypes = availableDishTypes;
     }
 }

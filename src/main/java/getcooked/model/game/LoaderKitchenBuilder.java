@@ -62,8 +62,8 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case '#' : tiles.add(new Counter(x, y)); break;
                     case 'p':
                         tiles.add(new PotatoDispenser(x, y));
-                        this.availableDishTypes.add(DishType.POTATO_SOUP); // for generating orders
-                        //TODO: this.availableDishTypes.add(Dish.DishType.FRIED_POTATO);
+                        this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
+                        //TODO: this.addavailableDishType(Dish.DishType.FRIED_POTATO);
                         break;
                     case 'P': tiles.add(new PlateDispenser(x, y));
                     case 'T' : tiles.add(new Trash(x, y)); break;
