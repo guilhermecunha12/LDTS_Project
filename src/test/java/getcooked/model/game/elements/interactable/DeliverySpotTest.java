@@ -37,12 +37,10 @@ public class DeliverySpotTest {
         this.deliverySpot.setKitchen(kitchen); // more branch coverage
 
         when(chef.isHoldingSomething()).thenReturn(false);
-        this.item = mock(Grabable.class);
-        when(chef.getItem()).thenReturn(item);
 
         deliverySpot.interact(chef, kitchen);
-        // does not satisfy the branch condition
-        verify(kitchen, times(0)).getActiveOrders();
+        // does not satisfy the branch condition (short circuit evaluation)
+        verify(chef, times(0)).getItem();
     }
 
     @Test
