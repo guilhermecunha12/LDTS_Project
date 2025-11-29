@@ -23,7 +23,7 @@ public abstract class KitchenBuilder {
 
     public Kitchen createKitchen() {
         return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers,
-                createChefs(), createTiles(), createOrders(), new ArrayList<>(), this.lives);
+                createChefs(), createTiles(), createOrders(), new ArrayList<>(), this.lives, 0);
     }
 
     // Creates the kitchen based on the width and the height of the file

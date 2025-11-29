@@ -20,10 +20,11 @@ public class Kitchen {
     private final Deque<Order> levelOrders;
     private final List<Order> activeOrders;
     private int lives;
+    private int timeForNewOrder;
 
 
     public Kitchen(int width, int height, int level, int numPlayers, List<Chef> chefs, List<Tile> tiles,
-                   Deque<Order> levelOrders, List<Order> activeOrders, int lives) {
+                   Deque<Order> levelOrders, List<Order> activeOrders, int lives, int timeForNewOrder) {
         this.width = width;
         this.height = height;
         this.level = level;
@@ -33,8 +34,8 @@ public class Kitchen {
         this.levelOrders = levelOrders;
         this.activeOrders = activeOrders;
         this.lives = lives;
+        this.timeForNewOrder = timeForNewOrder;
     }
-
 
     public int getLevel() {
         return level;
@@ -84,6 +85,14 @@ public class Kitchen {
 
     public List<Order> getActiveOrders() {
         return activeOrders;
+    }
+
+    public int getTimeForNewOrder() {
+        return timeForNewOrder;
+    }
+
+    public void setTimeForNewOrder (int timeForNewOrder) {
+        this.timeForNewOrder = timeForNewOrder;
     }
 
     // Return the object of the tile
