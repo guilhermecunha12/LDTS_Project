@@ -31,7 +31,7 @@ public class LanternaGUI implements GUI {
     private final Set<Integer> activeInputs; // Currently pressed keys
     private final Set<Integer> previousInputs; // Pressed keys in the previous frame
     private final Map<Integer, Long> lastActionTimes; // Last action times for keys
-    private static final long MIN_HOLD_TIME = 75;// Time needed to consider the keyHold a valid Hold
+    private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor; // to remember current background color
 
     public LanternaGUI(Screen screen){

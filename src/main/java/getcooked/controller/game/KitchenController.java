@@ -22,7 +22,6 @@ import java.util.Set;
 
 public class KitchenController extends Controller<Kitchen> {
     private final List<Controller<Kitchen>> chefControllers = new ArrayList<>();
-    private int timeToAddNewOrder;
 
     public KitchenController(Kitchen kitchen) {
         super(kitchen);
@@ -34,8 +33,6 @@ public class KitchenController extends Controller<Kitchen> {
         if (chefs.size() >= 2) {
             chefControllers.add(new ChefController2(chefs.get(1), kitchen));
         }
-
-        this.timeToAddNewOrder = 0; // immediately add the first order
     }
 
     @Override
@@ -78,12 +75,13 @@ public class KitchenController extends Controller<Kitchen> {
             }
         }
 
-        if (timeToAddNewOrder <= 0  && activeOrders.size() < Kitchen.MAX_ACTIVE_ORDERS && !kitchen.getOrders().isEmpty()) {
+        int timeForNewOrder = kitchen.getTimeForNewOrder();
+        if (timeForNewOrder <= 0  && activeOrders.size() < Kitchen.MAX_ACTIVE_ORDERS && !kitchen.getOrders().isEmpty()) {
             Order newOrder = kitchen.getOrders().removeLast();
             kitchen.addActiveOrder(newOrder);
-            timeToAddNewOrder = (int)(400/Math.sqrt(kitchen.getLevel())); // gets lower each level
+            kitchen.setTimeForNewOrder((int)(400/Math.sqrt(kitchen.getLevel()))); // gets lower each level
         }
 
-        timeToAddNewOrder--;
+        else kitchen.setTimeForNewOrder(timeForNewOrder - 1);
     }
 }
