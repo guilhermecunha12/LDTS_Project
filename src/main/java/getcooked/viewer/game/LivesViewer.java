@@ -2,7 +2,7 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.Kitchen;
+import getcooked.model.game.Kitchen;
 import getcooked.viewer.Viewer;
 
 public class LivesViewer extends Viewer<Kitchen> {

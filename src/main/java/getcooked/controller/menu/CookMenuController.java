@@ -37,7 +37,7 @@ public class CookMenuController extends Controller<CookMenu> {
                     if (getModel().isSelectedBack()) getModel().previousEntry();
                     break;
                 case PLAYER2_SELECT:
-                    // Add support for both one player and two player in a PlayingState
+                    // Add support for both one player and two player in a PlayingSessionState
                     if(getModel().isSelected1Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(true)));
                     else if(getModel().isSelected2Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(false)));
                     else if(getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));

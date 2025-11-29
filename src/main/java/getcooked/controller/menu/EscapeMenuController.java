@@ -3,20 +3,19 @@ package getcooked.controller.menu;
 import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
-import getcooked.model.PlayingSession;
+import getcooked.model.game.KitchenModelStorage;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.model.menu.MainMenu;
+import getcooked.states.game.KitchenState;
 import getcooked.states.menu.MainMenuState;
 
 import java.io.IOException;
 import java.util.Set;
 
 public class EscapeMenuController extends Controller<EscapeMenu> {
-    private final PlayingSession playingSession; // hold a reference to the playingSession to change its paused state
 
-    public EscapeMenuController(EscapeMenu escapeMenu, PlayingSession playingSession) {
+    public EscapeMenuController(EscapeMenu escapeMenu) {
         super(escapeMenu);
-        this.playingSession = playingSession;
     }
 
     @Override
@@ -30,11 +29,11 @@ public class EscapeMenuController extends Controller<EscapeMenu> {
                     getModel().nextEntry();
                     break;
                 case PLAYER2_SELECT:
-                    if (getModel().isSelectedResume()) this.playingSession.togglePause();
+                    if (getModel().isSelectedResume()) game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
                     else if (getModel().isSelectedExitToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
                     break;
                 case ESCAPE:
-                    this.playingSession.togglePause();
+                    game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
             }
         }
     }
