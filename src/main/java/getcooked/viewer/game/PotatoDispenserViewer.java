@@ -1,7 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.kitchen.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 
 public class PotatoDispenserViewer implements ElementViewer<PotatoDispenser> {
 

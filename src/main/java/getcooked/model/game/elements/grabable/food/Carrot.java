@@ -1,0 +1,17 @@
+package getcooked.model.game.elements.grabable.food;
+
+public class Carrot extends Food {
+
+    public Carrot(int x, int y){
+        super(x,y);
+    }
+
+    @Override
+    public boolean chop(){
+        if(state == FoodState.RAW){
+            state = FoodState.CHOPPED;
+            return true;
+        }
+        return false;
+    }
+}

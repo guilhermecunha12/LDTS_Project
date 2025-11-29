@@ -2,7 +2,7 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.Position;
-import getcooked.model.game.kitchen.Order;
+import getcooked.model.game.Order;
 import getcooked.viewer.Viewer;
 
 import java.util.List;
