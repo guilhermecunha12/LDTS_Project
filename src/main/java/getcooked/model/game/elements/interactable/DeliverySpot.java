@@ -41,8 +41,7 @@ public class DeliverySpot extends Interactable {
                 for (Order order : activeOrders) {
                     Dish orderDish = order.getDesiredDish();
 
-                    //TODO: override equals in Dish to compare dishes properly?
-                    if (dish.getType() == orderDish.getType()) {
+                    if (dish.equals(orderDish)) {
                         chef.drop();
                         kitchen.removeActiveOrder(order);
                         return; // only one order is satisfied

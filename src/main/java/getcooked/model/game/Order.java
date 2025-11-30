@@ -3,6 +3,8 @@ package getcooked.model.game;
 
 import getcooked.model.game.dish.Dish;
 
+import java.util.Objects;
+
 public class Order {
 
     private final Dish desiredDish;
@@ -31,5 +33,19 @@ public class Order {
     public boolean isExpired(){
         return remainingTime <= 0;
     }
-}
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+
+        Order order = (Order) obj;
+        return desiredDish.equals(order.desiredDish);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(desiredDish);
+    }
+}
