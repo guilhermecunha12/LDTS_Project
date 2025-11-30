@@ -287,6 +287,14 @@ We opted to use the **Adapter** pattern. This pattern creates an object that wil
 - **Implementation**<br>
 This implementation can be found in the gui package: the general GUI class and the specific LanternaGUI (adapter).
 
+ <p align="center" justify="center">
+    <img src="images/adapter.png"/>
+  </p>
+  <p align="center">
+    <b><i>Fig 16. Adapter Pattern  </i></b>
+  </p>
+  <br>
+
 
 - **Consequences**<br>
 By using the Adapter pattern, we avoid spreading Lanterna code throughout the project, providing several benefits:
