@@ -1,10 +1,7 @@
 package getcooked.controller.menu;
 
 import getcooked.Game;
-import getcooked.model.game.Kitchen;
-import getcooked.model.game.KitchenModelStorage;
 import getcooked.model.menu.EscapeMenu;
-import getcooked.states.game.KitchenState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,5 +32,4 @@ public class EscapeMenuControllerTest {
         escapeMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_DOWN),0);
         verify(escapeMenu,times(1)).nextEntry();
     }
-    //TODO: how to mock static
 }
