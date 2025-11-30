@@ -15,18 +15,22 @@ public class Counter extends Interactable{
         return item;
     }
 
+    public void setItem(Grabable item) {
+        this.item = item;
+    }
+
     @Override
     public void interact(Chef chef) {
         //pegar da counter
         if(!chef.isHoldingSomething() && item != null){
             chef.pickUp(item);
-            item = null;
+            this.item = null;
         }
         else if(chef.isHoldingSomething() && item == null){
-            Grabable tmp = chef.drop();
+            Grabable grabable = chef.drop();
             //Passar a posição deste counter
-            tmp.placeAt(getPosition());
-            item = tmp;
+            grabable.placeAt(getPosition());
+            this.item = grabable;
         }
     }
 }

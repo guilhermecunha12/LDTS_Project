@@ -69,11 +69,9 @@ public class Kitchen {
         return chefs;
     }
 
-
     public Deque<Order> getOrders() {
         return levelOrders;
     }
-
 
     public void addActiveOrder(Order order) {
         this.activeOrders.add(order);
