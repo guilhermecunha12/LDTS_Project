@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'jacoco'
+    id 'info.solidsoft.pitest' version '1.19.0-rc.2'
 }
 
 group = 'getcooked'
@@ -33,4 +34,8 @@ jacocoTestReport {
         xml.required = true
         html.required = true
     }
+}
+
+pitest {
+    junit5PluginVersion = '1.2.1'
 }
