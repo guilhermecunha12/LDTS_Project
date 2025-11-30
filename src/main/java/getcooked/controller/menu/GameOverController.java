@@ -30,6 +30,8 @@ public class GameOverController extends Controller<GameOverMenu> {
                     if (getModel().isSelectedBackToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
                     if (getModel().isSelectedExitGame()) game.changeState(null);
                     break;
+                default:
+                    break;
             }
         }
     }

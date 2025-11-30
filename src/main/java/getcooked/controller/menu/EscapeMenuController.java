@@ -9,7 +9,6 @@ import getcooked.model.menu.MainMenu;
 import getcooked.states.game.KitchenState;
 import getcooked.states.menu.MainMenuState;
 
-import java.io.IOException;
 import java.util.Set;
 
 public class EscapeMenuController extends Controller<EscapeMenu> {
@@ -34,6 +33,9 @@ public class EscapeMenuController extends Controller<EscapeMenu> {
                     break;
                 case ESCAPE:
                     game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
+                    break;
+                default:
+                    break;
             }
         }
     }

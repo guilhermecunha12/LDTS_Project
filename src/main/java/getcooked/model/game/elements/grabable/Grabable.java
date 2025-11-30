@@ -10,7 +10,7 @@ public abstract class Grabable extends Element {
     private Position placedPosition;
     private Chef holder;
 
-    public Grabable(int x, int y) {
+    protected Grabable(int x, int y) {
         super(x,y);
         this.placedPosition = new Position(x, y);
         this.holder = null;
@@ -19,6 +19,7 @@ public abstract class Grabable extends Element {
     public boolean isHeld() { return holder != null; }
     public boolean isPlaced() { return placedPosition != null && holder == null; }
 
+    @Override
     public Position getPosition() {
         if (isHeld()) return holder.getPosition();
         return placedPosition;

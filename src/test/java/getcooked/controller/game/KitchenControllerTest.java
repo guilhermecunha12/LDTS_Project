@@ -18,7 +18,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class KitchenControllerTest {
+class KitchenControllerTest {
     private Kitchen kitchen;
     private Game game;
     private KitchenController kitchenController;
@@ -35,7 +35,7 @@ public class KitchenControllerTest {
     void testStepWithEscapeAction() throws IOException {
         when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
         when(kitchen.getTimeForNewOrder()).thenReturn(1);
-        when(kitchen.getOrders()).thenReturn(new LinkedList<>());
+        when(kitchen.getOrders()).thenReturn(new ArrayDeque<>());
         when(kitchen.getLives()).thenReturn(3);
 
         kitchenController.step(game, Set.of(GUI.ACTION.ESCAPE), 0);
@@ -47,7 +47,7 @@ public class KitchenControllerTest {
     void testGameOverWhenLivesZeroAndDecreaseOrderTime() throws IOException {
         when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
         when(kitchen.getTimeForNewOrder()).thenReturn(1);
-        when(kitchen.getOrders()).thenReturn(new LinkedList<>());
+        when(kitchen.getOrders()).thenReturn(new ArrayDeque<>());
         when(kitchen.getLives()).thenReturn(0);
 
         kitchenController.step(game, Set.of(), 0);
@@ -59,7 +59,7 @@ public class KitchenControllerTest {
     @Test
     void testGameOverWhenLivesZeroAndAddNewOrder() throws IOException {
         Order order = mock(Order.class);
-        Deque<Order> orders = new LinkedList<>();
+        Deque<Order> orders = new ArrayDeque<>();
         orders.add(order);
 
         when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
@@ -78,7 +78,7 @@ public class KitchenControllerTest {
     void testAdvanceToNextLevelWhenNoOrdersLeft() throws IOException {
         when(kitchen.getActiveOrders()).thenReturn(new ArrayList<>());
         when(kitchen.getTimeForNewOrder()).thenReturn(1);
-        when(kitchen.getOrders()).thenReturn(new LinkedList<>());
+        when(kitchen.getOrders()).thenReturn(new ArrayDeque<>());
         when(kitchen.getLevel()).thenReturn(1);
         when(kitchen.getLives()).thenReturn(1);
 
@@ -91,7 +91,7 @@ public class KitchenControllerTest {
     void testManageOrdersTick() throws IOException {
         Order orderNotExpired = mock(Order.class);
         Order orderExpired = mock(Order.class);
-        List<Order> orders = new LinkedList<>();
+        List<Order> orders = new ArrayList<>();
         orders.add(orderNotExpired);
         orders.add(orderExpired);
 

@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.Position;
 import getcooked.model.game.Order;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class OrdersViewerTest {
+class OrdersViewerTest {
     private GUI gui;
     private List<Order> orders;
     private OrdersViewer ordersViewer;

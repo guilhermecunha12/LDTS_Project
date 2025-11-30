@@ -13,8 +13,7 @@ public class Cutter extends Interactable {
     public void interact(Chef chef) {
         if (chef.isHoldingSomething()) {
             Grabable held = chef.getItem();
-            if (held instanceof Food) {
-                Food food = (Food) held;
+            if (held instanceof Food food) {
                 food.chop();
             }
         }

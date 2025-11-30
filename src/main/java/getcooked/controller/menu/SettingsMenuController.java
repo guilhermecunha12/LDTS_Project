@@ -40,6 +40,9 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
                         }
                     }
                     if (getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
+                    break;
+                default:
+                    break;
             }
         }
     }
