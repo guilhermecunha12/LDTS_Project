@@ -34,6 +34,24 @@ public class LanternaGUI implements GUI {
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor; // to remember current background color
 
+    // Static key-to-action mapping for all available keybinds
+    private static final Map<Integer, GUI.ACTION> KEY_MAPPINGS = Map.ofEntries(
+            // PLAYER 1
+            Map.entry(KeyEvent.VK_W, GUI.ACTION.PLAYER1_UP),
+            Map.entry(KeyEvent.VK_A, GUI.ACTION.PLAYER1_LEFT),
+            Map.entry(KeyEvent.VK_S, GUI.ACTION.PLAYER1_DOWN),
+            Map.entry(KeyEvent.VK_D, GUI.ACTION.PLAYER1_RIGHT),
+            Map.entry(KeyEvent.VK_SPACE, GUI.ACTION.PLAYER1_SELECT),
+            // PLAYER 2
+            Map.entry(KeyEvent.VK_UP, GUI.ACTION.PLAYER2_UP),
+            Map.entry(KeyEvent.VK_LEFT, GUI.ACTION.PLAYER2_LEFT),
+            Map.entry(KeyEvent.VK_DOWN, GUI.ACTION.PLAYER2_DOWN),
+            Map.entry(KeyEvent.VK_RIGHT, GUI.ACTION.PLAYER2_RIGHT),
+            Map.entry(KeyEvent.VK_ENTER, GUI.ACTION.PLAYER2_SELECT),
+            // ESCAPE
+            Map.entry(KeyEvent.VK_ESCAPE, GUI.ACTION.ESCAPE)
+    );
+
     public LanternaGUI(Screen screen){
         this.screen = screen;
         this.height = screen.getTerminalSize().getRows();
@@ -42,6 +60,19 @@ public class LanternaGUI implements GUI {
         this.previousInputs = new HashSet<>();
         this.lastActionTimes = new HashMap<>();
         this.backgroundColor = "#ffffff";
+    }
+
+    // Constructor for testing purposes
+    public LanternaGUI(int height, int width, Set<Integer> activeInputs,
+                       Set<Integer> previousInputs, Map<Integer, Long> lastActionTimes, String
+                       backgroundColor) {
+        this.height = height;
+        this.width = width;
+        this.activeInputs = activeInputs;
+        this.previousInputs = previousInputs;
+        this.lastActionTimes = lastActionTimes;
+        this.backgroundColor = backgroundColor;
+        this.screen = null;
     }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
@@ -72,9 +103,8 @@ public class LanternaGUI implements GUI {
     }
 
 
-    public  Screen createScreen(Terminal terminal) throws IOException{
-        final Screen screen;
-        screen = new TerminalScreen(terminal);
+    private Screen createScreen(Terminal terminal) throws IOException{
+        final Screen screen = new TerminalScreen(terminal);
         // Attempts to hide the cursor
         screen.setCursorPosition(null);
         screen.startScreen();
@@ -123,65 +153,42 @@ public class LanternaGUI implements GUI {
 
     @Override
     public Set<GUI.ACTION> getNextAction() {
+        // Start with empty set of actions
         Set<GUI.ACTION> actions = new HashSet<>();
-        // Current time of action processing
-        long currentTime = System.currentTimeMillis();
+        // Current time for the getNextAction processing
 
-        // BIConsumer operates through side effects: for each call of processKey.accept, the function will execute
-        // for that user input
-        java.util.function.BiConsumer<Integer, ACTION> processKey = (keyCode, action) -> {
-            // We only care about keys that are active inputs in the frame (added through the KeyPress method)
-            if (activeInputs.contains(keyCode)) {
-                // Just pressed checks if the current key is a new input -> it wasn't pressed in the previous
-                // frame activeInputs
-                boolean justPressed = !previousInputs.contains(keyCode);
-                // If it's a new key that is being pressed, add them to actions and update the time it was pressed
-                if (justPressed) {
-                    // When a certain action occurs, the time of the action is updated
-                    actions.add(action);
-                    lastActionTimes.put(keyCode, currentTime);
-                } else {
-                    // Obtain the last time the action occurred, since it's still held
-                    Long lastActionTime = lastActionTimes.get(keyCode);
-                    // Ensures that even if that key is released during the execution of this function we don't have an error
-                    if (lastActionTime != null) {
-                        // Calculate the time between the current actionProcessTime and the last press time
-                        long heldTime = currentTime - lastActionTime;
-                        // If the time is greater than repeatDelay (we have a valid hold and the action wil be repeated)
-                        // If the time is too short, actions will not be updated
-                        if (heldTime > MIN_HOLD_TIME) {
-                            // When a certain action occurs, the time of the action is updated
-                            actions.add(action);
-                            lastActionTimes.put(keyCode, currentTime);
-                        }
-                    }
-                }
-            }
-        };
+        // Processes the map iterating like a set
+        for (Map.Entry<Integer, GUI.ACTION> mapping : KEY_MAPPINGS.entrySet()) {
+            tryProcessKey(mapping.getKey(), mapping.getValue(), System.currentTimeMillis(), actions);
+        }
 
-        // PLAYER 1
-        processKey.accept(KeyEvent.VK_W, ACTION.PLAYER1_UP);
-        processKey.accept(KeyEvent.VK_A, ACTION.PLAYER1_LEFT);
-        processKey.accept(KeyEvent.VK_S, ACTION.PLAYER1_DOWN);
-        processKey.accept(KeyEvent.VK_D, ACTION.PLAYER1_RIGHT);
-        processKey.accept(KeyEvent.VK_SPACE, ACTION.PLAYER1_SELECT);
-
-        // PLAYER 2
-        processKey.accept(KeyEvent.VK_UP, ACTION.PLAYER2_UP);
-        processKey.accept(KeyEvent.VK_LEFT, ACTION.PLAYER2_LEFT);
-        processKey.accept(KeyEvent.VK_DOWN, ACTION.PLAYER2_DOWN);
-        processKey.accept(KeyEvent.VK_RIGHT, ACTION.PLAYER2_RIGHT);
-        processKey.accept(KeyEvent.VK_ENTER, ACTION.PLAYER2_SELECT);
-
-        // ESCAPE
-        processKey.accept(KeyEvent.VK_ESCAPE, ACTION.ESCAPE);
-
-        // Prepare previousInputs set for next frame
+        // Update previousInputs for next frame
         previousInputs.clear();
-        // Adds all active inputs of the frame as they will become the previous inputs in the next one
         previousInputs.addAll(activeInputs);
 
         return actions;
+    }
+
+    // Public for testing purposes
+    public void tryProcessKey(int keyCode, GUI.ACTION action, long currentTime, Set<GUI.ACTION> actions) {
+        // Key not pressed, skip processing
+        if (activeInputs.contains(keyCode)) {
+            // Check if this is a newly pressed key (not in previous frame)
+            boolean justPressed = !previousInputs.contains(keyCode);
+            if (justPressed) {
+                // New key press - add action and record time
+                actions.add(action);
+                lastActionTimes.put(keyCode, currentTime);
+            } else {
+                // Key is being held - check if enough time has passed for repeat
+                Long lastActionTime = lastActionTimes.get(keyCode);
+                if (lastActionTime != null && currentTime - lastActionTime > MIN_HOLD_TIME) {
+                    // Repeat threshold exceeded - add action and update timer
+                    actions.add(action);
+                    lastActionTimes.put(keyCode, currentTime);
+                }
+            }
+        }
     }
 
     private void drawCharacter(Position position, char c, String color, String bgColor) {
@@ -413,4 +420,3 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 }
-
