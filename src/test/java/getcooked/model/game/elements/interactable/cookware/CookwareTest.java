@@ -33,7 +33,7 @@ public class CookwareTest{
     @Test
     void testInteractWhenChefHoldingFood() {
         Food held = mock(Food.class);
-        cookware.setContents(List.of());
+        cookware.setContents(null);
 
         when(chef.isHoldingSomething()).thenReturn(true);
         when(chef.getItem()).thenReturn(held);

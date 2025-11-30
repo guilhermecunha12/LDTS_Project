@@ -5,6 +5,7 @@ import getcooked.model.Position;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.interactable.Counter;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,19 @@ public class CounterViewerTest {
     }
 
     @Test
+    void testDrawCounterWithoutItem(){
+        Position position = mock(Position.class);
+
+        when(counter.getItem()).thenReturn(null);
+        when(counter.getPosition()).thenReturn(position);
+
+        counterViewer.draw(counter, gui);
+
+        verify(gui,times(1)).drawCounter(position);
+        verifyNoMoreInteractions(gui);
+    }
+
+    @Test
     void testDrawCounterWithPotato(){
         Potato potato = mock(Potato.class);
         Position position = mock(Position.class);
@@ -33,8 +47,23 @@ public class CounterViewerTest {
         when(counter.getPosition()).thenReturn(position);
 
         counterViewer.draw(counter, gui);
+
         verify(gui,times(1)).drawCounter(position);
         verify(gui,times(1)).drawPotato(position);
+    }
+
+    @Test
+    void testDrawCounterWithCarrot(){
+        Carrot carrot = mock(Carrot.class);
+        Position position = mock(Position.class);
+
+        when(counter.getItem()).thenReturn(carrot);
+        when(counter.getPosition()).thenReturn(position);
+
+        counterViewer.draw(counter, gui);
+
+        verify(gui,times(1)).drawCounter(position);
+        verify(gui,times(1)).drawCarrot(position);
     }
 
     @Test
@@ -49,7 +78,25 @@ public class CounterViewerTest {
         when(dish.getType()).thenReturn(DishType.POTATO_SOUP);
 
         counterViewer.draw(counter, gui);
+
         verify(gui,times(1)).drawPlate(position);
         verify(gui,times(1)).drawPotatoSoup(position);
+    }
+
+    @Test
+    void testDrawCounterWithCarrotSoup(){
+        Plate plate = mock(Plate.class);
+        Dish dish = mock(Dish.class);
+        Position position = mock(Position.class);
+
+        when(counter.getItem()).thenReturn(plate);
+        when(counter.getPosition()).thenReturn(position);
+        when(plate.getContent()).thenReturn(dish);
+        when(dish.getType()).thenReturn(DishType.CARROT_SOUP);
+
+        counterViewer.draw(counter, gui);
+
+        verify(gui,times(1)).drawPlate(position);
+        verify(gui,times(1)).drawCarrotSoup(position);
     }
 }
