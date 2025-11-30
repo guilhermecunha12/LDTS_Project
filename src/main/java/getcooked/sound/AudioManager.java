@@ -11,7 +11,7 @@ public class AudioManager {
     // TODO: make volume levels (by %)
 
     public AudioManager() throws Exception {
-        this.backgroundMusicPlayer = new BackgroundMusicPlayer(new MusicLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/music1.wav"))), AudioSystem.getClip()));
+        this.backgroundMusicPlayer = new BackgroundMusicPlayer(new MusicLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/music.wav"))), AudioSystem.getClip()));
         this.backgroundMusicOn = true;
     }
 
