@@ -12,21 +12,20 @@ import java.util.List;
 
 public abstract class Cookware extends Interactable {
 
-    protected List<Food> contents = new ArrayList<>();
-    protected int capacity;
+    protected Food content;
     protected boolean cooked = false;
 
     protected Cookware(int x, int y, int capacity) {
         super(x, y);
-        this.capacity = capacity;
+        this.content = null;
     }
 
-    public List<Food> getContents() {
-        return contents;
+    public Food getContent() {
+        return content;
     }
 
-    public void setContents(List<Food> contents) {
-        this.contents = contents;
+    public void setContents(Food content) {
+        this.content = content;
     }
 
     public boolean isCooked() {
@@ -34,15 +33,15 @@ public abstract class Cookware extends Interactable {
     }
 
     public boolean isFull(){
-        return contents.size() == capacity;
+        return content != null;
     }
 
     public boolean isEmpty(){
-        return contents.isEmpty();
+        return content == null;
     }
 
     public void clear(){
-        contents.clear();
+        content = null;
     }
 
     public boolean tryAdd(Grabable g) {
@@ -51,7 +50,7 @@ public abstract class Cookware extends Interactable {
         Food food = (Food) g;
         if (isFull()) return false;
         if (!accepts(food)) return false;
-        contents.add(food);
+        content = food;
         tryCook();
         return true;
     }

@@ -18,14 +18,14 @@ public class Pot extends Cookware{
         boolean isCarrot = (food instanceof Carrot) && (food.getState() == Food.FoodState.RAW);
 
         if (!isPotato && !isCarrot) return false;
-        if (contents.size() >= 1) return false;
+        if (isFull()) return false;
 
         return true;
     }
 
     @Override
     protected void tryCook(){
-        cooked =  !contents.isEmpty();
+        cooked = isFull();
     }
 
     @Override
@@ -33,10 +33,8 @@ public class Pot extends Cookware{
         if(!cooked) return null;
 
         boolean hasPotato = false, hasCarrot = false;
-        for (Food f : contents) {
-            if (f instanceof Potato) hasPotato = true;
-            if (f instanceof Carrot) hasCarrot = true;
-        }
+        if (content instanceof Potato) hasPotato = true;
+        if (content instanceof Carrot) hasCarrot = true;
 
         Dish result;
         if (hasPotato) {
@@ -47,7 +45,7 @@ public class Pot extends Cookware{
             return null; // should not happen
         }
 
-        contents.clear();
+        clear();
         cooked = false;
         return result;
     }

@@ -13,10 +13,10 @@ public class PotViewer implements ElementViewer<Pot>{
     @Override
     public void draw(Pot pot, GUI gui) {
         gui.drawPot(pot.getPosition());
-        List<Food> contents = pot.getContents();
-        if (pot.isCooked()){ // TODO: review thsi logic... pot should only have one item
-            if (contents.getFirst() instanceof Potato) gui.drawPotatoSoup(pot.getPosition());
-            else if (contents.getFirst() instanceof Carrot) gui.drawCarrotSoup(pot.getPosition());
+        Food content = pot.getContent();
+        if (pot.isCooked()){
+            if (content instanceof Potato) gui.drawPotatoSoup(pot.getPosition());
+            else if (content instanceof Carrot) gui.drawCarrotSoup(pot.getPosition());
         }
     }
 }
