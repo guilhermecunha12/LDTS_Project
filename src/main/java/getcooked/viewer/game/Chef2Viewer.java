@@ -6,6 +6,7 @@ import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Potato;
 
 public class Chef2Viewer implements ElementViewer<Chef> {
@@ -14,15 +15,17 @@ public class Chef2Viewer implements ElementViewer<Chef> {
         gui.drawChef2(chef.getPosition());
         Grabable item = chef.getItem();
         if(item == null) return;
-        if(item instanceof Potato){
-            gui.drawPotato(chef.getPosition());
-        }
-        if(item instanceof Plate){
+
+        if (item instanceof Potato) gui.drawPotato(chef.getPosition());
+        else if (item instanceof Carrot) gui.drawCarrot(chef.getPosition());
+
+        else if (item instanceof Plate){
             gui.drawPlate(chef.getPosition());
             Dish dish = ((Plate) item).getContent();
             if(dish != null){
-                if(dish.getType() == DishType.POTATO_SOUP){
-                    gui.drawPotatoSoup(chef.getPosition());
+                switch (dish.getType()) {
+                    case CARROT_SOUP -> gui.drawCarrotSoup(chef.getPosition());
+                    case POTATO_SOUP -> gui.drawPotatoSoup(chef.getPosition());
                 }
             }
         }

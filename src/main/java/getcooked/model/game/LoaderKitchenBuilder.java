@@ -7,6 +7,7 @@ import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.cookware.Pot;
+import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 
@@ -64,6 +65,10 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         tiles.add(new PotatoDispenser(x, y));
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
                         //TODO: this.addavailableDishType(Dish.DishType.FRIED_POTATO);
+                        break;
+                    case 'c':
+                        tiles.add(new CarrotDispenser(x, y));
+                        this.addAvailableDishType(DishType.CARROT_SOUP); // for generating orders
                         break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T' : tiles.add(new Trash(x, y)); break;

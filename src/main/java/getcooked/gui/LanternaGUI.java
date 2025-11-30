@@ -359,6 +359,9 @@ public class LanternaGUI implements GUI {
     public void drawPotatoSoup(Position position){ drawCharacter(position, '*', "#ffa500", "#ffffff");}
 
     @Override
+    public void drawCarrotSoup(Position position){ drawCharacter(position, '*', "#33a500", "#ffffff");}
+
+    @Override
     public void drawText(Position position, String text, String color, String bgColor) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
