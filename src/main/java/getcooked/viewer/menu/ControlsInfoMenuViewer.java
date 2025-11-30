@@ -27,7 +27,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
     private void draw1PlayerControls(GUI gui) {
         int w = gui.getWidth();
         int h = gui.getHeight();
-
+        String bgColor = gui.getBackgroundColor();
         Position wPos = new Position(w/6, h/3);
         Position sPos = new Position(wPos.getX(), wPos.getY() + 3);
         Position aPos = new Position(sPos.getX() - 3, sPos.getY());
@@ -49,22 +49,22 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
         for (; i < 9; i++) { // Player 1 controls
             Position curPos = new Position(7*w/12, wPos.getY() + (i-5) * 3);
-            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", gui.getBackgroundColor());
+            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
         }
 
         // ESC control
         gui.drawText(new Position(1, 1), getModel().getEntry(getModel().getNumberEntries() - 1),
-                "#ffffff", gui.getBackgroundColor());
+                "#ffffff", bgColor);
     }
 
     private void draw2PlayerControls(GUI gui) {
         int w = gui.getWidth();
         int h = gui.getHeight();
-
+        String bgColor = gui.getBackgroundColor();
         Position player1Pos = new Position(w/4 - 7, 6);
         Position player2Pos = new Position(3*w/4 - 8, 6);
-        gui.drawText(player1Pos, "Player 1 (WASD)", "#ffffff", gui.getBackgroundColor());
-        gui.drawText(player2Pos, "Player 2 (Arrows)", "#ffffff", gui.getBackgroundColor());
+        gui.drawText(player1Pos, "Player 1 (WASD)", "#ffffff",bgColor);
+        gui.drawText(player2Pos, "Player 2 (Arrows)", "#ffffff", bgColor);
 
         Position wPos = new Position(w/8, 7*h/24);
         Position sPos = new Position(wPos.getX(), wPos.getY() + 3);
@@ -86,7 +86,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
         for (; i < 10; i++) { // Player 1 controls
             Position curPos = new Position(w/8, 7*h/12 + (i-5) * 3);
-            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", gui.getBackgroundColor());
+            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
         }
 
 
@@ -109,11 +109,11 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
         for (; i < 20; i++) { // Player 1 controls
             Position curPos = new Position(7*w/12, 7*h/12 + (i-15) * 3);
-            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", gui.getBackgroundColor());
+            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
         }
 
         // ESC control
-        gui.drawText(new Position(1, 1), getModel().getEntry(i),"#ffffff", gui.getBackgroundColor());
+        gui.drawText(new Position(1, 1), getModel().getEntry(i),"#ffffff", bgColor);
     }
 }
     
