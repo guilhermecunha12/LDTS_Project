@@ -1,10 +1,9 @@
-package getcooked.model.game.elements;
+package getcooked.model.game;
 
-import getcooked.model.game.Kitchen;
-import getcooked.model.game.KitchenBuilder;
 import getcooked.model.game.dish.DishType;
+import getcooked.model.game.elements.Floor;
+import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -75,6 +74,4 @@ public class KitchenBuilderTest {
         assertEquals(2, kitchen.getChefs().size());
         assertEquals(3, kitchen.getTiles().size());
     }
-
-
 }

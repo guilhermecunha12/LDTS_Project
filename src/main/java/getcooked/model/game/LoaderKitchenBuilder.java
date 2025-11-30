@@ -36,8 +36,8 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
         return lines;
     }
 
-    @Override
-    protected int getWidth() {
+    @Override // public for testing
+    public int getWidth() {
         int width = 0;
         for(String line : lines) {
             width = Math.max(width, line.length());
@@ -45,13 +45,13 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
         return width;
     }
 
-    @Override
-    protected int getHeight() {
+    @Override // public for testing
+    public int getHeight() {
         return lines.size();
     }
 
-    @Override
-    protected List<Tile> createTiles() {
+    @Override // public for testing
+    public List<Tile> createTiles() {
         List<Tile> tiles = new ArrayList<>();
         for(int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
@@ -65,7 +65,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
                         //TODO: this.addavailableDishType(Dish.DishType.FRIED_POTATO);
                         break;
-                    case 'P': tiles.add(new PlateDispenser(x, y));
+                    case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T' : tiles.add(new Trash(x, y)); break;
                     case 'D' : tiles.add(new DeliverySpot(x, y)); break;
                     case 'Q' : tiles.add(new Pot(x, y));
