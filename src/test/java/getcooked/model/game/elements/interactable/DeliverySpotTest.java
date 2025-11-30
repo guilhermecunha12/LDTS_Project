@@ -118,17 +118,12 @@ public class DeliverySpotTest {
         when(kitchen.getActiveOrders()).thenReturn(mockedOrders);
 
         Dish orderDish1 = mock(Dish.class);
-        Dish orderDish2 = mock(Dish.class);
+        Dish orderDish2 = chefDish; // make order2 match
         Dish orderDish3 = mock(Dish.class);
 
         when(order1.getDesiredDish()).thenReturn(orderDish1);
         when(order2.getDesiredDish()).thenReturn(orderDish2);
         when(order3.getDesiredDish()).thenReturn(orderDish3);
-
-        when(chefDish.getType()).thenReturn(POTATO_SOUP);
-        when(orderDish1.getType()).thenReturn(CARROT_SOUP);
-        when(orderDish2.getType()).thenReturn(POTATO_SOUP); // will verify branch condition here
-        when(orderDish3.getType()).thenReturn(CARROT_SOUP);
 
         deliverySpot.interact(chef, kitchen);
         verify(chef, times(2)).getItem();

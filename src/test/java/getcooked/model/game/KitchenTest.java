@@ -83,6 +83,18 @@ public class KitchenTest {
     }
 
     @Test
+    void testGetTimeForNewOrder() {
+        assertEquals(0, kitchen.getTimeForNewOrder());
+    }
+
+    @Test
+    void testSetTimeForNewOrder() {
+        kitchen.setTimeForNewOrder(5);
+        assertEquals(5, kitchen.getTimeForNewOrder());
+    }
+    
+
+    @Test
     void test_getTile() {
         Tile mockedTile = mock(Tile.class);
         Position tilePosition = new Position(1, 1);
