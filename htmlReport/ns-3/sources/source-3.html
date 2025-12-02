@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KitchenController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.controller.game</a>
+</div>
+
+<h1>Coverage Summary for Class: KitchenController (getcooked.controller.game)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KitchenController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (18/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package getcooked.controller.game;
+&nbsp;
+&nbsp;import getcooked.Game;
+&nbsp;import getcooked.controller.Controller;
+&nbsp;import getcooked.gui.GUI;
+&nbsp;import getcooked.model.game.Kitchen;
+&nbsp;import getcooked.model.game.KitchenModelStorage;
+&nbsp;import getcooked.model.game.LoaderKitchenBuilder;
+&nbsp;import getcooked.model.game.Order;
+&nbsp;import getcooked.model.game.elements.Chef;
+&nbsp;import getcooked.model.menu.EscapeMenu;
+&nbsp;import getcooked.model.menu.GameOverMenu;
+&nbsp;import getcooked.states.game.KitchenState;
+&nbsp;import getcooked.states.menu.EscapeMenuState;
+&nbsp;import getcooked.states.menu.GameOverState;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public class KitchenController extends Controller&lt;Kitchen&gt; {
+<b class="fc">&nbsp;    private final List&lt;Controller&lt;Kitchen&gt;&gt; chefControllers = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public KitchenController(Kitchen kitchen) {
+<b class="fc">&nbsp;        super(kitchen);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Chef&gt; chefs = kitchen.getChefs();</b>
+<b class="pc">&nbsp;        if (chefs.size() &gt;= 1) {</b>
+<b class="fc">&nbsp;            chefControllers.add(new ChefController1(chefs.get(0), kitchen));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (chefs.size() &gt;= 2) {</b>
+<b class="fc">&nbsp;            chefControllers.add(new ChefController2(chefs.get(1), kitchen));</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void step(Game game, Set&lt;GUI.ACTION&gt; actions, long time) throws IOException {
+<b class="fc">&nbsp;        Kitchen kitchen = getModel();</b>
+&nbsp;        // handle global actions (pause)
+<b class="fc">&nbsp;        if (actions.contains(GUI.ACTION.ESCAPE)) {</b>
+<b class="fc">&nbsp;            KitchenModelStorage.storeKitchen(kitchen);</b>
+<b class="fc">&nbsp;            game.changeState(new EscapeMenuState(new EscapeMenu()));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //TODO: review: should these controllers be methods of this class (KitchenController)?
+<b class="fc">&nbsp;        chefControllers.get(0).step(game, actions, time);</b>
+<b class="pc">&nbsp;        if (chefControllers.size() == 2) chefControllers.get(1).step(game, actions, time);</b>
+&nbsp;
+<b class="fc">&nbsp;        this.manageOrders();</b>
+<b class="fc">&nbsp;        if (kitchen.getLives() == 0) {</b>
+<b class="fc">&nbsp;            game.changeState(new GameOverState(new GameOverMenu()));</b>
+<b class="fc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+<b class="pc">&nbsp;        if (kitchen.getOrders().isEmpty() &amp;&amp; kitchen.getActiveOrders().isEmpty()) {</b>
+<b class="fc">&nbsp;            game.changeState(new KitchenState(</b>
+<b class="fc">&nbsp;                    new LoaderKitchenBuilder(kitchen.getLevel() + 1, kitchen.getNumPlayers(), kitchen.getLives()).createKitchen()));</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void manageOrders() {
+<b class="fc">&nbsp;        Kitchen kitchen = getModel();</b>
+<b class="fc">&nbsp;        List&lt;Order&gt; activeOrders = kitchen.getActiveOrders();</b>
+<b class="fc">&nbsp;        Iterator&lt;Order&gt; iterator = activeOrders.iterator();</b>
+&nbsp;
+&nbsp;        // Used iterators because elements are being removed from the iterable, causing errors in a for-each loop
+<b class="fc">&nbsp;        while (iterator.hasNext()) {</b>
+<b class="fc">&nbsp;            Order activeOrder = iterator.next();</b>
+<b class="fc">&nbsp;            activeOrder.tick();</b>
+<b class="fc">&nbsp;            if (activeOrder.isExpired()) {</b>
+<b class="fc">&nbsp;                kitchen.decreaseLives();</b>
+<b class="fc">&nbsp;                iterator.remove();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        int timeForNewOrder = kitchen.getTimeForNewOrder();</b>
+<b class="pc">&nbsp;        if (timeForNewOrder &lt;= 0  &amp;&amp; activeOrders.size() &lt; Kitchen.MAX_ACTIVE_ORDERS &amp;&amp; !kitchen.getOrders().isEmpty()) {</b>
+<b class="fc">&nbsp;            Order newOrder = kitchen.getOrders().removeLast();</b>
+<b class="fc">&nbsp;            kitchen.addActiveOrder(newOrder);</b>
+<b class="fc">&nbsp;            kitchen.setTimeForNewOrder((int)(400/Math.sqrt(kitchen.getLevel()))); // gets lower each level</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        else kitchen.setTimeForNewOrder(timeForNewOrder - 1);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChefController1</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.controller.game</a>
+</div>
+
+<h1>Coverage Summary for Class: ChefController1 (getcooked.controller.game)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChefController1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (20/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (42/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package getcooked.controller.game;
+&nbsp;
+&nbsp;import getcooked.Game;
+&nbsp;import getcooked.controller.Controller;
+&nbsp;import getcooked.gui.GUI;
+&nbsp;import getcooked.model.Position;
+&nbsp;import getcooked.model.game.Kitchen;
+&nbsp;import getcooked.model.game.elements.Chef;
+&nbsp;import getcooked.model.game.elements.interactable.Counter;
+&nbsp;import getcooked.model.game.elements.interactable.DeliverySpot;
+&nbsp;import getcooked.model.game.elements.interactable.Trash;
+&nbsp;import getcooked.model.game.elements.interactable.cookware.Cookware;
+&nbsp;import getcooked.model.game.elements.interactable.dispenser.Dispenser;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;public class ChefController1 extends Controller&lt;Kitchen&gt; {
+&nbsp;    private final Chef chef;
+&nbsp;
+&nbsp;    public ChefController1(Chef chef, Kitchen kitchen) {
+<b class="fc">&nbsp;        super(kitchen);</b>
+<b class="fc">&nbsp;        this.chef = chef;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void moveChefLeft(){
+<b class="fc">&nbsp;        moveChef(getModel().getChefs().get(0).getPosition().getLeft());</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void moveChefUp(){
+<b class="fc">&nbsp;        moveChef(getModel().getChefs().get(0).getPosition().getUp());</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void moveChefDown(){
+<b class="fc">&nbsp;        moveChef(getModel().getChefs().get(0).getPosition().getDown());</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void moveChefRight(){
+<b class="fc">&nbsp;        moveChef(getModel().getChefs().get(0).getPosition().getRight());</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void moveChef(Position position){
+<b class="fc">&nbsp;        if(getModel().isEmpty(position)){</b>
+<b class="fc">&nbsp;            chef.setPosition(position);</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void ChefSelect(){
+&nbsp;        // Define a Order, so that first comes objects bellow -&gt; left -&gt; up -&gt; right
+<b class="fc">&nbsp;        Position positionUp = chef.getPosition().getUp();</b>
+<b class="fc">&nbsp;        Position positionDown = chef.getPosition().getDown();</b>
+<b class="fc">&nbsp;        Position positionLeft = chef.getPosition().getLeft();</b>
+<b class="fc">&nbsp;        Position positionRight = chef.getPosition().getRight();</b>
+<b class="fc">&nbsp;        List&lt;Position&gt; positions = List.of(positionDown, positionLeft, positionUp, positionRight);</b>
+<b class="pc">&nbsp;        for(Position position : positions){</b>
+<b class="fc">&nbsp;            if(getModel().getTile(position) instanceof Counter counter) {</b>
+<b class="fc">&nbsp;                counter.interact(chef);</b>
+<b class="fc">&nbsp;                return;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            else if(getModel().getTile(position) instanceof Trash trash){</b>
+<b class="fc">&nbsp;                trash.interact(chef);</b>
+<b class="fc">&nbsp;                return;</b>
+&nbsp;            }
+&nbsp;
+<b class="pc">&nbsp;            else if(getModel().getTile(position) instanceof Dispenser dispenser){</b>
+<b class="nc">&nbsp;                dispenser.interact(chef);</b>
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            }
+&nbsp;
+<b class="pc">&nbsp;            else if (getModel().getTile(position) instanceof Cookware cookware) {</b>
+<b class="nc">&nbsp;                cookware.interact(chef);</b>
+<b class="nc">&nbsp;                return;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            else if (getModel().getTile(position) instanceof DeliverySpot deliverySpot){</b>
+<b class="fc">&nbsp;                deliverySpot.interact(chef,getModel());</b>
+<b class="fc">&nbsp;                return;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void step(Game game, Set&lt;GUI.ACTION&gt; actions, long time) throws IOException {
+<b class="fc">&nbsp;        if (actions.contains(GUI.ACTION.PLAYER1_UP)) {</b>
+<b class="fc">&nbsp;            moveChefUp();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (actions.contains(GUI.ACTION.PLAYER1_DOWN)) {</b>
+<b class="fc">&nbsp;            moveChefDown();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (actions.contains(GUI.ACTION.PLAYER1_LEFT)) {</b>
+<b class="fc">&nbsp;            moveChefLeft();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (actions.contains(GUI.ACTION.PLAYER1_RIGHT)) {</b>
+<b class="fc">&nbsp;            moveChefRight();</b>
+&nbsp;        }
+<b class="pc">&nbsp;        if (actions.contains(GUI.ACTION.PLAYER1_SELECT)) {</b>
+<b class="nc">&nbsp;            ChefSelect();</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>

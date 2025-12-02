@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PlateDispenser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.model.game.elements.interactable.dispenser</a>
+</div>
+
+<h1>Coverage Summary for Class: PlateDispenser (getcooked.model.game.elements.interactable.dispenser)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlateDispenser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$5hLQ5iBD</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$5Jy5f1mV</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$bz8FW3Dy</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$ck2QojPe</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$fGlY7wsV</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$HK2e4SB1</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$IAiNZlvV</td>
+  </tr>
+  <tr>
+    <td class="name">PlateDispenser$MockitoMock$492815067$auxiliary$wJicA5Ys</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package getcooked.model.game.elements.interactable.dispenser;
+&nbsp;
+&nbsp;import getcooked.model.game.elements.grabable.Grabable;
+&nbsp;import getcooked.model.game.elements.grabable.Plate;
+&nbsp;
+&nbsp;public class PlateDispenser extends Dispenser{
+&nbsp;    public PlateDispenser(int x, int y) {
+<b class="fc">&nbsp;        super(x, y);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    protected Grabable createItem(int x, int y) {
+<b class="fc">&nbsp;        return new Plate(getX(), getY());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>

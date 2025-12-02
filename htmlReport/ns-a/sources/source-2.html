@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Plate</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.model.game.elements.grabable</a>
+</div>
+
+<h1>Coverage Summary for Class: Plate (getcooked.model.game.elements.grabable)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Plate</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$0zQFT7pB</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$2W6oyatL</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$6rhNSszt</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$E64NNanb</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$EGEzJ3BR</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$fzIBnxq7</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$iE6QBZwx</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$OZfvQm5x</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$PorvZTos</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$qod6vUQX</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$rCunmg76</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$TSHxEn2Z</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$u7wK7xli</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$XBIEv8NE</td>
+  </tr>
+  <tr>
+    <td class="name">Plate$MockitoMock$1567086659$auxiliary$XHWQHaI3</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package getcooked.model.game.elements.grabable;
+&nbsp;
+&nbsp;import getcooked.model.game.dish.Dish;
+&nbsp;
+&nbsp;public class Plate extends Grabable {
+&nbsp;
+&nbsp;    private Dish content;
+&nbsp;
+&nbsp;    public Plate(int x, int y) {
+<b class="fc">&nbsp;        super(x, y);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean hasContent(){
+<b class="pc">&nbsp;        return content != null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Dish getContent(){
+<b class="fc">&nbsp;        return content;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean put(Dish g) {
+<b class="fc">&nbsp;        if (g == null) return false;</b>
+<b class="fc">&nbsp;        if (content != null) return false;</b>
+<b class="fc">&nbsp;        content = g;</b>
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>

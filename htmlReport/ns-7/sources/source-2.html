@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > KitchenBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.model.game</a>
+</div>
+
+<h1>Coverage Summary for Class: KitchenBuilder (getcooked.model.game)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KitchenBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package getcooked.model.game;
+&nbsp;
+&nbsp;import getcooked.model.game.elements.Chef;
+&nbsp;import getcooked.model.game.elements.Tile;
+&nbsp;import getcooked.model.game.dish.Dish;
+&nbsp;import getcooked.model.game.dish.DishType;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public abstract class KitchenBuilder {
+&nbsp;    protected final int level;
+&nbsp;    protected final int lives;
+&nbsp;    protected final List&lt;DishType&gt; availableDishTypes;
+&nbsp;    private final int numPlayers;
+&nbsp;
+<b class="fc">&nbsp;    public KitchenBuilder(int level, int numPlayers, int lives) {</b>
+&nbsp;        // After the level 10 the kitchen to be drawn is always the same
+<b class="fc">&nbsp;        this.level = Math.min(level, 10);</b>
+<b class="fc">&nbsp;        this.numPlayers = numPlayers;</b>
+<b class="fc">&nbsp;        this.lives = lives;</b>
+<b class="fc">&nbsp;        this.availableDishTypes = new ArrayList&lt;&gt;(); // empty list</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Kitchen createKitchen() {
+<b class="fc">&nbsp;        return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers,</b>
+<b class="fc">&nbsp;                createChefs(), createTiles(), createOrders(), new ArrayList&lt;&gt;(), this.lives, 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Creates the kitchen based on the width and the height of the file
+&nbsp;    protected abstract int getWidth();
+&nbsp;
+&nbsp;    protected abstract int getHeight();
+&nbsp;
+&nbsp;
+&nbsp;    protected abstract List&lt;Tile&gt; createTiles();
+&nbsp;
+&nbsp;    protected void addAvailableDishType(DishType dishType) {
+<b class="fc">&nbsp;        this.availableDishTypes.add(dishType);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    //TODO: add exception that verifies that the chefs are on floor tiles positions
+&nbsp;    private List&lt;Chef&gt; createChefs() {
+<b class="fc">&nbsp;        List&lt;Chef&gt; chefs = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        int middleY = getHeight()/2;</b>
+<b class="fc">&nbsp;        int middleX = getWidth()/2;</b>
+&nbsp;
+<b class="fc">&nbsp;        if (this.numPlayers == 1) {</b>
+<b class="fc">&nbsp;            chefs.add(new Chef(middleX, middleY));</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            chefs.add(new Chef(middleX-2, middleY));</b>
+<b class="fc">&nbsp;            chefs.add(new Chef(middleX+1, middleY));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return chefs;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Deque&lt;Order&gt; createOrders() {
+<b class="fc">&nbsp;        Deque&lt;Order&gt; res = new ArrayDeque&lt;&gt;(); // empty list</b>
+<b class="fc">&nbsp;        int numOrders = 3*this.level; // linear</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; numOrders; i++) {</b>
+<b class="fc">&nbsp;            DishType randomDishType = getRandomDishType();</b>
+<b class="fc">&nbsp;            Order order = new Order(new Dish(randomDishType), 900); //TODO: change the timeLimit according to the current level (900/someFunction(this.level))</b>
+<b class="fc">&nbsp;            res.addFirst(order);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return res;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private DishType getRandomDishType() {
+<b class="fc">&nbsp;        Random random = new Random();</b>
+<b class="fc">&nbsp;        int randomIndex = random.nextInt(this.availableDishTypes.size());</b>
+<b class="fc">&nbsp;        return this.availableDishTypes.get(randomIndex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // constructor for testing, injecting availableDishTypes
+<b class="fc">&nbsp;    public KitchenBuilder(int level, int numPlayers, int lives, List&lt;DishType&gt; availableDishTypes) {</b>
+&nbsp;        // After the level 10 the kitchen to be drawn is always the same
+<b class="fc">&nbsp;        this.level = Math.min(level, 10);</b>
+<b class="fc">&nbsp;        this.numPlayers = numPlayers;</b>
+<b class="fc">&nbsp;        this.lives = lives;</b>
+<b class="fc">&nbsp;        this.availableDishTypes = availableDishTypes;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>
