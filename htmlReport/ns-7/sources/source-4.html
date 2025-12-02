@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LoaderKitchenBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.model.game</a>
+</div>
+
+<h1>Coverage Summary for Class: LoaderKitchenBuilder (getcooked.model.game)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoaderKitchenBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (33/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package getcooked.model.game;
+&nbsp;
+&nbsp;import getcooked.model.game.elements.Floor;
+&nbsp;import getcooked.model.game.elements.Tile;
+&nbsp;import getcooked.model.game.dish.DishType;
+&nbsp;import getcooked.model.game.elements.interactable.Counter;
+&nbsp;import getcooked.model.game.elements.interactable.DeliverySpot;
+&nbsp;import getcooked.model.game.elements.interactable.Trash;
+&nbsp;import getcooked.model.game.elements.interactable.cookware.Pot;
+&nbsp;import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
+&nbsp;import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
+&nbsp;import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
+&nbsp;
+&nbsp;import java.io.BufferedReader;
+&nbsp;import java.io.FileReader;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class LoaderKitchenBuilder extends KitchenBuilder{
+&nbsp;    private final List&lt;String&gt; lines;
+&nbsp;
+&nbsp;    public LoaderKitchenBuilder(int level, int numPlayers, int lives) throws IOException{
+<b class="fc">&nbsp;        super(level, numPlayers, lives);</b>
+&nbsp;
+<b class="fc">&nbsp;        URL resource = LoaderKitchenBuilder.class.getResource(&quot;/kitchen/level&quot; + this.level + &quot;.lvl&quot;);</b>
+<b class="fc">&nbsp;        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));</b>
+<b class="fc">&nbsp;        lines = readLines(br);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private List&lt;String&gt; readLines(BufferedReader br) throws IOException {
+<b class="fc">&nbsp;        List&lt;String&gt; lines = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(String line; (line = br.readLine()) != null; ) {</b>
+<b class="fc">&nbsp;            lines.add(line);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return lines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // public for testing
+&nbsp;    public int getWidth() {
+<b class="fc">&nbsp;        int width = 0;</b>
+<b class="fc">&nbsp;        for(String line : lines) {</b>
+<b class="fc">&nbsp;            width = Math.max(width, line.length());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return width;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // public for testing
+&nbsp;    public int getHeight() {
+<b class="fc">&nbsp;        return lines.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override // public for testing
+&nbsp;    public List&lt;Tile&gt; createTiles() {
+<b class="fc">&nbsp;        List&lt;Tile&gt; tiles = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(int y = 0; y &lt; lines.size(); y++) {</b>
+<b class="fc">&nbsp;            String line = lines.get(y);</b>
+<b class="fc">&nbsp;            for(int x = 0; x &lt; line.length(); x++) {</b>
+&nbsp;                // Creates interactable based on the symbol
+<b class="pc">&nbsp;                switch (line.charAt(x)) {</b>
+<b class="fc">&nbsp;                    case &#39; &#39;: tiles.add(new Floor(x, y)); break;</b>
+<b class="fc">&nbsp;                    case &#39;#&#39; : tiles.add(new Counter(x, y)); break;</b>
+&nbsp;                    case &#39;p&#39;:
+<b class="fc">&nbsp;                        tiles.add(new PotatoDispenser(x, y));</b>
+<b class="fc">&nbsp;                        this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders</b>
+&nbsp;                        //TODO: this.addavailableDishType(Dish.DishType.FRIED_POTATO);
+<b class="fc">&nbsp;                        break;</b>
+&nbsp;                    case &#39;c&#39;:
+<b class="fc">&nbsp;                        tiles.add(new CarrotDispenser(x, y));</b>
+<b class="fc">&nbsp;                        this.addAvailableDishType(DishType.CARROT_SOUP); // for generating orders</b>
+<b class="fc">&nbsp;                        break;</b>
+<b class="fc">&nbsp;                    case &#39;P&#39;: tiles.add(new PlateDispenser(x, y)); break;</b>
+<b class="fc">&nbsp;                    case &#39;T&#39; : tiles.add(new Trash(x, y)); break;</b>
+<b class="fc">&nbsp;                    case &#39;D&#39; : tiles.add(new DeliverySpot(x, y)); break;</b>
+<b class="fc">&nbsp;                    case &#39;Q&#39; : tiles.add(new Pot(x, y));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return tiles;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Order</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">getcooked.model.game</a>
+</div>
+
+<h1>Coverage Summary for Class: Order (getcooked.model.game)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Order</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611</td>
+  </tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611$auxiliary$56elhFlP</td>
+  </tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611$auxiliary$5703qU9g</td>
+  </tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611$auxiliary$htsRSvae</td>
+  </tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611$auxiliary$ohmuiYPI</td>
+  </tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611$auxiliary$rmOSj6Kp</td>
+  </tr>
+  <tr>
+    <td class="name">Order$MockitoMock$767223611$auxiliary$yezyln9M</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package getcooked.model.game;
+&nbsp;
+&nbsp;
+&nbsp;import getcooked.model.game.dish.Dish;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;public class Order {
+&nbsp;
+&nbsp;    private final Dish desiredDish;
+&nbsp;    //Remaining time in seconds
+&nbsp;    private int remainingTime;
+&nbsp;
+<b class="fc">&nbsp;    public Order(Dish desiredDish, int timeLimit) {</b>
+<b class="fc">&nbsp;        this.desiredDish = desiredDish;</b>
+<b class="fc">&nbsp;        this.remainingTime = timeLimit;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Dish getDesiredDish() {
+<b class="fc">&nbsp;        return desiredDish;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getRemainingTime() {
+<b class="fc">&nbsp;        return remainingTime;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void tick(){
+<b class="fc">&nbsp;        if (remainingTime &gt; 0){</b>
+<b class="fc">&nbsp;            remainingTime--;</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean isExpired(){
+<b class="fc">&nbsp;        return remainingTime &lt;= 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+<b class="fc">&nbsp;        if (this == obj) return true;</b>
+<b class="pc">&nbsp;        if (obj == null) return false;</b>
+<b class="pc">&nbsp;        if (getClass() != obj.getClass()) return false;</b>
+&nbsp;
+<b class="fc">&nbsp;        Order order = (Order) obj;</b>
+<b class="fc">&nbsp;        return desiredDish.equals(order.desiredDish);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(desiredDish);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-30 22:37</div>
+</div>
+</body>
+</html>
