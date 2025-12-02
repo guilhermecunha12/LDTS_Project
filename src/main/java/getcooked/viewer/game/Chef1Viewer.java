@@ -6,6 +6,7 @@ import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
+import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
 
 //TODO: review if ChefViewers could be unified
@@ -16,8 +17,10 @@ public class Chef1Viewer implements ElementViewer<Chef>{
         Grabable item = chef.getItem();
         if(item == null) return;
 
-        if (item instanceof Potato) gui.drawPotato(chef.getPosition());
-        else if (item instanceof Carrot) gui.drawCarrot(chef.getPosition());
+        else if (item instanceof Potato potato && potato.getState() == FoodState.RAW) gui.drawPotato(chef.getPosition());
+        else if (item instanceof Potato potato && potato.getState() == FoodState.CHOPPED) gui.drawChoppedPotato(chef.getPosition());
+        else if (item instanceof Carrot carrot && carrot.getState() == FoodState.RAW) gui.drawCarrot(chef.getPosition());
+        else if (item instanceof Carrot carrot && carrot.getState() == FoodState.CHOPPED) gui.drawChoppedCarrot(chef.getPosition());
 
         else if(item instanceof Plate plate){
             gui.drawPlate(chef.getPosition());

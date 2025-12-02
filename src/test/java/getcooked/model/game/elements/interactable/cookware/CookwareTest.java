@@ -7,8 +7,6 @@ import getcooked.model.game.elements.grabable.food.Food;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 public class CookwareTest{
@@ -18,7 +16,7 @@ public class CookwareTest{
     @BeforeEach
     void beforeEach() {
         chef = mock(Chef.class);
-        cookware = spy(new Cookware(0, 0, 2) {
+        cookware = spy(new Cookware(0, 0) {
             @Override
             protected boolean accepts(Food food) { return true; }
 
@@ -33,7 +31,7 @@ public class CookwareTest{
     @Test
     void testInteractWhenChefHoldingFood() {
         Food held = mock(Food.class);
-        cookware.setContents(null);
+        cookware.setContent(null);
 
         when(chef.isHoldingSomething()).thenReturn(true);
         when(chef.getItem()).thenReturn(held);
