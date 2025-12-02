@@ -7,29 +7,30 @@ import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.interactable.Interactable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public abstract class Cookware extends Interactable {
 
+    protected Set<Class<? extends Food>> allowedFoods;
     protected Food content;
-    protected boolean cooked = false;
+    protected boolean finished;
 
-    protected Cookware(int x, int y, int capacity) {
+    protected Cookware(int x, int y) {
         super(x, y);
         this.content = null;
+        this.finished = false;
     }
 
     public Food getContent() {
         return content;
     }
 
-    public void setContents(Food content) {
+    public void addContent(Food content) {
         this.content = content;
     }
 
-    public boolean isCooked() {
-        return cooked;
+    public boolean isFinished() {
+        return finished;
     }
 
     public boolean isFull(){
@@ -40,19 +41,14 @@ public abstract class Cookware extends Interactable {
         return content == null;
     }
 
-    public void clear(){
+    public void clearCookware(){
         content = null;
+        finished = false;
     }
 
-    public boolean tryAdd(Grabable g) {
-        if (g == null) return false;
-        if (!(g instanceof Food)) return false;
-        Food food = (Food) g;
-        if (isFull()) return false;
-        if (!accepts(food)) return false;
-        content = food;
-        tryCook();
-        return true;
+    public boolean canAdd(Food food) {
+        // Can add to cookware if not full and food can be accepted
+        return isEmpty() && accepts(food);
     }
 
     @Override
@@ -60,22 +56,21 @@ public abstract class Cookware extends Interactable {
         if (chef.isHoldingSomething()){
             Grabable held = chef.getItem();
 
-            if (held instanceof Food) {
-                boolean added = tryAdd(held);
-                if (added) {
+            if (held instanceof Food food) {
+                if (canAdd(food)) {
                     chef.drop();
+                    addContent(food);
+                    processFood();
                 }
-                return;
             }
 
-            if (held instanceof Plate plate) {
+            else if (held instanceof Plate plate) {
                 Dish result = createFinishedDish();
-                if (result == null) return;
-                plate.put(result);
+                if (result != null) plate.put(result);
             }
         }
     }
     protected abstract boolean accepts(Food food);
-    protected abstract void tryCook();
+    protected abstract void processFood();
     protected abstract Dish createFinishedDish();
 }

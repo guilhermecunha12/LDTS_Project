@@ -46,7 +46,7 @@ public class PotTest {
     }
 
     @Test
-    void testTryCook(){
+    void testTryProcessFood(){
         Potato potato = mock(Potato.class);
         when(potato.getState()).thenReturn(Food.FoodState.RAW);
 
@@ -56,8 +56,8 @@ public class PotTest {
     }
 
     @Test
-    void testDoesNotCookWhenEmpty(){
-        pot.clear();
+    void testDoesNotProcessFoodWhenEmpty(){
+        pot.clearCookware();
         pot.tryCook();
         assertFalse(pot.isCooked());
     }

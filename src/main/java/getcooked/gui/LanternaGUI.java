@@ -292,7 +292,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawChoppedCarrot(Position position){
-        drawCharacter(position, 'c', "#ffa500","#468499");
+        drawCharacter(position, 'c', "#98621f","#468499");
     }
 
     @Override
@@ -307,7 +307,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawChoppedPotato(Position position){
-        drawCharacter(position, 'P', "#daa520", "#468499");
+        drawCharacter(position, 'p', "#74721f", "#468499");
     }
 
     @Override
@@ -352,7 +352,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawCutter(Position position){
-        drawCharacter(position, 'C', "#666666", "#468499");
+        drawCharacter(position, 'K', "#666666", "#468499");
     }
 
     @Override

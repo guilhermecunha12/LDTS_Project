@@ -14,7 +14,7 @@ public class PotViewer implements ElementViewer<Pot>{
     public void draw(Pot pot, GUI gui) {
         gui.drawPot(pot.getPosition());
         Food content = pot.getContent();
-        if (pot.isCooked()){
+        if (pot.isFinished()){
             if (content instanceof Potato) gui.drawPotatoSoup(pot.getPosition());
             else if (content instanceof Carrot) gui.drawCarrotSoup(pot.getPosition());
         }

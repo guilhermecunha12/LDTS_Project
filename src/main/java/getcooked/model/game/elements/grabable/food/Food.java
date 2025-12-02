@@ -4,8 +4,6 @@ import getcooked.model.game.elements.grabable.Grabable;
 
 public abstract class Food extends Grabable {
 
-    public enum FoodState {RAW, CHOPPED, COOKED, FRIED}
-
     protected FoodState state;
 
     public Food(int x, int y){
@@ -17,6 +15,7 @@ public abstract class Food extends Grabable {
         return state;
     }
 
-    public boolean chop() { return false;}
-    public boolean cook() { return false;}
+    public void setState(FoodState foodState) {
+        this.state = foodState;
+    }
 }
