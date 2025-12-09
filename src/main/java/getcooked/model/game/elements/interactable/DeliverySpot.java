@@ -37,10 +37,11 @@ public class DeliverySpot extends Interactable {
 
             for (Order order : activeOrders) {
                 Dish orderDish = order.getDesiredDish();
-
+                
                 if (dish.equals(orderDish)) {
                     chef.drop();
                     kitchen.removeActiveOrder(order);
+                    kitchen.incrementOrdersDelivered();
                     return; // only one order is satisfied
                 }
             }

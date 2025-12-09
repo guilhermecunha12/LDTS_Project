@@ -22,8 +22,8 @@ import java.util.List;
 public class LoaderKitchenBuilder extends KitchenBuilder{
     private final List<String> lines;
 
-    public LoaderKitchenBuilder(int level, int numPlayers, int lives) throws IOException{
-        super(level, numPlayers, lives);
+    public LoaderKitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) throws IOException{
+        super(level, numPlayers, lives, ordersDelivered);
 
         URL resource = LoaderKitchenBuilder.class.getResource("/kitchen/level" + this.level + ".lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));

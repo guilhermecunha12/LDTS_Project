@@ -43,13 +43,14 @@ public class KitchenController extends Controller<Kitchen> {
 
         this.manageOrders();
         if (kitchen.getLives() == 0) {
-            game.changeState(new GameOverState(new GameOverMenu()));
+            game.changeState(new GameOverState(new GameOverMenu(kitchen.getOrdersDelivered())));
             return;
         }
 
         if (kitchen.getOrders().isEmpty() && kitchen.getActiveOrders().isEmpty()) {
             game.changeState(new KitchenState(
-                    new LoaderKitchenBuilder(kitchen.getLevel() + 1, kitchen.getNumPlayers(), kitchen.getLives()).createKitchen()));
+                    new LoaderKitchenBuilder(kitchen.getLevel() + 1, kitchen.getNumPlayers(), kitchen.getLives(),
+                    kitchen.getOrdersDelivered()).createKitchen()));
         }
     }
 
