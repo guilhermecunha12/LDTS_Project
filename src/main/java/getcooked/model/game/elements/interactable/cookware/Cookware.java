@@ -33,8 +33,8 @@ public abstract class Cookware extends Interactable {
         return finished;
     }
 
-    public boolean isFull(){
-        return content != null;
+    public void finish() {
+        this.finished = true;
     }
 
     public boolean isEmpty(){
@@ -69,6 +69,7 @@ public abstract class Cookware extends Interactable {
             }
         }
     }
+
     protected abstract boolean accepts(Food food);
     protected abstract void processFood();
     protected abstract Dish createFinishedDish();

@@ -6,7 +6,7 @@ public abstract class Food extends Grabable {
 
     protected FoodState state;
 
-    public Food(int x, int y){
+    protected Food(int x, int y){
         super(x,y);
         this.state = FoodState.RAW;
     }

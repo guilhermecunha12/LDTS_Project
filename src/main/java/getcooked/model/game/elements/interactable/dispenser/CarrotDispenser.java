@@ -11,6 +11,6 @@ public class CarrotDispenser extends Dispenser {
 
     @Override
     public Grabable createItem(int x, int y) {
-        return new Carrot(getX(),getY());
+        return new Carrot(x, y);
     }
 }

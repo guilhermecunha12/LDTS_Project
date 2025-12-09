@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.interactable.dispenser;
 
+import getcooked.model.Position;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 
@@ -10,6 +11,6 @@ public class PlateDispenser extends Dispenser{
 
     @Override
     protected Grabable createItem(int x, int y) {
-        return new Plate(getX(), getY());
+        return new Plate(x, y);
     }
 }
