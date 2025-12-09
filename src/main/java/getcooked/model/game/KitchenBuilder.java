@@ -12,18 +12,20 @@ public abstract class KitchenBuilder {
     protected final int lives;
     protected final List<DishType> availableDishTypes;
     private final int numPlayers;
+    private final int ordersDelivered;
 
-    public KitchenBuilder(int level, int numPlayers, int lives) {
+    public KitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) {
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
         this.lives = lives;
         this.availableDishTypes = new ArrayList<>(); // empty list
+        this.ordersDelivered = ordersDelivered;
     }
 
     public Kitchen createKitchen() {
         return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers,
-                createChefs(), createTiles(), createOrders(), new ArrayList<>(), this.lives, 0);
+                createChefs(), createTiles(), createOrders(), new ArrayList<>(), this.lives, 0, this.ordersDelivered);
     }
 
     // Creates the kitchen based on the width and the height of the file
@@ -72,11 +74,12 @@ public abstract class KitchenBuilder {
     }
 
     // constructor for testing, injecting availableDishTypes
-    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes) {
+    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes, int ordersDelivered) {
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
         this.lives = lives;
         this.availableDishTypes = availableDishTypes;
+        this.ordersDelivered = ordersDelivered;
     }
 }
