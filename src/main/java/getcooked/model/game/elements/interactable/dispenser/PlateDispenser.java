@@ -10,6 +10,6 @@ public class PlateDispenser extends Dispenser{
 
     @Override
     protected Grabable createItem(int x, int y) {
-        return new Plate(getX(), getY());
+        return new Plate(x, y);
     }
 }

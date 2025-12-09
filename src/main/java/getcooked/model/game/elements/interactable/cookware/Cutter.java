@@ -23,7 +23,7 @@ public class Cutter extends Cookware {
         }
     }
 
-    @Override
+    @Override // different implementation from cookware
     public void interact(Chef chef) {
         if (chef.isHoldingSomething()) {
             Grabable held = chef.getItem();
@@ -41,11 +41,10 @@ public class Cutter extends Cookware {
         }
     }
 
-
     @Override
     public void processFood() {
         chop();
-        finished = true;
+        finish();
     }
 
     @Override

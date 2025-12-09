@@ -23,47 +23,47 @@ public class CounterTest {
 
     @Test
     void testInteract_ChefIsHoldingSomething_CounterIsEmpty() {
-        this.counter.setItem(null);
+        this.counter.setContent(null);
 
         when(chef.isHoldingSomething()).thenReturn(true);
         when(chef.drop()).thenReturn(item);
 
         counter.interact(chef);
         verify(item, times(1)).placeAt(counter.getPosition());
-        assertEquals(item, counter.getItem());
+        assertEquals(item, counter.getContent());
     }
 
     @Test
     void testInteract_ChefIsHoldingSomething_CounterHasItem() {
-        this.counter.setItem(item);
+        this.counter.setContent(item);
 
         when(chef.isHoldingSomething()).thenReturn(true);
 
         counter.interact(chef);
         verify(chef, times(0)).drop();
-        assertEquals(item, counter.getItem());
+        assertEquals(item, counter.getContent());
     }
 
     @Test
     void testInteract_ChefIsNotHoldingSomething_CounterHasItem() {
-        this.counter.setItem(item);
+        this.counter.setContent(item);
 
         when(chef.isHoldingSomething()).thenReturn(false);
         when(chef.pickUp(item)).thenReturn(true);
 
         counter.interact(chef);
         verify(chef, times(1)).pickUp(item);
-        assertEquals(null, counter.getItem());
+        assertEquals(null, counter.getContent());
     }
 
     @Test
     void testInteract_ChefIsNotHoldingSomething_CounterIsEmpty() {
-        this.counter.setItem(null);
+        this.counter.setContent(null);
 
         when(chef.isHoldingSomething()).thenReturn(false);
 
         counter.interact(chef);
         verify(chef, times(0)).pickUp(item);
-        assertEquals(null, counter.getItem());
+        assertEquals(null, counter.getContent());
     }
 }

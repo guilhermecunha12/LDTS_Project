@@ -5,7 +5,7 @@ import getcooked.model.game.elements.Tile;
 
 public abstract class Interactable extends Tile {
 
-    public Interactable(int x, int y){
+    protected Interactable(int x, int y){
         super(x,y);
     }
 

@@ -22,8 +22,8 @@ public class Pot extends Cookware{
     }
 
     @Override
-    protected void processFood(){
-        finished = true;
+    protected void processFood() {
+        finish();
     }
 
     @Override

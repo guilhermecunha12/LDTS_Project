@@ -29,7 +29,7 @@ public class CounterViewerTest {
     void testDrawCounterWithoutItem(){
         Position position = mock(Position.class);
 
-        when(counter.getItem()).thenReturn(null);
+        when(counter.getContent()).thenReturn(null);
         when(counter.getPosition()).thenReturn(position);
 
         counterViewer.draw(counter, gui);
@@ -43,7 +43,7 @@ public class CounterViewerTest {
         Potato potato = mock(Potato.class);
         Position position = mock(Position.class);
 
-        when(counter.getItem()).thenReturn(potato);
+        when(counter.getContent()).thenReturn(potato);
         when(counter.getPosition()).thenReturn(position);
 
         counterViewer.draw(counter, gui);
@@ -57,7 +57,7 @@ public class CounterViewerTest {
         Carrot carrot = mock(Carrot.class);
         Position position = mock(Position.class);
 
-        when(counter.getItem()).thenReturn(carrot);
+        when(counter.getContent()).thenReturn(carrot);
         when(counter.getPosition()).thenReturn(position);
 
         counterViewer.draw(counter, gui);
@@ -72,7 +72,7 @@ public class CounterViewerTest {
         Dish dish = mock(Dish.class);
         Position position = mock(Position.class);
 
-        when(counter.getItem()).thenReturn(plate);
+        when(counter.getContent()).thenReturn(plate);
         when(counter.getPosition()).thenReturn(position);
         when(plate.getContent()).thenReturn(dish);
         when(dish.getType()).thenReturn(DishType.POTATO_SOUP);
@@ -89,7 +89,7 @@ public class CounterViewerTest {
         Dish dish = mock(Dish.class);
         Position position = mock(Position.class);
 
-        when(counter.getItem()).thenReturn(plate);
+        when(counter.getContent()).thenReturn(plate);
         when(counter.getPosition()).thenReturn(position);
         when(plate.getContent()).thenReturn(dish);
         when(dish.getType()).thenReturn(DishType.CARROT_SOUP);
