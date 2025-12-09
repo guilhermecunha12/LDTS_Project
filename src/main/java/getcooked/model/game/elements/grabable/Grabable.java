@@ -6,39 +6,27 @@ import getcooked.model.game.elements.Element;
 
 
 public abstract class Grabable extends Element {
-    //TODO: Check if this position method is the best for class grabable
-    private Position placedPosition;
     private Chef holder;
 
     protected Grabable(int x, int y) {
         super(x,y);
-        this.placedPosition = new Position(x, y);
         this.holder = null;
     }
 
     public boolean isHeld() { return holder != null; }
-    public boolean isPlaced() { return placedPosition != null && holder == null; }
-
-    @Override
-    public Position getPosition() {
-        if (isHeld()) return holder.getPosition();
-        return placedPosition;
-    }
+    public boolean isPlaced() { return holder == null; }
 
     // mark placed; clears holder
     public void placeAt(Position pos) {
-        this.placedPosition = pos;
         this.holder = null;
+        this.setPosition(pos);
     }
 
     // mark held; clears placed position
     public void setHolder(Chef chef) {
         this.holder = chef;
-        if(chef != null) {
-            this.placedPosition = null;
-        }
+        if(chef != null) this.setPosition(chef.getPosition());
     }
 
     public Chef getHolder() { return holder; }
-    public Position getPlacedPosition() { return placedPosition; }
 }

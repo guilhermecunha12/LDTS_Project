@@ -1,5 +1,6 @@
 package getcooked.model.game.elements;
 
+import getcooked.model.Position;
 import getcooked.model.game.elements.grabable.Grabable;
 
 public class Chef extends Element{
@@ -31,6 +32,12 @@ public class Chef extends Element{
             return tmp;
         }
         return null;
+    }
+
+    @Override
+    public void setPosition(Position position) {
+        super.setPosition(position);
+        if (this.isHoldingSomething()) item.setPosition(position); // also update the item's position
     }
 
     public boolean isHoldingSomething(){

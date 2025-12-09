@@ -43,9 +43,7 @@ public class ChefController extends Controller<Kitchen> {
     }
 
     public void moveChef(Position position){
-        if(getModel().isEmpty(position)){
-            chef.setPosition(position);
-        }
+        if(getModel().isEmpty(position)) chef.setPosition(position);
     }
 
     public void ChefSelect(){

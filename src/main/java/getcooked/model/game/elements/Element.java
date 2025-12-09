@@ -6,7 +6,7 @@ public abstract class Element {
 
     private Position position;
 
-    public Element(int x,int y) {
+    protected Element(int x,int y) {
         this.position = new Position(x,y);
     }
 
@@ -14,7 +14,7 @@ public abstract class Element {
         return position;
     }
 
-    public int  getX() {
+    public int getX() {
         return position.getX();
     }
     public int getY() {
