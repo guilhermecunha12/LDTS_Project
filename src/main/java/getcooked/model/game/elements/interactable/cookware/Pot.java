@@ -8,13 +8,12 @@ import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Pot extends Cookware{
     public Pot(int x, int y){
         super(x,y);
-        this.allowedFoods = new HashSet<>();
-        this.allowedFoods.add(Potato.class);
-        this.allowedFoods.add(Carrot.class);
+        this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 
     @Override
@@ -29,11 +28,9 @@ public class Pot extends Cookware{
 
     @Override
     protected Dish createFinishedDish(){
-        if(!finished) return null;
         Dish result = null;
         if (content instanceof Potato) result = new Dish(DishType.POTATO_SOUP);
         else if (content instanceof Carrot) result = new Dish(DishType.CARROT_SOUP);
-        clearCookware();
         return result;
     }
 }

@@ -1,47 +1,41 @@
-package getcooked.model.game.elements.interactable;
+package getcooked.model.game.elements.interactable.cookware;
 
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.interactable.cookware.Cookware;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Cutter extends Cookware {
     public Cutter(int x, int y) {
         super(x, y);
-        this.allowedFoods = new HashSet<>();
-        this.allowedFoods.add(Potato.class);
-        this.allowedFoods.add(Carrot.class);
+        this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 
     public void chop(){
-        if(content.getState() ==  FoodState.RAW){
+        if(content.getState() == FoodState.RAW){
             content.setState(FoodState.CHOPPED);
         }
     }
 
     @Override
     public void interact(Chef chef) {
-        if (chef.isHoldingSomething()){
+        if (chef.isHoldingSomething()) {
             Grabable held = chef.getItem();
-            if (held instanceof Food food) {
-                if (canAdd(food)) {
-                    chef.drop();
-                    addContent(food);
-                    processFood();
-                }
+            if (held instanceof Food food && canAdd(food)) {
+                chef.drop();
+                addContent(food);
+                processFood();
             }
         }
-        else{
-            if (isFinished()){
-                Food finishedFood = content;
-                chef.pickUp(finishedFood);
+        else {
+            if (isFinished()) {
+                chef.pickUp(content);
                 clearCookware();
             }
         }

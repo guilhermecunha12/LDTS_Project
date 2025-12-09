@@ -4,7 +4,7 @@ import getcooked.gui.GUI;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.interactable.Cutter;
+import getcooked.model.game.elements.interactable.cookware.Cutter;
 
 public class CutterViewer implements ElementViewer<Cutter> {
     @Override

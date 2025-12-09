@@ -48,7 +48,7 @@ public abstract class Cookware extends Interactable {
 
     public boolean canAdd(Food food) {
         // Can add to cookware if not full and food can be accepted
-        return isEmpty() && accepts(food);
+        return isEmpty() && this.accepts(food);
     }
 
     @Override
@@ -56,17 +56,16 @@ public abstract class Cookware extends Interactable {
         if (chef.isHoldingSomething()){
             Grabable held = chef.getItem();
 
-            if (held instanceof Food food) {
-                if (canAdd(food)) {
-                    chef.drop();
-                    addContent(food);
-                    processFood();
-                }
+            if (held instanceof Food food && canAdd(food)) {
+                chef.drop();
+                addContent(food);
+                processFood();
             }
 
-            else if (held instanceof Plate plate) {
+            else if (held instanceof Plate plate && isFinished()) {
                 Dish result = createFinishedDish();
-                if (result != null) plate.put(result);
+                plate.put(result);
+                clearCookware();
             }
         }
     }

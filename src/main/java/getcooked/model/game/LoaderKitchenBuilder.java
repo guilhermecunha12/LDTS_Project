@@ -4,7 +4,7 @@ import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.interactable.Counter;
-import getcooked.model.game.elements.interactable.Cutter;
+import getcooked.model.game.elements.interactable.cookware.Cutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.cookware.Pot;
