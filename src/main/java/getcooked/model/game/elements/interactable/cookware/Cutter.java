@@ -25,20 +25,17 @@ public class Cutter extends Cookware {
 
     @Override
     public void interact(Chef chef) {
-        if (chef.isHoldingSomething()){
+        if (chef.isHoldingSomething()) {
             Grabable held = chef.getItem();
-            if (held instanceof Food food) {
-                if (canAdd(food)) {
-                    chef.drop();
-                    addContent(food);
-                    processFood();
-                }
+            if (held instanceof Food food && canAdd(food)) {
+                chef.drop();
+                addContent(food);
+                processFood();
             }
         }
-        else{
-            if (isFinished()){
-                Food finishedFood = content;
-                chef.pickUp(finishedFood);
+        else {
+            if (isFinished()) {
+                chef.pickUp(content);
                 clearCookware();
             }
         }
