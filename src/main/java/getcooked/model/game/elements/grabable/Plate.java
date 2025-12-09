@@ -20,8 +20,7 @@ public class Plate extends Grabable {
     }
 
     public boolean put(Dish g) {
-        if (g == null) return false;
-        if (content != null) return false;
+        if (hasContent()) return false;
         content = g;
         return true;
     }

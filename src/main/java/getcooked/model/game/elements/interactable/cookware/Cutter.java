@@ -1,27 +1,24 @@
-package getcooked.model.game.elements.interactable;
+package getcooked.model.game.elements.interactable.cookware;
 
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.interactable.cookware.Cookware;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Cutter extends Cookware {
     public Cutter(int x, int y) {
         super(x, y);
-        this.allowedFoods = new HashSet<>();
-        this.allowedFoods.add(Potato.class);
-        this.allowedFoods.add(Carrot.class);
+        this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 
     public void chop(){
-        if(content.getState() ==  FoodState.RAW){
+        if(content.getState() == FoodState.RAW){
             content.setState(FoodState.CHOPPED);
         }
     }
