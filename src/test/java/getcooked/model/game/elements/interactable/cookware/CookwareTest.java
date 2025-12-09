@@ -56,6 +56,6 @@ public class CookwareTest{
 
         cookware.interact(chef);
 
-        verify(plate,times(1)).put(result);
+        verify(plate,times(1)).setContent(result);
     }
 }

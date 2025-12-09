@@ -19,9 +19,7 @@ public class Plate extends Grabable {
         return content;
     }
 
-    public boolean put(Dish g) {
-        if (hasContent()) return false;
-        content = g;
-        return true;
+    public void setContent(Dish dish) {
+        this.content = dish;
     }
 }

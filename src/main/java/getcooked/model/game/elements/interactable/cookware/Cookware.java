@@ -62,9 +62,9 @@ public abstract class Cookware extends Interactable {
                 processFood();
             }
 
-            else if (held instanceof Plate plate && isFinished()) {
-                Dish result = createFinishedDish();
-                plate.put(result);
+            else if (held instanceof Plate plate && this.isFinished() && !plate.hasContent()) {
+                Dish dish = createFinishedDish();
+                plate.setContent(dish);
                 clearCookware();
             }
         }

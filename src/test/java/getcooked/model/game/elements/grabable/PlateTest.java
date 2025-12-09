@@ -17,21 +17,21 @@ public class PlateTest {
 
     @Test
     void testPutNull(){
-        assertFalse(plate.put(null));
+        assertFalse(plate.setContent(null));
     }
 
     @Test
     void testPutWhenHasContent(){
         Dish dish = mock(Dish.class);
-        plate.put(dish);
+        plate.setContent(dish);
         assertTrue(plate.hasContent());
-        assertFalse(plate.put(dish));
+        assertFalse(plate.setContent(dish));
     }
 
     @Test
     void testPutWhenEmpty(){
         Dish dish = mock(Dish.class);
-        assertTrue(plate.put(dish));
+        assertTrue(plate.setContent(dish));
         assertEquals(dish, plate.getContent());
         assertTrue(plate.hasContent());
     }
