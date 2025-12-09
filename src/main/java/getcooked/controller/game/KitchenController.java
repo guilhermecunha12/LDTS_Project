@@ -21,18 +21,9 @@ import java.util.List;
 import java.util.Set;
 
 public class KitchenController extends Controller<Kitchen> {
-    private final List<Controller<Kitchen>> chefControllers = new ArrayList<>();
 
     public KitchenController(Kitchen kitchen) {
         super(kitchen);
-
-        List<Chef> chefs = kitchen.getChefs();
-        if (chefs.size() >= 1) {
-            chefControllers.add(new ChefController1(chefs.get(0), kitchen));
-        }
-        if (chefs.size() >= 2) {
-            chefControllers.add(new ChefController2(chefs.get(1), kitchen));
-        }
     }
 
     @Override
@@ -44,9 +35,11 @@ public class KitchenController extends Controller<Kitchen> {
             game.changeState(new EscapeMenuState(new EscapeMenu()));
         }
 
-        //TODO: review: should these controllers be methods of this class (KitchenController)?
-        chefControllers.get(0).step(game, actions, time);
-        if (chefControllers.size() == 2) chefControllers.get(1).step(game, actions, time);
+        for(int i = 0; i < kitchen.getChefs().size(); i++) {
+            Chef chef = kitchen.getChefs().get(i);
+            ChefController chefController = new ChefController(chef, kitchen, i);
+            chefController.step(game, actions, time);
+        }
 
         this.manageOrders();
         if (kitchen.getLives() == 0) {

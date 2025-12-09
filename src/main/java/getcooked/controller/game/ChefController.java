@@ -16,28 +16,30 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-public class ChefController1 extends Controller<Kitchen> {
+public class ChefController extends Controller<Kitchen> {
     private final Chef chef;
+    private final int index;
 
-    public ChefController1(Chef chef, Kitchen kitchen) {
+    public ChefController(Chef chef, Kitchen kitchen, int index) {
         super(kitchen);
         this.chef = chef;
+        this.index = index;
     }
 
     public void moveChefLeft(){
-        moveChef(getModel().getChefs().get(0).getPosition().getLeft());
+        moveChef(getModel().getChefs().get(index).getPosition().getLeft());
     }
 
     public void moveChefUp(){
-        moveChef(getModel().getChefs().get(0).getPosition().getUp());
+        moveChef(getModel().getChefs().get(index).getPosition().getUp());
     }
 
     public void moveChefDown(){
-        moveChef(getModel().getChefs().get(0).getPosition().getDown());
+        moveChef(getModel().getChefs().get(index).getPosition().getDown());
     }
 
     public void moveChefRight(){
-        moveChef(getModel().getChefs().get(0).getPosition().getRight());
+        moveChef(getModel().getChefs().get(index).getPosition().getRight());
     }
 
     public void moveChef(Position position){
@@ -83,20 +85,39 @@ public class ChefController1 extends Controller<Kitchen> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
-        if (actions.contains(GUI.ACTION.PLAYER1_UP)) {
-            moveChefUp();
+        if(index == 0){
+            if (actions.contains(GUI.ACTION.PLAYER1_UP)) {
+                moveChefUp();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER1_DOWN)) {
+                moveChefDown();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER1_LEFT)) {
+                moveChefLeft();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER1_RIGHT)) {
+                moveChefRight();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER1_SELECT)) {
+                ChefSelect();
+            }
         }
-        if (actions.contains(GUI.ACTION.PLAYER1_DOWN)) {
-            moveChefDown();
-        }
-        if (actions.contains(GUI.ACTION.PLAYER1_LEFT)) {
-            moveChefLeft();
-        }
-        if (actions.contains(GUI.ACTION.PLAYER1_RIGHT)) {
-            moveChefRight();
-        }
-        if (actions.contains(GUI.ACTION.PLAYER1_SELECT)) {
-            ChefSelect();
+        else if (index == 1) {
+            if (actions.contains(GUI.ACTION.PLAYER2_UP)) {
+                moveChefUp();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER2_DOWN)) {
+                moveChefDown();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER2_LEFT)) {
+                moveChefLeft();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER2_RIGHT)) {
+                moveChefRight();
+            }
+            if (actions.contains(GUI.ACTION.PLAYER2_SELECT)) {
+                ChefSelect();
+            }
         }
     }
 }
