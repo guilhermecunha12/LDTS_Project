@@ -19,18 +19,20 @@ public class Counter extends Interactable{
         this.item = item;
     }
 
+    private boolean isEmpty() {
+        return this.item == null;
+    }
+
     @Override
     public void interact(Chef chef) {
-        //pegar da counter
-        if(!chef.isHoldingSomething() && item != null){
+        if (!chef.isHoldingSomething() && !this.isEmpty()){
             chef.pickUp(item);
-            this.item = null;
+            setItem(null);
         }
-        else if(chef.isHoldingSomething() && item == null){
+        else if (chef.isHoldingSomething() && this.isEmpty()){
             Grabable grabable = chef.drop();
-            //Passar a posição deste counter
             grabable.placeAt(getPosition());
-            this.item = grabable;
+            setItem(grabable);
         }
     }
 }
