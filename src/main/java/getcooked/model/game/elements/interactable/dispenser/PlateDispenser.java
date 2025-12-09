@@ -1,6 +1,5 @@
 package getcooked.model.game.elements.interactable.dispenser;
 
-import getcooked.model.Position;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 

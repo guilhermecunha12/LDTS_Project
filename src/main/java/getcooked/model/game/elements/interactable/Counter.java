@@ -5,34 +5,34 @@ import getcooked.model.game.elements.grabable.Grabable;
 
 public class Counter extends Interactable{
 
-    private Grabable item;
+    private Grabable content;
 
     public Counter(int x,int y){
         super(x,y);
     }
 
-    public Grabable getItem() {
-        return item;
+    public Grabable getContent() {
+        return content;
     }
 
-    public void setItem(Grabable item) {
-        this.item = item;
+    public void setContent(Grabable content) {
+        this.content = content;
     }
 
     private boolean isEmpty() {
-        return this.item == null;
+        return this.content == null;
     }
 
     @Override
     public void interact(Chef chef) {
         if (!chef.isHoldingSomething() && !this.isEmpty()){
-            chef.pickUp(item);
-            setItem(null);
+            chef.pickUp(content);
+            this.setContent(null);
         }
         else if (chef.isHoldingSomething() && this.isEmpty()){
             Grabable grabable = chef.drop();
-            grabable.placeAt(getPosition());
-            setItem(grabable);
+            grabable.placeAt(this.getPosition());
+            this.setContent(grabable);
         }
     }
 }

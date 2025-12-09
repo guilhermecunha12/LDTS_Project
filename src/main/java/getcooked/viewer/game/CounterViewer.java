@@ -13,7 +13,7 @@ public class CounterViewer implements ElementViewer<Counter>{
     @Override
     public void draw(Counter counter, GUI gui) {
         gui.drawCounter(counter.getPosition());
-        Grabable item = counter.getItem();
+        Grabable item = counter.getContent();
         if(item == null) return;
 
         if (item instanceof Potato) gui.drawPotato(counter.getPosition());
