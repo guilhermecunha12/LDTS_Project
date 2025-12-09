@@ -15,23 +15,14 @@ public class Chef extends Element{
     public Grabable getItem() { return item; }
 
     //boolean in order to later change states of cookware
-    public boolean pickUp(Grabable item) {
-        if (!isHoldingSomething()){
-            item.setHolder(this);
-            this.item = item;
-            return true;
-        }
-        return false;
+    public void pickUp(Grabable item) {
+        this.item = item;
     }
 
-    public Grabable drop(){
-        if (isHoldingSomething()){
-            Grabable tmp = item;
-            tmp.setHolder(null);
-            this.item = null;
-            return tmp;
-        }
-        return null;
+    public Grabable drop() {
+        Grabable tmp = this.item;
+        this.item = null;
+        return tmp;
     }
 
     @Override
