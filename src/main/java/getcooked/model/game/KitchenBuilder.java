@@ -69,7 +69,7 @@ public abstract class KitchenBuilder {
 
     private Deque<Order> createOrders() {
         Deque<Order> res = new ArrayDeque<>(); // empty list
-        int numOrders = ordersPerLevel(this.level); // linear
+        int numOrders = ordersPerLevel(this.level);
 
         for (int i = 0; i < numOrders; i++) {
             DishType randomDishType = getRandomDishType();
