@@ -9,6 +9,7 @@ import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.cookware.Cutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
+import getcooked.model.game.elements.interactable.cookware.Fryer;
 import getcooked.model.game.elements.interactable.cookware.Pot;
 import getcooked.model.game.elements.interactable.dispenser.*;
 
@@ -83,6 +84,10 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case 'k':
                         tiles.add(new KebabDispenser(x, y));
                         this.addAvailableDishType(DishType.KEBAB);
+                        break;
+                    case 'F':
+                        tiles.add(new Fryer(x, y));
+                        this.addAvailableDishType(DishType.FRIES);
                         break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T' : tiles.add(new Trash(x, y)); break;
