@@ -7,6 +7,8 @@ import getcooked.model.game.dish.DishType;
 
 import java.util.*;
 
+import static getcooked.Game.FPS;
+
 public abstract class KitchenBuilder {
     protected final int level;
     protected final int lives;
@@ -38,8 +40,6 @@ public abstract class KitchenBuilder {
     protected void addAvailableDishType(DishType dishType) {
         this.availableDishTypes.add(dishType);
     }
-
-    //TODO: add exception that verifies that the chefs are on floor tiles positions
     private List<Chef> createChefs() {
         List<Chef> chefs = new ArrayList<>();
         int middleY = getHeight()/2;
@@ -54,17 +54,29 @@ public abstract class KitchenBuilder {
         return chefs;
     }
 
+    private int ordersPerLevel(int level) {
+        return 2 + (int)Math.round(1.5 * level + Math.sqrt(level));
+    }
+
+    private int orderTimeLimit(int level) {
+        double baseSeconds = 30.0;
+        double minSeconds  = 15.0;
+        double seconds     = baseSeconds - 2.0 * Math.log(level + 1.0);
+        seconds = Math.max(seconds, minSeconds);
+        return (int)Math.round(seconds * FPS);
+    }
+
     private Deque<Order> createOrders() {
         Deque<Order> res = new ArrayDeque<>(); // empty list
-        int numOrders = 3*this.level; // linear
+        int numOrders = ordersPerLevel(this.level);
         Random random = new Random();
-
+          
         for (int i = 0; i < numOrders; i++) {
             DishType randomDishType = getRandomDishType(random);
-            Order order = new Order(new Dish(randomDishType), 900); //TODO: change the timeLimit according to the current level (900/someFunction(this.level))
+            int orderTimeLimit = orderTimeLimit(this.level);
+            Order order = new Order(new Dish(randomDishType), orderTimeLimit);
             res.addFirst(order);
         }
-
         return res;
     }
 

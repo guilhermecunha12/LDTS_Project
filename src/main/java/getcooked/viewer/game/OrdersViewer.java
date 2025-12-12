@@ -7,6 +7,8 @@ import getcooked.viewer.Viewer;
 
 import java.util.List;
 
+import static getcooked.Game.FPS;
+
 public class OrdersViewer extends Viewer<List<Order>> {
 
     public OrdersViewer(List<Order> activeOrders) {
@@ -30,7 +32,7 @@ public class OrdersViewer extends Viewer<List<Order>> {
             gui.drawRectangle(curPos, curDishTypeLength, 4, orderColor);
             gui.drawText(curPos, curDishType, "#000000", orderColor);
             gui.drawText(new Position(curPos.getX(), curPos.getY() + 3),
-                    String.valueOf(activeOrders.get(i).getRemainingTime() / 30), "#000000", orderColor);
+                    String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000", orderColor);
         }
     }
 }
