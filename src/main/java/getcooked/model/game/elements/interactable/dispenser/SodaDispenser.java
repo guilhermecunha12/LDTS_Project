@@ -13,4 +13,6 @@ public class SodaDispenser extends Dispenser {
     protected Grabable createItem(int x, int y) {
         return new Soda(x, y);
     }
+
+    //TODO: rever a lógica de entregar sodas (não são dishes, pq o chef não pode pegar em dishes
 }

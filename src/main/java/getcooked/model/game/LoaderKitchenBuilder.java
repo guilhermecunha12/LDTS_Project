@@ -1,5 +1,6 @@
 package getcooked.model.game;
 
+import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.DishType;
@@ -75,8 +76,14 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         this.addAvailableDishType(DishType.SALAD);
                         break;
                     case 'B': tiles.add(new BeefDispenser(x, y)); break;
-                    case 's': tiles.add(new SodaDispenser(x, y)); break;
-                    case 'k': tiles.add(new KebabDispenser(x, y)); break;
+                    case 's':
+                        tiles.add(new SodaDispenser(x, y));
+                        this.addAvailableDishType(DishType.SODA);
+                        break;
+                    case 'k':
+                        tiles.add(new KebabDispenser(x, y));
+                        this.addAvailableDishType(DishType.KEBAB);
+                        break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T' : tiles.add(new Trash(x, y)); break;
                     case 'D' : tiles.add(new DeliverySpot(x, y)); break;
