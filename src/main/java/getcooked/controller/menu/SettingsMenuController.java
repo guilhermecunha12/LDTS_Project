@@ -19,7 +19,7 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
-        for(GUI.ACTION action : actions) {
+        for (GUI.ACTION action : actions) {
             switch (action) {
                 case PLAYER2_UP:
                     getModel().previousEntry();
@@ -27,16 +27,34 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
                 case PLAYER2_DOWN:
                     getModel().nextEntry();
                     break;
+                case PLAYER2_LEFT:
+                    if (getModel().isSelectedBackgroundVolume()) {
+                        AudioManager audioManager = game.getAudioManager();
+                        int currentVolume = audioManager.getCurrentPercentage();
+                        int newVolume = Math.max(0, currentVolume - 5);  // decrease by 5%
+                        audioManager.setBackgroundVolume(newVolume);
+                        getModel().updateVolumePercentage();
+                    }
+                    break;
+                case PLAYER2_RIGHT:
+                    if (getModel().isSelectedBackgroundVolume()) {
+                        AudioManager audioManager = game.getAudioManager();
+                        int currentVolume = audioManager.getCurrentPercentage();
+                        int newVolume = Math.min(100, currentVolume + 5);  // increase by 1%
+                        audioManager.setBackgroundVolume(newVolume);
+                        getModel().updateVolumePercentage();
+                    }
+                    break;
                 case PLAYER2_SELECT:
-                    if(getModel().isSelectedVolume()) {
+                    if (getModel().isSelectedVolume()) {
                         AudioManager audioManager = game.getAudioManager();
                         if (audioManager.isBackgroundMusicOn()) {
                             audioManager.stopBackgroundMusic();
-                            getModel().updateEntries();
+                            getModel().updateVolumeState();
                         }
                         else {
                             audioManager.playBackgroundMusic();
-                            getModel().updateEntries();
+                            getModel().updateVolumeState();
                         }
                     }
                     if (getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
