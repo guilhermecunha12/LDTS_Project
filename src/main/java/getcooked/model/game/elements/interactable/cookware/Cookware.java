@@ -6,6 +6,7 @@ import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.interactable.Interactable;
+import getcooked.model.game.elements.interactable.strategies.ExecutionBehaviour;
 
 import java.util.Set;
 
@@ -13,12 +14,15 @@ public abstract class Cookware extends Interactable {
 
     protected Set<Class<? extends Food>> allowedFoods;
     protected Food content;
+    protected boolean cooking; // for drawing cooking state
     protected boolean finished;
+    protected ExecutionBehaviour executionBehaviour;
 
     protected Cookware(int x, int y) {
         super(x, y);
         this.content = null;
         this.finished = false;
+        this.cooking = false;
     }
 
     public Food getContent() {
@@ -33,7 +37,12 @@ public abstract class Cookware extends Interactable {
         return finished;
     }
 
+    public void cook() {
+        this.cooking = true;
+    }
+
     public void finish() {
+        this.cooking = false;
         this.finished = true;
     }
 
@@ -53,7 +62,7 @@ public abstract class Cookware extends Interactable {
 
     @Override
     public void interact(Chef chef) {
-        if (chef.isHoldingSomething()){
+        if (!cooking && chef.isHoldingSomething()){
             Grabable held = chef.getItem();
 
             if (held instanceof Food food && canAdd(food)) {
