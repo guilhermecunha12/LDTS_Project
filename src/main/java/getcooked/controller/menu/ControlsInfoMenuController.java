@@ -10,9 +10,11 @@ import getcooked.states.game.KitchenState;
 import java.io.IOException;
 import java.util.Set;
 
+import static getcooked.Game.FPS;
+
 public class ControlsInfoMenuController extends Controller<ControlsInfoMenu> {
 
-    private static final int FRAMES_TO_WAIT = 150;
+    private static final int FRAMES_TO_WAIT = 5 * FPS; // number of frames to wait
     private int framesWaited;
 
     public ControlsInfoMenuController(ControlsInfoMenu controlsInfoMenu) {
