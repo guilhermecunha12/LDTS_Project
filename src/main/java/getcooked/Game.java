@@ -12,6 +12,7 @@ public class Game {
     private State state;
     private final LanternaGUI gui;
     private final AudioManager audioManager;
+    public static final int FPS = 30; // Frames per second
 
     public Game() throws Exception{
         this.state = new MainMenuState(new MainMenu());
@@ -32,10 +33,9 @@ public class Game {
     }
 
     private void start() throws IOException { // fps missing / update frequency
-        int FPS = 30;
-        int frameTime = 1000 / FPS; // time in milisseconds to spend in one frame
 
         audioManager.playBackgroundMusic();
+        int frameTime = 1000 / FPS;
         while (state != null) {
             long startTime = System.currentTimeMillis(); // needed for limiting chef's moving velocity
 
