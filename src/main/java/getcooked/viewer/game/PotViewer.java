@@ -6,8 +6,6 @@ import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.interactable.cookware.Pot;
 
-import java.util.List;
-
 public class PotViewer implements ElementViewer<Pot>{
 
     @Override
