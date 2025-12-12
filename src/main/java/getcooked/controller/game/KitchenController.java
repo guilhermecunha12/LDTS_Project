@@ -12,7 +12,6 @@ import getcooked.states.menu.EscapeMenuState;
 import getcooked.states.menu.GameOverState;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -68,8 +67,8 @@ public class KitchenController extends Controller<Kitchen> {
         }
 
         int timeForNewOrder = orderManager.getTimeForNewOrder();
-        if (timeForNewOrder <= 0  && activeOrders.size() < OrderManager.MAX_ACTIVE_ORDERS && !orderManager.getOrders().isEmpty()) {
-            Order newOrder = orderManager.getOrders().removeLast();
+        if (timeForNewOrder <= 0  && activeOrders.size() < OrderManager.MAX_ACTIVE_ORDERS && !orderManager.ordersAreEmpty()) {
+            Order newOrder = orderManager.popOrder();
             orderManager.addActiveOrder(newOrder);
             orderManager.setTimeForNewOrder((int)(400/Math.sqrt(kitchen.getLevel()))); // gets lower each level
         }

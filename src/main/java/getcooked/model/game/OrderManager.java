@@ -17,8 +17,16 @@ public class OrderManager {
         this.ordersDelivered = ordersDelivered;
     }
 
-    public Deque<Order> getOrders() {
+    public Deque<Order> getLevelOrders() {
         return levelOrders;
+    }
+
+    public boolean ordersAreEmpty() {
+        return this.levelOrders.isEmpty();
+    }
+
+    public Order popOrder() {
+        return this.levelOrders.removeLast();
     }
 
     public void addActiveOrder(Order order) {

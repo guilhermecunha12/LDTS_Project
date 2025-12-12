@@ -69,7 +69,7 @@ public class Kitchen {
 
     //TODO: after correcting the tests, verify the methods related to orders are needed here
     public Deque<Order> getOrders() {
-        return orderManager.getOrders();
+        return orderManager.getLevelOrders();
     }
 
     public void addActiveOrder(Order order) {
