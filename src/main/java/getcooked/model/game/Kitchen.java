@@ -10,33 +10,25 @@ import java.util.Deque;
 import java.util.List;
 
 public class Kitchen {
-    public static final int MAX_ACTIVE_ORDERS = 3;
     private final int width;
     private final int height;
     private final int level;
     private final int numPlayers;
     private final List<Chef> chefs;
     private final List<Tile> tiles;
-    private final Deque<Order> levelOrders;
-    private final List<Order> activeOrders;
     private int lives;
-    private int timeForNewOrder;
-    private int ordersDelivered;
+    private final OrderManager orderManager;
 
 
-    public Kitchen(int width, int height, int level, int numPlayers, List<Chef> chefs, List<Tile> tiles,
-                   Deque<Order> levelOrders, List<Order> activeOrders, int lives, int timeForNewOrder, int  ordersDelivered) {
+    public Kitchen(int width, int height, int level, int numPlayers, List<Chef> chefs, List<Tile> tiles, int lives, OrderManager orderManager) {
         this.width = width;
         this.height = height;
         this.level = level;
         this.numPlayers = numPlayers;
         this.chefs = chefs;
         this.tiles = tiles;
-        this.levelOrders = levelOrders;
-        this.activeOrders = activeOrders;
         this.lives = lives;
-        this.timeForNewOrder = timeForNewOrder;
-        this.ordersDelivered = ordersDelivered;
+        this.orderManager = orderManager;
     }
 
     public int getLevel() {
@@ -71,36 +63,41 @@ public class Kitchen {
         return chefs;
     }
 
+    public OrderManager getOrderManager() {
+        return orderManager;
+    }
+
+    //TODO: after correcting the tests, verify the methods related to orders are needed here
     public Deque<Order> getOrders() {
-        return levelOrders;
+        return orderManager.getOrders();
     }
 
     public void addActiveOrder(Order order) {
-        this.activeOrders.add(order);
+        orderManager.addActiveOrder(order);
     }
 
     public void removeActiveOrder(Order order) {
-        this.activeOrders.remove(order);
+        orderManager.removeActiveOrder(order);
     }
 
     public List<Order> getActiveOrders() {
-        return activeOrders;
+        return orderManager.getActiveOrders();
     }
 
     public int getTimeForNewOrder() {
-        return timeForNewOrder;
+        return orderManager.getTimeForNewOrder();
     }
 
     public void setTimeForNewOrder (int timeForNewOrder) {
-        this.timeForNewOrder = timeForNewOrder;
+        orderManager.setTimeForNewOrder(timeForNewOrder);
     }
 
     public void incrementOrdersDelivered() {
-        this.ordersDelivered++;
+        orderManager.incrementOrdersDelivered();
     }
 
     public int getOrdersDelivered() {
-        return  ordersDelivered;
+        return orderManager.getOrdersDelivered();
     }
 
     // Return the object of the tile
