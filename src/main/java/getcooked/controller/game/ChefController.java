@@ -75,7 +75,8 @@ public class ChefController extends Controller<Kitchen> {
             }
 
             else if (getModel().getTile(position) instanceof DeliverySpot deliverySpot){
-                deliverySpot.interact(chef,getModel()); // TODO: code smell?
+                deliverySpot.setOrderManager(getModel().getOrderManager());
+                deliverySpot.interact(chef);
                 return;
             }
         }

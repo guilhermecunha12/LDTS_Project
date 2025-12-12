@@ -16,7 +16,7 @@ public abstract class KitchenBuilder {
     private final int numPlayers;
     private final int ordersDelivered;
 
-    public KitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) {
+    protected KitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) {
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
@@ -26,15 +26,14 @@ public abstract class KitchenBuilder {
     }
 
     public Kitchen createKitchen() {
-        return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers,
-                createChefs(), createTiles(), createOrders(), new ArrayList<>(), this.lives, 0, this.ordersDelivered);
+        return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers, createChefs(), createTiles(), this.lives,
+                new OrderManager(createOrders(), new ArrayList<>(), 0, this.ordersDelivered));
     }
 
     // Creates the kitchen based on the width and the height of the file
     protected abstract int getWidth();
 
     protected abstract int getHeight();
-
 
     protected abstract List<Tile> createTiles();
 
@@ -70,9 +69,10 @@ public abstract class KitchenBuilder {
     private Deque<Order> createOrders() {
         Deque<Order> res = new ArrayDeque<>(); // empty list
         int numOrders = ordersPerLevel(this.level);
-
+        Random random = new Random();
+          
         for (int i = 0; i < numOrders; i++) {
-            DishType randomDishType = getRandomDishType();
+            DishType randomDishType = getRandomDishType(random);
             int orderTimeLimit = orderTimeLimit(this.level);
             Order order = new Order(new Dish(randomDishType), orderTimeLimit);
             res.addFirst(order);
@@ -80,8 +80,7 @@ public abstract class KitchenBuilder {
         return res;
     }
 
-    private DishType getRandomDishType() {
-        Random random = new Random();
+    private DishType getRandomDishType(Random random) {
         int randomIndex = random.nextInt(this.availableDishTypes.size());
         return this.availableDishTypes.get(randomIndex);
     }

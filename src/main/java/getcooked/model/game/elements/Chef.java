@@ -14,7 +14,6 @@ public class Chef extends Element{
 
     public Grabable getItem() { return item; }
 
-    //boolean in order to later change states of cookware
     public void pickUp(Grabable item) {
         this.item = item;
     }
