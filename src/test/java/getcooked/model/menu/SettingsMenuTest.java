@@ -19,17 +19,17 @@ class SettingsMenuTest {
     }
 
     @Test
-    void testUpdateEntriesReflectsMusicStateWhenOn() {
+    void testUpdateVolumeStateReflectsMusicStateWhenOn() {
         when(audioManager.isBackgroundMusicOn()).thenReturn(true);
-        menu.updateEntries();
+        menu.updateVolumeState();
 
         assertEquals("Background Music ON", menu.getEntry(0));
     }
 
     @Test
-    void testUpdateEntriesReflectsMusicStateWhenOff() {
+    void testUpdateVolumeStateReflectsMusicStateWhenOff() {
         when(audioManager.isBackgroundMusicOn()).thenReturn(false);
-        menu.updateEntries();
+        menu.updateVolumeState();
 
         assertEquals("Background Music OFF", menu.getEntry(0));
     }
