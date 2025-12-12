@@ -3,8 +3,10 @@ package getcooked.model.game.elements.interactable;
 import getcooked.model.game.Order;
 import getcooked.model.game.OrderManager;
 import getcooked.model.game.dish.Dish;
+import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.Soda;
 
 import java.util.List;
 
@@ -27,8 +29,14 @@ public class DeliverySpot extends Interactable {
         if (this.orderManager == null)
             return;
 
-        if (chef.isHoldingSomething() && chef.getItem() instanceof Plate plate && plate.hasContent()) {
-            Dish dish = plate.getContent();
+        if (chef.isHoldingSomething()) {
+            Dish dish;
+            if (chef.getItem() instanceof Plate plate && plate.hasContent())
+                dish = plate.getContent();
+            else if (chef.getItem() instanceof Soda)
+                dish = new Dish(DishType.SODA);
+            else return;
+
             List<Order> activeOrders = orderManager.getActiveOrders();
 
             for (Order order : activeOrders) {

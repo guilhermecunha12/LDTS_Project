@@ -1,16 +1,16 @@
 package getcooked.model.game;
 
+import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.DishType;
+import getcooked.model.game.elements.grabable.food.Kebab;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.cookware.Cutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.cookware.Pot;
-import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
-import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
-import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.elements.interactable.dispenser.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -70,6 +70,19 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case 'c':
                         tiles.add(new CarrotDispenser(x, y));
                         this.addAvailableDishType(DishType.CARROT_SOUP); // for generating orders
+                        break;
+                    case 'S':
+                        tiles.add(new SaladDispenser(x, y));
+                        this.addAvailableDishType(DishType.SALAD);
+                        break;
+                    case 'B': tiles.add(new BeefDispenser(x, y)); break;
+                    case 's':
+                        tiles.add(new SodaDispenser(x, y));
+                        this.addAvailableDishType(DishType.SODA);
+                        break;
+                    case 'k':
+                        tiles.add(new KebabDispenser(x, y));
+                        this.addAvailableDishType(DishType.KEBAB);
                         break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T' : tiles.add(new Trash(x, y)); break;
