@@ -3,10 +3,7 @@ package getcooked.controller.game;
 import getcooked.Game;
 import getcooked.controller.Controller;
 import getcooked.gui.GUI;
-import getcooked.model.game.Kitchen;
-import getcooked.model.game.KitchenModelStorage;
-import getcooked.model.game.LoaderKitchenBuilder;
-import getcooked.model.game.Order;
+import getcooked.model.game.*;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.model.menu.GameOverMenu;
@@ -56,7 +53,8 @@ public class KitchenController extends Controller<Kitchen> {
 
     private void manageOrders() {
         Kitchen kitchen = getModel();
-        List<Order> activeOrders = kitchen.getActiveOrders();
+        OrderManager orderManager = kitchen.getOrderManager();
+        List<Order> activeOrders = orderManager.getActiveOrders();
         Iterator<Order> iterator = activeOrders.iterator();
 
         // Used iterators because elements are being removed from the iterable, causing errors in a for-each loop
@@ -69,13 +67,13 @@ public class KitchenController extends Controller<Kitchen> {
             }
         }
 
-        int timeForNewOrder = kitchen.getTimeForNewOrder();
-        if (timeForNewOrder <= 0  && activeOrders.size() < Kitchen.MAX_ACTIVE_ORDERS && !kitchen.getOrders().isEmpty()) {
-            Order newOrder = kitchen.getOrders().removeLast();
-            kitchen.addActiveOrder(newOrder);
-            kitchen.setTimeForNewOrder((int)(400/Math.sqrt(kitchen.getLevel()))); // gets lower each level
+        int timeForNewOrder = orderManager.getTimeForNewOrder();
+        if (timeForNewOrder <= 0  && activeOrders.size() < OrderManager.MAX_ACTIVE_ORDERS && !orderManager.getOrders().isEmpty()) {
+            Order newOrder = orderManager.getOrders().removeLast();
+            orderManager.addActiveOrder(newOrder);
+            orderManager.setTimeForNewOrder((int)(400/Math.sqrt(kitchen.getLevel()))); // gets lower each level
         }
 
-        else kitchen.setTimeForNewOrder(timeForNewOrder - 1);
+        else orderManager.setTimeForNewOrder(timeForNewOrder - 1);
     }
 }
