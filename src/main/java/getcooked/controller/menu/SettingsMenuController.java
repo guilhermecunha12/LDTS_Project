@@ -21,47 +21,50 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
         for (GUI.ACTION action : actions) {
             switch (action) {
-                case PLAYER2_UP:
-                    getModel().previousEntry();
-                    break;
-                case PLAYER2_DOWN:
-                    getModel().nextEntry();
-                    break;
-                case PLAYER2_LEFT:
-                    if (getModel().isSelectedBackgroundVolume()) {
-                        AudioManager audioManager = game.getAudioManager();
-                        int currentVolume = audioManager.getCurrentPercentage();
-                        int newVolume = Math.max(0, currentVolume - 5);  // decrease by 5%
-                        audioManager.setBackgroundVolume(newVolume);
-                        getModel().updateVolumePercentage();
-                    }
-                    break;
-                case PLAYER2_RIGHT:
-                    if (getModel().isSelectedBackgroundVolume()) {
-                        AudioManager audioManager = game.getAudioManager();
-                        int currentVolume = audioManager.getCurrentPercentage();
-                        int newVolume = Math.min(100, currentVolume + 5);  // increase by 1%
-                        audioManager.setBackgroundVolume(newVolume);
-                        getModel().updateVolumePercentage();
-                    }
-                    break;
-                case PLAYER2_SELECT:
-                    if (getModel().isSelectedVolume()) {
-                        AudioManager audioManager = game.getAudioManager();
-                        if (audioManager.isBackgroundMusicOn()) {
-                            audioManager.stopBackgroundMusic();
-                            getModel().updateVolumeState();
-                        }
-                        else {
-                            audioManager.playBackgroundMusic();
-                            getModel().updateVolumeState();
-                        }
-                    }
-                    if (getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
-                    break;
-                default:
-                    break;
+                case PLAYER2_UP: getModel().previousEntry(); break;
+                case PLAYER2_DOWN: getModel().nextEntry(); break;
+                case PLAYER2_LEFT: volumeDecrease(game); break;
+                case PLAYER2_RIGHT: volumeIncrease(game); break;
+                case PLAYER2_SELECT: selectOption(game); break;
+                default : break;
             }
         }
+    }
+
+    private void volumeDecrease(Game game) {
+        if (getModel().isSelectedBackgroundVolume()) {
+            AudioManager audioManager = game.getAudioManager();
+            int newVolume = Math.max(0, audioManager.getCurrentPercentage() - 5);
+            audioManager.setBackgroundVolume(newVolume);
+            getModel().updateVolumePercentage();
+        }
+    }
+
+    private void volumeIncrease(Game game) {
+        if (getModel().isSelectedBackgroundVolume()) {
+            AudioManager audioManager = game.getAudioManager();
+            int newVolume = Math.min(100, audioManager.getCurrentPercentage() + 5);
+            audioManager.setBackgroundVolume(newVolume);
+            getModel().updateVolumePercentage();
+        }
+    }
+
+    private void selectOption(Game game){
+        if (getModel().isSelectedVolume()) {
+            toggleBackgroundMusic(game);
+        }
+        if (getModel().isSelectedBack()) {
+            game.changeState(new MainMenuState(new MainMenu()));
+        }
+    }
+
+    private void toggleBackgroundMusic(Game game) {
+        AudioManager audioManager = game.getAudioManager();
+        if (audioManager.isBackgroundMusicOn()) {
+            audioManager.stopBackgroundMusic();
+        } else {
+            audioManager.playBackgroundMusic();
+        }
+        getModel().updateVolumeState();
     }
 }
