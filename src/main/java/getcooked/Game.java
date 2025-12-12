@@ -35,8 +35,8 @@ public class Game {
     private void start() throws IOException { // fps missing / update frequency
 
         audioManager.playBackgroundMusic();
+        int frameTime = 1000 / FPS;
         while (state != null) {
-            int frameTime = 1000 / FPS;
             long startTime = System.currentTimeMillis(); // needed for limiting chef's moving velocity
 
             state.step(this, this.gui, startTime); // state keeps a backreference
