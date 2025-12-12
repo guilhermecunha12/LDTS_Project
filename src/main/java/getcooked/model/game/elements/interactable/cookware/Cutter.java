@@ -7,6 +7,7 @@ import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.model.game.elements.interactable.strategies.InputBehaviour;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ public class Cutter extends Cookware {
     public Cutter(int x, int y) {
         super(x, y);
         this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
+        this.executionBehaviour = new InputBehaviour(5, this);
     }
 
     public void chop(){
@@ -30,21 +32,22 @@ public class Cutter extends Cookware {
             if (held instanceof Food food && canAdd(food)) {
                 chef.drop();
                 addContent(food);
-                processFood();
             }
         }
+
         else {
             if (isFinished()) {
                 chef.pickUp(content);
                 clearCookware();
+            } else if (content != null) {
+                processFood();
             }
         }
     }
 
     @Override
     public void processFood() {
-        chop();
-        finish();
+        executionBehaviour.execute();
     }
 
     @Override
