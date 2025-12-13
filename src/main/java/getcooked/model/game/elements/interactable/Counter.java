@@ -31,7 +31,7 @@ public class Counter extends Interactable{
         }
         else if (chef.isHoldingSomething() && this.isEmpty()){
             Grabable grabable = chef.drop();
-            grabable.placeAt(this.getPosition());
+            grabable.setPosition(this.getPosition());
             this.setContent(grabable);
         }
     }
