@@ -1,10 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.elements.grabable.food.Carrot;
-import getcooked.model.game.elements.grabable.food.Food;
-import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.interactable.cookware.Cutter;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.viewer.Sprite;
 
 import javax.swing.*;
@@ -12,14 +9,14 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class CutterViewer implements ElementViewer<Cutter> {
+public class CutterViewer implements ElementViewer<CounterCutter> {
 
     private final Sprite sprite;
     public  CutterViewer(String filepath) throws Exception {
         this.sprite = new Sprite(filepath);
     }
     @Override
-    public void draw(Cutter model, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+    public void draw(CounterCutter model, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         int pixelX = model.getPosition().getX() * 5;
         int pixelY = model.getPosition().getY() * 5;
         sprite.draw(gui, pixelX, pixelY);

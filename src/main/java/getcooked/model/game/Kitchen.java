@@ -88,12 +88,8 @@ public class Kitchen {
         return orderManager.getTimeForNewOrder();
     }
 
-    public void setTimeForNewOrder (int timeForNewOrder) {
-        orderManager.setTimeForNewOrder(timeForNewOrder);
-    }
-
-    public void incrementOrdersDelivered() {
-        orderManager.incrementOrdersDelivered();
+    public void setTimeForNewOrder() {
+        orderManager.setTimeForNewOrder();
     }
 
     public int getOrdersDelivered() {

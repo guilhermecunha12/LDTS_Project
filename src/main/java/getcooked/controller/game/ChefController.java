@@ -6,14 +6,11 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.interactable.Counter;
+import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.DeliverySpot;
-import getcooked.model.game.elements.interactable.Trash;
-import getcooked.model.game.elements.interactable.cookware.Cookware;
-import getcooked.model.game.elements.interactable.dispenser.Dispenser;
+import getcooked.model.game.elements.interactable.Interactable;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 public class ChefController extends Controller<Kitchen> {
@@ -28,57 +25,37 @@ public class ChefController extends Controller<Kitchen> {
 
     public void moveChefLeft(){
         moveChef(getModel().getChefs().get(index).getPosition().getLeft());
+        chef.turnLeft();
     }
 
     public void moveChefUp(){
         moveChef(getModel().getChefs().get(index).getPosition().getUp());
+        chef.turnUp();
     }
 
     public void moveChefDown(){
         moveChef(getModel().getChefs().get(index).getPosition().getDown());
+        chef.turnDown();
     }
 
     public void moveChefRight(){
         moveChef(getModel().getChefs().get(index).getPosition().getRight());
+        chef.turnRight();
     }
 
     public void moveChef(Position position){
         if(getModel().isEmpty(position)) chef.setPosition(position);
     }
 
-    public void ChefSelect(){
-        // Define a Order, so that first comes objects bellow -> left -> up -> right
-        Position positionUp = chef.getPosition().getUp();
-        Position positionDown = chef.getPosition().getDown();
-        Position positionLeft = chef.getPosition().getLeft();
-        Position positionRight = chef.getPosition().getRight();
-        List<Position> positions = List.of(positionDown, positionLeft, positionUp, positionRight);
-        for(Position position : positions){
-            if(getModel().getTile(position) instanceof Counter counter) {
-                counter.interact(chef);
-                return;
-            }
+    public void chefSelect(){
+        Position toInteract = chef.getFrontPosition();
+        Tile tileToInteract = getModel().getTile(toInteract);
 
-            else if(getModel().getTile(position) instanceof Trash trash){
-                trash.interact(chef);
-                return;
-            }
-
-            else if(getModel().getTile(position) instanceof Dispenser dispenser){
-                dispenser.interact(chef);
-                return;
-            }
-
-            else if (getModel().getTile(position) instanceof Cookware cookware) {
-                cookware.interact(chef);
-                return;
-            }
-
-            else if (getModel().getTile(position) instanceof DeliverySpot deliverySpot){
+        if (tileToInteract instanceof Interactable interactable) {
+            if (tileToInteract instanceof DeliverySpot deliverySpot) {
                 deliverySpot.setOrderManager(getModel().getOrderManager());
-                deliverySpot.interact(chef);
-                return;
             }
+            interactable.interact(chef);
         }
     }
 
@@ -98,7 +75,7 @@ public class ChefController extends Controller<Kitchen> {
                 moveChefRight();
             }
             if (actions.contains(GUI.ACTION.PLAYER1_SELECT)) {
-                ChefSelect();
+                chefSelect();
             }
         }
         else if (index == 1) {
@@ -115,7 +92,7 @@ public class ChefController extends Controller<Kitchen> {
                 moveChefRight();
             }
             if (actions.contains(GUI.ACTION.PLAYER2_SELECT)) {
-                ChefSelect();
+                chefSelect();
             }
         }
     }

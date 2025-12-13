@@ -4,6 +4,7 @@ import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

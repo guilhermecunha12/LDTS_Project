@@ -8,15 +8,18 @@ import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.Counter;
-import getcooked.model.game.elements.interactable.cookware.Cutter;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
-import getcooked.model.game.elements.interactable.cookware.Pot;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.viewer.Viewer;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -48,7 +51,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer("sprites/pot.png"));
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
-        drawElements(gui, filterOfType(Cutter.class, tiles), new CutterViewer("sprites/cutter.png"));
+        drawElements(gui, filterOfType(CounterCutter.class, tiles), new CutterViewer("sprites/cutter.png"));
 
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new ChefViewer("sprites/chef1.png"));
@@ -68,7 +71,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
     }
 
     // generic method with type T
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException, URISyntaxException, FontFormatException {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException, URISyntaxException, FontFormatException, IOException, URISyntaxException, FontFormatException {
         viewer.draw(element, gui);
     }
 
