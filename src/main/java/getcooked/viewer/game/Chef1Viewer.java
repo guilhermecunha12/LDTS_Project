@@ -52,8 +52,8 @@ public class Chef1Viewer implements ElementViewer<Chef>{
     }*/
     @Override
     public void draw(Chef chef, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = chef.getPosition().getX() * 8;
-        int pixelY = chef.getPosition().getY() * 8;
+        int pixelX = chef.getPosition().getX() * 5;
+        int pixelY = chef.getPosition().getY() * 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }

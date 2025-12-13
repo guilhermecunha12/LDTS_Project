@@ -43,8 +43,8 @@ public class KitchenViewer extends Viewer<Kitchen> {
 
         List<Tile> tiles = getModel().getTiles();
 
-        drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/bottomcounter.png"));
-        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/leftcounter.png"));
+        drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/test.png"));
+        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/test.png"));
         //drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer());
         //drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
         //drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer());
@@ -54,7 +54,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         //drawElements(gui, filterOfType(Cutter.class, tiles), new CutterViewer());
 
         List<Chef> chefs = getModel().getChefs();
-        drawElement(gui, chefs.getFirst(), new Chef1Viewer("sprites/topcounter.png"));
+        drawElement(gui, chefs.getFirst(), new Chef1Viewer("sprites/chef.png"));
         //if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
 
         // update the viewers because the active orders and lives could have changed

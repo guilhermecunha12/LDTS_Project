@@ -17,8 +17,8 @@ public class FloorViewer implements ElementViewer<Floor> {
     }
     @Override
     public void draw(Floor element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = element.getPosition().getX() * 8;
-        int pixelY = element.getPosition().getY() * 8;
+        int pixelX = element.getPosition().getX() * 5;
+        int pixelY = element.getPosition().getY() * 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }

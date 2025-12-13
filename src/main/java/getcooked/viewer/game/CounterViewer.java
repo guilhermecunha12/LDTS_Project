@@ -50,8 +50,8 @@ public class CounterViewer implements ElementViewer<Counter>{
     }
     @Override
     public void draw(Counter model, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = model.getPosition().getX() * 8;
-        int pixelY = model.getPosition().getY() * 8;
+        int pixelX = model.getPosition().getX() * 5;
+        int pixelY = model.getPosition().getY() * 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }
