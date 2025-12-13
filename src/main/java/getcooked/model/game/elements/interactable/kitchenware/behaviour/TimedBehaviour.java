@@ -16,6 +16,7 @@ public class TimedBehaviour implements ExecutionBehaviour {
             try {
                 Thread.sleep(cookingTime * 1000 / Game.FPS);
             } catch (InterruptedException e) {
+                kitchenware.finish();
                 throw new RuntimeException(e);
             }
             kitchenware.finish();

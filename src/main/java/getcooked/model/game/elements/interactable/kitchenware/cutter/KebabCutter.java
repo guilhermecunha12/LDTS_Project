@@ -27,7 +27,7 @@ public class KebabCutter extends Cutter {
                 clear();
             }
         } else {
-            if (!chef.isHoldingSomething()) {
+            if (!chef.isHoldingSomething() && isEmpty()) { // no kebab yet generated
                 processFood();
             }
         }
