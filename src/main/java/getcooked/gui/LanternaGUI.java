@@ -84,7 +84,7 @@ public class LanternaGUI implements GUI {
 
         int size = 0;
         if(screenBounds.height <= 1080){
-            size = 13;
+            size = 11;
         }
         else size = 17;
 
