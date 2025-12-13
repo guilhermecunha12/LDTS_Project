@@ -82,7 +82,7 @@ public class LanternaGUI implements GUI {
                 .getDefaultConfiguration()
                 .getBounds();
 
-        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(13);
+        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(11);
 
         int charWidth = menuFontConfig.getFontWidth();
         int charHeight = menuFontConfig.getFontHeight();
