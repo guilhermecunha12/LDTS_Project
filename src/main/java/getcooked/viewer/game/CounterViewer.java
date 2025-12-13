@@ -7,9 +7,16 @@ import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.interactable.Counter;
+import getcooked.viewer.Sprite;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static getcooked.viewer.Sprite.SCALE;
 
 public class CounterViewer implements ElementViewer<Counter>{
-
+    /*
     @Override
     public void draw(Counter counter, GUI gui) {
         gui.drawCounter(counter.getPosition());
@@ -35,6 +42,30 @@ public class CounterViewer implements ElementViewer<Counter>{
                         break;
                 }
             }
+        }
+    }
+     */
+    private final Sprite sprite;
+    public CounterViewer(String filepath) throws IOException {
+        this.sprite = new Sprite(filepath);
+        //TODO: fazer switch case para diferentes sprites de counter, é preicso mudaar o map
+    }
+    @Override
+    public void draw(Counter counter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        int pixelX = counter.getPosition().getX() * SCALE;
+        int pixelY = counter.getPosition().getY() * SCALE;
+        sprite.draw(gui, pixelX, pixelY);
+        Grabable item = counter.getContent();
+        if(item == null) return;
+        if (item instanceof Potato potato){
+            PotatoViewer potatoViewer = new PotatoViewer(potato);
+            potatoViewer.draw(potato, gui);
+        } else if (item instanceof Carrot){
+            //CarrotViewer carrotViewer = new CarrotViewer("sprites/carrot.png");
+            //carrotViewer.draw((Carrot) item, gui);
+        } else if(item instanceof Plate plate){
+            PlateViewer plateViewer = new PlateViewer(plate);
+            plateViewer.draw(plate, gui);
         }
     }
 }

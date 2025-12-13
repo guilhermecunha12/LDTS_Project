@@ -17,6 +17,9 @@ import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.viewer.Viewer;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,26 +34,25 @@ public class KitchenViewer extends Viewer<Kitchen> {
     }
 
     @Override
-    public void drawElements(GUI gui) {
+    public void drawElements(GUI gui) throws Exception {
         // TODO: adjust the position of the level text according to the current level to avoid it going out of the screen
-        gui.drawText(new Position(gui.getWidth() - 10, 2),
+        gui.drawText(new Position(gui.getWidth() - 20, 2),
                 "Level: " + getModel().getLevel(), "#ffffff", "#000000");
 
         List<Tile> tiles = getModel().getTiles();
-
-        drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer());
-        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
-        drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer());
-        drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
-        drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer());
-        drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer());
-        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
-        drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
-        drawElements(gui, filterOfType(CounterCutter.class, tiles), new CutterViewer());
+        drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
+        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/counter.png"));
+        drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
+        //drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
+        drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
+        drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
+        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer("sprites/pot.png"));
+        drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
+        drawElements(gui, filterOfType(CounterCutter.class, tiles), new CutterViewer("sprites/cutter.png"));
 
         List<Chef> chefs = getModel().getChefs();
-        drawElement(gui, chefs.getFirst(), new Chef1Viewer());
-        if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
+        drawElement(gui, chefs.getFirst(), new ChefViewer("sprites/chef1.png"));
+        if (chefs.size() > 1) drawElement(gui, chefs.get(1), new ChefViewer("sprites/chef2.png"));
 
         // update the viewers because the active orders and lives could have changed
         this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
@@ -59,15 +61,14 @@ public class KitchenViewer extends Viewer<Kitchen> {
         livesViewer.drawElements(gui);
     }
 
-    // generic method with type T
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
+    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) throws IOException, URISyntaxException, FontFormatException {
         for (T element: elements) {
             drawElement(gui, element, viewer);
         }
     }
 
     // generic method with type T
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException, URISyntaxException, FontFormatException {
         viewer.draw(element, gui);
     }
 

@@ -21,6 +21,7 @@ public class Chef extends Element {
 
     public void pickUp(Grabable item) {
         this.item = item;
+        item.setPosition(this.getPosition());
     }
 
     public Grabable drop() {

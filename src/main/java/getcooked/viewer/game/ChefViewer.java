@@ -8,11 +8,26 @@ import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.viewer.Sprite;
 
-public class Chef2Viewer implements ElementViewer<Chef> {
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static getcooked.viewer.Sprite.SCALE;
+
+//TODO: review if ChefViewers could be unified
+public class ChefViewer implements ElementViewer<Chef>{
+    private final Sprite sprite;
+    public ChefViewer(String filepath) throws IOException {
+        this.sprite = new Sprite(filepath);
+
+    }
+
+    /*
     @Override
     public void draw(Chef chef, GUI gui) {
-        gui.drawChef2(chef.getPosition());
+        gui.drawChef1(chef.getPosition());
         Grabable item = chef.getItem();
         if(item == null) return;
 
@@ -36,6 +51,26 @@ public class Chef2Viewer implements ElementViewer<Chef> {
                         break;
                 }
             }
+        }
+    }*/
+    @Override
+    public void draw(Chef chef, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        int pixelX = chef.getPosition().getX() * SCALE;
+        int pixelY = chef.getPosition().getY() * SCALE;
+        sprite.draw(gui, pixelX, pixelY);
+        Grabable grabable = chef.getItem();
+        if(grabable == null) return;
+        else if(grabable instanceof Potato potato) {
+            PotatoViewer potatoViewer = new PotatoViewer(potato);
+            potatoViewer.draw(potato, gui);
+        }
+        else if (grabable instanceof Carrot carrot){
+            CarrotViewer carrotViewer = new CarrotViewer(carrot);
+            carrotViewer.draw(carrot, gui);
+        }
+        else if(grabable instanceof Plate plate){
+            PlateViewer plateViewer = new PlateViewer(plate);
+            plateViewer.draw(plate, gui);
         }
     }
 }

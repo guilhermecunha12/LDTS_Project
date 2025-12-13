@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-public class Chef1ViewerTest {
+public class ChefViewerTest {
     private GUI gui;
     private Chef chef;
-    private Chef1Viewer chef1Viewer;
+    private ChefViewer chefViewer;
 
     @BeforeEach
     void setUp() {
         this.gui = mock(GUI.class);
         this.chef = mock(Chef.class);
-        this.chef1Viewer = new Chef1Viewer();
+        this.chefViewer = new ChefViewer();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class Chef1ViewerTest {
         when(chef.getItem()).thenReturn(potato);
         when(chef.getPosition()).thenReturn(position);
 
-        chef1Viewer.draw(chef, gui);
+        chefViewer.draw(chef, gui);
 
         verify(gui,times(1)).drawChef1(position);
         verify(gui,times(1)).drawPotato(position);
@@ -49,7 +49,7 @@ public class Chef1ViewerTest {
         when(plate.getContent()).thenReturn(dish);
         when(dish.getType()).thenReturn(DishType.POTATO_SOUP);
 
-        chef1Viewer.draw(chef, gui);
+        chefViewer.draw(chef, gui);
 
         verify(gui,times(1)).drawPlate(position);
         verify(gui,times(1)).drawPotatoSoup(position);
