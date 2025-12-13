@@ -8,6 +8,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.viewer.Sprite.SCALE;
+
 public class PotatoViewer implements ElementViewer<Potato>{
 
     private final Sprite sprite;
