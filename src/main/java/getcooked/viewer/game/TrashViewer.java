@@ -16,9 +16,9 @@ public class TrashViewer implements ElementViewer<Trash> {
     }
 
     @Override
-    public void draw(Trash model, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = model.getPosition().getX() * 5;
-        int pixelY = model.getPosition().getY() * 5;
+    public void draw(Trash trash, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        int pixelX = trash.getPosition().getX() * 5;
+        int pixelY = trash.getPosition().getY() * 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }
