@@ -70,9 +70,9 @@ public class KitchenController extends Controller<Kitchen> {
         if (timeForNewOrder <= 0  && activeOrders.size() < OrderManager.MAX_ACTIVE_ORDERS && !orderManager.ordersAreEmpty()) {
             Order newOrder = orderManager.popOrder();
             orderManager.addActiveOrder(newOrder);
-            orderManager.setTimeForNewOrder((int)(400/Math.sqrt(kitchen.getLevel()))); // gets lower each level
+            orderManager.setTimeForNewOrder();
         }
 
-        else orderManager.setTimeForNewOrder(timeForNewOrder - 1);
+        else orderManager.decreaseTimeForNewOrder();
     }
 }

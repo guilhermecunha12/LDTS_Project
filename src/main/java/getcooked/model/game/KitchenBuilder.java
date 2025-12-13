@@ -27,7 +27,7 @@ public abstract class KitchenBuilder {
 
     public Kitchen createKitchen() {
         return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers, createChefs(), createTiles(), this.lives,
-                new OrderManager(createOrders(), new ArrayList<>(), 0, this.ordersDelivered));
+                new OrderManager(createOrders(), new ArrayList<>(), orderFrequency(this.level), this.ordersDelivered));
     }
 
     // Creates the kitchen based on the width and the height of the file
@@ -64,6 +64,10 @@ public abstract class KitchenBuilder {
         double seconds     = baseSeconds - 2.0 * Math.log(level + 1.0);
         seconds = Math.max(seconds, minSeconds);
         return (int)Math.round(seconds * FPS);
+    }
+
+    private int orderFrequency(int level) { // gets lower each level
+        return (int)(400/Math.sqrt(level));
     }
 
     private Deque<Order> createOrders() {
