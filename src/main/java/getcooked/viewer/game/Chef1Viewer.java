@@ -57,5 +57,28 @@ public class Chef1Viewer implements ElementViewer<Chef>{
         int pixelX = chef.getPosition().getX() * SCALE;
         int pixelY = chef.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
+        Grabable grabable = chef.getItem();
+        if(grabable == null) return;
+        else if(grabable instanceof Potato potato && potato.getState() == FoodState.RAW) {
+            PotatoViewer potatoViewer = new PotatoViewer("sprites/potato.png");
+            potatoViewer.draw(potato, gui);
+        }
+        else if(grabable instanceof Plate plate){
+            PlateViewer plateViewer = new PlateViewer("sprites/plate.png");
+            plateViewer.draw(plate, gui);
+            Dish dish = plate.getContent();
+            if(dish != null) {
+                switch (dish.getType()) {
+                    case CARROT_SOUP:
+
+                        break;
+                    case POTATO_SOUP:
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
