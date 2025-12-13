@@ -1,6 +1,5 @@
 package getcooked.model.game;
 
-import getcooked.Game;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.Dish;

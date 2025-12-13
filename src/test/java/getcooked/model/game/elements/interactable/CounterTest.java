@@ -29,7 +29,7 @@ public class CounterTest {
         when(chef.drop()).thenReturn(item);
 
         counter.interact(chef);
-        verify(item, times(1)).placeAt(counter.getPosition());
+        verify(item, times(1)).setPosition(counter.getPosition());
         assertEquals(item, counter.getContent());
     }
 
