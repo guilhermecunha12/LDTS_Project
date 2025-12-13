@@ -59,8 +59,8 @@ public class CounterViewer implements ElementViewer<Counter>{
             PotatoViewer potatoViewer = new PotatoViewer("sprites/potato.png");
             potatoViewer.draw((Potato) item, gui);
         } else if (item instanceof Carrot){
-            CarrotViewer carrotViewer = new CarrotViewer("sprites/carrot.png");
-            carrotViewer.draw((Carrot) item, gui);
+            //CarrotViewer carrotViewer = new CarrotViewer("sprites/carrot.png");
+            //carrotViewer.draw((Carrot) item, gui);
         } else if(item instanceof Plate plate){
             PlateViewer plateViewer = new PlateViewer("sprites/plate.png");
             plateViewer.draw(plate, gui);
@@ -75,7 +75,6 @@ public class CounterViewer implements ElementViewer<Counter>{
                     PotatoSoupViewer potatoSoupViewer = new PotatoSoupViewer("sprites/potato_soup.png");
                     potatoSoupViewer.draw(plate, gui);
                     break;
-                    */
             }
         }
     }
