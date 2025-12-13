@@ -6,6 +6,7 @@ import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.Salad;
 import getcooked.model.game.elements.grabable.food.Soda;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class DeliverySpot extends Interactable {
                 dish = plate.getContent();
             else if (chef.getItem() instanceof Soda)
                 dish = new Dish(DishType.SODA);
+            else if (chef.getItem() instanceof Salad)
+                dish = new Dish(DishType.SALAD);
             else return;
 
             List<Order> activeOrders = orderManager.getActiveOrders();

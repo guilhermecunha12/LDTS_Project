@@ -17,11 +17,4 @@ public class SaladDispenser extends Dispenser {
     protected Grabable createItem(int x, int y) {
         return new Salad(x, y);
     }
-
-    @Override // SaladDispenser requires that the chef has a plate in hand
-    public void interact(Chef chef) {
-        if (chef.isHoldingSomething() && chef.getItem() instanceof Plate plate && !plate.hasContent()){
-            plate.setContent(new Dish(DishType.SALAD));
-        }
-    }
 }
