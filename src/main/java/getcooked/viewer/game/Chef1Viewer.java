@@ -15,6 +15,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.viewer.Sprite.SCALE;
+
 //TODO: review if ChefViewers could be unified
 public class Chef1Viewer implements ElementViewer<Chef>{
     private final Sprite sprite;
@@ -52,8 +54,8 @@ public class Chef1Viewer implements ElementViewer<Chef>{
     }*/
     @Override
     public void draw(Chef chef, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = chef.getPosition().getX() * 5;
-        int pixelY = chef.getPosition().getY() * 5;
+        int pixelX = chef.getPosition().getX() * SCALE;
+        int pixelY = chef.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
     }
 }

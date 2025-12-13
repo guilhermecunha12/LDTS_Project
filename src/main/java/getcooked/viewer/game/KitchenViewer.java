@@ -36,13 +36,10 @@ public class KitchenViewer extends Viewer<Kitchen> {
     @Override
     public void drawElements(GUI gui) throws Exception {
         // TODO: adjust the position of the level text according to the current level to avoid it going out of the screen
-        gui.drawText(new Position(gui.getWidth() - 10, 2),
+        gui.drawText(new Position(gui.getWidth() - 20, 2),
                 "Level: " + getModel().getLevel(), "#ffffff", "#000000");
 
-
-
         List<Tile> tiles = getModel().getTiles();
-
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/counter.png"));
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));

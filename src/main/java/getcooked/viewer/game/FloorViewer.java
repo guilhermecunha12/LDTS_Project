@@ -9,6 +9,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.viewer.Sprite.SCALE;
+
 public class FloorViewer implements ElementViewer<Floor> {
     private final Sprite sprite;
     public FloorViewer(String path) throws Exception {
@@ -17,8 +19,8 @@ public class FloorViewer implements ElementViewer<Floor> {
     }
     @Override
     public void draw(Floor element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = element.getPosition().getX() * 5;
-        int pixelY = element.getPosition().getY() * 5;
+        int pixelX = element.getPosition().getX() * SCALE;
+        int pixelY = element.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
     }
 }

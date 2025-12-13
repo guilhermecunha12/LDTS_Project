@@ -24,7 +24,7 @@ public class GameOverViewer extends Viewer<GameOverMenu> {
             String entry = getModel().getEntry(i);
             int padding = 1;
             // incrementing y using i multiplied by a factor 4
-            Position topLeftPos = new Position(middleX - (entry.length() / 2) - padding, 15 + 4*i);
+            Position topLeftPos = new Position(middleX - (entry.length() / 2) - padding, 30 + 4*i);
 
             gui.drawTextBox(topLeftPos, entry, "#000000",
                     getModel().isSelected(i)? "#ffff00" : "#a9a9a9", padding);
