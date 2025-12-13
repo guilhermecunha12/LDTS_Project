@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class PotatoViewer implements ElementViewer<Potato>{
+
     private final Sprite sprite;
     public PotatoViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);

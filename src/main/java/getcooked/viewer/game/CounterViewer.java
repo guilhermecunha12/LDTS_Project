@@ -65,17 +65,6 @@ public class CounterViewer implements ElementViewer<Counter>{
             PlateViewer plateViewer = new PlateViewer("sprites/plate.png");
             plateViewer.draw(plate, gui);
             Dish dish = plate.getContent();
-            if(dish == null) return;
-            switch (dish.getType()){
-                case CARROT_SOUP:
-                    CarrotSoupViewer carrotSoupViewer = new CarrotSoupViewer("sprites/carrot_soup.png");
-                    carrotSoupViewer.draw(plate, gui);
-                    break;
-                case POTATO_SOUP:
-                    PotatoSoupViewer potatoSoupViewer = new PotatoSoupViewer("sprites/potato_soup.png");
-                    potatoSoupViewer.draw(plate, gui);
-                    break;
-            }
         }
     }
 }

@@ -44,10 +44,10 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/counter.png"));
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
         //drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
-        //drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer());
+        drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
-        //drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
-        //drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
+        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer("sprites/pot.png"));
+        drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
         drawElements(gui, filterOfType(Cutter.class, tiles), new CutterViewer("sprites/cutter.png"));
 
         List<Chef> chefs = getModel().getChefs();
