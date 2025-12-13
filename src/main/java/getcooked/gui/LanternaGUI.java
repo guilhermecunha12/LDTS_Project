@@ -82,14 +82,14 @@ public class LanternaGUI implements GUI {
                 .getDefaultConfiguration()
                 .getBounds();
 
-        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(15);
+        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(13);
 
         int charWidth = menuFontConfig.getFontWidth();
         int charHeight = menuFontConfig.getFontHeight();
         int terminalWidth = (screenBounds.width) / charWidth;
         int terminalHeight = (screenBounds.height) / charHeight;
         this.width = terminalWidth - 5;
-        this.height = terminalHeight - 10;
+        this.height = terminalHeight - 7;
         Terminal terminal = createTerminal(width, height, menuFontConfig);
         this.screen = createScreen(terminal);
         this.activeInputs = new HashSet<>();
