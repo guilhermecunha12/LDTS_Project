@@ -3,7 +3,6 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.dish.Dish;
-import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
@@ -18,11 +17,13 @@ import java.net.URISyntaxException;
 import static getcooked.viewer.Sprite.SCALE;
 
 //TODO: review if ChefViewers could be unified
-public class Chef1Viewer implements ElementViewer<Chef>{
+public class ChefViewer implements ElementViewer<Chef>{
     private final Sprite sprite;
-    public Chef1Viewer(String filepath) throws IOException {
+    public ChefViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);
+
     }
+
     /*
     @Override
     public void draw(Chef chef, GUI gui) {
@@ -62,6 +63,10 @@ public class Chef1Viewer implements ElementViewer<Chef>{
         else if(grabable instanceof Potato potato && potato.getState() == FoodState.RAW) {
             PotatoViewer potatoViewer = new PotatoViewer("sprites/potato.png");
             potatoViewer.draw(potato, gui);
+        }
+        else if (grabable instanceof Carrot carrot){
+            CarrotViewer carrotViewer = new CarrotViewer(carrot);
+            carrotViewer.draw(carrot, gui);
         }
         else if(grabable instanceof Plate plate){
             PlateViewer plateViewer = new PlateViewer("sprites/plate.png");

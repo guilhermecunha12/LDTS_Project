@@ -51,8 +51,8 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Cutter.class, tiles), new CutterViewer("sprites/cutter.png"));
 
         List<Chef> chefs = getModel().getChefs();
-        drawElement(gui, chefs.getFirst(), new Chef1Viewer("sprites/chef1.png"));
-        //if (chefs.size() > 1) drawElement(gui, chefs.get(1), new Chef2Viewer());
+        drawElement(gui, chefs.getFirst(), new ChefViewer("sprites/chef1.png"));
+        if (chefs.size() > 1) drawElement(gui, chefs.get(1), new ChefViewer("sprites/chef2.png"));
 
         // update the viewers because the active orders and lives could have changed
         this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());
