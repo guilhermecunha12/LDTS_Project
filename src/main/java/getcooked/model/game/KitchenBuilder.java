@@ -1,5 +1,6 @@
 package getcooked.model.game;
 
+import getcooked.Game;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.Dish;
@@ -55,19 +56,21 @@ public abstract class KitchenBuilder {
     }
 
     private int ordersPerLevel(int level) {
-        return 2 + (int)Math.round(1.5 * level + Math.sqrt(level));
+        return 2 + (int)(level/(0.3*Math.sqrt(level)));
     }
 
     private int orderTimeLimit(int level) {
-        double baseSeconds = 30.0;
+        double baseSeconds = 35.0;
         double minSeconds  = 15.0;
-        double seconds     = baseSeconds - 2.0 * Math.log(level + 1.0);
+        double seconds     = baseSeconds - 10.0 * Math.log10(level);
         seconds = Math.max(seconds, minSeconds);
         return (int)Math.round(seconds * FPS);
     }
 
     private int orderFrequency(int level) { // gets lower each level
-        return (int)(400/Math.sqrt(level));
+        int decay = (int)(2.6*FPS * Math.log10(level));
+        if (this.numPlayers == 2) decay = (int)(3.3*FPS * Math.log10(level));
+        return Math.max(10*FPS, 15*FPS - decay);
     }
 
     private Deque<Order> createOrders() {
