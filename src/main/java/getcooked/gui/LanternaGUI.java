@@ -87,8 +87,8 @@ public class LanternaGUI implements GUI {
         int charHeight = fontConfig.getFontHeight();
         int terminalWidth = (screenBounds.width) / charWidth;
         int terminalHeight = (screenBounds.height) / charHeight;
-        this.width = terminalWidth - 4;
-        this.height = terminalHeight - 5;
+        this.width = terminalWidth - 3;
+        this.height = terminalHeight - 4;
 
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
