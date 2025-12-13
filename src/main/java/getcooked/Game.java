@@ -5,7 +5,6 @@ import getcooked.sound.AudioManager;
 import getcooked.states.State;
 import getcooked.states.menu.MainMenuState;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class Game {
@@ -16,7 +15,7 @@ public class Game {
 
     public Game() throws Exception{
         this.state = new MainMenuState(new MainMenu());
-        this.gui = new LanternaGUI(50,30);
+        this.gui = new LanternaGUI();
         this.audioManager = new AudioManager();
     }
 
