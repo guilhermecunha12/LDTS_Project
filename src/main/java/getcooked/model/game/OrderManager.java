@@ -1,5 +1,7 @@
 package getcooked.model.game;
 
+import getcooked.Game;
+
 import java.util.Deque;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class OrderManager {
         this.levelOrders = levelOrders;
         this.activeOrders = activeOrders;
         this.orderFrequency = orderFrequency;
-        this.timeForNewOrder = 10; // wait a bit before adding the first order
+        this.timeForNewOrder = Game.FPS; // wait a second before showing the first order
         this.ordersDelivered = ordersDelivered;
     }
 

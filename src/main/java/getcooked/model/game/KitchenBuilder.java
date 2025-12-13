@@ -67,8 +67,10 @@ public abstract class KitchenBuilder {
     }
 
     private int orderFrequency(int level) { // gets lower each level
-        int decay = (int)(2.6*FPS * Math.log10(level));
-        if (this.numPlayers == 2) decay = (int)(3.3*FPS * Math.log10(level));
+        double factor1p = 2.6;
+        double factor2p = 3.3;
+        int decay = (int)(factor1p * FPS * Math.log10(level));
+        if (this.numPlayers == 2) decay = (int)(factor2p * FPS * Math.log10(level));
         return Math.max(10*FPS, 15*FPS - decay);
     }
 

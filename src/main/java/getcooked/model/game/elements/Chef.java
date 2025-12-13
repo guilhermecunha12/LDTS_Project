@@ -53,9 +53,9 @@ public class Chef extends Element {
 
     public Position getFrontPosition() {
         return switch (direction) {
-            case Direction.UP -> this.getPosition().getUp();
-            case Direction.DOWN -> this.getPosition().getDown();
-            case Direction.LEFT -> this.getPosition().getLeft();
+            case UP -> this.getPosition().getUp();
+            case DOWN -> this.getPosition().getDown();
+            case LEFT -> this.getPosition().getLeft();
             default -> this.getPosition().getRight();
         };
     }
