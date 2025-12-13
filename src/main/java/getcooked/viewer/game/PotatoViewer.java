@@ -13,8 +13,12 @@ import static getcooked.viewer.Sprite.SCALE;
 public class PotatoViewer implements ElementViewer<Potato>{
 
     private final Sprite sprite;
-    public PotatoViewer(String filepath) throws IOException {
-        this.sprite = new Sprite(filepath);
+    public PotatoViewer(Potato potato) throws IOException {
+        switch (potato.getState()){
+            case RAW -> sprite = new Sprite("sprites/raw_potato.png");
+            case CHOPPED -> sprite = new Sprite("sprites/chopped_potato.png");
+            default -> throw new IOException("Invalid potato state");
+        }
     }
     @Override
     public void draw(Potato element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
