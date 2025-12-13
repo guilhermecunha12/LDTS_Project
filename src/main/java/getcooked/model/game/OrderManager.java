@@ -7,13 +7,15 @@ public class OrderManager {
     public static final int MAX_ACTIVE_ORDERS = 3;
     private final Deque<Order> levelOrders;
     private final List<Order> activeOrders;
+    private final int orderFrequency;
     private int timeForNewOrder;
     private int ordersDelivered;
 
-    public OrderManager(Deque<Order> levelOrders, List<Order> activeOrders, int timeForNewOrder, int ordersDelivered) {
+    public OrderManager(Deque<Order> levelOrders, List<Order> activeOrders, int orderFrequency, int ordersDelivered) {
         this.levelOrders = levelOrders;
         this.activeOrders = activeOrders;
-        this.timeForNewOrder = timeForNewOrder;
+        this.orderFrequency = orderFrequency;
+        this.timeForNewOrder = 10; // wait a bit before adding the first order
         this.ordersDelivered = ordersDelivered;
     }
 
@@ -45,8 +47,12 @@ public class OrderManager {
         return timeForNewOrder;
     }
 
-    public void setTimeForNewOrder (int timeForNewOrder) {
-        this.timeForNewOrder = timeForNewOrder;
+    public void setTimeForNewOrder () {
+        this.timeForNewOrder = orderFrequency;
+    }
+
+    public void decreaseTimeForNewOrder() {
+        this.timeForNewOrder--;
     }
 
     public void incrementOrdersDelivered() {

@@ -6,12 +6,9 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.interactable.Counter;
+import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.DeliverySpot;
-import getcooked.model.game.elements.interactable.Trash;
-import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
-import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
-import getcooked.model.game.elements.interactable.dispenser.Dispenser;
+import getcooked.model.game.elements.interactable.Interactable;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,30 +51,16 @@ public class ChefController extends Controller<Kitchen> {
         Position positionLeft = chef.getPosition().getLeft();
         Position positionRight = chef.getPosition().getRight();
         List<Position> positions = List.of(positionDown, positionLeft, positionUp, positionRight);
-        for(Position position : positions){
-            if(getModel().getTile(position) instanceof Counter counter) {
-                counter.interact(chef);
-                return;
-            }
 
-            else if(getModel().getTile(position) instanceof Trash trash){
-                trash.interact(chef);
-                return;
-            }
+        for (Position position : positions) {
+            Tile curTile = getModel().getTile(position);
 
-            else if(getModel().getTile(position) instanceof Dispenser dispenser){
-                dispenser.interact(chef);
-                return;
-            }
+            if (curTile instanceof Interactable interactable) {
+                if (curTile instanceof DeliverySpot deliverySpot) {
+                    deliverySpot.setOrderManager(getModel().getOrderManager());
+                }
 
-            else if (getModel().getTile(position) instanceof Kitchenware kitchenware) {
-                kitchenware.interact(chef);
-                return;
-            }
-
-            else if (getModel().getTile(position) instanceof DeliverySpot deliverySpot){
-                deliverySpot.setOrderManager(getModel().getOrderManager());
-                deliverySpot.interact(chef);
+                interactable.interact(chef);
                 return;
             }
         }
