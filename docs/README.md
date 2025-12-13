@@ -55,8 +55,8 @@ This project was developed by *Gabriel Magalhães* (*up202405890@fe.up.pt*), *Gu
 
 - **Sprites use** - Use sprites to enhance game visuals.
 - **New foods** - Add beef, salad, soda and kebab and their corresponding dispensers.
-- **New interactables** - Add grill for beefs, a cutter for potatoes and carrots (then the pot will only accept chopped potatoes and chopped carrots) and a fryer for potatoes.
-- **Add cooking behaviours** - Implement distinct cooking behaviours for different interactables: grills, fryers, and pots will require time to cook food and the cutter and the kebab dispenser will require player input (chopping actions) to cut food.     
+- **New interactables** - Add grill for beefs, a counterCutter for potatoes and carrots (then the pot will only accept chopped potatoes and chopped carrots) and a fryer for potatoes.
+- **Add cooking behaviours** - Implement distinct cooking behaviours for different interactables: grills, fryers, and pots will require time to cook food and the counterCutter and the kebab dispenser will require player input (chopping actions) to cut food.     
 - **New kitchen maps** - Create a set of 10 kitchen maps that are introduced progressively as levels increase and have increasingly more foods and interactables available.
 - **Difficulty adjustment** - Adjust the game difficulty according to the selected game mode (single player or two-player).
 - **Number of orders delivered** - Present the number of orders delivered during and at the end of the game.

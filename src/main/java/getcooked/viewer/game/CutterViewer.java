@@ -4,11 +4,11 @@ import getcooked.gui.GUI;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.interactable.cookware.Cutter;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 
-public class CutterViewer implements ElementViewer<Cutter> {
+public class CutterViewer implements ElementViewer<CounterCutter> {
     @Override
-    public void draw(Cutter element, GUI gui) {
+    public void draw(CounterCutter element, GUI gui) {
         gui.drawCutter(element.getPosition());
         Food content = element.getContent();
         if (element.isFinished()){

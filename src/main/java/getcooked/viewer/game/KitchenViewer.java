@@ -8,10 +8,10 @@ import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.Counter;
-import getcooked.model.game.elements.interactable.cookware.Cutter;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
-import getcooked.model.game.elements.interactable.cookware.Pot;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
@@ -46,7 +46,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer());
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer());
-        drawElements(gui, filterOfType(Cutter.class, tiles), new CutterViewer());
+        drawElements(gui, filterOfType(CounterCutter.class, tiles), new CutterViewer());
 
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new Chef1Viewer());

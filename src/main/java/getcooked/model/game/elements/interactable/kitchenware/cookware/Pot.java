@@ -1,4 +1,4 @@
-package getcooked.model.game.elements.interactable.cookware;
+package getcooked.model.game.elements.interactable.kitchenware.cookware;
 
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
@@ -6,24 +6,21 @@ import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.model.game.elements.interactable.kitchenware.behaviour.TimedBehaviour;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Pot extends Cookware{
+public class Pot extends Cookware {
+
     public Pot(int x, int y){
-        super(x,y);
+        super(x,y, new TimedBehaviour(100));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 
     @Override
     protected boolean accepts(Food food){
         return allowedFoods.contains(food.getClass()) && food.getState() == FoodState.CHOPPED;
-    }
-
-    @Override
-    protected void processFood() {
-        finish();
     }
 
     @Override

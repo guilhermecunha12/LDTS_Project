@@ -4,9 +4,7 @@ import getcooked.gui.GUI;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.interactable.cookware.Pot;
-
-import java.util.List;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 
 public class PotViewer implements ElementViewer<Pot>{
 

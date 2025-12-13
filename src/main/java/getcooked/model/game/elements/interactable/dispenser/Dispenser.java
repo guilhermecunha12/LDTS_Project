@@ -6,7 +6,7 @@ import getcooked.model.game.elements.interactable.Interactable;
 
 public abstract class Dispenser extends Interactable {
 
-    public Dispenser(int x, int y) {
+    protected Dispenser(int x, int y) {
         super(x, y);
     }
 

@@ -9,7 +9,8 @@ import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
-import getcooked.model.game.elements.interactable.cookware.Cookware;
+import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import getcooked.model.game.elements.interactable.dispenser.Dispenser;
 
 import java.io.IOException;
@@ -69,8 +70,8 @@ public class ChefController extends Controller<Kitchen> {
                 return;
             }
 
-            else if (getModel().getTile(position) instanceof Cookware cookware) {
-                cookware.interact(chef);
+            else if (getModel().getTile(position) instanceof Kitchenware kitchenware) {
+                kitchenware.interact(chef);
                 return;
             }
 
