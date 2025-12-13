@@ -4,21 +4,22 @@ import getcooked.gui.GUI;
 import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.viewer.Sprite;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.viewer.Sprite.SCALE;
+
 public class CutterViewer implements ElementViewer<CounterCutter> {
 
     private final Sprite sprite;
-    public  CutterViewer(String filepath) throws Exception {
+    public  CutterViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);
     }
     @Override
     public void draw(CounterCutter model, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = model.getPosition().getX() * 5;
-        int pixelY = model.getPosition().getY() * 5;
+        int pixelX = model.getPosition().getX() * SCALE;
+        int pixelY = model.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
     }
         /*

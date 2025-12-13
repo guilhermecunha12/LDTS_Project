@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 public class PotViewer implements ElementViewer<Pot>{
 
     private final Sprite sprite;
-    public PotViewer(String filepath) throws Exception {
+    public PotViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);
     }
 

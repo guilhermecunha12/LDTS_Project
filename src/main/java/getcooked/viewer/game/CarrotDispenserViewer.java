@@ -13,7 +13,7 @@ import static getcooked.viewer.Sprite.SCALE;
 
 public class CarrotDispenserViewer implements ElementViewer<CarrotDispenser> {
     private final Sprite sprite;
-    public CarrotDispenserViewer(String filepath) throws Exception {
+    public CarrotDispenserViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);
     }
 

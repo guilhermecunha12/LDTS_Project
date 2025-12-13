@@ -15,7 +15,7 @@ public class CarrotViewer implements ElementViewer<Carrot> {
     public CarrotViewer(Carrot carrot) throws IOException {
         switch (carrot.getState()){
             case RAW: sprite = new Sprite("sprites/raw_carrot.png"); break;
-            case CHOPPED: sprite = new Sprite("sprites/chopped_potato.png"); break;
+            case CHOPPED: sprite = new Sprite("sprites/chopped_carrot.png"); break;
             default: throw new IOException("Invalid potato state");
         }
     }

@@ -13,6 +13,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.viewer.Sprite.SCALE;
+
 public class CounterViewer implements ElementViewer<Counter>{
     /*
     @Override
@@ -44,14 +46,14 @@ public class CounterViewer implements ElementViewer<Counter>{
     }
      */
     private final Sprite sprite;
-    public CounterViewer(String filepath) throws Exception {
+    public CounterViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);
         //TODO: fazer switch case para diferentes sprites de counter, é preicso mudaar o map
     }
     @Override
     public void draw(Counter counter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = counter.getPosition().getX() * 5;
-        int pixelY = counter.getPosition().getY() * 5;
+        int pixelX = counter.getPosition().getX() * SCALE;
+        int pixelY = counter.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
         Grabable item = counter.getContent();
         if(item == null) return;

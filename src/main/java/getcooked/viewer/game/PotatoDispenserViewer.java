@@ -14,7 +14,7 @@ import static getcooked.viewer.Sprite.SCALE;
 public class PotatoDispenserViewer implements ElementViewer<PotatoDispenser> {
 
     private final Sprite sprite;
-    public PotatoDispenserViewer(String filepath) throws Exception {
+    public PotatoDispenserViewer(String filepath) throws IOException {
         this.sprite = new Sprite(filepath);
     }
 

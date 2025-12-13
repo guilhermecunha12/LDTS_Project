@@ -20,9 +20,6 @@ import getcooked.viewer.Viewer;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +68,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
     }
 
     // generic method with type T
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException, URISyntaxException, FontFormatException, IOException, URISyntaxException, FontFormatException {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException, URISyntaxException, FontFormatException {
         viewer.draw(element, gui);
     }
 

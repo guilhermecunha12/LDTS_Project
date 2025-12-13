@@ -22,8 +22,8 @@ public class PotatoViewer implements ElementViewer<Potato>{
     }
     @Override
     public void draw(Potato element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = element.getPosition().getX() * 5;
-        int pixelY = element.getPosition().getY() * 5;
+        int pixelX = element.getPosition().getX() * SCALE;
+        int pixelY = element.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
     }
 }
