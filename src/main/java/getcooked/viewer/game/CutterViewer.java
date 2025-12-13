@@ -5,7 +5,7 @@ import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.interactable.cookware.Cutter;
-
+/*
 public class CutterViewer implements ElementViewer<Cutter> {
     @Override
     public void draw(Cutter element, GUI gui) {
@@ -17,3 +17,4 @@ public class CutterViewer implements ElementViewer<Cutter> {
         }
     }
 }
+*/

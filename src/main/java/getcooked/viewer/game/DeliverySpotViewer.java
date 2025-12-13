@@ -2,7 +2,7 @@ package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
 import getcooked.model.game.elements.interactable.DeliverySpot;
-
+/*
 public class DeliverySpotViewer implements ElementViewer<DeliverySpot>{
 
     @Override
@@ -10,3 +10,4 @@ public class DeliverySpotViewer implements ElementViewer<DeliverySpot>{
         gui.drawDelivery(element.getPosition());
     }
 }
+*/

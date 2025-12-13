@@ -1,7 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
-
+/*
 public class CarrotDispenserViewer implements ElementViewer<CarrotDispenser> {
 
     @Override
@@ -9,3 +9,4 @@ public class CarrotDispenserViewer implements ElementViewer<CarrotDispenser> {
         gui.drawCarrotDispenser(element.getPosition());
     }
 }
+*/

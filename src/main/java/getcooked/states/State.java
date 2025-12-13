@@ -26,7 +26,7 @@ public abstract class State<T> {
         return model;
     }
 
-    public void step(Game game, GUI gui, long time) throws IOException {
+    public void step(Game game, GUI gui, long time) throws Exception {
         Set<GUI.ACTION> actions = gui.getNextAction();
         this.controller.step(game, actions, time);
         this.viewer.draw(gui);

@@ -3,14 +3,25 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.dish.Dish;
+import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.viewer.Sprite;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 //TODO: review if ChefViewers could be unified
 public class Chef1Viewer implements ElementViewer<Chef>{
+    private final Sprite sprite;
+    public Chef1Viewer(String filepath) throws IOException {
+        this.sprite = new Sprite(filepath);
+    }
+    /*
     @Override
     public void draw(Chef chef, GUI gui) {
         gui.drawChef1(chef.getPosition());
@@ -38,5 +49,11 @@ public class Chef1Viewer implements ElementViewer<Chef>{
                 }
             }
         }
+    }*/
+    @Override
+    public void draw(Chef chef, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        int pixelX = chef.getPosition().getX() * 8;
+        int pixelY = chef.getPosition().getY() * 8;
+        sprite.draw(gui, pixelX, pixelY);
     }
 }

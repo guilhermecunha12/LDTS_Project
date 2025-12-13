@@ -15,11 +15,11 @@ public abstract class Viewer<T> {
         return this.model; // for concrete viewers
     }
 
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui) throws Exception {
         gui.clear();
         this.drawElements(gui); // implemented by concrete viewers
         gui.refresh();
     }
 
-    protected abstract void drawElements(GUI gui);
+    protected abstract void drawElements(GUI gui) throws Exception;
 }

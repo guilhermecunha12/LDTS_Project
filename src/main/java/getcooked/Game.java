@@ -31,7 +31,7 @@ public class Game {
         return this.audioManager;
     }
 
-    private void start() throws IOException { // fps missing / update frequency
+    private void start() throws Exception { // fps missing / update frequency
 
         audioManager.playBackgroundMusic();
         int frameTime = 1000 / FPS;

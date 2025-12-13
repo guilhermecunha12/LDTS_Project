@@ -26,12 +26,12 @@ import java.util.Set;
 public class LanternaGUI implements GUI {
     private int width;
     private int height;
-    private final Screen screen;
+    private Screen screen;
     private final Set<Integer> activeInputs; // Currently pressed keys
     private final Set<Integer> previousInputs; // Pressed keys in the previous frame
     private final Map<Integer, Long> lastActionTimes; // Last action times for keys
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
-    private String backgroundColor; // to remember current background color
+    private String backgroundColor;// to remember current background color
 
     // Static key-to-action mapping for all available keybinds
     private static final Map<Integer, GUI.ACTION> KEY_MAPPINGS = Map.ofEntries(
@@ -82,15 +82,15 @@ public class LanternaGUI implements GUI {
                 .getDefaultConfiguration()
                 .getBounds();
 
-        AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        int charWidth = fontConfig.getFontWidth();
-        int charHeight = fontConfig.getFontHeight();
+        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(10);
+
+        int charWidth = menuFontConfig.getFontWidth();
+        int charHeight = menuFontConfig.getFontHeight();
         int terminalWidth = (screenBounds.width) / charWidth;
         int terminalHeight = (screenBounds.height) / charHeight;
         this.width = terminalWidth - 3;
         this.height = terminalHeight - 4;
-
-        Terminal terminal = createTerminal(width, height, fontConfig);
+        Terminal terminal = createTerminal(width, height, menuFontConfig);
         this.screen = createScreen(terminal);
         this.activeInputs = new HashSet<>();
         this.previousInputs = new HashSet<>();
@@ -115,7 +115,6 @@ public class LanternaGUI implements GUI {
         });
     }
 
-
     private Screen createScreen(Terminal terminal) throws IOException{
         final Screen screen = new TerminalScreen(terminal);
         // Attempts to hide the cursor
@@ -134,7 +133,7 @@ public class LanternaGUI implements GUI {
         return terminalFactory.createTerminal();
     }
 
-    private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException{
+    private AWTTerminalFontConfiguration loadPixelFont(int fontSize) throws URISyntaxException, FontFormatException, IOException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -142,9 +141,9 @@ public class LanternaGUI implements GUI {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
 
-        // Can change the font regarding appearance and size
-        Font loadedFont = font.deriveFont(Font.PLAIN, 25);
-        return AWTTerminalFontConfiguration.newInstance(loadedFont);
+        // Derive the pixel font size
+        Font pixelFont = font.deriveFont(Font.PLAIN, fontSize);
+        return AWTTerminalFontConfiguration.newInstance(pixelFont);
     }
 
     @Override
@@ -202,6 +201,7 @@ public class LanternaGUI implements GUI {
         }
     }
 
+    /*
     private void drawCharacter(Position position, char c, String color, String bgColor) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
@@ -372,6 +372,7 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawCarrotSoup(Position position){ drawCharacter(position, '*', "#33a500", "#ffffff");}
 
+*/
     @Override
     public void drawText(Position position, String text, String color, String bgColor) {
         TextGraphics tg = screen.newTextGraphics();
@@ -403,8 +404,15 @@ public class LanternaGUI implements GUI {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(TextColor.Factory.fromString(color));
 
-        tg.fillRectangle(new TerminalPosition(position.getX(), position.getY()),
+        tg.fillRectangle(new TerminalPosition(position.getX(),position.getY()),
                 new TerminalSize(width, height), ' ');
+    }
+
+    @Override
+    public void drawPixel(double x, double y, TextColor color){
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(color);
+        tg.setCharacter((int) x, (int) y, ' ');
     }
 
     @Override

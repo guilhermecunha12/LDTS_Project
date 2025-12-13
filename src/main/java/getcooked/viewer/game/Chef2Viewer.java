@@ -8,7 +8,7 @@ import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
-
+/*
 public class Chef2Viewer implements ElementViewer<Chef> {
     @Override
     public void draw(Chef chef, GUI gui) {
@@ -39,3 +39,4 @@ public class Chef2Viewer implements ElementViewer<Chef> {
         }
     }
 }
+*/
