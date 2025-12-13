@@ -24,9 +24,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class LanternaGUI implements GUI {
-
-    private final int height; // for now, final
-    private final int width; // for now, final
+    private int width;
+    private int height;
     private final Screen screen;
     private final Set<Integer> activeInputs; // Currently pressed keys
     private final Set<Integer> previousInputs; // Pressed keys in the previous frame
@@ -52,6 +51,7 @@ public class LanternaGUI implements GUI {
             Map.entry(KeyEvent.VK_ESCAPE, GUI.ACTION.ESCAPE)
     );
 
+
     public LanternaGUI(Screen screen){
         this.screen = screen;
         this.height = screen.getTerminalSize().getRows();
@@ -75,18 +75,31 @@ public class LanternaGUI implements GUI {
         this.screen = null;
     }
 
-    public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException{
-        this.width = width;
-        this.height = height;
+    public LanternaGUI() throws IOException, FontFormatException, URISyntaxException{
+        Rectangle screenBounds = GraphicsEnvironment
+                .getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice()
+                .getDefaultConfiguration()
+                .getBounds();
+
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
+        int charWidth = fontConfig.getFontWidth();
+        int charHeight = fontConfig.getFontHeight();
+        int terminalWidth = (screenBounds.width) / charWidth;
+        int terminalHeight = (screenBounds.height) / charHeight;
+        this.width = terminalWidth - 3;
+        this.height = terminalHeight - 4;
+
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
-        // Consider synchronized set if needed
         this.activeInputs = new HashSet<>();
         this.previousInputs = new HashSet<>();
         this.lastActionTimes = new HashMap<>();
         this.backgroundColor = "#ffffff";
+        addKeyListener(terminal);
+    }
 
+    private void addKeyListener(Terminal terminal){
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -108,18 +121,17 @@ public class LanternaGUI implements GUI {
         // Attempts to hide the cursor
         screen.setCursorPosition(null);
         screen.startScreen();
-        // Checks if the terminal was resized and if so updates the internals of the screen
         screen.doResizeIfNecessary();
+        // Checks if the terminal was resized and if so updates the internals of the screen
         return screen;
     }
 
     private Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException{
-        TerminalSize terminalSize = new TerminalSize(width, height +1);
+        TerminalSize terminalSize = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-        Terminal terminal = terminalFactory.createTerminal();
-        return terminal;
+        return terminalFactory.createTerminal();
     }
 
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException{
@@ -132,8 +144,7 @@ public class LanternaGUI implements GUI {
 
         // Can change the font regarding appearance and size
         Font loadedFont = font.deriveFont(Font.PLAIN, 25);
-        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-        return fontConfig;
+        return AWTTerminalFontConfiguration.newInstance(loadedFont);
     }
 
     @Override
