@@ -60,8 +60,8 @@ public class ChefViewer implements ElementViewer<Chef>{
         sprite.draw(gui, pixelX, pixelY);
         Grabable grabable = chef.getItem();
         if(grabable == null) return;
-        else if(grabable instanceof Potato potato && potato.getState() == FoodState.RAW) {
-            PotatoViewer potatoViewer = new PotatoViewer("sprites/potato.png");
+        else if(grabable instanceof Potato potato) {
+            PotatoViewer potatoViewer = new PotatoViewer(potato);
             potatoViewer.draw(potato, gui);
         }
         else if (grabable instanceof Carrot carrot){
@@ -69,21 +69,8 @@ public class ChefViewer implements ElementViewer<Chef>{
             carrotViewer.draw(carrot, gui);
         }
         else if(grabable instanceof Plate plate){
-            PlateViewer plateViewer = new PlateViewer("sprites/plate.png");
+            PlateViewer plateViewer = new PlateViewer(plate);
             plateViewer.draw(plate, gui);
-            Dish dish = plate.getContent();
-            if(dish != null) {
-                switch (dish.getType()) {
-                    case CARROT_SOUP:
-
-                        break;
-                    case POTATO_SOUP:
-
-                        break;
-                    default:
-                        break;
-                }
-            }
         }
     }
 }
