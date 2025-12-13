@@ -5,7 +5,7 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.interactable.cookware.Cookware;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import getcooked.model.game.elements.interactable.dispenser.Dispenser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

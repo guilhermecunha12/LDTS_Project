@@ -1,17 +1,16 @@
 package getcooked.model.game;
 
-import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.DishType;
-import getcooked.model.game.elements.grabable.food.Kebab;
 import getcooked.model.game.elements.interactable.Counter;
-import getcooked.model.game.elements.interactable.cookware.Cutter;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.KebabCutter;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
-import getcooked.model.game.elements.interactable.cookware.Fryer;
-import getcooked.model.game.elements.interactable.cookware.Grill;
-import getcooked.model.game.elements.interactable.cookware.Pot;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Fryer;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Grill;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import getcooked.model.game.elements.interactable.dispenser.*;
 
 import java.io.BufferedReader;
@@ -67,7 +66,6 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case 'p':
                         tiles.add(new PotatoDispenser(x, y));
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
-                        //TODO: this.addavailableDishType(Dish.DishType.FRIED_POTATO);
                         break;
                     case 'c':
                         tiles.add(new CarrotDispenser(x, y));
@@ -87,7 +85,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         this.addAvailableDishType(DishType.SODA);
                         break;
                     case 'k':
-                        tiles.add(new KebabDispenser(x, y));
+                        tiles.add(new KebabCutter(x, y));
                         this.addAvailableDishType(DishType.KEBAB);
                         break;
                     case 'F':
@@ -98,7 +96,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case 'T' : tiles.add(new Trash(x, y)); break;
                     case 'D' : tiles.add(new DeliverySpot(x, y)); break;
                     case 'Q' : tiles.add(new Pot(x, y)); break;
-                    case 'K' : tiles.add(new Cutter(x, y)); break;
+                    case 'K' : tiles.add(new CounterCutter(x, y)); break;
                 }
             }
         }
