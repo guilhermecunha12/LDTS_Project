@@ -11,17 +11,23 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import getcooked.model.Position;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class LanternaGUI implements GUI {
     private int width;
@@ -218,10 +224,55 @@ public class LanternaGUI implements GUI {
     }
     @Override
     public void drawText(Position position, String text, String color, String bgColor) {
+        int curX = position.getX();
+        int y = position.getY();
+        for (int i = 0; i < text.length(); i++) {
+            char curChar = text.charAt(i);
+            try {
+                drawCharacter(curChar, curX, y, color);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            curX += 4; // for text width 3
+        }
+        /*
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
         tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(position.getX(), position.getY(), text);
+        */
+    }
+
+    private void drawCharacter(char c, int x, int y, String color) throws IOException {
+        URL image = getClass().getClassLoader().getResource("fonts/font.png");
+        BufferedImage fontImage = ImageIO.read(Objects.requireNonNull(image));
+
+        URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
+        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+
+        int mapX = 0;
+        int mapY = 0;
+        for(String line; (line = br.readLine()) != null; mapY++) {
+            boolean breaked = false;
+            mapX = 0;
+            for (; mapX < line.length(); mapX++) {
+                if (c == line.charAt(mapX)) {
+                    breaked = true;
+                    break;
+                }
+            }
+            if (breaked) break;
+        }
+
+        int imgX = mapX * (3 + 1);
+        int imgY = mapY * (5 + 1);
+
+        for (int dx = 0; dx < 3; dx++) {
+            for (int dy = 0; dy < 5; dy++) {
+                if (fontImage.getRGB(imgX + dx, imgY + dy) != 0xFFFFFFFF)
+                    drawPixel(x + dx, y + dy, TextColor.Factory.fromString(color));
+            }
+        }
     }
 
     @Override
