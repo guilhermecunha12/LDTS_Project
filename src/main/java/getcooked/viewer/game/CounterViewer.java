@@ -1,7 +1,6 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
@@ -45,13 +44,21 @@ public class CounterViewer implements ElementViewer<Counter>{
         }
     }
      */
-    private final Sprite sprite;
-    public CounterViewer(String filepath) throws IOException {
-        this.sprite = new Sprite(filepath);
-        //TODO: fazer switch case para diferentes sprites de counter, é preicso mudaar o map
-    }
+
     @Override
     public void draw(Counter counter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        Sprite sprite = switch (counter.getType()) {
+            case 'u' -> new Sprite("sprites/up_counter.png");
+            case 'd' -> new Sprite("sprites/down_counter.png");
+            case 'l' -> new Sprite("sprites/left_counter.png");
+            case 'r' -> new Sprite("sprites/right_counter.png");
+            case '1' -> new Sprite("sprites/top_left_counter.png");
+            case '2' -> new Sprite("sprites/top_right_counter.png");
+            case '3' -> new Sprite("sprites/bottom_right_counter.png");
+            case '4' -> new Sprite("sprites/bottom_left_counter.png");
+            default -> throw new IllegalStateException("Unexpected value: " + counter.getType());
+        };
+
         int pixelX = counter.getPosition().getX() * SCALE;
         int pixelY = counter.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);

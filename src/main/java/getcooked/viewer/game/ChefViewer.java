@@ -57,7 +57,7 @@ public class ChefViewer implements ElementViewer<Chef>{
             potatoViewer.draw(potato, gui);
         }
         else if (grabable instanceof Carrot carrot){
-            CarrotViewer carrotViewer = new CarrotViewer(carrot);
+            CarrotViewer carrotViewer = new CarrotViewer();
             carrotViewer.draw(carrot, gui);
         }
         else if(grabable instanceof Plate plate){
