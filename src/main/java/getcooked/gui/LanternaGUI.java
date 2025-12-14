@@ -319,7 +319,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void refresh() throws IOException {
-        screen.refresh();
+        screen.refresh(Screen.RefreshType.DELTA);
     }
 
     @Override
