@@ -15,36 +15,6 @@ import java.net.URISyntaxException;
 import static getcooked.viewer.Sprite.SCALE;
 
 public class CounterViewer implements ElementViewer<Counter>{
-    /*
-    @Override
-    public void draw(Counter counter, GUI gui) {
-        gui.drawCounter(counter.getPosition());
-        Grabable item = counter.getContent();
-        if(item == null) return;
-
-        if (item instanceof Potato) gui.drawPotato(counter.getPosition());
-        else if (item instanceof Carrot) gui.drawCarrot(counter.getPosition());
-
-        else if(item instanceof Plate plate){
-            gui.drawPlate(counter.getPosition());
-            Dish dish = plate.getContent();
-
-            if(dish != null){
-                switch (dish.getType()) {
-                    case CARROT_SOUP:
-                        gui.drawCarrotSoup(counter.getPosition());
-                        break;
-                    case POTATO_SOUP:
-                        gui.drawPotatoSoup(counter.getPosition());
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-     */
-
     @Override
     public void draw(Counter counter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = switch (counter.getType()) {
@@ -62,16 +32,17 @@ public class CounterViewer implements ElementViewer<Counter>{
         int pixelX = counter.getPosition().getX() * SCALE;
         int pixelY = counter.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
+
         Grabable item = counter.getContent();
-        if(item == null) return;
+        if (item == null) return;
         if (item instanceof Potato potato){
-            PotatoViewer potatoViewer = new PotatoViewer(potato);
+            PotatoViewer potatoViewer = new PotatoViewer();
             potatoViewer.draw(potato, gui);
         } else if (item instanceof Carrot){
             //CarrotViewer carrotViewer = new CarrotViewer("sprites/carrot.png");
             //carrotViewer.draw((Carrot) item, gui);
         } else if(item instanceof Plate plate){
-            PlateViewer plateViewer = new PlateViewer(plate);
+            PlateViewer plateViewer = new PlateViewer();
             plateViewer.draw(plate, gui);
         }
     }
