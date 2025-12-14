@@ -7,9 +7,8 @@ public class ControlsInfoMenu extends Menu{
     private final boolean onePlayer;
 
     public ControlsInfoMenu(boolean is1Player) {
-        super(Arrays.asList("W", "A", "S", "D", "Space", "W - move up", "A - move left", "S - move down", "D - move right", "Space - grab/drop",
-                "U", "L", "D", "R", "ENTER", "UP - move up", "DOWN - move down", "LEFT - move left", "RIGHT - move right", "ENTER - grab/drop",
-                "ESC - Escape Menu"));
+        super(Arrays.asList("W - move up", "A - move left", "S - move down", "D - move right", "Space - grab/drop",
+                "UP - move up", "DOWN - move down", "LEFT - move left", "RIGHT - move right", "ENTER - grab/drop"));
 
 
         this.onePlayer = is1Player;

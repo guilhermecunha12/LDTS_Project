@@ -75,7 +75,7 @@ public class LanternaGUI implements GUI {
     // Constructor for testing purposes
     public LanternaGUI(int height, int width, Set<Integer> activeInputs,
                        Set<Integer> previousInputs, Map<Integer, Long> lastActionTimes, String
-                       backgroundColor) {
+                               backgroundColor) {
         this.height = height;
         this.width = width;
         this.activeInputs = activeInputs;

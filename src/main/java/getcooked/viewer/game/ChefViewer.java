@@ -28,7 +28,6 @@ public class ChefViewer implements ElementViewer<Chef>{
     }
 
     public void setSprite(String filepath) throws IOException {
-        System.out.println(filepath);
         this.sprite = new Sprite(filepath);
     }
     @Override
