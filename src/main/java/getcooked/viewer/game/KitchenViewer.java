@@ -12,7 +12,6 @@ import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutt
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
-import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.viewer.Viewer;
@@ -40,10 +39,9 @@ public class KitchenViewer extends Viewer<Kitchen> {
                 "Level: " + getModel().getLevel(), "#ffffff", "#000000");
 
         List<Tile> tiles = getModel().getTiles();
-        List<Counter> counters = filterOfType(Counter.class, tiles);
 
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
-        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/counter.png"));
+        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
         //drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
         drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));

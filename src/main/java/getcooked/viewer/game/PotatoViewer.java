@@ -11,19 +11,16 @@ import java.net.URISyntaxException;
 import static getcooked.viewer.Sprite.SCALE;
 
 public class PotatoViewer implements ElementViewer<Potato>{
-
-    private final Sprite sprite;
-    public PotatoViewer(Potato potato) throws IOException {
-        switch (potato.getState()){
-            case RAW -> sprite = new Sprite("sprites/raw_potato.png");
-            case CHOPPED -> sprite = new Sprite("sprites/chopped_potato.png");
-            default -> throw new IOException("Invalid potato state");
-        }
-    }
     @Override
-    public void draw(Potato element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = element.getPosition().getX() * SCALE;
-        int pixelY = element.getPosition().getY() * SCALE;
+    public void draw(Potato potato, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+
+        Sprite sprite = switch (potato.getState()) {
+            case RAW -> new Sprite("sprites/raw_potato.png");
+            case CHOPPED -> new Sprite("sprites/chopped_potato.png");
+        };
+
+        int pixelX = potato.getPosition().getX() * SCALE;
+        int pixelY = potato.getPosition().getY() * SCALE;
         sprite.draw(gui, pixelX, pixelY);
     }
 }
