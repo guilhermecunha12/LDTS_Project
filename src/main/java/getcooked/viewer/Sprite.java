@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class Sprite {
-    public static final int SCALE = 5;
+    public static final int SCALE = 12;
     private BufferedImage image;
 
     public Sprite(String filepath) throws IOException {

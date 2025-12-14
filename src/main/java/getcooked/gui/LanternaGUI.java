@@ -78,24 +78,34 @@ public class LanternaGUI implements GUI {
     public LanternaGUI() throws IOException, FontFormatException, URISyntaxException{
         Rectangle screenBounds = GraphicsEnvironment
                 .getLocalGraphicsEnvironment()
+                .getMaximumWindowBounds();
+
+        Rectangle ratioBounds = GraphicsEnvironment
+                .getLocalGraphicsEnvironment()
                 .getDefaultScreenDevice()
                 .getDefaultConfiguration()
                 .getBounds();
 
-        int size = 0;
-        if(screenBounds.height <= 1080){
-            size = 11;
+        if(ratioBounds.getWidth() == 2560 && ratioBounds.getHeight() == 1600){
+            this.width = 160;
+            this.height = 100;
         }
-        else size = 17;
+        else if (ratioBounds.getWidth() == 1920 && ratioBounds.getHeight() == 1080){
+            this.width = 160;
+            this.height = 90;
+        }
+
+        double maxFontWidth = screenBounds.getWidth() / width;
+        double maxFontHeight = screenBounds.getHeight() / height;
+        int size = Math.min((int) maxFontWidth, (int) maxFontHeight);
+        size = size - 5;
+
+        this.width = screenBounds.width / size;
+        this.height = screenBounds.height / size;
+
 
         AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(size);
 
-        int charWidth = menuFontConfig.getFontWidth();
-        int charHeight = menuFontConfig.getFontHeight();
-        int terminalWidth = (screenBounds.width) / charWidth;
-        int terminalHeight = (screenBounds.height) / charHeight;
-        this.width = terminalWidth - 5;
-        this.height = terminalHeight - 7;
         Terminal terminal = createTerminal(width, height, menuFontConfig);
         this.screen = createScreen(terminal);
         this.activeInputs = new HashSet<>();
