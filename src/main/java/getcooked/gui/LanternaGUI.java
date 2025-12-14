@@ -32,12 +32,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class LanternaGUI implements GUI {
     private int width;
     private int height;
+    private int fontSize;
     private Screen screen;
     private final Set<Integer> activeInputs; // Currently pressed keys
     private final Set<Integer> previousInputs; // Pressed keys in the previous frame
     private final Map<Integer, Long> lastActionTimes; // Last action times for keys
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor;// to remember current background color
+    private AspectRatio aspectRatio;
 
     // Static key-to-action mapping for all available keybinds
     private static final Map<Integer, GUI.ACTION> KEY_MAPPINGS = Map.ofEntries(
@@ -82,6 +84,18 @@ public class LanternaGUI implements GUI {
     }
 
     public LanternaGUI() throws IOException, FontFormatException, URISyntaxException{
+        setSizes();
+        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(fontSize);
+        Terminal terminal = createTerminal(width, height, menuFontConfig);
+        this.screen = createScreen(terminal);
+        this.activeInputs = new HashSet<>();
+        this.previousInputs = new HashSet<>();
+        this.lastActionTimes = new HashMap<>();
+        this.backgroundColor = "#ffffff";
+        addKeyListener(terminal);
+    }
+
+    private void setSizes(){
         Rectangle screenBounds = GraphicsEnvironment
                 .getLocalGraphicsEnvironment()
                 .getMaximumWindowBounds();
@@ -92,33 +106,23 @@ public class LanternaGUI implements GUI {
                 .getDefaultConfiguration()
                 .getBounds();
 
-        if(ratioBounds.getWidth() == 2560 && ratioBounds.getHeight() == 1600){
-            this.width = 160;
-            this.height = 100;
-        }
-        else if (ratioBounds.getWidth() == 1920 && ratioBounds.getHeight() == 1080){
+        this.aspectRatio = new AspectRatio(ratioBounds.width, ratioBounds.height);
+        if(aspectRatio.getAspectRatioWidth() == 16 && aspectRatio.getAspectRatioHeight() == 9){
             this.width = 160;
             this.height = 90;
+            this.fontSize = -5;
         }
-
+        else if (aspectRatio.getAspectRatioWidth() == 8 && aspectRatio.getAspectRatioHeight() == 5){
+            this.width = 160;
+            this.height = 100;
+            this.fontSize = -7;
+        }
         double maxFontWidth = screenBounds.getWidth() / width;
         double maxFontHeight = screenBounds.getHeight() / height;
         int size = Math.min((int) maxFontWidth, (int) maxFontHeight);
-        size = size - 5;
-
-        this.width = screenBounds.width / size;
-        this.height = screenBounds.height / size;
-
-
-        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(size);
-
-        Terminal terminal = createTerminal(width, height, menuFontConfig);
-        this.screen = createScreen(terminal);
-        this.activeInputs = new HashSet<>();
-        this.previousInputs = new HashSet<>();
-        this.lastActionTimes = new HashMap<>();
-        this.backgroundColor = "#ffffff";
-        addKeyListener(terminal);
+        fontSize += size;
+        this.width = screenBounds.width / fontSize;
+        this.height = screenBounds.height / fontSize;
     }
 
     private void addKeyListener(Terminal terminal){

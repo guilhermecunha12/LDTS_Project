@@ -1,4 +1,5 @@
 package getcooked;
+import getcooked.gui.AspectRatio;
 import getcooked.gui.LanternaGUI;
 import getcooked.model.menu.MainMenu;
 import getcooked.sound.AudioManager;

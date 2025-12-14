@@ -16,17 +16,17 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
         gui.paint();
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 4, gui.getHeight()/12), "Settings", "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 15, gui.getHeight()/12), "Settings", "#ffcf40", bgColor);
 
         int i = 0;
         for (; i < getModel().getNumberEntries() - 1; i++) { // draw the options
-            gui.drawText(new Position(5, 10 + 4*i), getModel().getEntry(i),
+            gui.drawText(new Position(5, 30 + 15*i), getModel().getEntry(i),
                     getModel().isSelected(i)? "#ffff00" : "#000000", bgColor);
         }
 
         // draw back button
-        Position posBack = new Position(gui.getWidth() - 10, gui.getHeight() - 3);
-        gui.drawTextBox(posBack, getModel().getEntry(i), "#000000",
-                getModel().isSelected(i)? "#ffff00" : "#a9a9a9", 1);
+        Position posBack = new Position(gui.getWidth() - 40, gui.getHeight() - 30);
+        gui.drawText(posBack, getModel().getEntry(i),
+                getModel().isSelected(i)? "#ffff00" : "#000000", bgColor);
     }
 }
