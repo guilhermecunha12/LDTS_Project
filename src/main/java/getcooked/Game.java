@@ -1,18 +1,15 @@
 package getcooked;
-import getcooked.gui.AspectRatio;
 import getcooked.gui.LanternaGUI;
 import getcooked.model.menu.MainMenu;
 import getcooked.sound.AudioManager;
 import getcooked.states.State;
 import getcooked.states.menu.MainMenuState;
 
-import java.io.IOException;
-
 public class Game {
-    private State state;
+    private State<?> state;
     private final LanternaGUI gui;
     private final AudioManager audioManager;
-    public static final int FPS = 30; // Frames per second
+    public static final int FPS = 24; // Frames per second
 
     public Game() throws Exception{
         this.state = new MainMenuState(new MainMenu());
@@ -24,7 +21,7 @@ public class Game {
         new Game().start();
     }
 
-    public void changeState(State state) {
+    public void changeState(State<?> state) {
         this.state = state;
     }
 
