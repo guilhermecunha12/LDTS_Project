@@ -40,6 +40,8 @@ public class LanternaGUI implements GUI {
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor;// to remember current background color
     private AspectRatio aspectRatio;
+    private BufferedImage fontImage;
+    private Map<Character, int[]> charPositionCache;
 
     // Static key-to-action mapping for all available keybinds
     private static final Map<Integer, GUI.ACTION> KEY_MAPPINGS = Map.ofEntries(
@@ -92,6 +94,7 @@ public class LanternaGUI implements GUI {
         this.previousInputs = new HashSet<>();
         this.lastActionTimes = new HashMap<>();
         this.backgroundColor = "#ffffff";
+        loadFontResources();
         addKeyListener(terminal);
     }
 
@@ -123,6 +126,27 @@ public class LanternaGUI implements GUI {
         fontSize += size;
         this.width = screenBounds.width / fontSize;
         this.height = screenBounds.height / fontSize;
+    }
+
+    private void loadFontResources() throws IOException {
+        // Load font image once
+        URL image = getClass().getClassLoader().getResource("fonts/font.png");
+        this.fontImage = ImageIO.read(Objects.requireNonNull(image));
+
+        // Build character position cache once
+        this.charPositionCache = new HashMap<>();
+        URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
+            int mapY = 0;
+            for (String line; (line = br.readLine()) != null; mapY++) {
+                for (int mapX = 0; mapX < line. length(); mapX++) {
+                    char c = line.charAt(mapX);
+                    int imgX = mapX * (3 + 1);
+                    int imgY = mapY * (5 + 1);
+                    charPositionCache.put(c, new int[]{imgX, imgY});
+                }
+            }
+        }
     }
 
     private void addKeyListener(Terminal terminal){
@@ -239,42 +263,20 @@ public class LanternaGUI implements GUI {
             }
             curX += 4; // for text width 3
         }
-        /*
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
-        tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.putString(position.getX(), position.getY(), text);
-        */
     }
 
     private void drawCharacter(char c, int x, int y, String color) throws IOException {
-        URL image = getClass().getClassLoader().getResource("fonts/font.png");
-        BufferedImage fontImage = ImageIO.read(Objects.requireNonNull(image));
+        // Use cached resources instead of loading every time
+        int[] pos = charPositionCache.get(c);
+        if (pos == null) return;  // Character not found in font map
 
-        URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-
-        int mapX = 0;
-        int mapY = 0;
-        for(String line; (line = br.readLine()) != null; mapY++) {
-            boolean breaked = false;
-            mapX = 0;
-            for (; mapX < line.length(); mapX++) {
-                if (c == line.charAt(mapX)) {
-                    breaked = true;
-                    break;
-                }
-            }
-            if (breaked) break;
-        }
-
-        int imgX = mapX * (3 + 1);
-        int imgY = mapY * (5 + 1);
+        int imgX = pos[0];
+        int imgY = pos[1];
 
         for (int dx = 0; dx < 3; dx++) {
             for (int dy = 0; dy < 5; dy++) {
-                if (fontImage.getRGB(imgX + dx, imgY + dy) != 0xFFFFFFFF)
-                    drawPixel(x + dx, y + dy, TextColor.Factory.fromString(color));
+                if (fontImage. getRGB(imgX + dx, imgY + dy) != 0xFFFFFFFF)
+                    drawPixel(x + dx, y + dy, TextColor. Factory.fromString(color));
             }
         }
     }
