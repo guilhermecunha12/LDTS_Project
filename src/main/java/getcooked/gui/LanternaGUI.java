@@ -34,9 +34,9 @@ public class LanternaGUI implements GUI {
     private int height;
     private int fontSize;
     private Screen screen;
-    private final Set<Integer> activeInputs; // Currently pressed keys
-    private final Set<Integer> previousInputs; // Pressed keys in the previous frame
-    private final Map<Integer, Long> lastActionTimes; // Last action times for keys
+    private Set<Integer> activeInputs; // Currently pressed keys
+    private Set<Integer> previousInputs; // Pressed keys in the previous frame
+    private Map<Integer, Long> lastActionTimes; // Last action times for keys
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor;// to remember current background color
     private AspectRatio aspectRatio;
@@ -98,34 +98,19 @@ public class LanternaGUI implements GUI {
         addKeyListener(terminal);
     }
 
-    private void setSizes(){
-        Rectangle screenBounds = GraphicsEnvironment
-                .getLocalGraphicsEnvironment()
-                .getMaximumWindowBounds();
+    private void setSizes() {
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
 
-        Rectangle ratioBounds = GraphicsEnvironment
-                .getLocalGraphicsEnvironment()
-                .getDefaultScreenDevice()
-                .getDefaultConfiguration()
-                .getBounds();
+        Rectangle terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 
-        this.aspectRatio = new AspectRatio(ratioBounds.width, ratioBounds.height);
-        if(aspectRatio.getAspectRatioWidth() == 16 && aspectRatio.getAspectRatioHeight() == 9){
-            this.width = 160;
-            this.height = 90;
-            this.fontSize = -5;
-        }
-        else if (aspectRatio.getAspectRatioWidth() == 8 && aspectRatio.getAspectRatioHeight() == 5){
-            this.width = 160;
-            this.height = 100;
-            this.fontSize = -7;
-        }
-        double maxFontWidth = screenBounds.getWidth() / width;
-        double maxFontHeight = screenBounds.getHeight() / height;
-        int size = Math.min((int) maxFontWidth, (int) maxFontHeight);
-        fontSize += size;
-        this.width = screenBounds.width / fontSize;
-        this.height = screenBounds.height / fontSize;
+        fontSize = bestFontSize(screenBounds.height);
+        this.width = (terminalBounds.width / fontSize);
+        this.height = (terminalBounds.height / fontSize);
+    }
+
+    private int bestFontSize(int height){
+        return (int) (0.00432432 * height + 1);
     }
 
     private void loadFontResources() throws IOException {
@@ -275,8 +260,8 @@ public class LanternaGUI implements GUI {
 
         for (int dx = 0; dx < 3; dx++) {
             for (int dy = 0; dy < 5; dy++) {
-                if (fontImage. getRGB(imgX + dx, imgY + dy) != 0xFFFFFFFF)
-                    drawPixel(x + dx, y + dy, TextColor. Factory.fromString(color));
+                if (fontImage.getRGB(imgX + dx, imgY + dy) != 0xFFFFFFFF)
+                    drawPixel(x + dx, y + dy, TextColor.Factory.fromString(color));
             }
         }
     }

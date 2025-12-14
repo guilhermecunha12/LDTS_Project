@@ -4,7 +4,7 @@ import getcooked.model.Position;
 import getcooked.model.game.elements.grabable.Grabable;
 
 public class Chef extends Element {
-    private enum Direction {UP, DOWN, LEFT, RIGHT}
+    public enum Direction {UP, DOWN, LEFT, RIGHT}
 
     private Grabable item;
     private Direction direction;
@@ -63,5 +63,9 @@ public class Chef extends Element {
 
     public boolean isHoldingSomething(){
         return item != null;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }
