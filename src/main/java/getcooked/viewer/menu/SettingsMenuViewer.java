@@ -12,21 +12,25 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
 
     @Override
     public void drawElements(GUI gui) {
-        gui.changeBackgroundColor("#468499"); // background color
+        gui.changeBackgroundColor("#468499");
         gui.paint();
+
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 4, gui.getHeight()/12), "Settings", "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 13, gui.getHeight() / 12), "Settings", "#ffcf40", bgColor);
 
-        int i = 0;
-        for (; i < getModel().getNumberEntries() - 1; i++) { // draw the options
-            gui.drawText(new Position(5, 10 + 4*i), getModel().getEntry(i),
-                    getModel().isSelected(i)? "#ffff00" : "#000000", bgColor);
+
+        Position posMusic = new Position(middleX- 35, (gui.getHeight() / 2) - 30);
+        Position posSound = new Position(middleX - 52, (gui.getHeight() / 2) - 15);
+        Position posBack = new Position(gui.getWidth() - 50, gui.getHeight() - 35);
+
+        for (int i = 0; i < getModel().getNumberEntries(); i++) {
+            Position curPos = posMusic;
+            if (i == 1) curPos = posSound;
+            else if (i==2) curPos = posBack;
+
+            gui.drawText(curPos, getModel().getEntry(i),
+                    getModel().isSelected(i) ? "#ffff00" : "#000000", bgColor);
         }
-
-        // draw back button
-        Position posBack = new Position(gui.getWidth() - 10, gui.getHeight() - 3);
-        gui.drawTextBox(posBack, getModel().getEntry(i), "#000000",
-                getModel().isSelected(i)? "#ffff00" : "#a9a9a9", 1);
     }
 }

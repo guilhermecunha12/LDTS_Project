@@ -11,27 +11,37 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import getcooked.model.Position;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class LanternaGUI implements GUI {
     private int width;
     private int height;
+    private int fontSize;
     private Screen screen;
-    private final Set<Integer> activeInputs; // Currently pressed keys
-    private final Set<Integer> previousInputs; // Pressed keys in the previous frame
-    private final Map<Integer, Long> lastActionTimes; // Last action times for keys
+    private Set<Integer> activeInputs; // Currently pressed keys
+    private Set<Integer> previousInputs; // Pressed keys in the previous frame
+    private Map<Integer, Long> lastActionTimes; // Last action times for keys
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor;// to remember current background color
+    private AspectRatio aspectRatio;
+    private BufferedImage fontImage;
+    private Map<Character, int[]> charPositionCache;
 
     // Static key-to-action mapping for all available keybinds
     private static final Map<Integer, GUI.ACTION> KEY_MAPPINGS = Map.ofEntries(
@@ -65,7 +75,7 @@ public class LanternaGUI implements GUI {
     // Constructor for testing purposes
     public LanternaGUI(int height, int width, Set<Integer> activeInputs,
                        Set<Integer> previousInputs, Map<Integer, Long> lastActionTimes, String
-                       backgroundColor) {
+                               backgroundColor) {
         this.height = height;
         this.width = width;
         this.activeInputs = activeInputs;
@@ -76,43 +86,52 @@ public class LanternaGUI implements GUI {
     }
 
     public LanternaGUI() throws IOException, FontFormatException, URISyntaxException{
-        Rectangle screenBounds = GraphicsEnvironment
-                .getLocalGraphicsEnvironment()
-                .getMaximumWindowBounds();
-
-        Rectangle ratioBounds = GraphicsEnvironment
-                .getLocalGraphicsEnvironment()
-                .getDefaultScreenDevice()
-                .getDefaultConfiguration()
-                .getBounds();
-
-        if(ratioBounds.getWidth() == 2560 && ratioBounds.getHeight() == 1600){
-            this.width = 160;
-            this.height = 100;
-        }
-        else if (ratioBounds.getWidth() == 1920 && ratioBounds.getHeight() == 1080){
-            this.width = 160;
-            this.height = 90;
-        }
-
-        double maxFontWidth = screenBounds.getWidth() / width;
-        double maxFontHeight = screenBounds.getHeight() / height;
-        int size = Math.min((int) maxFontWidth, (int) maxFontHeight);
-        size = size - 5;
-
-        this.width = screenBounds.width / size;
-        this.height = screenBounds.height / size;
-
-
-        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(size);
-
+        setSizes();
+        AWTTerminalFontConfiguration menuFontConfig = loadPixelFont(fontSize);
         Terminal terminal = createTerminal(width, height, menuFontConfig);
         this.screen = createScreen(terminal);
         this.activeInputs = new HashSet<>();
         this.previousInputs = new HashSet<>();
         this.lastActionTimes = new HashMap<>();
         this.backgroundColor = "#ffffff";
+        loadFontResources();
         addKeyListener(terminal);
+    }
+
+    private void setSizes() {
+        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+
+        Rectangle terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+
+        fontSize = bestFontSize(screenBounds.height);
+        this.width = (terminalBounds.width / fontSize);
+        this.height = (terminalBounds.height / fontSize);
+    }
+
+    private int bestFontSize(int height){
+        return (int) (0.00432432 * height + 1);
+    }
+
+    private void loadFontResources() throws IOException {
+        // Load font image once
+        URL image = getClass().getClassLoader().getResource("fonts/font.png");
+        this.fontImage = ImageIO.read(Objects.requireNonNull(image));
+
+        // Build character position cache once
+        this.charPositionCache = new HashMap<>();
+        URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))) {
+            int mapY = 0;
+            for (String line; (line = br.readLine()) != null; mapY++) {
+                for (int mapX = 0; mapX < line. length(); mapX++) {
+                    char c = line.charAt(mapX);
+                    int imgX = mapX * (3 + 1);
+                    int imgY = mapY * (5 + 1);
+                    charPositionCache.put(c, new int[]{imgX, imgY});
+                }
+            }
+        }
     }
 
     private void addKeyListener(Terminal terminal){
@@ -218,10 +237,33 @@ public class LanternaGUI implements GUI {
     }
     @Override
     public void drawText(Position position, String text, String color, String bgColor) {
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(bgColor));
-        tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.putString(position.getX(), position.getY(), text);
+        int curX = position.getX();
+        int y = position.getY();
+        for (int i = 0; i < text.length(); i++) {
+            char curChar = text.charAt(i);
+            try {
+                drawCharacter(curChar, curX, y, color);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            curX += 4; // for text width 3
+        }
+    }
+
+    private void drawCharacter(char c, int x, int y, String color) throws IOException {
+        // Use cached resources instead of loading every time
+        int[] pos = charPositionCache.get(c);
+        if (pos == null) return;  // Character not found in font map
+
+        int imgX = pos[0];
+        int imgY = pos[1];
+
+        for (int dx = 0; dx < 3; dx++) {
+            for (int dy = 0; dy < 5; dy++) {
+                if (fontImage.getRGB(imgX + dx, imgY + dy) != 0xFFFFFFFF)
+                    drawPixel(x + dx, y + dy, TextColor.Factory.fromString(color));
+            }
+        }
     }
 
     @Override
