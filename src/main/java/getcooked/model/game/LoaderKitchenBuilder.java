@@ -26,7 +26,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
     public LoaderKitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) throws IOException{
         super(level, numPlayers, lives, ordersDelivered);
 
-        URL resource = LoaderKitchenBuilder.class.getResource("/kitchen/level" + this.level + ".lvl");
+        URL resource = LoaderKitchenBuilder.class.getResource("/kitchen/level" + 4 + ".lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
         lines = readLines(br);
     }

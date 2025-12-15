@@ -8,6 +8,7 @@ import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.Counter;
+import getcooked.model.game.elements.interactable.dispenser.SaladDispenser;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Grill;
 import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
@@ -46,6 +47,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
         drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer("sprites/carrot_dispenser.png"));
+        drawElements(gui, filterOfType(SaladDispenser.class, tiles), new SaladDispenserViewer("sprites/salad_dispenser.png"));
         drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());

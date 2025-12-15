@@ -4,6 +4,7 @@ import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.Beef;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.grabable.food.Salad;
@@ -47,6 +48,10 @@ public class ChefViewer implements ElementViewer<Chef>{
         else if (grabable instanceof Carrot carrot){
             CarrotViewer carrotViewer = new CarrotViewer();
             carrotViewer.draw(carrot, gui);
+        }
+        else if (grabable instanceof Beef beef) {
+            BeefViewer beefViewer = new BeefViewer();
+            beefViewer.draw(beef, gui);
         }
         else if(grabable instanceof Plate plate){
             PlateViewer plateViewer = new PlateViewer();

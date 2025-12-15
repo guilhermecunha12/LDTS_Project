@@ -20,7 +20,7 @@ public class CarrotViewer implements ElementViewer<Carrot> {
         };
 
         int pixelX = carrot.getPosition().getX() * SCALE;
-        int pixelY = carrot.getPosition().getY() * SCALE +5;
+        int pixelY = carrot.getPosition().getY() * SCALE + 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }
