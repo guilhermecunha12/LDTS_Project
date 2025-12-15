@@ -10,13 +10,11 @@ public abstract class State<T> {
     private T model;
     private Viewer<T> viewer;
     private Controller<T> controller;
-    private boolean first;
 
-    public State(T model) {
+    protected State(T model) {
         this.model = model;
         this.viewer = this.getViewer();
         this.controller = this.getController();
-        this.first = true;
     }
 
     protected abstract Viewer<T> getViewer();
