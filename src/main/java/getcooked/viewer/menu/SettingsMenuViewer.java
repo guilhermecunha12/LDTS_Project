@@ -16,8 +16,7 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
         gui.paint();
 
         int middleX = gui.getWidth() / 2;
-        String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 13, gui.getHeight() / 12), "Settings", "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 13, gui.getHeight() / 12), "Settings", "#ffcf40");
 
 
         Position posMusic = new Position(middleX- 35, (gui.getHeight() / 2) - 30);
@@ -30,7 +29,7 @@ public class SettingsMenuViewer extends Viewer<SettingsMenu> {
             else if (i==2) curPos = posBack;
 
             gui.drawText(curPos, getModel().getEntry(i),
-                    getModel().isSelected(i) ? "#ffff00" : "#000000", bgColor);
+                    getModel().isSelected(i) ? "#ffff00" : "#000000");
         }
     }
 }

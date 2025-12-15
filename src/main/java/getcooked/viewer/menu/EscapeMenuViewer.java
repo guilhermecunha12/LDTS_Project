@@ -21,7 +21,7 @@ public class EscapeMenuViewer extends Viewer<EscapeMenu> {
         Position topleftPos = new Position(w/2 - side/2, h/2 - side/2);
         String rectangleColor = "#808080"; // gray
         gui.drawRectangle(topleftPos, side, side, rectangleColor);
-        gui.drawText(new Position(middleX - side/4, middleY- side/2 + side/10), "Escape Menu", "#ffcf40", rectangleColor);
+        gui.drawText(new Position(middleX - side/4, middleY- side/2 + side/10), "Escape Menu", "#ffcf40");
 
         Position posResume = new Position(middleX - 13, middleY - 10);
         Position posExit = new Position(middleX - 32, middleY);
@@ -31,7 +31,7 @@ public class EscapeMenuViewer extends Viewer<EscapeMenu> {
             if (i == 1) curPos = posExit;
 
             gui.drawText(curPos, getModel().getEntry(i),
-                    getModel().isSelected(i)? "#ffff00": "#ffffff", rectangleColor);
+                    getModel().isSelected(i)? "#ffff00": "#ffffff");
         }
     }
 }

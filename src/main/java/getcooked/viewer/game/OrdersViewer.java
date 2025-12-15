@@ -3,8 +3,14 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Order;
+import getcooked.model.game.dish.Dish;
+import getcooked.model.game.dish.DishType;
+import getcooked.viewer.Sprite;
 import getcooked.viewer.Viewer;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static getcooked.Game.FPS;
@@ -16,22 +22,30 @@ public class OrdersViewer extends Viewer<List<Order>> {
     }
 
     @Override
-    public void drawElements(GUI gui) {
+    public void drawElements(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         List<Order> activeOrders = getModel();
-        int h = gui.getHeight();
 
-        String orderColor = "#ffff88";
-        gui.drawText(new Position(112, h - 65), "Orders: ", "#ffffff", "#000000");
-        int nextX = 112; // position for the next order
+        gui.drawText(new Position(270,  20), "Orders: ", "#ffffff");
+        int ySpacing = 20;
         for (int i = 0; i < activeOrders.size(); i++) { // iterate through the current active orders
-            String curDishType = activeOrders.get(i).getDesiredDish().getType().toString();
-            int curDishTypeLength = curDishType.length();
+            DishType curDishType = activeOrders.get(i).getDesiredDish().getType();
+            Sprite sprite = switch (curDishType) {
+                case POTATO_SOUP -> new Sprite("sprites/order_potato_soup.png");
+                case CARROT_SOUP -> new Sprite("sprites/order_burger.png");
+                case SALAD -> new Sprite("sprites/order_salad.png");
+                case SODA -> new Sprite("sprites/order_soda.png");
+                case FRIES -> new Sprite("sprites/order_fries.png");
+                case KEBAB -> new Sprite("sprites/order_kebab.png");
+                case STEAK -> new Sprite("sprites/order_steak.png");
+                default -> new Sprite("sprites/order_empty.png");
+            };
 
-            Position curPos = new Position(nextX, h - 62 + i * 5);
-            gui.drawRectangle(curPos, curDishTypeLength, 4, orderColor);
-            gui.drawText(curPos, curDishType, "#000000", orderColor);
-            gui.drawText(new Position(curPos.getX(), curPos.getY() + 3),
-                    String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000", orderColor);
+            sprite.draw(gui, 270, 30 + ySpacing * i);
+
+            Position curPos = new Position(271, 32 + ySpacing * i);
+            gui.drawText(curPos, curDishType.toString(), "#000000");
+            gui.drawText(new Position(curPos.getX(), curPos.getY() + 8),
+            String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000");
         }
     }
 }

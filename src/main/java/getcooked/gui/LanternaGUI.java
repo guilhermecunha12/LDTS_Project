@@ -236,7 +236,7 @@ public class LanternaGUI implements GUI {
         }
     }
     @Override
-    public void drawText(Position position, String text, String color, String bgColor) {
+    public void drawText(Position position, String text, String color) {
         int curX = position.getX();
         int y = position.getY();
         for (int i = 0; i < text.length(); i++) {
@@ -281,7 +281,7 @@ public class LanternaGUI implements GUI {
 
         // center the text in the box
         Position textPosition = new Position(position.getX() + padding, position.getY() + padding);
-        drawText(textPosition, text, textColor, bgColor);
+        drawText(textPosition, text, textColor);
     }
 
     @Override

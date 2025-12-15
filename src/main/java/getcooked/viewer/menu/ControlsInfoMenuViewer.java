@@ -23,8 +23,8 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
         int middleX = gui.getWidth() / 2;
         String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 16, gui.getHeight()/12), "Controls", "#ffcf40", bgColor);
-        gui.drawText(new Position(1, 1), "ESC - Escape Menu", "#ffffff", bgColor);
+        gui.drawText(new Position(middleX - 16, gui.getHeight()/12), "Controls", "#ffcf40");
+        gui.drawText(new Position(1, 1), "ESC - Escape Menu", "#ffffff");
 
         if (getModel().isOnePlayer()) draw1PlayerControls(gui);
         else draw2PlayerControls(gui);
@@ -48,7 +48,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
             if (i == 2) curPos = sPosMeaning;
             else if (i == 3) curPos = dPosMeaning;
             else if (i == 4) curPos = spacePosMeaning;
-            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
+            gui.drawText(curPos, getModel().getEntry(i), "#ffffff");
         }
 
         Sprite sprite = new Sprite("sprites/wasdcontrols.png");
@@ -84,7 +84,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
             else if (i == 7) curPos = downPosMeaning;
             else if (i == 8) curPos = rightPosMeaning;
             else if (i == 9) curPos = enterPosMeaning;
-            gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
+            gui.drawText(curPos, getModel().getEntry(i), "#ffffff");
         }
         Sprite spritePlayer1 = new Sprite("sprites/wasdcontrols.png");
         spritePlayer1.draw(gui, middleX - 100, middleY - 25);
