@@ -46,7 +46,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         //drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
         drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
-        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer("sprites/pot.png"));
+        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
         drawElements(gui, filterOfType(CounterCutter.class, tiles), new CutterViewer("sprites/cutter.png"));
 
