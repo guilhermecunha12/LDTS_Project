@@ -3,7 +3,12 @@ package getcooked.viewer.menu;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.menu.ControlsInfoMenu;
+import getcooked.viewer.Sprite;
 import getcooked.viewer.Viewer;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
@@ -12,7 +17,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         gui.changeBackgroundColor("#468499");
         gui.paint();
 
@@ -26,7 +31,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
     }
 
 
-    private void draw1PlayerControls(GUI gui) {
+    private void draw1PlayerControls(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         int middleX = gui.getWidth() / 2;
         int middleY = gui.getHeight() / 2;
         String bgColor = gui.getBackgroundColor();
@@ -45,12 +50,16 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
             else if (i == 4) curPos = spacePosMeaning;
             gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
         }
-        //TODO: sprites para as teclas
+
+        Sprite sprite = new Sprite("sprites/wasdcontrols.png");
+        sprite.draw(gui, middleX - 70, middleY - 25);
+
     }
 
-    private void draw2PlayerControls(GUI gui) {
+    private void draw2PlayerControls(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         int middleX = gui.getWidth() / 2;
         int h = gui.getHeight();
+        int middleY = gui.getHeight() / 2;
         String bgColor = gui.getBackgroundColor();
 
         Position wPosMeaning = new Position(middleX - 100,h - 70);
@@ -77,7 +86,11 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
             else if (i == 9) curPos = enterPosMeaning;
             gui.drawText(curPos, getModel().getEntry(i), "#ffffff", bgColor);
         }
-        //TODO: sprites para as teclas
+        Sprite spritePlayer1 = new Sprite("sprites/wasdcontrols.png");
+        spritePlayer1.draw(gui, middleX - 100, middleY - 25);
+        Sprite spritePlayer2 = new Sprite("sprites/arrowscontrols.png");
+        spritePlayer2.draw(gui, middleX + 50, middleY - 25);
+
     }
 }
 
