@@ -8,15 +8,12 @@ import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.elements.interactable.Counter;
-import getcooked.model.game.elements.interactable.dispenser.SaladDispenser;
+import getcooked.model.game.elements.interactable.dispenser.*;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Grill;
-import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
-import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
-import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
 import getcooked.viewer.Viewer;
 
 import java.awt.*;
@@ -38,7 +35,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
     @Override
     public void drawElements(GUI gui) throws Exception {
         // TODO: Refactor needed
-        gui.drawText(new Position(gui.getWidth() - 20, 2),
+        gui.drawText(new Position(gui.getWidth() - 85, 2),
                 "Level: " + getModel().getLevel(), "#ffffff");
 
         List<Tile> tiles = getModel().getTiles();
@@ -54,6 +51,8 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
         drawElements(gui, filterOfType(CounterCutter.class, tiles), new CounterCutterViewer());
         drawElements(gui, filterOfType(Grill.class, tiles), new GrillViewer());
+        drawElements(gui, filterOfType(BeefDispenser.class, tiles), new BeefDispenserViewer("sprites/beef_dispenser.png"));
+        drawElements(gui, filterOfType(SodaDispenser.class, tiles), new SodaDispenserViewer("sprites/soda_dispenser.png"));
 
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new ChefViewer(1));

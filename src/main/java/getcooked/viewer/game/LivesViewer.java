@@ -3,7 +3,12 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
+import getcooked.viewer.Sprite;
 import getcooked.viewer.Viewer;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class LivesViewer extends Viewer<Kitchen> {
     public LivesViewer(Kitchen kitchen) {
@@ -11,13 +16,14 @@ public class LivesViewer extends Viewer<Kitchen> {
     }
 
     @Override
-    public void drawElements(GUI gui) {
+    public void drawElements(GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        Sprite sprite = new Sprite("sprites/life.png");
         int h = gui.getHeight();
         String lifeColor = "#ff0000";
-        gui.drawText(new Position(112, h - 75), "Lives: ", "#ffffff");
+        gui.drawText(new Position(270, 20), "Lives: ", "#ffffff");
         for (int i = 0; i < getModel().getLives(); i++) {
-            Position curPos = new Position(112 + 4*i, h - 72);
-            gui.drawRectangle(curPos, 3, 3, lifeColor);
+            Position curPos = new Position(270 + 10*i, 30);
+            sprite.draw(gui, curPos.getX(), curPos.getY());
         }
     }
 }

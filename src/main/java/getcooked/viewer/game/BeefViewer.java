@@ -19,7 +19,7 @@ public class BeefViewer implements ElementViewer<Beef> {
             sprite = new Sprite("sprites/raw_beef.png");
         }
         int pixelX = beef.getPosition().getX() * SCALE;
-        int pixelY = beef.getPosition().getY() * SCALE;
+        int pixelY = beef.getPosition().getY() * SCALE + 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }

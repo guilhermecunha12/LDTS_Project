@@ -25,7 +25,7 @@ public class OrdersViewer extends Viewer<List<Order>> {
     public void drawElements(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         List<Order> activeOrders = getModel();
 
-        gui.drawText(new Position(270,  20), "Orders: ", "#ffffff");
+        gui.drawText(new Position(270,  60), "Orders: ", "#ffffff");
         int ySpacing = 20;
         for (int i = 0; i < activeOrders.size(); i++) { // iterate through the current active orders
             DishType curDishType = activeOrders.get(i).getDesiredDish().getType();
@@ -40,12 +40,16 @@ public class OrdersViewer extends Viewer<List<Order>> {
                 default -> new Sprite("sprites/order_empty.png");
             };
 
-            sprite.draw(gui, 270, 30 + ySpacing * i);
+            sprite.draw(gui, 270, 70 + ySpacing * i);
 
-            Position curPos = new Position(271, 32 + ySpacing * i);
-            gui.drawText(curPos, curDishType.toString(), "#000000");
+            Position curPos = new Position(271, 72 + ySpacing * i);
+            gui.drawText(curPos, formatString(curDishType.toString()), "#000000");
             gui.drawText(new Position(curPos.getX(), curPos.getY() + 8),
             String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000");
         }
+    }
+
+    private String formatString(String string) {
+        return string.replace("_", " ");
     }
 }
