@@ -15,18 +15,20 @@ public class GameOverViewer extends Viewer<GameOverMenu> {
     protected void drawElements(GUI gui) {
         gui.changeBackgroundColor("#468499");
         gui.paint();
-        // draw game title in the middle
-        int middleX = gui.getWidth() / 2;
-        gui.drawText(new Position(middleX - 4, gui.getHeight()/12), "Game Over", "#ffcf40");
-        gui.drawText(new Position(middleX - 8, 2*gui.getHeight()/12), "Delivered dishes: " + getModel().getOrdersDelivered(), "#ffcf40");
-        for (int i = 0; i < getModel().getNumberEntries(); i++) {
-            String entry = getModel().getEntry(i);
-            int padding = 1;
-            // incrementing y using i multiplied by a factor 4
-            Position topLeftPos = new Position(middleX - (entry.length() / 2) - padding, 30 + 4*i);
 
-            gui.drawTextBox(topLeftPos, entry, "#000000",
-                    getModel().isSelected(i)? "#ffff00" : "#a9a9a9", padding);
+        int middleX = gui.getWidth() / 2;
+        gui.drawText(new Position(middleX - 9, gui.getHeight()/12), "Game Over", "#ffcf40");
+        gui.drawText(new Position(middleX - 24, gui.getHeight()/6 + 5), "Delivered dishes: " + getModel().getOrdersDelivered(), "#ffcf40");
+
+        Position posBackToMainMenu = new Position(middleX - 23, gui.getHeight()/2 - 10);
+        Position posExit = new Position(middleX - 8, gui.getHeight()/2);
+
+        for(int i = 0; i < getModel().getNumberEntries(); i++) {
+            Position curPos = posBackToMainMenu;
+            if (i == 1) curPos = posExit;
+
+            gui.drawText(curPos, getModel().getEntry(i),
+                    getModel().isSelected(i)? "#ffff00": "#000000");
         }
     }
 

@@ -34,7 +34,6 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
     private void draw1PlayerControls(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         int middleX = gui.getWidth() / 2;
         int middleY = gui.getHeight() / 2;
-        String bgColor = gui.getBackgroundColor();
 
         Position wPosMeaning = new Position(middleX + 30,middleY - 30);
         Position sPosMeaning = new Position(middleX + 30, middleY- 22);
@@ -51,8 +50,10 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
             gui.drawText(curPos, getModel().getEntry(i), "#ffffff");
         }
 
-        Sprite sprite = new Sprite("sprites/wasdcontrols.png");
-        sprite.draw(gui, middleX - 70, middleY - 25);
+        Sprite spriteControls = new Sprite("sprites/wasdcontrols.png");
+        Sprite spriteSpace = new Sprite("sprites/space.png");
+        spriteControls.draw(gui, middleX - 70, middleY - 25);
+        spriteSpace.draw(gui, middleX - 70, middleY + 5);
 
     }
 
@@ -60,7 +61,6 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
         int middleX = gui.getWidth() / 2;
         int h = gui.getHeight();
         int middleY = gui.getHeight() / 2;
-        String bgColor = gui.getBackgroundColor();
 
         Position wPosMeaning = new Position(middleX - 100,h - 70);
         Position sPosMeaning = new Position(middleX - 100, h - 62);
@@ -87,10 +87,13 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
             gui.drawText(curPos, getModel().getEntry(i), "#ffffff");
         }
         Sprite spritePlayer1 = new Sprite("sprites/wasdcontrols.png");
+        Sprite spriteSpace = new Sprite("sprites/space.png");
         spritePlayer1.draw(gui, middleX - 100, middleY - 25);
+        spriteSpace.draw(gui, middleX - 100, middleY + 5);
         Sprite spritePlayer2 = new Sprite("sprites/arrowscontrols.png");
+        Sprite spriteEnter = new Sprite("sprites/enter.png");
         spritePlayer2.draw(gui, middleX + 50, middleY - 25);
-
+        spriteEnter.draw(gui, middleX + 65, middleY + 5);
     }
 }
 
