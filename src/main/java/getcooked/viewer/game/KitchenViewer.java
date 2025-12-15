@@ -7,6 +7,7 @@ import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.grabable.food.Kebab;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Grill;
 import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
@@ -16,6 +17,7 @@ import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.KebabCutter;
 import getcooked.viewer.Viewer;
 
 import java.awt.*;
@@ -45,13 +47,14 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
-        drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
+        drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer("sprites/carrot_dispenser.png"));
         drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
         drawElements(gui, filterOfType(CounterCutter.class, tiles), new CounterCutterViewer());
         drawElements(gui, filterOfType(Grill.class, tiles), new GrillViewer());
+        drawElements(gui,filterOfType(KebabCutter.class, tiles), new KebabCutterViewer());
 
         List<Chef> chefs = getModel().getChefs();
         drawElement(gui, chefs.getFirst(), new ChefViewer(1));
