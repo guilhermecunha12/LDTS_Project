@@ -6,6 +6,7 @@ import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.model.game.elements.grabable.food.Salad;
 import getcooked.viewer.Sprite;
 
 import java.awt.*;
@@ -22,6 +23,7 @@ public class ChefViewer implements ElementViewer<Chef>{
 
     @Override
     public void draw(Chef chef, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        // TODO: Refactor needed
         int pixelX = chef.getPosition().getX() * SCALE;
         int pixelY = chef.getPosition().getY() * SCALE;
         Sprite sprite = switch (chef.getDirection()){
@@ -37,6 +39,10 @@ public class ChefViewer implements ElementViewer<Chef>{
         else if(grabable instanceof Potato potato) {
             PotatoViewer potatoViewer = new PotatoViewer();
             potatoViewer.draw(potato, gui);
+        }
+        else if (grabable instanceof Salad salad) {
+            SaladViewer saladViewer = new SaladViewer();
+            saladViewer.draw(salad, gui);
         }
         else if (grabable instanceof Carrot carrot){
             CarrotViewer carrotViewer = new CarrotViewer();

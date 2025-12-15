@@ -36,7 +36,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
 
     @Override
     public void drawElements(GUI gui) throws Exception {
-        // TODO: adjust the position of the level text according to the current level to avoid it going out of the screen
+        // TODO: Refactor needed
         gui.drawText(new Position(gui.getWidth() - 20, 2),
                 "Level: " + getModel().getLevel(), "#ffffff");
 
@@ -45,7 +45,7 @@ public class KitchenViewer extends Viewer<Kitchen> {
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
-        drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
+        drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer("sprites/carrot_dispenser.png"));
         drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
         drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
