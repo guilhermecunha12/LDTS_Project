@@ -22,12 +22,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class LanternaGUI implements GUI {
     private int width;
@@ -39,7 +34,6 @@ public class LanternaGUI implements GUI {
     private Map<Integer, Long> lastActionTimes; // Last action times for keys
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor;// to remember current background color
-    private AspectRatio aspectRatio;
     private BufferedImage fontImage;
     private Map<Character, int[]> charPositionCache;
 
