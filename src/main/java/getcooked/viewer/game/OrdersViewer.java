@@ -37,7 +37,7 @@ public class OrdersViewer extends Viewer<List<Order>> {
                 case FRIES -> new Sprite("sprites/order_fries.png");
                 case KEBAB -> new Sprite("sprites/order_kebab.png");
                 case STEAK -> new Sprite("sprites/order_steak.png");
-                default -> new Sprite("sprites/order_empty.png");
+                default -> throw new IllegalStateException("Unexpected value: " + curDishType);
             };
 
             sprite.draw(gui, 270, 70 + ySpacing * i);

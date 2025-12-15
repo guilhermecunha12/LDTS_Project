@@ -26,6 +26,7 @@ public class PlateViewer implements ElementViewer<Plate>{
                 case CARROT_SOUP ->  sprite = new Sprite("sprites/carrot_soup.png");
                 case STEAK ->  sprite = new Sprite("sprites/steak.png");
                 case FRIES ->  sprite = new Sprite("sprites/fries.png");
+                case KEBAB ->  sprite = new Sprite("sprites/kebab.png");
                 default -> throw new IOException("Invalid plate state");
             }
         }
