@@ -31,7 +31,7 @@ public class OrdersViewer extends Viewer<List<Order>> {
             DishType curDishType = activeOrders.get(i).getDesiredDish().getType();
             Sprite sprite = switch (curDishType) {
                 case POTATO_SOUP -> new Sprite("sprites/order_potato_soup.png");
-                case CARROT_SOUP -> new Sprite("sprites/order_burger.png");
+                case CARROT_SOUP -> new Sprite("sprites/order_carrot_soup.png");
                 case SALAD -> new Sprite("sprites/order_salad.png");
                 case SODA -> new Sprite("sprites/order_soda.png");
                 case FRIES -> new Sprite("sprites/order_fries.png");
