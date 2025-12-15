@@ -20,7 +20,7 @@ public class PotatoViewer implements ElementViewer<Potato>{
         };
 
         int pixelX = potato.getPosition().getX() * SCALE;
-        int pixelY = potato.getPosition().getY() * SCALE;
+        int pixelY = potato.getPosition().getY() * SCALE + 5;
         sprite.draw(gui, pixelX, pixelY);
     }
 }

@@ -98,13 +98,14 @@ public class LanternaGUI implements GUI {
 
         Rectangle terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 
-        fontSize = bestFontSize(screenBounds.height);
+        fontSize = bestFontSize(screenBounds.height, screenBounds.width);
         this.width = (terminalBounds.width / fontSize);
         this.height = (terminalBounds.height / fontSize);
     }
 
-    private int bestFontSize(int height){
-        return (int) (0.00432432 * height + 1);
+    private int bestFontSize(int height, int width){
+        // Function that maps fontSize for each resolution
+        return Math.max(1,(int) Math.round(-40.78265+3.12953 * Math.log(height * width)));
     }
 
     private void loadFontResources() throws IOException {
