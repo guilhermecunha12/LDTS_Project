@@ -17,9 +17,8 @@ public class GameOverViewer extends Viewer<GameOverMenu> {
         gui.paint();
         // draw game title in the middle
         int middleX = gui.getWidth() / 2;
-        String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 4, gui.getHeight()/12), "Game Over", "#ffcf40", bgColor);
-        gui.drawText(new Position(middleX - 8, 2*gui.getHeight()/12), "Delivered dishes: " + getModel().getOrdersDelivered(), "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 4, gui.getHeight()/12), "Game Over", "#ffcf40");
+        gui.drawText(new Position(middleX - 8, 2*gui.getHeight()/12), "Delivered dishes: " + getModel().getOrdersDelivered(), "#ffcf40");
         for (int i = 0; i < getModel().getNumberEntries(); i++) {
             String entry = getModel().getEntry(i);
             int padding = 1;

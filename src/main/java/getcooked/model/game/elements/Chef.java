@@ -26,6 +26,7 @@ public class Chef extends Element {
 
     public Grabable drop() {
         Grabable tmp = this.item;
+        tmp.setPosition(getFrontPosition());
         this.item = null;
         return tmp;
     }

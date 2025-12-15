@@ -19,13 +19,13 @@ public class EscapeMenuViewer extends Viewer<EscapeMenu> {
         Position topleftPos = new Position(w/2 - side/2, h/2 - side/2);
         String rectangleColor = "#808080"; // gray
         gui.drawRectangle(topleftPos, side, side, rectangleColor);
-        gui.drawText(new Position(w/2 - 5, h/2 - side/2 + side/10), "Escape Menu", "#ffcf40", rectangleColor);
+        gui.drawText(new Position(w/2 - 5, h/2 - side/2 + side/10), "Escape Menu", "#ffcf40");
 
         for (int i = 0; i < getModel().getNumberEntries(); i++) {
             String entry = getModel().getEntry(i);
             Position curPos = new Position(w/2 - entry.length()/2, h/2 - side/2 + 4*side/10 + 4*i);
             gui.drawText(curPos, entry,
-                    getModel().isSelected(i)? "#ffff00" : "#ffffff", rectangleColor);
+                    getModel().isSelected(i)? "#ffff00" : "#ffffff");
         }
     }
 }

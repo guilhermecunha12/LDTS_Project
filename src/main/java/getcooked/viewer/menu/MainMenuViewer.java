@@ -16,8 +16,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
         gui.paint();
 
         int middleX = gui.getWidth() / 2;
-        String bgColor = gui.getBackgroundColor();
-        gui.drawText(new Position(middleX - 18, gui.getHeight()/12), "Get Cooked", "#ffcf40", bgColor);
+        gui.drawText(new Position(middleX - 18, gui.getHeight()/12), "Get Cooked", "#ffcf40");
 
         Position posCook = new Position(middleX - 8, (gui.getHeight() / 2)- 45);
         Position posSettings = new Position(middleX - 15, (gui.getHeight() / 2) - 35);
@@ -29,7 +28,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
             else if (i==2) curPos = posExit;
 
             gui.drawText(curPos, getModel().getEntry(i),
-                    getModel().isSelected(i)? "#ffff00": "#000000", bgColor);
+                    getModel().isSelected(i)? "#ffff00": "#000000");
         }
     }
 }
