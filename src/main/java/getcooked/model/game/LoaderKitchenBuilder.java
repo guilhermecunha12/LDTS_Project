@@ -103,7 +103,6 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         break;
                     case 'f':
                         tiles.add(new Fryer(x, y,'f'));
-                        this.addAvailableDishType(DishType.FRIES);
                         break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T' : tiles.add(new Trash(x, y)); break;

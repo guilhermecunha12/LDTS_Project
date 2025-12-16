@@ -67,8 +67,8 @@ public class Kitchen {
         return orderManager;
     }
 
-    //TODO: after correcting the tests, verify the methods related to orders are needed here
-    public Deque<Order> getOrders() {
+
+    public Deque<Order> getLevelOrders() {
         return orderManager.getLevelOrders();
     }
 

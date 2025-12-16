@@ -3,14 +3,12 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.*;
 import getcooked.viewer.Sprite;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import static getcooked.viewer.Sprite.SCALE;
 
 public class ChefViewer extends ElementViewer<Chef>{
     private final int index;

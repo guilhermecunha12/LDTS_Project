@@ -45,14 +45,14 @@ public class KitchenTest {
     }
 
     @Test
-    void testGetOrders() {
+    void testGetLevelOrders() {
         // convert to list to compare by elements
         List<Order> expected = Arrays.asList(
                 new Order(new Dish(DishType.POTATO_SOUP), 30),
                 new Order(new Dish(DishType.CARROT_SOUP), 45),
                 new Order(new Dish(DishType.CARROT_SOUP), 60)
         );
-        assertEquals(expected, new ArrayList<>(kitchen.getOrders()));
+        assertEquals(expected, new ArrayList<>(kitchen.getLevelOrders()));
     }
 
     @Test

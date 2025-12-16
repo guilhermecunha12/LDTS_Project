@@ -35,7 +35,7 @@ class KitchenControllerTest {
     void testStepWithEscapeAction() throws IOException {
         when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
         when(kitchen.getTimeForNewOrder()).thenReturn(1);
-        when(kitchen.getOrders()).thenReturn(new ArrayDeque<>());
+        when(kitchen.getLevelOrders()).thenReturn(new ArrayDeque<>());
         when(kitchen.getLives()).thenReturn(3);
 
         kitchenController.step(game, Set.of(GUI.ACTION.ESCAPE), 0);
@@ -47,7 +47,7 @@ class KitchenControllerTest {
     void testGameOverWhenLivesZeroAndDecreaseOrderTime() throws IOException {
         when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
         when(kitchen.getTimeForNewOrder()).thenReturn(1);
-        when(kitchen.getOrders()).thenReturn(new ArrayDeque<>());
+        when(kitchen.getLevelOrders()).thenReturn(new ArrayDeque<>());
         when(kitchen.getLives()).thenReturn(0);
 
         kitchenController.step(game, Set.of(), 0);
@@ -65,7 +65,7 @@ class KitchenControllerTest {
         when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
         when(kitchen.getTimeForNewOrder()).thenReturn(0);
         when(kitchen.getLives()).thenReturn(0);
-        when(kitchen.getOrders()).thenReturn(orders);
+        when(kitchen.getLevelOrders()).thenReturn(orders);
         when(kitchen.getLevel()).thenReturn(1);
 
         kitchenController.step(game, Set.of(), 0);
@@ -78,7 +78,7 @@ class KitchenControllerTest {
     void testAdvanceToNextLevelWhenNoOrdersLeft() throws IOException {
         when(kitchen.getActiveOrders()).thenReturn(new ArrayList<>());
         when(kitchen.getTimeForNewOrder()).thenReturn(1);
-        when(kitchen.getOrders()).thenReturn(new ArrayDeque<>());
+        when(kitchen.getLevelOrders()).thenReturn(new ArrayDeque<>());
         when(kitchen.getLevel()).thenReturn(1);
         when(kitchen.getLives()).thenReturn(1);
 

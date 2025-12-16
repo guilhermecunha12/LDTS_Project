@@ -39,7 +39,6 @@ public class LanternaGUI implements GUI {
     private Map<Integer, Long> lastActionTimes; // Last action times for keys
     private static final long MIN_HOLD_TIME = 150;// Time needed to consider the keyHold a valid Hold
     private String backgroundColor;// to remember current background color
-    private AspectRatio aspectRatio;
     private BufferedImage fontImage;
     private Map<Character, int[]> charPositionCache;
 
@@ -60,7 +59,6 @@ public class LanternaGUI implements GUI {
             // ESCAPE
             Map.entry(KeyEvent.VK_ESCAPE, GUI.ACTION.ESCAPE)
     );
-
 
     public LanternaGUI(Screen screen){
         this.screen = screen;
