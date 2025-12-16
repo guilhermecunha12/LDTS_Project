@@ -14,13 +14,23 @@ public class FryerViewer implements ElementViewer<Fryer>{
 
     @Override
     public void draw(Fryer fryer, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+
         int pixelX = fryer.getX() * SCALE;
         int pixelY = fryer.getY() * SCALE;
         Sprite sprite = null;
-        if(fryer.isEmpty()) sprite = new Sprite("sprites/empty_fryer.png");
-        else if(fryer.isExecuting()) sprite = new Sprite("sprites/fryer_cooking.png");
-        else sprite = new Sprite("sprites/fryer_finished.png");
-        sprite.draw(gui,pixelX,pixelY);
 
+        if(fryer.isEmpty()){
+            if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_empty_fryer.png");
+            else sprite = new Sprite("sprites/right_empty_fryer.png");
+        }
+        else if(fryer.isExecuting()){
+            if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_fryer_cooking.png");
+            else sprite = new Sprite("sprites/right_fryer_cooking.png");
+        }
+        else {
+            if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_fryer_finished.png");
+            else sprite = new Sprite("sprites/right_fryer_finished.png");
+        }
+        sprite.draw(gui,pixelX,pixelY);
     }
 }
