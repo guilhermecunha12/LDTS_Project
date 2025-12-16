@@ -7,14 +7,18 @@ import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.grabable.food.Kebab;
 import getcooked.model.game.elements.interactable.Counter;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Fryer;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Grill;
+import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.kitchenware.cutter.CounterCutter;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import getcooked.model.game.elements.interactable.Trash;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
-import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PlateDispenser;
 import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.KebabCutter;
 import getcooked.viewer.Viewer;
 
 import java.awt.*;
@@ -35,24 +39,28 @@ public class KitchenViewer extends Viewer<Kitchen> {
 
     @Override
     public void drawElements(GUI gui) throws Exception {
-        // TODO: adjust the position of the level text according to the current level to avoid it going out of the screen
+        // TODO: Refactor needed
         gui.drawText(new Position(gui.getWidth() - 20, 2),
-                "Level: " + getModel().getLevel(), "#ffffff", "#000000");
+                "Level: " + getModel().getLevel(), "#ffffff");
 
         List<Tile> tiles = getModel().getTiles();
+
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
-        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer("sprites/counter.png"));
+        drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());
         drawElements(gui, filterOfType(PotatoDispenser.class, tiles), new PotatoDispenserViewer("sprites/potato_dispenser.png"));
-        //drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer());
+        drawElements(gui, filterOfType(CarrotDispenser.class, tiles), new CarrotDispenserViewer("sprites/carrot_dispenser.png"));
         drawElements(gui, filterOfType(DeliverySpot.class, tiles), new DeliverySpotViewer("sprites/delivery_spot.png"));
         drawElements(gui, filterOfType(Trash.class, tiles), new TrashViewer("sprites/trash.png"));
-        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer("sprites/pot.png"));
+        drawElements(gui, filterOfType(Pot.class, tiles), new PotViewer());
         drawElements(gui, filterOfType(PlateDispenser.class, tiles), new PlateDispenserViewer("sprites/plate_dispenser.png"));
-        drawElements(gui, filterOfType(CounterCutter.class, tiles), new CutterViewer("sprites/cutter.png"));
+        drawElements(gui, filterOfType(CounterCutter.class, tiles), new CounterCutterViewer());
+        drawElements(gui, filterOfType(Grill.class, tiles), new GrillViewer());
+        drawElements(gui,filterOfType(KebabCutter.class, tiles), new KebabCutterViewer());
+        drawElements(gui, filterOfType(Fryer.class, tiles), new FryerViewer());
 
         List<Chef> chefs = getModel().getChefs();
-        drawElement(gui, chefs.getFirst(), new ChefViewer("sprites/chef1.png"));
-        if (chefs.size() > 1) drawElement(gui, chefs.get(1), new ChefViewer("sprites/chef2.png"));
+        drawElement(gui, chefs.getFirst(), new ChefViewer(1));
+        if (chefs.size() > 1) drawElement(gui, chefs.get(1), new ChefViewer(2));
 
         // update the viewers because the active orders and lives could have changed
         this.ordersViewer = new OrdersViewer(getModel().getActiveOrders());

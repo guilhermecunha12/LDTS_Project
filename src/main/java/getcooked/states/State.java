@@ -10,13 +10,11 @@ public abstract class State<T> {
     private T model;
     private Viewer<T> viewer;
     private Controller<T> controller;
-    private boolean first;
 
-    public State(T model) {
+    protected State(T model) {
         this.model = model;
         this.viewer = this.getViewer();
         this.controller = this.getController();
-        this.first = true;
     }
 
     protected abstract Viewer<T> getViewer();
@@ -27,15 +25,8 @@ public abstract class State<T> {
     }
 
     public void step(Game game, GUI gui, long time) throws Exception {
-        if (first) { // if state changed, then draw gui (for performance improvement)
-            this.viewer.draw(gui);
-            first = false;
-        }
-
         Set<GUI.ACTION> actions = gui.getNextAction();
         this.controller.step(game, actions, time);
-
-        if (!actions.isEmpty())  // if inputs were processed, then draw gui (for performance improvement)
-            this.viewer.draw(gui);
+        this.viewer.draw(gui);
     }
 }

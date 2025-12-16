@@ -62,7 +62,16 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                 // Creates interactable based on the symbol
                 switch (line.charAt(x)) {
                     case ' ': tiles.add(new Floor(x, y)); break;
-                    case '#' : tiles.add(new Counter(x, y)); break;
+
+                    case 'u' : tiles.add(new Counter(x, y, 'u')); break;
+                    case 'd' : tiles.add(new Counter(x, y, 'd')); break;
+                    case 'l' : tiles.add(new Counter(x, y, 'l')); break;
+                    case 'r' : tiles.add(new Counter(x, y, 'r')); break;
+                    case '1' : tiles.add(new Counter(x, y, '1')); break;
+                    case '2' : tiles.add(new Counter(x, y, '2')); break;
+                    case '3' : tiles.add(new Counter(x, y, '3')); break;
+                    case '4' : tiles.add(new Counter(x, y, '4')); break;
+
                     case 'p':
                         tiles.add(new PotatoDispenser(x, y));
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
@@ -89,7 +98,11 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         this.addAvailableDishType(DishType.KEBAB);
                         break;
                     case 'F':
-                        tiles.add(new Fryer(x, y));
+                        tiles.add(new Fryer(x, y,'F'));
+                        this.addAvailableDishType(DishType.FRIES);
+                        break;
+                    case 'f':
+                        tiles.add(new Fryer(x, y,'f'));
                         this.addAvailableDishType(DishType.FRIES);
                         break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;

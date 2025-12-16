@@ -104,13 +104,14 @@ public class LanternaGUI implements GUI {
 
         Rectangle terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 
-        fontSize = bestFontSize(screenBounds.height);
+        fontSize = bestFontSize(screenBounds.height, screenBounds.width);
         this.width = (terminalBounds.width / fontSize);
         this.height = (terminalBounds.height / fontSize);
     }
 
-    private int bestFontSize(int height){
-        return (int) (0.00432432 * height + 1);
+    private int bestFontSize(int height, int width){
+        // Function that maps fontSize for each resolution
+        return Math.max(1,(int) Math.round(-40.78265+3.12953 * Math.log(height * width)));
     }
 
     private void loadFontResources() throws IOException {
@@ -236,7 +237,7 @@ public class LanternaGUI implements GUI {
         }
     }
     @Override
-    public void drawText(Position position, String text, String color, String bgColor) {
+    public void drawText(Position position, String text, String color) {
         int curX = position.getX();
         int y = position.getY();
         for (int i = 0; i < text.length(); i++) {
@@ -281,7 +282,7 @@ public class LanternaGUI implements GUI {
 
         // center the text in the box
         Position textPosition = new Position(position.getX() + padding, position.getY() + padding);
-        drawText(textPosition, text, textColor, bgColor);
+        drawText(textPosition, text, textColor);
     }
 
     @Override
@@ -319,7 +320,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void refresh() throws IOException {
-        screen.refresh();
+        screen.refresh(Screen.RefreshType.DELTA);
     }
 
     @Override

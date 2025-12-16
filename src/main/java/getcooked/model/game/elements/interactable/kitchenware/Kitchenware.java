@@ -32,7 +32,7 @@ public abstract class Kitchenware extends Interactable {
         return !this.executing && content != null;
     }
 
-    protected boolean isExecuting() { // for drawing purposes
+    public boolean isExecuting() { // for drawing purposes
         return this.executing;
     }
 
