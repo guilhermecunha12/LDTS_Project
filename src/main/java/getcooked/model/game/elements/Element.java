@@ -1,11 +1,8 @@
 package getcooked.model.game.elements;
-
-import getcooked.gui.GUI;
 import getcooked.model.Position;
+import getcooked.viewer.game.ElementViewer;
 
 import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public abstract class Element {
 
@@ -30,5 +27,6 @@ public abstract class Element {
         this.position = position;
     }
 
-    public abstract void draw(GUI gui) throws IOException, URISyntaxException, FontFormatException;
+    // Factory
+    public abstract ElementViewer getViewer();
 }

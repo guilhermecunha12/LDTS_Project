@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Floor;
 import getcooked.viewer.Sprite;
 
@@ -10,16 +11,11 @@ import java.net.URISyntaxException;
 
 import static getcooked.viewer.Sprite.SCALE;
 
-public class FloorViewer implements ElementViewer<Floor> {
-    private final Sprite sprite;
-    public FloorViewer(String path) throws IOException {
-        this.sprite = new Sprite(path);
-        //TODO: fazer switch case para diferentes sprites de counter, é preicso mudaar o map
-    }
+public class FloorViewer extends ElementViewer<Floor>{
+
     @Override
     public void draw(Floor element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = element.getPosition().getX() * SCALE;
-        int pixelY = element.getPosition().getY() * SCALE;
-        sprite.draw(gui, pixelX, pixelY);
+        Sprite sprite = new Sprite("sprites/floor.png");
+        sprite.draw(gui, element.getX(), element.getY(), 0);
     }
 }

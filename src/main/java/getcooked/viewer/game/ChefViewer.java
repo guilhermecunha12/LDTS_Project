@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import static getcooked.viewer.Sprite.SCALE;
 
-public class ChefViewer implements ElementViewer<Chef>{
+public class ChefViewer extends ElementViewer<Chef>{
     private final int index;
 
     public ChefViewer(int index) {
@@ -21,42 +21,17 @@ public class ChefViewer implements ElementViewer<Chef>{
 
     @Override
     public void draw(Chef chef, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        // TODO: Refactor needed
-        int pixelX = chef.getPosition().getX() * SCALE;
-        int pixelY = chef.getPosition().getY() * SCALE;
         Sprite sprite = switch (chef.getDirection()){
             case UP -> new Sprite("sprites/chef" + index + "_back.png");
             case DOWN -> new Sprite("sprites/chef" + index + "_front.png");
             case LEFT -> new Sprite("sprites/chef" + index + "_left.png");
             case RIGHT -> new Sprite("sprites/chef" + index + "_right.png");
         };
+        sprite.draw(gui, chef.getX(), chef.getY(), 0);
+        if(chef.isHoldingSomething()){
+            Grabable grabable = chef.getItem();
+            grabable.getViewer().draw(grabable, gui);
+        }
 
-        sprite.draw(gui, pixelX, pixelY);
-        Grabable grabable = chef.getItem();
-        if(grabable == null) return;
-        else if(grabable instanceof Potato potato) {
-            PotatoViewer potatoViewer = new PotatoViewer();
-            potatoViewer.draw(potato, gui);
-        }
-        else if (grabable instanceof Salad salad) {
-            SaladViewer saladViewer = new SaladViewer();
-            saladViewer.draw(salad, gui);
-        }
-        else if (grabable instanceof Carrot carrot){
-            CarrotViewer carrotViewer = new CarrotViewer();
-            carrotViewer.draw(carrot, gui);
-        }
-        else if (grabable instanceof Beef beef) {
-            BeefViewer beefViewer = new BeefViewer();
-            beefViewer.draw(beef, gui);
-        }
-        else if (grabable instanceof Soda soda) {
-            SodaViewer sodaViewer = new SodaViewer();
-            sodaViewer.draw(soda, gui);
-        }
-        else if(grabable instanceof Plate plate){
-            PlateViewer plateViewer = new PlateViewer();
-            plateViewer.draw(plate, gui);
-        }
     }
 }

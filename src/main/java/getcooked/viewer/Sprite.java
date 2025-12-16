@@ -24,7 +24,9 @@ public class Sprite {
         return image;
     }
 
-    public void draw(GUI gui, double x, double y) throws IOException, URISyntaxException, FontFormatException {
+    public void draw(GUI gui, double x, double y, double offset) throws IOException, URISyntaxException, FontFormatException {
+        x *= SCALE;
+        y = y * SCALE + offset;
         for (int dx = 0; dx < image.getWidth(); dx++) {
             for (int dy = 0; dy < image.getHeight(); dy++) {
                 int ARGB = image.getRGB(dx, dy);

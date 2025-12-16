@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.viewer.Sprite.SCALE;
+
 public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
     public ControlsInfoMenuViewer(ControlsInfoMenu controlsInfoMenu) {
@@ -52,8 +54,8 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
 
         Sprite spriteControls = new Sprite("sprites/wasdcontrols.png");
         Sprite spriteSpace = new Sprite("sprites/space.png");
-        spriteControls.draw(gui, middleX - 70, middleY - 25);
-        spriteSpace.draw(gui, middleX - 70, middleY + 5);
+        spriteControls.draw(gui, (double) (middleX - 70) / SCALE, (double) (middleY - 25) / SCALE, 0);
+        spriteSpace.draw(gui, (double) (middleX - 70) / SCALE, (double) (middleY + 5) / SCALE, 0);
 
     }
 
@@ -88,12 +90,12 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
         }
         Sprite spritePlayer1 = new Sprite("sprites/wasdcontrols.png");
         Sprite spriteSpace = new Sprite("sprites/space.png");
-        spritePlayer1.draw(gui, middleX - 100, middleY - 25);
-        spriteSpace.draw(gui, middleX - 100, middleY + 5);
+        spritePlayer1.draw(gui, (double) (middleX - 100) / SCALE, (double) (middleY - 25) / SCALE, 0);
+        spriteSpace.draw(gui, (double) (middleX - 100) / SCALE, (double) (middleY + 5) / SCALE, 0);
         Sprite spritePlayer2 = new Sprite("sprites/arrowscontrols.png");
         Sprite spriteEnter = new Sprite("sprites/enter.png");
-        spritePlayer2.draw(gui, middleX + 50, middleY - 25);
-        spriteEnter.draw(gui, middleX + 65, middleY + 5);
+        spritePlayer2.draw(gui, (double) (middleX + 50) / SCALE, (double) (middleY - 25) /SCALE, 0);
+        spriteEnter.draw(gui, (double) (middleX + 65) / SCALE, (double) (middleY + 5) / SCALE, 0);
     }
 }
 

@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 
 import static getcooked.viewer.Sprite.SCALE;
 
-public class CounterViewer implements ElementViewer<Counter>{
+public class CounterViewer extends ElementViewer<Counter>{
     @Override
     public void draw(Counter counter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = switch (counter.getType()) {
@@ -27,35 +27,11 @@ public class CounterViewer implements ElementViewer<Counter>{
             case '4' -> new Sprite("sprites/bottom_left_counter.png");
             default -> throw new IllegalStateException("Unexpected value: " + counter.getType());
         };
-
-        int pixelX = counter.getPosition().getX() * SCALE;
-        int pixelY = counter.getPosition().getY() * SCALE;
-        sprite.draw(gui, pixelX, pixelY);
+        sprite.draw(gui, counter.getX(), counter.getY(), 0);
 
         Grabable item = counter.getContent();
-        if (item == null) return;
-        if (item instanceof Potato potato){
-            PotatoViewer potatoViewer = new PotatoViewer();
-            potatoViewer.draw(potato, gui);
-        } else if (item instanceof Carrot carrot){
-            CarrotViewer carrotViewer = new CarrotViewer();
-            carrotViewer.draw(carrot, gui);
-        }
-        else if (item instanceof Salad salad){
-            SaladViewer saladViewer = new SaladViewer();
-            saladViewer.draw(salad, gui);
-        }
-        else if (item instanceof Beef beef){
-            BeefViewer beefViewer = new BeefViewer();
-            beefViewer.draw(beef, gui);
-        }
-        else if(item instanceof Plate plate){
-            PlateViewer plateViewer = new PlateViewer();
-            plateViewer.draw(plate, gui);
-        }
-        else if (item instanceof Soda soda){
-            SodaViewer sodaViewer = new SodaViewer();
-            sodaViewer.draw(soda, gui);
+        if(item != null) {
+            item.getViewer().draw(item, gui);
         }
     }
 }

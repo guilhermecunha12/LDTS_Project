@@ -15,31 +15,29 @@ import java.util.Set;
 
 public class ChefController extends Controller<Kitchen> {
     private final Chef chef;
-    private final int index;
 
-    public ChefController(Chef chef, Kitchen kitchen, int index) {
+    public ChefController(Chef chef, Kitchen kitchen) {
         super(kitchen);
         this.chef = chef;
-        this.index = index;
     }
 
     public void moveChefLeft(){
-        moveChef(getModel().getChefs().get(index).getPosition().getLeft());
+        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getLeft());
         chef.turnLeft();
     }
 
     public void moveChefUp(){
-        moveChef(getModel().getChefs().get(index).getPosition().getUp());
+        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getUp());
         chef.turnUp();
     }
 
     public void moveChefDown(){
-        moveChef(getModel().getChefs().get(index).getPosition().getDown());
+        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getDown());
         chef.turnDown();
     }
 
     public void moveChefRight(){
-        moveChef(getModel().getChefs().get(index).getPosition().getRight());
+        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getRight());
         chef.turnRight();
     }
 
@@ -61,7 +59,7 @@ public class ChefController extends Controller<Kitchen> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
-        if(index == 0){
+        if(chef.getIndex() == 0){
             if (actions.contains(GUI.ACTION.PLAYER1_UP)) {
                 moveChefUp();
             }
@@ -78,7 +76,7 @@ public class ChefController extends Controller<Kitchen> {
                 chefSelect();
             }
         }
-        else if (index == 1) {
+        else if (chef.getIndex() == 1) {
             if (actions.contains(GUI.ACTION.PLAYER2_UP)) {
                 moveChefUp();
             }

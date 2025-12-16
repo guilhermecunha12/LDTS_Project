@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
@@ -13,20 +14,15 @@ import java.net.URISyntaxException;
 
 import static getcooked.viewer.Sprite.SCALE;
 
-public class CounterCutterViewer implements ElementViewer<CounterCutter> {
+public class CounterCutterViewer extends ElementViewer<CounterCutter> {
     @Override
     public void draw(CounterCutter counterCutter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/cutter.png");
-        int pixelX = counterCutter.getPosition().getX() * SCALE;
-        int pixelY = counterCutter.getPosition().getY() * SCALE;
-        sprite.draw(gui, pixelX, pixelY);
+        sprite.draw(gui, counterCutter.getX(), counterCutter.getY(), 0);
 
         if (!counterCutter.isEmpty()) {
-            if (counterCutter.getContent() instanceof Potato potato) {
-                new PotatoViewer().draw(potato, gui);
-            } else if (counterCutter.getContent() instanceof Carrot carrot) {
-                new CarrotViewer().draw(carrot, gui);
-            }
+            Grabable item = counterCutter.getContent();
+            item.getViewer().draw(item, gui);
         }
     }
 }

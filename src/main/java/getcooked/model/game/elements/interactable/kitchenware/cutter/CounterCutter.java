@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.interactable.kitchenware.cutter;
 
+import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.food.Carrot;
@@ -7,9 +8,19 @@ import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.InputBehaviour;
+import getcooked.viewer.Sprite;
+import getcooked.viewer.game.CarrotViewer;
+import getcooked.viewer.game.CounterCutterViewer;
+import getcooked.viewer.game.ElementViewer;
+import getcooked.viewer.game.PotatoViewer;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
+
+import static getcooked.viewer.Sprite.SCALE;
 
 public class CounterCutter extends Cutter {
     protected Set<Class<? extends Food>> allowedFoods;
@@ -18,6 +29,11 @@ public class CounterCutter extends Cutter {
         super(x, y, new InputBehaviour(5));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
         this.content = null;
+    }
+
+    @Override
+    public ElementViewer<CounterCutter> getViewer() {
+        return new CounterCutterViewer();
     }
 
     @Override

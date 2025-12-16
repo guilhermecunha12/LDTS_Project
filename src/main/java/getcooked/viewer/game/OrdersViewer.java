@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import static getcooked.Game.FPS;
+import static getcooked.viewer.Sprite.SCALE;
 
 public class OrdersViewer extends Viewer<List<Order>> {
 
@@ -40,9 +41,9 @@ public class OrdersViewer extends Viewer<List<Order>> {
                 default -> throw new IllegalStateException("Unexpected value: " + curDishType);
             };
 
-            sprite.draw(gui, 270, 70 + ySpacing * i);
+            sprite.draw(gui, (double) 270 / SCALE, (double) (70 + ySpacing * i) / SCALE, 0);
 
-            Position curPos = new Position(271, 72 + ySpacing * i);
+            Position curPos = new Position(271, (72 + ySpacing * i));
             gui.drawText(curPos, formatString(curDishType.toString()), "#000000");
             gui.drawText(new Position(curPos.getX(), curPos.getY() + 8),
             String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000");

@@ -33,7 +33,7 @@ public class KitchenController extends Controller<Kitchen> {
 
         for(int i = 0; i < kitchen.getChefs().size(); i++) {
             Chef chef = kitchen.getChefs().get(i);
-            ChefController chefController = new ChefController(chef, kitchen, i);
+            ChefController chefController = new ChefController(chef, kitchen);
             chefController.step(game, actions, time);
         }
 

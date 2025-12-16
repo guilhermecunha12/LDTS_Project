@@ -1,6 +1,8 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.game.elements.Element;
+import getcooked.model.game.elements.grabable.food.Beef;
 import getcooked.model.game.elements.interactable.dispenser.BeefDispenser;
 import getcooked.viewer.Sprite;
 
@@ -10,18 +12,12 @@ import java.net.URISyntaxException;
 
 import static getcooked.viewer.Sprite.SCALE;
 
-public class BeefDispenserViewer implements ElementViewer<BeefDispenser> {
+public class BeefDispenserViewer extends ElementViewer<BeefDispenser> {
 
-    private Sprite sprite;
-
-    public BeefDispenserViewer(String filepath) throws IOException {
-        this.sprite = new Sprite(filepath);
-    }
 
     @Override
-    public void draw(BeefDispenser beefDispenser, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = beefDispenser.getX() * SCALE;
-        int pixelY = beefDispenser.getY() * SCALE;
-        sprite.draw(gui, pixelX, pixelY);
+    public void draw(BeefDispenser element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
+        Sprite sprite = new Sprite("sprites/beef_dispenser.png");
+        sprite.draw(gui, element.getX(), element.getY(), 0);
     }
 }

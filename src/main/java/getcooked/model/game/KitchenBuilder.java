@@ -46,10 +46,10 @@ public abstract class KitchenBuilder {
         int middleX = getWidth()/2;
 
         if (this.numPlayers == 1) {
-            chefs.add(new Chef(middleX, middleY));
+            chefs.add(new Chef(middleX, middleY, 0));
         } else {
-            chefs.add(new Chef(middleX-2, middleY));
-            chefs.add(new Chef(middleX+1, middleY));
+            chefs.add(new Chef(middleX-2, middleY, 0));
+            chefs.add(new Chef(middleX+1, middleY, 1));
         }
         return chefs;
     }

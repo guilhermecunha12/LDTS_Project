@@ -10,18 +10,12 @@ import java.net.URISyntaxException;
 
 import static getcooked.viewer.Sprite.SCALE;
 
-public class SodaDispenserViewer implements ElementViewer<SodaDispenser> {
+public class SodaDispenserViewer extends ElementViewer<SodaDispenser> {
 
-    private Sprite sprite;
-
-    public SodaDispenserViewer(String filepath) throws IOException {
-        this.sprite = new Sprite(filepath);
-    }
 
     @Override
     public void draw(SodaDispenser sodaDispenser, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        int pixelX = sodaDispenser.getX() * SCALE;
-        int pixelY = sodaDispenser.getY() * SCALE;
-        sprite.draw(gui, pixelX, pixelY);
+        Sprite sprite = new Sprite("sprites/soda_dispenser.png");
+        sprite.draw(gui, sodaDispenser.getX(), sodaDispenser.getY(), 0);
     }
 }
