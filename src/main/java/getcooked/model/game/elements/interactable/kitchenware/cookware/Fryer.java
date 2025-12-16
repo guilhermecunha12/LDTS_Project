@@ -13,10 +13,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Fryer extends Cookware {
+    private char type;
 
-    public Fryer(int x, int y) {
+    public Fryer(int x, int y, char type) {
         super(x, y, new TimedBehaviour(100));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class));
+        this.type = type;
     }
 
     @Override
@@ -32,5 +34,9 @@ public class Fryer extends Cookware {
     @Override
     protected Dish createFinishedDish() {
         return new Dish(DishType.FRIES);
+    }
+
+    public char  getType() {
+        return type;
     }
 }
