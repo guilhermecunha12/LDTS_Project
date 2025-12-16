@@ -164,6 +164,7 @@ public class LanternaGUI implements GUI {
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+        terminalFactory.setTerminalEmulatorTitle("Get Cooked");
         return terminalFactory.createTerminal();
     }
 
