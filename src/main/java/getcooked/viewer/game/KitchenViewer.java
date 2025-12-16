@@ -44,6 +44,10 @@ public class KitchenViewer extends Viewer<Kitchen> {
                 "Level: " + getModel().getLevel(), "#ffffff");
 
         List<Tile> tiles = getModel().getTiles();
+        for(Tile tile : tiles) {
+            tile.draw(gui);
+        }
+
 
         drawElements(gui, filterOfType(Floor.class, tiles), new FloorViewer("sprites/floor.png"));
         drawElements(gui, filterOfType(Counter.class, tiles), new CounterViewer());

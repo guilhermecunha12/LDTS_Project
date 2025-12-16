@@ -1,7 +1,12 @@
 package getcooked.model.game.elements.interactable;
 
+import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class Counter extends Interactable{
 
@@ -39,5 +44,10 @@ public class Counter extends Interactable{
 
     public char getType() {
         return this.type;
+    }
+
+    @Override
+    public void draw(GUI gui) throws IOException, URISyntaxException, FontFormatException {
+
     }
 }

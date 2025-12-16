@@ -3,10 +3,7 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
-import getcooked.model.game.elements.grabable.food.Beef;
-import getcooked.model.game.elements.grabable.food.Carrot;
-import getcooked.model.game.elements.grabable.food.Potato;
-import getcooked.model.game.elements.grabable.food.Salad;
+import getcooked.model.game.elements.grabable.food.*;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.viewer.Sprite;
 
@@ -55,6 +52,10 @@ public class CounterViewer implements ElementViewer<Counter>{
         else if(item instanceof Plate plate){
             PlateViewer plateViewer = new PlateViewer();
             plateViewer.draw(plate, gui);
+        }
+        else if (item instanceof Soda soda){
+            SodaViewer sodaViewer = new SodaViewer();
+            sodaViewer.draw(soda, gui);
         }
     }
 }
