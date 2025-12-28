@@ -20,19 +20,16 @@ public class GameOverController extends Controller<GameOverMenu> {
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
         for (GUI.ACTION action : actions) {
             switch (action) {
-                case PLAYER2_DOWN:
-                    getModel().nextEntry();
-                    break;
-                case PLAYER2_UP:
-                    getModel().previousEntry();
-                    break;
-                case PLAYER2_SELECT:
-                    if (getModel().isSelectedBackToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
-                    if (getModel().isSelectedExitGame()) game.changeState(null);
-                    break;
-                default:
-                    break;
+                case PLAYER2_DOWN: getModel().nextEntry(); break;
+                case PLAYER2_UP: getModel().previousEntry(); break;
+                case PLAYER2_SELECT: selectEntry(game); break;
+                default: break;
             }
         }
+    }
+
+    private void selectEntry(Game game) {
+        if (getModel().isSelectedBackToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
+        if (getModel().isSelectedExitGame()) game.changeState(null);
     }
 }

@@ -23,28 +23,29 @@ public class CookMenuController extends Controller<CookMenu> {
         for(GUI.ACTION action : actions) {
             switch (action) {
                 // Considering arrow movement to select options from the menu
-                case PLAYER2_LEFT:
-                    if (getModel().isSelected2Player()) getModel().previousEntry();
-                    break;
-                case PLAYER2_RIGHT:
-                    if (getModel().isSelected1Player()) getModel().nextEntry();
-                    break;
-                case PLAYER2_DOWN:
-                    if (getModel().isSelected1Player()) getModel().previousEntry();
-                    else if (getModel().isSelected2Player()) getModel().nextEntry();
-                    break;
-                case PLAYER2_UP:
-                    if (getModel().isSelectedBack()) getModel().previousEntry();
-                    break;
-                case PLAYER2_SELECT:
-                    // Add support for both one player and two player in a PlayingSessionState
-                    if(getModel().isSelected1Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(true)));
-                    else if(getModel().isSelected2Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(false)));
-                    else if(getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
-                    break;
-                default:
-                    break;
+                case PLAYER2_LEFT: getModel().previousEntry(); break;
+                case PLAYER2_RIGHT: getModel().nextEntry(); break;
+                case PLAYER2_DOWN: getDownEntry(); break;
+                case PLAYER2_UP: getUpEntry(); break;
+                case PLAYER2_SELECT: selectEntry(game); break;
+                default: break;
             }
         }
+    }
+
+    private void getDownEntry() {
+        if (getModel().isSelected1Player()) getModel().previousEntry();
+        else if (getModel().isSelected2Player()) getModel().nextEntry();
+    }
+
+    private void getUpEntry() {
+        if (getModel().isSelectedBack()) getModel().previousEntry();
+    }
+
+    private void selectEntry(Game game) {
+        if (getModel().isSelected1Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(true)));
+        else if(getModel().isSelected2Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(false)));
+        else if(getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
+
     }
 }

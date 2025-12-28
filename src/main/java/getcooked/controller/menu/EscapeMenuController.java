@@ -21,22 +21,21 @@ public class EscapeMenuController extends Controller<EscapeMenu> {
     public void step(Game game, Set<GUI.ACTION> actions, long time) {
         for(GUI.ACTION action : actions) {
             switch (action) {
-                case PLAYER2_UP:
-                    getModel().previousEntry();
-                    break;
-                case PLAYER2_DOWN:
-                    getModel().nextEntry();
-                    break;
-                case PLAYER2_SELECT:
-                    if (getModel().isSelectedResume()) game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
-                    else if (getModel().isSelectedExitToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
-                    break;
-                case ESCAPE:
-                    game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
-                    break;
-                default:
-                    break;
+                case PLAYER2_UP: getModel().previousEntry(); break;
+                case PLAYER2_DOWN: getModel().nextEntry(); break;
+                case PLAYER2_SELECT: selectEntry(game); break;
+                case ESCAPE: escape(game); break;
+                default: break;
             }
         }
+    }
+
+    private void escape(Game game) {
+        game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
+    }
+
+    private void selectEntry(Game game) {
+        if (getModel().isSelectedResume()) game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
+        else if (getModel().isSelectedExitToMainMenu()) game.changeState(new MainMenuState(new MainMenu()));
     }
 }
