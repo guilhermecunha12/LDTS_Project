@@ -9,7 +9,7 @@ public class Game {
     private State<?> state;
     private final LanternaGUI gui;
     private final AudioManager audioManager;
-    public static final int FPS = 24; // Frames per second
+    public static final int FPS = 15; // Frames per second
 
     public Game() throws Exception{
         this.state = new MainMenuState(new MainMenu());

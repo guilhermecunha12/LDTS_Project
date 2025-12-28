@@ -1,6 +1,5 @@
 package getcooked.model.game.elements.interactable.kitchenware.behaviour;
 
-import getcooked.Game;
 import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
 
 public class TimedBehaviour implements ExecutionBehaviour {
@@ -14,7 +13,7 @@ public class TimedBehaviour implements ExecutionBehaviour {
     public void execute(Kitchenware kitchenware) {
         Thread.ofVirtual().start(() -> {
             try {
-                Thread.sleep(cookingTime * 1000 / Game.FPS);
+                Thread.sleep(cookingTime * 1000);
             } catch (InterruptedException e) {
                 kitchenware.finish();
                 throw new RuntimeException(e);

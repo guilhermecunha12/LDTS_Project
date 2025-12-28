@@ -55,23 +55,32 @@ public abstract class KitchenBuilder {
     }
 
     private int ordersPerLevel(int level) {
-        return 2 + (int)(level/(0.3*Math.sqrt(level)));
+        return level + 2;
+        //return 2 + (int)(level/(0.3*Math.sqrt(level)));
     }
 
     private int orderTimeLimit(int level) {
-        double baseSeconds = 35.0;
+        double baseSeconds = 40.0;
         double minSeconds  = 15.0;
-        double seconds     = baseSeconds - 10.0 * Math.log10(level);
+        double seconds     = baseSeconds - level;
         seconds = Math.max(seconds, minSeconds);
         return (int)Math.round(seconds * FPS);
     }
 
     private int orderFrequency(int level) { // gets lower each level
+        double baseSeconds = 12.0;
+        if (this.numPlayers == 1)
+            return (int)Math.max(7.0*FPS, (baseSeconds - 0.5*level)*FPS);
+        else
+            return (int)Math.max(5.0*FPS, (baseSeconds - level)*FPS);
+
+        /*
         double factor1p = 2.6;
-        double factor2p = 3.3;
+        double factor2p = 4.5;
         int decay = (int)(factor1p * FPS * Math.log10(level));
         if (this.numPlayers == 2) decay = (int)(factor2p * FPS * Math.log10(level));
         return Math.max(10*FPS, 15*FPS - decay);
+        */
     }
 
     private Deque<Order> createOrders() {

@@ -67,9 +67,8 @@ public class Kitchen {
         return orderManager;
     }
 
-
-    public Deque<Order> getLevelOrders() {
-        return orderManager.getLevelOrders();
+    public boolean moreOrders() {
+        return orderManager.moreOrders();
     }
 
     public void addActiveOrder(Order order) {

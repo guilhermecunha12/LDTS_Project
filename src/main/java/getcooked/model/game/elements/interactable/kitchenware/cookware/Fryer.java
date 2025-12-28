@@ -16,7 +16,7 @@ public class Fryer extends Cookware {
     private char type;
 
     public Fryer(int x, int y, char type) {
-        super(x, y, new TimedBehaviour(100));
+        super(x, y, new TimedBehaviour(4));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class));
         this.type = type;
     }

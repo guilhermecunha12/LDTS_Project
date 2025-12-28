@@ -43,7 +43,7 @@ public class KitchenController extends Controller<Kitchen> {
             return;
         }
 
-        if (kitchen.getLevelOrders().isEmpty() && kitchen.getActiveOrders().isEmpty()) {
+        if (!kitchen.moreOrders() && kitchen.getActiveOrders().isEmpty()) {
             game.changeState(new KitchenState(
                     new LoaderKitchenBuilder(kitchen.getLevel() + 1, kitchen.getNumPlayers(), kitchen.getLives(),
                     kitchen.getOrdersDelivered()).createKitchen()));
@@ -67,12 +67,16 @@ public class KitchenController extends Controller<Kitchen> {
         }
 
         int timeForNewOrder = orderManager.getTimeForNewOrder();
-        if (timeForNewOrder <= 0  && activeOrders.size() < OrderManager.MAX_ACTIVE_ORDERS && !orderManager.ordersAreEmpty()) {
-            Order newOrder = orderManager.popOrder();
-            orderManager.addActiveOrder(newOrder);
-            orderManager.setTimeForNewOrder();
-        }
+        if (orderManager.moreOrders()) {
+            if (timeForNewOrder <= 0  && activeOrders.size() < OrderManager.MAX_ACTIVE_ORDERS) {
+                Order newOrder = orderManager.popOrder();
+                orderManager.addActiveOrder(newOrder);
+                orderManager.setTimeForNewOrder();
 
-        else orderManager.decreaseTimeForNewOrder();
+            } else if (activeOrders.isEmpty()) // keep chefs occupied
+                orderManager.setTimeForNewOrder(Game.FPS);
+
+            orderManager.decreaseTimeForNewOrder();
+        }
     }
 }

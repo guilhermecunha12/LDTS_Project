@@ -16,7 +16,7 @@ import java.util.Set;
 public class Pot extends Cookware {
 
     public Pot(int x, int y){
-        super(x,y, new TimedBehaviour(100));
+        super(x,y, new TimedBehaviour(4));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 

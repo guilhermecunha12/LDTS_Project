@@ -15,7 +15,7 @@ import java.util.Set;
 public class Grill extends Cookware {
 
     public Grill(int x, int y) {
-        super(x, y, new TimedBehaviour(100));
+        super(x, y, new TimedBehaviour(4));
         this.allowedFoods = new HashSet<>(Set.of(Beef.class));
     }
 
