@@ -22,22 +22,22 @@ public class ChefController extends Controller<Kitchen> {
     }
 
     public void moveChefLeft(){
-        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getLeft());
+        moveChef(chef.getPosition().getLeft());
         chef.turnLeft();
     }
 
     public void moveChefUp(){
-        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getUp());
+        moveChef(chef.getPosition().getUp());
         chef.turnUp();
     }
 
     public void moveChefDown(){
-        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getDown());
+        moveChef(chef.getPosition().getDown());
         chef.turnDown();
     }
 
     public void moveChefRight(){
-        moveChef(getModel().getChefs().get(chef.getIndex()).getPosition().getRight());
+        moveChef(chef.getPosition().getRight());
         chef.turnRight();
     }
 
@@ -59,39 +59,25 @@ public class ChefController extends Controller<Kitchen> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
-        if(chef.getIndex() == 0){
-            if (actions.contains(GUI.ACTION.PLAYER1_UP)) {
-                moveChefUp();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER1_DOWN)) {
-                moveChefDown();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER1_LEFT)) {
-                moveChefLeft();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER1_RIGHT)) {
-                moveChefRight();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER1_SELECT)) {
-                chefSelect();
-            }
+        int idx = chef.getIndex();
+        GUI.ACTION up = GUI.ACTION.PLAYER1_UP;
+        GUI.ACTION down  = GUI.ACTION.PLAYER1_DOWN;
+        GUI.ACTION left = GUI.ACTION.PLAYER1_LEFT;
+        GUI.ACTION right  = GUI.ACTION.PLAYER1_RIGHT;
+        GUI.ACTION select = GUI.ACTION.PLAYER1_SELECT;
+
+        if (idx == 1) {
+            up = GUI.ACTION.PLAYER2_UP;
+            down = GUI.ACTION.PLAYER2_DOWN;
+            left = GUI.ACTION.PLAYER2_LEFT;
+            right = GUI.ACTION.PLAYER2_RIGHT;
+            select = GUI.ACTION.PLAYER2_SELECT;
         }
-        else if (chef.getIndex() == 1) {
-            if (actions.contains(GUI.ACTION.PLAYER2_UP)) {
-                moveChefUp();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER2_DOWN)) {
-                moveChefDown();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER2_LEFT)) {
-                moveChefLeft();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER2_RIGHT)) {
-                moveChefRight();
-            }
-            if (actions.contains(GUI.ACTION.PLAYER2_SELECT)) {
-                chefSelect();
-            }
-        }
+
+        if (actions.contains(up)) moveChefUp();
+        if (actions.contains(down)) moveChefDown();
+        if (actions.contains(left)) moveChefLeft();
+        if (actions.contains(right)) moveChefRight();
+        if (actions.contains(select)) chefSelect();
     }
 }
