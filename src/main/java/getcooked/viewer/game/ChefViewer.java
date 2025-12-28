@@ -3,7 +3,6 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.model.game.elements.grabable.food.*;
 import getcooked.viewer.Sprite;
 
 import java.awt.*;
@@ -25,7 +24,7 @@ public class ChefViewer extends ElementViewer<Chef>{
             case LEFT -> new Sprite("sprites/chef" + index + "_left.png");
             case RIGHT -> new Sprite("sprites/chef" + index + "_right.png");
         };
-        sprite.draw(gui, chef.getX(), chef.getY(), 0);
+        sprite.draw(gui, chef.getX(), chef.getY(), 0, 0);
         if(chef.isHoldingSomething()){
             Grabable grabable = chef.getItem();
             grabable.getViewer().draw(grabable, gui);

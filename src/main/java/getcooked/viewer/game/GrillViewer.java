@@ -14,6 +14,6 @@ public class GrillViewer extends ElementViewer<Grill>{
         if(grill.isEmpty()) sprite = new Sprite("sprites/empty_grill.png");
         else if (grill.isExecuting()) sprite = new Sprite("sprites/grill_cooking.png");
         else sprite = new Sprite("sprites/grill_finished.png");
-        sprite.draw(gui, grill.getX(), grill.getY(), 0);
+        sprite.draw(gui, grill.getX(), grill.getY(), 0, 0);
     }
 }

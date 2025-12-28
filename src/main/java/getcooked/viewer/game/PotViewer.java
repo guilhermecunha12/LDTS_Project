@@ -3,7 +3,6 @@ package getcooked.viewer.game;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import getcooked.gui.GUI;
 import getcooked.viewer.Sprite;
-import static getcooked.viewer.Sprite.SCALE;
 
 import java.awt.*;
 import java.io.IOException;
@@ -17,6 +16,6 @@ public class PotViewer extends ElementViewer<Pot>{
         if (pot.isEmpty()) sprite = new Sprite("sprites/empty_pot.png");
         else if (pot.isExecuting()) sprite = new Sprite("sprites/pot_cooking.png");
         else sprite = new Sprite("sprites/pot_finished.png");
-        sprite.draw(gui, pot.getX(), pot.getY(), 0);
+        sprite.draw(gui, pot.getX(), pot.getY(), 0, 0);
     }
 }

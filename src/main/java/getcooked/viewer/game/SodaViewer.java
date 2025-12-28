@@ -8,12 +8,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
 public class SodaViewer extends ElementViewer<Soda> {
     @Override
     public void draw(Soda element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/soda.png");
-        sprite.draw(gui, element.getX(), element.getY(), 5);
+        sprite.draw(gui, element.getX(), element.getY(), 0, 5);
     }
 }

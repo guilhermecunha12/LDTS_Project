@@ -8,8 +8,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
 public class KebabCutterViewer extends ElementViewer<KebabCutter>{
     @Override
     public void draw(KebabCutter kebabCutter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
@@ -17,7 +15,7 @@ public class KebabCutterViewer extends ElementViewer<KebabCutter>{
         if(kebabCutter.isFinished()){
             sprite = new Sprite("sprites/kebab_cutter_cutted.png");
         }
-        sprite.draw(gui, kebabCutter.getX(), kebabCutter.getY(), 0);
+        sprite.draw(gui, kebabCutter.getX(), kebabCutter.getY(), 0, 0);
 
     }
 }

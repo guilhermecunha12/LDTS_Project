@@ -8,8 +8,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
 public class FryerViewer extends ElementViewer<Fryer>{
 
     @Override
@@ -28,6 +26,6 @@ public class FryerViewer extends ElementViewer<Fryer>{
             if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_fryer_finished.png");
             else sprite = new Sprite("sprites/right_fryer_finished.png");
         }
-        sprite.draw(gui, fryer.getX(), fryer.getY(), 0);
+        sprite.draw(gui, fryer.getX(), fryer.getY(), 0, 0);
     }
 }

@@ -11,7 +11,7 @@ public class Game {
     private final AudioManager audioManager;
     public static final int FPS = 15; // Frames per second
 
-    public Game() throws Exception{
+    public Game() throws Exception {
         this.state = new MainMenuState(new MainMenu());
         this.gui = new LanternaGUI();
         this.audioManager = new AudioManager();

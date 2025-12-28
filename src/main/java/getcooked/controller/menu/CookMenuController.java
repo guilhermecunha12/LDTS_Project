@@ -46,6 +46,5 @@ public class CookMenuController extends Controller<CookMenu> {
         if (getModel().isSelected1Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(true)));
         else if(getModel().isSelected2Player()) game.changeState(new ControlsInfoState(new ControlsInfoMenu(false)));
         else if(getModel().isSelectedBack()) game.changeState(new MainMenuState(new MainMenu()));
-
     }
 }

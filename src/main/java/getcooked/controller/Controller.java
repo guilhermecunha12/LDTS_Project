@@ -9,7 +9,7 @@ import java.util.Set;
 public abstract class Controller<T> {
     private final T model;
 
-    public Controller(T model) {
+    protected Controller(T model) {
         this.model = model;
     }
 

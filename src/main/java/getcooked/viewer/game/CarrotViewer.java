@@ -1,17 +1,12 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.viewer.Sprite;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import static getcooked.model.game.elements.grabable.food.FoodState.CHOPPED;
-import static getcooked.model.game.elements.grabable.food.FoodState.RAW;
-import static getcooked.viewer.Sprite.SCALE;
 
 public class CarrotViewer extends ElementViewer<Carrot> {
 
@@ -21,6 +16,6 @@ public class CarrotViewer extends ElementViewer<Carrot> {
             case RAW -> new Sprite("sprites/raw_carrot.png");
             case CHOPPED -> new Sprite("sprites/chopped_carrot.png");
         };
-        sprite.draw(gui, element.getX(), element.getY(), 5);
+        sprite.draw(gui, element.getX(), element.getY(), 0, 5);
     }
 }

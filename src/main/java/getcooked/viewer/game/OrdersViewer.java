@@ -3,7 +3,6 @@ package getcooked.viewer.game;
 import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Order;
-import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.viewer.Sprite;
 import getcooked.viewer.Viewer;
@@ -41,11 +40,11 @@ public class OrdersViewer extends Viewer<List<Order>> {
                 default -> throw new IllegalStateException("Unexpected value: " + curDishType);
             };
 
-            sprite.draw(gui, (double) 270 / SCALE, (double) (70 + ySpacing * i) / SCALE, 0);
+            sprite.draw(gui, 270 / SCALE,70 / SCALE, 6, 10 + ySpacing * i);
 
             Position curPos = new Position(271, (72 + ySpacing * i));
             gui.drawText(curPos, formatString(curDishType.toString()), "#000000");
-            gui.drawText(new Position(curPos.getX(), curPos.getY() + 8),
+            gui.drawText(new Position(curPos.getX(), curPos.getY() + 9),
             String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000");
         }
     }
