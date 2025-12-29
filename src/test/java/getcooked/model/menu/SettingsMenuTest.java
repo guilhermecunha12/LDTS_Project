@@ -33,4 +33,30 @@ class SettingsMenuTest {
 
         assertEquals("Background Music OFF", menu.getEntry(0));
     }
+
+    @Test
+    void testUpdateVolumePercentageReflectsCurrentPercentage() {
+        when(audioManager.getCurrentPercentage()).thenReturn(75);
+        menu.updateVolumePercentage();
+
+        assertEquals("Background Music Volume < 75 >", menu.getEntry(1));
+    }
+
+    @Test
+    void testIsSelectedMethods() {
+        menu.currentEntry = 0;
+        assertTrue(menu.isSelectedVolume());
+        assertFalse(menu.isSelectedBackgroundVolume());
+        assertFalse(menu.isSelectedBack());
+
+        menu.currentEntry = 1;
+        assertFalse(menu.isSelectedVolume());
+        assertTrue(menu.isSelectedBackgroundVolume());
+        assertFalse(menu.isSelectedBack());
+
+        menu.currentEntry = 2;
+        assertFalse(menu.isSelectedVolume());
+        assertFalse(menu.isSelectedBackgroundVolume());
+        assertTrue(menu.isSelectedBack());
+    }
 }
