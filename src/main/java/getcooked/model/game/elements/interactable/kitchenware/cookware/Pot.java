@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.interactable.kitchenware.cookware;
 
+import getcooked.Game;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.food.Carrot;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Pot extends Cookware {
 
     public Pot(int x, int y){
-        super(x,y, new TimedBehaviour(4));
+        super(x,y, new TimedBehaviour(4*Game.FPS));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 
@@ -32,9 +33,7 @@ public class Pot extends Cookware {
 
     @Override
     protected Dish createFinishedDish(){
-        Dish result = null;
-        if (content instanceof Potato) result = new Dish(DishType.POTATO_SOUP);
-        else if (content instanceof Carrot) result = new Dish(DishType.CARROT_SOUP);
-        return result;
+        DishType type  = content.getCookedDishType();
+        return type != null ? new Dish(type) : null;
     }
 }

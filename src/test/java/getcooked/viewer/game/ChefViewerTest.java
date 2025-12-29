@@ -47,7 +47,7 @@ public class ChefViewerTest {
         when(chef.getItem()).thenReturn(plate);
         when(chef.getPosition()).thenReturn(position);
         when(plate.getContent()).thenReturn(dish);
-        when(dish.getType()).thenReturn(DishType.POTATO_SOUP);
+        when(dish.type()).thenReturn(DishType.POTATO_SOUP);
 
         chefViewer.draw(chef, gui);
 

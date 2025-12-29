@@ -1,24 +1,18 @@
 package getcooked.model.game.elements.interactable;
 
-import getcooked.gui.GUI;
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Interactable;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.viewer.Sprite;
 import getcooked.viewer.game.CounterViewer;
 import getcooked.viewer.game.ElementViewer;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
-public class Counter extends Interactable{
+public class Counter extends Interactable {
 
     private Grabable content;
-    private char type;
+    private final char type;
 
-    public Counter(int x, int y, char type){
+    public Counter(int x, int y, char type) {
         super(x,y);
         this.type = type;
     }
@@ -40,8 +34,8 @@ public class Counter extends Interactable{
         if (!chef.isHoldingSomething() && !this.isEmpty()){
             chef.pickUp(content);
             this.setContent(null);
-        }
-        else if (chef.isHoldingSomething() && this.isEmpty()){
+
+        } else if (chef.isHoldingSomething() && this.isEmpty()) {
             Grabable grabable = chef.drop();
             this.setContent(grabable);
         }

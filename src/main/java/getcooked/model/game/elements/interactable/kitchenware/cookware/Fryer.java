@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.interactable.kitchenware.cookware;
 
+import getcooked.Game;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.food.Food;
@@ -13,10 +14,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Fryer extends Cookware {
-    private char type;
+    private final char type;
 
     public Fryer(int x, int y, char type) {
-        super(x, y, new TimedBehaviour(4));
+        super(x, y, new TimedBehaviour(4*Game.FPS));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class));
         this.type = type;
     }
@@ -36,7 +37,7 @@ public class Fryer extends Cookware {
         return new Dish(DishType.FRIES);
     }
 
-    public char  getType() {
+    public char getType() {
         return type;
     }
 }

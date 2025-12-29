@@ -20,24 +20,21 @@ public class MainMenuController extends Controller<MainMenu> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actions, long time) throws IOException {
-        // iterate over the set of actions
         for(GUI.ACTION action : actions){
             switch (action){
-                // Considering that we want to use arrows to move in the mene
-                case PLAYER2_UP:
-                    getModel().previousEntry();
-                    break;
-                case PLAYER2_DOWN:
-                    getModel().nextEntry();
-                    break;
-                case PLAYER2_SELECT:
-                    if(getModel().isSelectedCook()) game.changeState(new CookMenuState(new CookMenu()));
-                    if(getModel().isSelectedSettings()) game.changeState(new SettingsMenuState(new SettingsMenu(game.getAudioManager())));
-                    if(getModel().isSelectedExit()) game.changeState(null);
-                    break;
-                default:
-                    break;
+                // Considering that we want to use arrows to move in the menu
+                case PLAYER2_UP: getModel().previousEntry(); break;
+                case PLAYER2_DOWN: getModel().nextEntry(); break;
+                case PLAYER2_SELECT: selectEntry(game); break;
+                default: break;
             }
         }
+    }
+
+    private void selectEntry(Game game) {
+        if(getModel().isSelectedCook()) game.changeState(new CookMenuState(new CookMenu()));
+        if(getModel().isSelectedSettings()) game.changeState(
+                new SettingsMenuState(new SettingsMenu(game.getAudioManager())));
+        if(getModel().isSelectedExit()) game.changeState(null);
     }
 }

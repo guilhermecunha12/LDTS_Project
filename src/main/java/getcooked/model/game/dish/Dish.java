@@ -1,18 +1,6 @@
 package getcooked.model.game.dish;
 
-import java.util.Objects;
-
-public class Dish {
-
-    private final DishType type;
-
-    public Dish(DishType type) {
-        this.type = type;
-    }
-
-    public DishType getType() {
-        return type;
-    }
+public record Dish(DishType type) {
 
     @Override
     public boolean equals(Object obj) {
@@ -22,10 +10,5 @@ public class Dish {
 
         Dish dish = (Dish) obj;
         return type == dish.type;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type);
     }
 }

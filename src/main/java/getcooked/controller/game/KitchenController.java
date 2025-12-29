@@ -5,6 +5,7 @@ import getcooked.controller.Controller;
 import getcooked.gui.GUI;
 import getcooked.model.game.*;
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.model.menu.GameOverMenu;
 import getcooked.states.game.KitchenState;
@@ -12,14 +13,23 @@ import getcooked.states.menu.EscapeMenuState;
 import getcooked.states.menu.GameOverState;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class KitchenController extends Controller<Kitchen> {
+    private final List<ChefController> chefControllers;
 
     public KitchenController(Kitchen kitchen) {
         super(kitchen);
+        this.chefControllers = new ArrayList<>();
+
+        for(int i = 0; i < kitchen.getChefs().size(); i++) {
+            Chef chef = kitchen.getChefs().get(i);
+            ChefController chefController = new ChefController(chef, kitchen);
+            chefControllers.add(chefController);
+        }
     }
 
     @Override
@@ -31,10 +41,12 @@ public class KitchenController extends Controller<Kitchen> {
             game.changeState(new EscapeMenuState(new EscapeMenu()));
         }
 
-        for(int i = 0; i < kitchen.getChefs().size(); i++) {
-            Chef chef = kitchen.getChefs().get(i);
-            ChefController chefController = new ChefController(chef, kitchen);
+        for(ChefController chefController : this.chefControllers) {
             chefController.step(game, actions, time);
+        }
+
+        for (Cookware cookware : kitchen.getCookwares()) {
+            cookware.update();
         }
 
         this.manageOrders();

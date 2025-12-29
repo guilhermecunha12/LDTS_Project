@@ -4,11 +4,12 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Tile;
-import getcooked.model.game.elements.interactable.dispenser.*;
+import getcooked.model.game.elements.Interactable;
 import getcooked.viewer.Viewer;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class KitchenViewer extends Viewer<Kitchen> {
@@ -22,13 +23,13 @@ public class KitchenViewer extends Viewer<Kitchen> {
     }
 
     @Override
-    public void drawElements(GUI gui) throws Exception {
+    public void drawElements(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         gui.drawText(new Position(gui.getWidth() - 85, 2),
                 "Level: " + getModel().getLevel(), "#ffffff");
 
-        List<Tile> tiles = getModel().getTiles();
-        for(Tile tile : tiles) {
-            tile.getViewer().draw(tile, gui);
+        List<Interactable> interactables = getModel().getInteractables();
+        for(Interactable interactable : interactables) {
+            interactable.getViewer().draw(interactable, gui);
         }
 
         List<Chef> chefs = getModel().getChefs();

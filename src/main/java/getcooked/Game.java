@@ -5,20 +5,35 @@ import getcooked.sound.AudioManager;
 import getcooked.states.State;
 import getcooked.states.menu.MainMenuState;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Logger;
+
 public class Game {
     private State<?> state;
     private final LanternaGUI gui;
     private final AudioManager audioManager;
     public static final int FPS = 15; // Frames per second
 
-    public Game() throws Exception{
+    public Game() throws IOException, URISyntaxException, FontFormatException,
+            UnsupportedAudioFileException, LineUnavailableException {
         this.state = new MainMenuState(new MainMenu());
         this.gui = new LanternaGUI();
         this.audioManager = new AudioManager();
     }
 
-    public static void main(String[] args) throws Exception {
-        new Game().start();
+    public static void main(String[] args) {
+        try {
+            new Game().start();
+        } catch (IOException | URISyntaxException | FontFormatException | InterruptedException |
+                 UnsupportedAudioFileException | LineUnavailableException e) {
+            Logger.getLogger(Game.class.getName()).severe("Failed to start game: " + e.getMessage());
+            Thread.currentThread().interrupt();
+            System.exit(1);
+        }
     }
 
     public void changeState(State<?> state) {
@@ -29,7 +44,7 @@ public class Game {
         return this.audioManager;
     }
 
-    private void start() throws Exception { // fps missing / update frequency
+    private void start() throws IOException, URISyntaxException, FontFormatException, InterruptedException {
 
         audioManager.playBackgroundMusic();
         int frameTime = 1000 / FPS;
@@ -42,11 +57,7 @@ public class Game {
             long sleepTime = frameTime - elapsedTime; // time remaining for the current frame
 
             if (sleepTime > 0) {
-                try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                Thread.sleep(sleepTime);
             }
         }
         audioManager.stopBackgroundMusic();

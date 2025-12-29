@@ -21,9 +21,9 @@ public class LivesViewer extends Viewer<Kitchen> {
     public void drawElements(GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/life.png");
         gui.drawText(new Position(270, 20), "Lives: ", "#ffffff");
+        Position pos = new Position(270, 30);
         for (int i = 0; i < getModel().getLives(); i++) {
-            Position curPos = new Position(270 + 10*i, 30);
-            sprite.draw(gui, (double) curPos.getX() / SCALE, (double) curPos.getY() / SCALE, 0);
+            sprite.draw(gui, pos.x() / SCALE, pos.y() / SCALE, 5+10*i, 5);
         }
     }
 }

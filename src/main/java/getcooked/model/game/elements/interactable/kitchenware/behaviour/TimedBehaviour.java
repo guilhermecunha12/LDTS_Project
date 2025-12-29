@@ -3,24 +3,20 @@ package getcooked.model.game.elements.interactable.kitchenware.behaviour;
 import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
 
 public class TimedBehaviour implements ExecutionBehaviour {
-    private final long cookingTime;
+    private final int timeRequired;
+    private int timeLeft;
 
-    public TimedBehaviour(long cookingTime) {
-        this.cookingTime = cookingTime;
+    public TimedBehaviour(int timeRequired) {
+        this.timeRequired = timeRequired;
+        this.timeLeft = timeRequired;
     }
 
     @Override
     public void execute(Kitchenware kitchenware) {
-        Thread.ofVirtual().start(() -> {
-            try {
-                Thread.sleep(cookingTime * 1000);
-            } catch (InterruptedException e) {
-                kitchenware.finish();
-                throw new RuntimeException(e);
-            }
+        timeLeft--;
+        if (timeLeft == 0) {
             kitchenware.finish();
-        });
+            timeLeft = timeRequired;
+        }
     }
-
-
 }

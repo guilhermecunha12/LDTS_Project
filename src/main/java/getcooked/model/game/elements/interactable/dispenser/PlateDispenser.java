@@ -11,7 +11,7 @@ public class PlateDispenser extends Dispenser{
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<PlateDispenser> getViewer() {
         return new PlateDispenserViewer();
     }
 

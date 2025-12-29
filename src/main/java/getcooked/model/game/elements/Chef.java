@@ -1,24 +1,17 @@
 package getcooked.model.game.elements;
 
-import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.viewer.Sprite;
 import getcooked.viewer.game.ChefViewer;
 import getcooked.viewer.game.ElementViewer;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import static getcooked.viewer.Sprite.SCALE;
 
 public class Chef extends Element {
     public enum Direction {UP, DOWN, LEFT, RIGHT}
 
     private Grabable item;
     private Direction direction;
-    private int index;
+    private final int index;
 
     public Chef(int x, int y, int index) {
         super(x, y);

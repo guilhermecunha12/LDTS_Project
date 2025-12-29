@@ -8,13 +8,11 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
 
-
-public class PotatoDispenserViewer extends ElementViewer<PotatoDispenser> {
+public class PotatoDispenserViewer implements ElementViewer<PotatoDispenser> {
     @Override
     public void draw(PotatoDispenser model, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/potato_dispenser.png");
-        sprite.draw(gui, model.getX(), model.getY(), 0);
+        sprite.draw(gui, model.getX(), model.getY(), 0, 0);
     }
 }

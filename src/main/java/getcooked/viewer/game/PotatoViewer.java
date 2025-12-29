@@ -8,9 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
-public class PotatoViewer extends ElementViewer<Potato>{
+public class PotatoViewer implements ElementViewer<Potato>{
     @Override
     public void draw(Potato potato, GUI gui) throws IOException, URISyntaxException, FontFormatException {
 
@@ -19,6 +17,6 @@ public class PotatoViewer extends ElementViewer<Potato>{
             case CHOPPED -> new Sprite("sprites/chopped_potato.png");
         };
 
-        sprite.draw(gui, potato.getX(), potato.getY(), 5);
+        sprite.draw(gui, potato.getX(), potato.getY(), 0, 5);
     }
 }

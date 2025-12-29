@@ -3,7 +3,6 @@ package getcooked.model.game.elements.interactable.dispenser;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.food.Beef;
 import getcooked.viewer.game.BeefDispenserViewer;
-import getcooked.viewer.game.BeefViewer;
 import getcooked.viewer.game.ElementViewer;
 
 public class BeefDispenser extends Dispenser {
@@ -12,7 +11,7 @@ public class BeefDispenser extends Dispenser {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<BeefDispenser> getViewer() {
         return new BeefDispenserViewer();
     }
 

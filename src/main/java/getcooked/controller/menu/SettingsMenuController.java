@@ -26,7 +26,7 @@ public class SettingsMenuController extends Controller<SettingsMenu> {
                 case PLAYER2_LEFT: volumeDecrease(game); break;
                 case PLAYER2_RIGHT: volumeIncrease(game); break;
                 case PLAYER2_SELECT: selectOption(game); break;
-                default : break;
+                default: break;
             }
         }
     }

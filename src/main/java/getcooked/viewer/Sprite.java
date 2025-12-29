@@ -13,10 +13,10 @@ import java.util.Objects;
 
 public class Sprite {
     public static final int SCALE = 12;
-    private BufferedImage image;
+    private final BufferedImage image;
 
     public Sprite(String filepath) throws IOException {
-        URL resource = getClass().getClassLoader().getResource(filepath);
+        URL resource = Thread.currentThread().getContextClassLoader().getResource(filepath);
         this.image = ImageIO.read(Objects.requireNonNull(resource));
     }
 
@@ -24,27 +24,28 @@ public class Sprite {
         return image;
     }
 
-    public void draw(GUI gui, double x, double y, double offset) throws IOException, URISyntaxException, FontFormatException {
-        x *= SCALE;
-        y = y * SCALE + offset;
+    public void draw(GUI gui, int x, int y, int xOffset, int yOffset)
+            throws IOException, URISyntaxException, FontFormatException {
+        x = x * SCALE + xOffset;
+        y = y * SCALE + yOffset;
         for (int dx = 0; dx < image.getWidth(); dx++) {
             for (int dy = 0; dy < image.getHeight(); dy++) {
-                int ARGB = image.getRGB(dx, dy);
-                if (getTransparency(ARGB) == 0)
+                int argb = image.getRGB(dx, dy);
+                if (getTransparency(argb) == 0)
                     continue;
-                gui.drawPixel(x + dx, y + dy, getRGB(ARGB));
+                gui.drawPixel(x + dx, y + dy, getRGB(argb));
             }
         }
     }
 
-    private int getTransparency(int ARGB) {
-        return ARGB >> 24;
+    private static int getTransparency(int argb) {
+        return argb >> 24;
     }
 
-    private TextColor getRGB(int ARGB) {
-        int red = ARGB >> 16 & 0xFF;
-        int green = ARGB >> 8 & 0xFF;
-        int blue = ARGB & 0xFF;
+    private static TextColor getRGB(int argb) {
+        int red = (argb >> 16) & 0xFF;
+        int green = (argb >> 8) & 0xFF;
+        int blue = argb & 0xFF;
         return new TextColor.RGB(red, green, blue);
     }
 }

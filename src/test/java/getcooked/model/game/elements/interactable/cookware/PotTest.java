@@ -72,7 +72,7 @@ public class PotTest {
         pot.tryCook();
         //cooked = true now
 
-        assertEquals(getcooked.model.game.dish.DishType.POTATO_SOUP,pot.createFinishedDish().getType());
+        assertEquals(getcooked.model.game.dish.DishType.POTATO_SOUP,pot.createFinishedDish().type());
         assertFalse(pot.isCooked());
     }
 
@@ -85,7 +85,7 @@ public class PotTest {
         pot.tryCook();
         //cooked = true now
 
-        assertEquals(getcooked.model.game.dish.DishType.CARROT_SOUP, pot.createFinishedDish().getType());
+        assertEquals(getcooked.model.game.dish.DishType.CARROT_SOUP, pot.createFinishedDish().type());
         assertFalse(pot.isCooked());
     }
 

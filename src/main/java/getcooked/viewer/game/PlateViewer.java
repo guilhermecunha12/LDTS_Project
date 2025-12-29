@@ -9,9 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
-public class PlateViewer extends ElementViewer<Plate>{
+public class PlateViewer implements ElementViewer<Plate>{
     @Override
     public void draw(Plate plate, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite;
@@ -19,9 +17,9 @@ public class PlateViewer extends ElementViewer<Plate>{
         Dish dish = plate.getContent();
         if (dish == null){
             sprite = new Sprite("sprites/plate.png");
-        }
-        else{
-            switch (dish.getType()) {
+
+        } else{
+            switch (dish.type()) {
                 case POTATO_SOUP -> sprite = new Sprite("sprites/potato_soup.png");
                 case CARROT_SOUP ->  sprite = new Sprite("sprites/carrot_soup.png");
                 case STEAK ->  sprite = new Sprite("sprites/steak.png");
@@ -31,6 +29,6 @@ public class PlateViewer extends ElementViewer<Plate>{
             }
         }
 
-        sprite.draw(gui, plate.getX(), plate.getY(), 5);
+        sprite.draw(gui, plate.getX(), plate.getY(), 0, 5);
     }
 }

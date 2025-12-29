@@ -1,9 +1,11 @@
 package getcooked.model.game;
 
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.Interactable;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
+import getcooked.model.game.elements.interactable.DeliverySpot;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 
 import java.util.*;
 
@@ -15,19 +17,30 @@ public abstract class KitchenBuilder {
     protected final List<DishType> availableDishTypes;
     private final int numPlayers;
     private final int ordersDelivered;
+    private final Random random = new Random(); // for order generation
+    protected final List<DeliverySpot> deliverySpots; // to later set order manager to each of them
+    protected final List<Cookware> cookwares; // to later update its cooking state every step (timed behaviour)
 
     protected KitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) {
-        // After the level 10 the kitchen to be drawn is always the same
+        // After level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
         this.lives = lives;
-        this.availableDishTypes = new ArrayList<>(); // empty list
+        this.availableDishTypes = new ArrayList<>();
         this.ordersDelivered = ordersDelivered;
+        this.deliverySpots = new ArrayList<>();
+        this.cookwares = new ArrayList<>();
     }
 
     public Kitchen createKitchen() {
-        return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers, createChefs(), createTiles(), this.lives,
-                new OrderManager(createOrders(), new ArrayList<>(), orderFrequency(this.level), this.ordersDelivered));
+        List<Chef> chefs = createChefs();
+        List<Interactable> interactables = createInteractables();
+        OrderManager orderManager = new OrderManager(createOrders(), new ArrayList<>(),
+                orderFrequency(this.level), this.ordersDelivered);
+        for(DeliverySpot deliverySpot : deliverySpots) {
+            deliverySpot.setOrderManager(orderManager);
+        }
+        return new Kitchen(this.level, this.numPlayers, chefs, interactables, this.lives, orderManager, cookwares);
     }
 
     // Creates the kitchen based on the width and the height of the file
@@ -35,7 +48,7 @@ public abstract class KitchenBuilder {
 
     protected abstract int getHeight();
 
-    protected abstract List<Tile> createTiles();
+    protected abstract List<Interactable> createInteractables();
 
     protected void addAvailableDishType(DishType dishType) {
         this.availableDishTypes.add(dishType);
@@ -54,12 +67,11 @@ public abstract class KitchenBuilder {
         return chefs;
     }
 
-    private int ordersPerLevel(int level) {
+    private static int ordersPerLevel(int level) {
         return level + 2;
-        //return 2 + (int)(level/(0.3*Math.sqrt(level)));
     }
 
-    private int orderTimeLimit(int level) {
+    private static int orderTimeLimit(int level) {
         double baseSeconds = 40.0;
         double minSeconds  = 15.0;
         double seconds     = baseSeconds - level;
@@ -73,20 +85,11 @@ public abstract class KitchenBuilder {
             return (int)Math.max(7.0*FPS, (baseSeconds - 0.5*level)*FPS);
         else
             return (int)Math.max(5.0*FPS, (baseSeconds - level)*FPS);
-
-        /*
-        double factor1p = 2.6;
-        double factor2p = 4.5;
-        int decay = (int)(factor1p * FPS * Math.log10(level));
-        if (this.numPlayers == 2) decay = (int)(factor2p * FPS * Math.log10(level));
-        return Math.max(10*FPS, 15*FPS - decay);
-        */
     }
 
     private Deque<Order> createOrders() {
-        Deque<Order> res = new ArrayDeque<>(); // empty list
+        Deque<Order> res = new ArrayDeque<>();
         int numOrders = ordersPerLevel(this.level);
-        Random random = new Random();
           
         for (int i = 0; i < numOrders; i++) {
             DishType randomDishType = getRandomDishType(random);
@@ -103,12 +106,14 @@ public abstract class KitchenBuilder {
     }
 
     // constructor for testing, injecting availableDishTypes
-    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes, int ordersDelivered) {
+    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes, int ordersDelivered){
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
         this.lives = lives;
         this.availableDishTypes = availableDishTypes;
         this.ordersDelivered = ordersDelivered;
+        this.deliverySpots = new ArrayList<>();
+        this.cookwares = new ArrayList<>();
     }
 }

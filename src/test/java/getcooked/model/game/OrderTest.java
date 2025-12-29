@@ -18,7 +18,7 @@ public class OrderTest {
 
     @Test
     void testGetDesiredDish() {
-        assertEquals(DishType.POTATO_SOUP, order.getDesiredDish().getType());
+        assertEquals(DishType.POTATO_SOUP, order.getDesiredDish().type());
     }
 
     @Test

@@ -16,7 +16,6 @@ public class CookMenuViewer extends Viewer<CookMenu> {
         gui.paint();
 
         int middleX = gui.getWidth() / 2;
-        String bgColor = gui.getBackgroundColor();
         gui.drawText(new Position(middleX - 33, gui.getHeight()/12), "Get Ready To Cook", "#ffcf40");
 
         // define positions for the text boxes

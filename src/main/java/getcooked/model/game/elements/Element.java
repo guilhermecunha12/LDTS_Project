@@ -2,8 +2,6 @@ package getcooked.model.game.elements;
 import getcooked.model.Position;
 import getcooked.viewer.game.ElementViewer;
 
-import java.awt.*;
-
 public abstract class Element {
 
     private Position position;
@@ -17,10 +15,10 @@ public abstract class Element {
     }
 
     public int getX() {
-        return position.getX();
+        return position.x();
     }
     public int getY() {
-        return position.getY();
+        return position.y();
     }
 
     public void setPosition(Position position) {

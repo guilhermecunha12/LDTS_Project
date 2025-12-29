@@ -3,7 +3,6 @@ package getcooked.model.game.elements.interactable.dispenser;
 import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.food.Soda;
 import getcooked.viewer.game.ElementViewer;
-import getcooked.viewer.game.SaladDispenserViewer;
 import getcooked.viewer.game.SodaDispenserViewer;
 
 public class SodaDispenser extends Dispenser {

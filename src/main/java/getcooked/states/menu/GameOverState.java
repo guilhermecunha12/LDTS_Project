@@ -3,7 +3,6 @@ package getcooked.states.menu;
 import getcooked.controller.Controller;
 import getcooked.controller.menu.GameOverController;
 import getcooked.model.menu.GameOverMenu;
-import getcooked.model.menu.MainMenu;
 import getcooked.states.State;
 import getcooked.viewer.Viewer;
 import getcooked.viewer.menu.GameOverViewer;

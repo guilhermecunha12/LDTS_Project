@@ -1,7 +1,9 @@
 package getcooked.model.game.elements.interactable.kitchenware;
 
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
-import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.ExecutionBehaviour;
 
 public abstract class Kitchenware extends Interactable {
@@ -47,4 +49,15 @@ public abstract class Kitchenware extends Interactable {
     protected void processFood() {
         this.executionBehaviour.execute(this);
     }
+
+    // part of visitor pattern: default implementation is to do nothing
+    // then, each subclass implements this method with specific code
+    // only if it should do something when chef is holding food.
+    public void acceptFoodInChef(Food food, Chef chef) {}
+
+    // part of visitor pattern: default implementation is to do nothing
+    // then, each subclass implements this method with specific code
+    // only if it should do something when chef is holding a plate.
+    public void acceptPlateInChef(Plate plate, Chef chef) {}
+
 }

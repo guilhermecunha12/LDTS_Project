@@ -1,23 +1,16 @@
 package getcooked.model.game.elements.interactable.kitchenware.cutter;
 
-import getcooked.gui.GUI;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
-import getcooked.model.game.elements.grabable.food.Kebab;
+import getcooked.model.game.elements.grabable.food.Food;
+import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.InputBehaviour;
-import getcooked.viewer.Sprite;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.KebabCutterViewer;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import static getcooked.viewer.Sprite.SCALE;
-
-public class KebabCutter extends Cutter {
+public class KebabCutter extends Kitchenware {
 
     public KebabCutter(int x, int y) {
         super(x, y, new InputBehaviour(5));
@@ -30,21 +23,45 @@ public class KebabCutter extends Cutter {
 
     @Override
     public void finish() {
-        content = new Kebab(this.getX(), this.getY());
+        content = new KebabDummy(getX(), getY());
         super.finish();
+    }
+
+    // Kebab is only used to set KebabCutter's content different from null
+    private static class KebabDummy extends Food {
+        protected KebabDummy(int x, int y) {
+            super(x, y);
+        }
+
+        @Override
+        public DishType getCookedDishType() {
+            return DishType.KEBAB;
+        }
+
+        @Override
+        public ElementViewer<KebabDummy> getViewer() {
+            return null;
+        }
     }
 
     @Override // KebabCutter requires that the chef has a plate in hand
     public void interact(Chef chef) {
         if (isFinished()) {
-            if (chef.isHoldingSomething() && chef.getItem() instanceof Plate plate && !plate.hasContent()) {
-                plate.setContent(new Dish(DishType.KEBAB));
-                clear();
+            if (chef.isHoldingSomething()) {
+                chef.getItem().interactWithKitchenware(this, chef);
             }
         } else {
             if (!chef.isHoldingSomething() && isEmpty()) { // no kebab yet generated
                 processFood();
             }
+        }
+    }
+
+    @Override
+    public void acceptPlateInChef(Plate plate, Chef chef) {
+        if (!plate.hasContent()) {
+            plate.setContent(new Dish(content.getCookedDishType()));
+            clear();
         }
     }
 }

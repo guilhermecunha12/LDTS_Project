@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.grabable.food;
 
+import getcooked.model.game.dish.DishType;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.SodaViewer;
 
@@ -10,7 +11,12 @@ public class Soda extends Food {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public DishType getCookedDishType() {
+        return DishType.SODA;
+    }
+
+    @Override
+    public ElementViewer<Soda> getViewer() {
         return new SodaViewer();
     }
 }

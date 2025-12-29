@@ -36,9 +36,9 @@ class ControlsInfoMenuViewerTest {
         when(controlsInfoMenu.getEntry(4)).thenReturn("SPACE: Interact");
         controlsInfoMenuViewer.drawElements(gui);
         Position wPos = new Position(x/6, y/3);
-        Position sPos = new Position(wPos.getX(), wPos.getY() + 3);
-        Position aPos = new Position(sPos.getX() - 3, sPos.getY());
-        Position dPos = new Position(sPos.getX() + 3, sPos.getY());
+        Position sPos = new Position(wPos.x(), wPos.y() + 3);
+        Position aPos = new Position(sPos.x() - 3, sPos.y());
+        Position dPos = new Position(sPos.x() + 3, sPos.y());
         Position spacePos = new Position(x/4, 2*y/3);
         verify(gui, times(1)).changeBackgroundColor("#468499");
         verify(gui, times(2)).getBackgroundColor();

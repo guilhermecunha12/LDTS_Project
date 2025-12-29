@@ -8,14 +8,12 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
-public class TrashViewer extends ElementViewer<Trash> {
+public class TrashViewer implements ElementViewer<Trash> {
 
     @Override
     public void draw(Trash trash, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/trash.png");
-        sprite.draw(gui, trash.getX(), trash.getY(), 0);
+        sprite.draw(gui, trash.getX(), trash.getY(), 0, 0);
     }
 }
 

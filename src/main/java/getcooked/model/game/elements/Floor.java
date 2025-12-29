@@ -1,14 +1,21 @@
 package getcooked.model.game.elements;
 
-import getcooked.gui.GUI;
-import getcooked.viewer.Sprite;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.FloorViewer;
 
-
-public class Floor extends Tile {
+public class Floor extends Interactable {
     public Floor(int x, int y) {
         super(x,y);
+    }
+
+    @Override
+    public boolean isBlocking() {
+        return false;
+    }
+
+    @Override
+    public void interact(Chef chef){
+        // Default implementation ignored
     }
 
     @Override

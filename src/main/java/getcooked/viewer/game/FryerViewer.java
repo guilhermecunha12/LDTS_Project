@@ -8,26 +8,24 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.viewer.Sprite.SCALE;
-
-public class FryerViewer extends ElementViewer<Fryer>{
+public class FryerViewer implements ElementViewer<Fryer>{
 
     @Override
     public void draw(Fryer fryer, GUI gui) throws IOException, URISyntaxException, FontFormatException {
-        Sprite sprite = null;
+        Sprite sprite;
 
         if(fryer.isEmpty()){
             if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_empty_fryer.png");
             else sprite = new Sprite("sprites/right_empty_fryer.png");
-        }
-        else if(fryer.isExecuting()){
+
+        } else if(fryer.isExecuting()){
             if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_fryer_cooking.png");
             else sprite = new Sprite("sprites/right_fryer_cooking.png");
-        }
-        else {
+
+        } else {
             if(fryer.getType() == 'F') sprite = new Sprite("sprites/left_fryer_finished.png");
             else sprite = new Sprite("sprites/right_fryer_finished.png");
         }
-        sprite.draw(gui, fryer.getX(), fryer.getY(), 0);
+        sprite.draw(gui, fryer.getX(), fryer.getY(), 0, 0);
     }
 }
