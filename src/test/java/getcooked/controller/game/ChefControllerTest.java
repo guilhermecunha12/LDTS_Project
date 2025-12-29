@@ -99,7 +99,7 @@ class ChefControllerTest {
     }
 
     @Test
-    void testChefSelect() throws IOException {
+    void testChefSelect() {
         Position frontPos = new Position(5,4);
         Interactable interactable = mock(Interactable.class);
 
