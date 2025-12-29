@@ -46,4 +46,13 @@ class EscapeMenuControllerTest {
 
         verify(game, times(1)).changeState(any(MainMenuState.class));
     }
+
+    @Test
+    void testSelectResume() {
+        when(escapeMenu.isSelectedResume()).thenReturn(true);
+
+        escapeMenuController.step(game, Set.of(GUI.ACTION.PLAYER2_SELECT), 0);
+
+        verify(game, times(1)).changeState(any());
+    }
 }
