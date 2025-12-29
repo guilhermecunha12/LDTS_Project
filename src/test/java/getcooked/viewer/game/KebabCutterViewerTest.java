@@ -1,0 +1,34 @@
+package getcooked.viewer.game;
+
+import getcooked.gui.GUI;
+import getcooked.model.game.elements.interactable.kitchenware.cutter.KebabCutter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static org.mockito.Mockito.*;
+
+class KebabCutterViewerTest {
+    private GUI gui;
+    private KebabCutterViewer kebabCutterViewer;
+
+    @BeforeEach
+    void setUp() {
+        gui = mock(GUI.class);
+        kebabCutterViewer = new KebabCutterViewer();
+    }
+
+    @Test
+    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+        KebabCutter kebabCutter = mock(KebabCutter.class);
+        when(kebabCutter.getX()).thenReturn(0);
+        when(kebabCutter.getY()).thenReturn(0);
+
+        kebabCutterViewer.draw(kebabCutter, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+}
