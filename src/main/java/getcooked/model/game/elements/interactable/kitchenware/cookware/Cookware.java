@@ -2,7 +2,6 @@ package getcooked.model.game.elements.interactable.kitchenware.cookware;
 
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.dish.Dish;
-import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
@@ -31,19 +30,26 @@ public abstract class Cookware extends Kitchenware {
     @Override
     public void interact(Chef chef) {
         if (!isExecuting() && chef.isHoldingSomething()){
-            Grabable held = chef.getItem();
+            chef.getItem().interactWithKitchenware(this, chef);
+        }
+    }
 
-            if (held instanceof Food food && canAdd(food)) {
-                chef.drop();
-                addContent(food);
-                this.start();
-                processFood();
+    @Override
+    public void acceptFood(Food food, Chef chef) {
+        if (canAdd(food)) {
+            chef.drop();
+            addContent(food);
+            this.start();
+            processFood();
+        }
+    }
 
-            } else if (held instanceof Plate plate && this.isFinished() && !plate.hasContent()) {
-                Dish dish = createFinishedDish();
-                plate.setContent(dish);
-                clear();
-            }
+    @Override
+    public void acceptPlate(Plate plate, Chef chef) {
+        if (this.isFinished() && !plate.hasContent()) {
+            Dish dish = createFinishedDish();
+            plate.setContent(dish);
+            clear();
         }
     }
 

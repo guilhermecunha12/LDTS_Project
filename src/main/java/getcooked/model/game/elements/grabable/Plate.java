@@ -2,6 +2,8 @@
 package getcooked.model.game.elements.grabable;
 
 import getcooked.model.game.dish.Dish;
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.PlateViewer;
 
@@ -28,5 +30,10 @@ public class Plate extends Grabable {
 
     public void setContent(Dish dish) {
         this.content = dish;
+    }
+
+    @Override
+    public void interactWithKitchenware(Kitchenware kitchenware, Chef chef) {
+        kitchenware.acceptPlate(this, chef);
     }
 }

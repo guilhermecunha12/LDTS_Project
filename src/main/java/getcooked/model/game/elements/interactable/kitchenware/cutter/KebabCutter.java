@@ -41,14 +41,21 @@ public class KebabCutter extends Cutter {
     @Override // KebabCutter requires that the chef has a plate in hand
     public void interact(Chef chef) {
         if (isFinished()) {
-            if (chef.isHoldingSomething() && chef.getItem() instanceof Plate plate && !plate.hasContent()) {
-                plate.setContent(new Dish(DishType.KEBAB));
-                clear();
+            if (chef.isHoldingSomething()) {
+                chef.getItem().interactWithKitchenware(this, chef);
             }
         } else {
             if (!chef.isHoldingSomething() && isEmpty()) { // no kebab yet generated
                 processFood();
             }
         }
+    }
+
+    @Override
+    public void acceptPlate(Plate plate, Chef chef) {
+        if (!plate.hasContent()) {
+            plate.setContent(new Dish(DishType.KEBAB));
+            clear();
+            }
     }
 }
