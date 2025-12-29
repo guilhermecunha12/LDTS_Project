@@ -27,7 +27,7 @@ public class KebabCutter extends Kitchenware {
         super.finish();
     }
 
-    // Kebab is only used to set KebabCounter's content different from null
+    // Kebab is only used to set KebabCutter's content different from null
     private static class KebabDummy extends Food {
         protected KebabDummy(int x, int y) {
             super(x, y);
