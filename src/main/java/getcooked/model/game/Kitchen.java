@@ -94,7 +94,7 @@ public class Kitchen {
 
     public boolean isEmpty(Position position) {
         for(Tile tile : tiles){
-            if(tile.getPosition().equals(position) && !(tile instanceof Floor))
+            if(tile.getPosition().equals(position) && tile. isBlocking())
                 return false;
         }
         for(Chef chef : chefs){
