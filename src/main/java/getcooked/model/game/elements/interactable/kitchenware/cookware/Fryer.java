@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.interactable.kitchenware.cookware;
 
+import getcooked.Game;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.food.Food;
@@ -16,7 +17,7 @@ public class Fryer extends Cookware {
     private final char type;
 
     public Fryer(int x, int y, char type) {
-        super(x, y, new TimedBehaviour(4));
+        super(x, y, new TimedBehaviour(4*Game.FPS));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class));
         this.type = type;
     }

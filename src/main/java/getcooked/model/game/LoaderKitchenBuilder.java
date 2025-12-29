@@ -72,30 +72,32 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case '4': interactables.add(new Counter(x, y, '4')); break;
                     case 'P': interactables.add(new PlateDispenser(x, y)); break;
                     case 'T': interactables.add(new Trash(x, y)); break;
-                    case 'Q': interactables.add(new Pot(x, y)); break;
                     case 'K': interactables.add(new CounterCutter(x, y)); break;
                     case 'B': interactables.add(new BeefDispenser(x, y)); break;
-                    case 'f': interactables.add(new Fryer(x, y,'f')); break;
+
                     case 'D':
                         DeliverySpot deliverySpot = new DeliverySpot(x, y);
                         interactables.add(deliverySpot);
                         deliverySpots.add(deliverySpot);
                         break;
+
                     case 'p':
                         interactables.add(new PotatoDispenser(x, y));
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
                         break;
                     case 'c':
                         interactables.add(new CarrotDispenser(x, y));
-                        this.addAvailableDishType(DishType.CARROT_SOUP); // for generating orders
+                        this.addAvailableDishType(DishType.CARROT_SOUP);
                         break;
                     case 'S':
                         interactables.add(new SaladDispenser(x, y));
                         this.addAvailableDishType(DishType.SALAD);
                         break;
                     case 'G':
-                        interactables.add(new Grill(x, y));
+                        Grill grill = new Grill(x, y);
+                        interactables.add(grill);
                         this.addAvailableDishType(DishType.STEAK);
+                        cookwares.add(grill);
                         break;
                     case 's':
                         interactables.add(new SodaDispenser(x, y));
@@ -106,8 +108,20 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                         this.addAvailableDishType(DishType.KEBAB);
                         break;
                     case 'F':
-                        interactables.add(new Fryer(x, y,'F'));
+                        Fryer leftFryer = new Fryer(x, y,'F');
+                        interactables.add(leftFryer);
+                        cookwares.add(leftFryer);
                         this.addAvailableDishType(DishType.FRIES);
+                        break;
+                    case 'f':
+                        Fryer rightFryer = new Fryer(x, y,'f');
+                        interactables.add(rightFryer);
+                        cookwares.add(rightFryer);
+                        break;
+                    case 'Q':
+                        Pot pot = new Pot(x, y);
+                        interactables.add(pot);
+                        cookwares.add(pot);
                         break;
 
                     default: break;
