@@ -9,6 +9,11 @@ public abstract class Interactable extends Tile {
         super(x,y);
     }
 
+    @Override
+    public boolean isBlocking() {
+        return true;
+    }
+
     // Each interactable defines what happens to the chef
     public abstract void interact(Chef chef);
 }

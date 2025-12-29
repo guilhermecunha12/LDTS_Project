@@ -9,6 +9,11 @@ public class Floor extends Tile {
     }
 
     @Override
+    public boolean isBlocking() {
+        return false;
+    }
+
+    @Override
     public ElementViewer<Floor> getViewer() {
         return new FloorViewer();
     }
