@@ -4,12 +4,10 @@ import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
-import getcooked.model.game.elements.grabable.food.Kebab;
+import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.InputBehaviour;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.KebabCutterViewer;
-
-import java.awt.*;
 
 public class KebabCutter extends Cutter {
 
@@ -24,8 +22,20 @@ public class KebabCutter extends Cutter {
 
     @Override
     public void finish() {
-        content = new Kebab(this.getX(), this.getY());
+        content = new KebabDummy(getX(), getY());
         super.finish();
+    }
+
+    // Kebab is only used to set KebabCounter's content different from null
+    private static class KebabDummy extends Food {
+        protected KebabDummy(int x, int y) {
+            super(x, y);
+        }
+
+        @Override
+        public ElementViewer<KebabDummy> getViewer() {
+            return null;
+        }
     }
 
     @Override // KebabCutter requires that the chef has a plate in hand

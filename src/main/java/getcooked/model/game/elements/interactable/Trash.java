@@ -5,7 +5,7 @@ import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.TrashViewer;
 
 
-public class Trash extends Interactable{
+public class Trash extends Interactable {
 
     public Trash(int x, int y){
         super(x,y);

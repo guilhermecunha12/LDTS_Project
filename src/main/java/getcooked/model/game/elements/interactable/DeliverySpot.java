@@ -1,6 +1,5 @@
 package getcooked.model.game.elements.interactable;
 
-import getcooked.gui.GUI;
 import getcooked.model.game.Order;
 import getcooked.model.game.OrderManager;
 import getcooked.model.game.dish.Dish;
@@ -9,14 +8,11 @@ import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Salad;
 import getcooked.model.game.elements.grabable.food.Soda;
-import getcooked.viewer.Sprite;
 import getcooked.viewer.game.DeliverySpotViewer;
 import getcooked.viewer.game.ElementViewer;
 
-import java.awt.*;
 import java.util.List;
 
-import static getcooked.viewer.Sprite.SCALE;
 
 public class DeliverySpot extends Interactable {
 
@@ -39,18 +35,16 @@ public class DeliverySpot extends Interactable {
 
     @Override
     public void interact(Chef chef) {
-        if (this.orderManager == null)
-            return;
-
         if (chef.isHoldingSomething()) {
             Dish dish;
-            if (chef.getItem() instanceof Plate plate && plate.hasContent())
-                dish = plate.getContent();
-            else if (chef.getItem() instanceof Soda)
-                dish = new Dish(DishType.SODA);
-            else if (chef.getItem() instanceof Salad)
-                dish = new Dish(DishType.SALAD);
-            else return;
+            switch (chef.getItem()) {
+                case Plate plate when plate.hasContent() -> dish = plate.getContent();
+                case Soda ignored -> dish = new Dish(DishType.SODA);
+                case Salad ignored -> dish = new Dish(DishType.SALAD);
+                case null, default -> {
+                    return; // when chef is holding something else
+                }
+            }
 
             List<Order> activeOrders = orderManager.getActiveOrders();
 

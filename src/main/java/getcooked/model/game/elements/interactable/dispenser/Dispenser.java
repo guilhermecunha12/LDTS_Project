@@ -13,11 +13,10 @@ public abstract class Dispenser extends Interactable {
     protected abstract Grabable createItem(int x, int y);
 
     @Override
-    public void interact(Chef chef){
-        if(!chef.isHoldingSomething()){
-            Grabable newItem = this.createItem(chef.getX(), chef.getY());
+    public void interact(Chef chef) {
+        if (!chef.isHoldingSomething()) {
+            Grabable newItem = this.createItem(getX(), getY());
             chef.pickUp(newItem);
         }
     }
-
 }

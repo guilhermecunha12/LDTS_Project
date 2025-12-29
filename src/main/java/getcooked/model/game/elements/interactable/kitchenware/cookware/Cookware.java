@@ -38,9 +38,8 @@ public abstract class Cookware extends Kitchenware {
                 addContent(food);
                 this.start();
                 processFood();
-            }
 
-            else if (held instanceof Plate plate && this.isFinished() && !plate.hasContent()) {
+            } else if (held instanceof Plate plate && this.isFinished() && !plate.hasContent()) {
                 Dish dish = createFinishedDish();
                 plate.setContent(dish);
                 clear();

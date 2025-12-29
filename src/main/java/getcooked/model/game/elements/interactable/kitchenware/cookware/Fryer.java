@@ -36,7 +36,7 @@ public class Fryer extends Cookware {
         return new Dish(DishType.FRIES);
     }
 
-    public char  getType() {
+    public char getType() {
         return type;
     }
 }
