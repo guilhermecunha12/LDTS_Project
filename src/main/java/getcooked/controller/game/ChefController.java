@@ -46,7 +46,10 @@ public class ChefController extends Controller<Kitchen> {
     public void chefSelect(){
         Position toInteract = chef.getFrontPosition();
         Interactable interactableToInteract = getModel().getInteractable(toInteract);
-        interactableToInteract.interact(chef);
+
+        if (interactableToInteract != null) {
+            interactableToInteract.interact(chef);
+        }
     }
 
     @Override

@@ -36,6 +36,9 @@ public class DeliverySpot extends Interactable {
 
     @Override
     public void interact(Chef chef) {
+        if (this.orderManager == null)
+            return;
+
         if (chef.isHoldingSomething()) {
             Dish dish;
             switch (chef.getItem()) {
