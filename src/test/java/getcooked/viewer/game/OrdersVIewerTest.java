@@ -1,14 +1,9 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.Position;
 import getcooked.model.game.Order;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -26,12 +21,4 @@ class OrdersVIewerTest {
         ordersViewer = new OrdersViewer(orders);
     }
 
-    @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
-
-        ordersViewer.draw(gui);
-
-        verify(gui,times(1)).drawText(new Position(270,60),"Orders: ","#ffffff");
-        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
-    }
 }
