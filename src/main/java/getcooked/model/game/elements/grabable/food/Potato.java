@@ -10,7 +10,7 @@ public class Potato extends Food {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<Potato> getViewer() {
         return new PotatoViewer();
     }
 }

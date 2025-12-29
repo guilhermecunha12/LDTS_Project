@@ -45,8 +45,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawText(Position position, String text, String color) {
-        int curX = position.getX();
-        int y = position.getY();
+        int curX = position.x();
+        int y = position.y();
         for (int i = 0; i < text.length(); i++) {
             char curChar = text.charAt(i);
             drawCharacter(curChar, curX, y, color);
@@ -79,7 +79,7 @@ public class LanternaGUI implements GUI {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(TextColor.Factory.fromString(color));
 
-        tg.fillRectangle(new TerminalPosition(position.getX(),position.getY()),
+        tg.fillRectangle(new TerminalPosition(position.x(),position.y()),
                 new TerminalSize(width, height), ' ');
     }
 

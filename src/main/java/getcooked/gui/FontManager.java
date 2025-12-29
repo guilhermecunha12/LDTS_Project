@@ -20,7 +20,6 @@ public class FontManager {
     private BufferedImage fontImage;
     private Map<Character, Coordinate> charPositionCache;
 
-
     public FontManager() throws IOException {
         loadFontResources();
         setFontSize();
@@ -40,7 +39,7 @@ public class FontManager {
     }
 
     public AWTTerminalFontConfiguration loadPixelFont() throws URISyntaxException, IOException, FontFormatException {
-        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
+        URL resource = Thread.currentThread().getContextClassLoader().getResource("fonts/square.ttf");
         File fontFile = new File(Objects.requireNonNull(resource).toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
@@ -54,12 +53,12 @@ public class FontManager {
 
     private void loadFontResources() throws IOException {
         // Load font image once
-        URL image = getClass().getClassLoader().getResource("fonts/font.png");
+        URL image = Thread.currentThread().getContextClassLoader().getResource("fonts/font.png");
         this.fontImage = ImageIO.read(Objects.requireNonNull(image));
 
         // Build character position cache once
         this.charPositionCache = new HashMap<>();
-        URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
+        URL resource = Thread.currentThread().getContextClassLoader().getResource("fonts/font-map.txt");
 
         // load charPositionCache with the top left position of each character
         try (BufferedReader br = new BufferedReader(new FileReader(Objects.requireNonNull(resource).getFile()))) {
@@ -86,6 +85,6 @@ public class FontManager {
     }
 
     public Map<Character, Coordinate> getCharPositionCache() {
-        return charPositionCache;
+        return this.charPositionCache;
     }
 }

@@ -12,7 +12,7 @@ public class PotatoDispenser extends Dispenser {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<PotatoDispenser> getViewer() {
         return new PotatoDispenserViewer();
     }
 

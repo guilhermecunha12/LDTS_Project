@@ -10,7 +10,7 @@ public class Carrot extends Food {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<Carrot> getViewer() {
         return new CarrotViewer();
     }
 }

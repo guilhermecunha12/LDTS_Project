@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Order {
 
     private final Dish desiredDish;
-    //Remaining time in seconds
     private int remainingTime;
 
     public Order(Dish desiredDish, int timeLimit) {

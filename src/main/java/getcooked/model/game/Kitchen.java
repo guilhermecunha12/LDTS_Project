@@ -6,12 +6,9 @@ import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Floor;
 import getcooked.model.game.elements.Tile;
 
-import java.util.Deque;
 import java.util.List;
 
 public class Kitchen {
-    private final int width;
-    private final int height;
     private final int level;
     private final int numPlayers;
     private final List<Chef> chefs;
@@ -20,9 +17,8 @@ public class Kitchen {
     private final OrderManager orderManager;
 
 
-    public Kitchen(int width, int height, int level, int numPlayers, List<Chef> chefs, List<Tile> tiles, int lives, OrderManager orderManager) {
-        this.width = width;
-        this.height = height;
+    public Kitchen(int level, int numPlayers, List<Chef> chefs,
+                   List<Tile> tiles, int lives, OrderManager orderManager) {
         this.level = level;
         this.numPlayers = numPlayers;
         this.chefs = chefs;
@@ -45,14 +41,6 @@ public class Kitchen {
 
     public int getNumPlayers() {
         return numPlayers;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public List<Tile> getTiles() {

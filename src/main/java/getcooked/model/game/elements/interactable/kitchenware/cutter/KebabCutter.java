@@ -1,21 +1,15 @@
 package getcooked.model.game.elements.interactable.kitchenware.cutter;
 
-import getcooked.gui.GUI;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Kebab;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.InputBehaviour;
-import getcooked.viewer.Sprite;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.KebabCutterViewer;
 
 import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import static getcooked.viewer.Sprite.SCALE;
 
 public class KebabCutter extends Cutter {
 

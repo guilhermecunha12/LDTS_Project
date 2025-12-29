@@ -9,8 +9,7 @@ public class Kebab extends Food {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<Kebab> getViewer() {
         return null;
     }
-
 }

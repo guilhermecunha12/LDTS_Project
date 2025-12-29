@@ -75,7 +75,7 @@ public class CounterViewerTest {
         when(counter.getContent()).thenReturn(plate);
         when(counter.getPosition()).thenReturn(position);
         when(plate.getContent()).thenReturn(dish);
-        when(dish.getType()).thenReturn(DishType.POTATO_SOUP);
+        when(dish.type()).thenReturn(DishType.POTATO_SOUP);
 
         counterViewer.draw(counter, gui);
 
@@ -92,7 +92,7 @@ public class CounterViewerTest {
         when(counter.getContent()).thenReturn(plate);
         when(counter.getPosition()).thenReturn(position);
         when(plate.getContent()).thenReturn(dish);
-        when(dish.getType()).thenReturn(DishType.CARROT_SOUP);
+        when(dish.type()).thenReturn(DishType.CARROT_SOUP);
 
         counterViewer.draw(counter, gui);
 

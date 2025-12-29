@@ -90,8 +90,8 @@ public class DeliverySpotTest {
         when(order2.getDesiredDish()).thenReturn(orderDish);
         when(order3.getDesiredDish()).thenReturn(orderDish);
 
-        when(chefDish.getType()).thenReturn(POTATO_SOUP);
-        when(orderDish.getType()).thenReturn(CARROT_SOUP); // will not verify branch condition
+        when(chefDish.type()).thenReturn(POTATO_SOUP);
+        when(orderDish.type()).thenReturn(CARROT_SOUP); // will not verify branch condition
 
         deliverySpot.interact(chef, kitchen);
         verify(chef, times(2)).getItem();

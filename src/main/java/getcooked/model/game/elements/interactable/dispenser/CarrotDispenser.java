@@ -12,7 +12,7 @@ public class CarrotDispenser extends Dispenser {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<CarrotDispenser> getViewer() {
         return new CarrotDispenserViewer();
     }
 

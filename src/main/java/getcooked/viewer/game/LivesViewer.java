@@ -23,7 +23,7 @@ public class LivesViewer extends Viewer<Kitchen> {
         gui.drawText(new Position(270, 20), "Lives: ", "#ffffff");
         Position pos = new Position(270, 30);
         for (int i = 0; i < getModel().getLives(); i++) {
-            sprite.draw(gui, pos.getX() / SCALE, pos.getY() / SCALE, 5+10*i, 5);
+            sprite.draw(gui, pos.x() / SCALE, pos.y() / SCALE, 5+10*i, 5);
         }
     }
 }

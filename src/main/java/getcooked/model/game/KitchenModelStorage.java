@@ -1,8 +1,8 @@
 package getcooked.model.game;
 
 // Custom Singleton class, that only contains one static Kitchen member variable
-public class KitchenModelStorage {
-    private static Kitchen storedKitchen = null;
+public final class KitchenModelStorage {
+    private static Kitchen storedKitchen;
 
     public static void storeKitchen(Kitchen newKitchen) {
         storedKitchen = newKitchen;

@@ -14,7 +14,7 @@ public class Plate extends Grabable {
     }
 
     @Override
-    public ElementViewer getViewer() {
+    public ElementViewer<Plate> getViewer() {
         return new PlateViewer();
     }
 

@@ -30,7 +30,7 @@ public class EscapeMenuController extends Controller<EscapeMenu> {
         }
     }
 
-    private void escape(Game game) {
+    private static void escape(Game game) {
         game.changeState(new KitchenState(KitchenModelStorage.getStoredKitchen()));
     }
 

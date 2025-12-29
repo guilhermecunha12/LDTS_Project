@@ -33,7 +33,8 @@ public class MainMenuController extends Controller<MainMenu> {
 
     private void selectEntry(Game game) {
         if(getModel().isSelectedCook()) game.changeState(new CookMenuState(new CookMenu()));
-        if(getModel().isSelectedSettings()) game.changeState(new SettingsMenuState(new SettingsMenu(game.getAudioManager())));
+        if(getModel().isSelectedSettings()) game.changeState(
+                new SettingsMenuState(new SettingsMenu(game.getAudioManager())));
         if(getModel().isSelectedExit()) game.changeState(null);
     }
 }

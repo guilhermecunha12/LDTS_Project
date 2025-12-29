@@ -4,7 +4,6 @@ import getcooked.model.game.elements.Chef;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.TrashViewer;
 
-import java.awt.*;
 
 public class Trash extends Interactable{
 

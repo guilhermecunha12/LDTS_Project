@@ -28,7 +28,7 @@ public class OrdersViewer extends Viewer<List<Order>> {
         gui.drawText(new Position(270,  60), "Orders: ", "#ffffff");
         int ySpacing = 20;
         for (int i = 0; i < activeOrders.size(); i++) { // iterate through the current active orders
-            DishType curDishType = activeOrders.get(i).getDesiredDish().getType();
+            DishType curDishType = activeOrders.get(i).getDesiredDish().type();
             Sprite sprite = switch (curDishType) {
                 case POTATO_SOUP -> new Sprite("sprites/order_potato_soup.png");
                 case CARROT_SOUP -> new Sprite("sprites/order_carrot_soup.png");
@@ -37,14 +37,13 @@ public class OrdersViewer extends Viewer<List<Order>> {
                 case FRIES -> new Sprite("sprites/order_fries.png");
                 case KEBAB -> new Sprite("sprites/order_kebab.png");
                 case STEAK -> new Sprite("sprites/order_steak.png");
-                default -> throw new IllegalStateException("Unexpected value: " + curDishType);
             };
 
             sprite.draw(gui, 270 / SCALE,70 / SCALE, 6, 10 + ySpacing * i);
 
             Position curPos = new Position(271, (72 + ySpacing * i));
             gui.drawText(curPos, formatString(curDishType.toString()), "#000000");
-            gui.drawText(new Position(curPos.getX(), curPos.getY() + 9),
+            gui.drawText(new Position(curPos.x(), curPos.y() + 9),
             String.valueOf(activeOrders.get(i).getRemainingTime() / FPS), "#000000");
         }
     }

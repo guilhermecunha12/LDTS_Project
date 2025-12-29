@@ -15,18 +15,19 @@ public abstract class KitchenBuilder {
     protected final List<DishType> availableDishTypes;
     private final int numPlayers;
     private final int ordersDelivered;
+    private final Random random = new Random(); // for order generation
 
     protected KitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) {
-        // After the level 10 the kitchen to be drawn is always the same
+        // After level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
         this.lives = lives;
-        this.availableDishTypes = new ArrayList<>(); // empty list
+        this.availableDishTypes = new ArrayList<>();
         this.ordersDelivered = ordersDelivered;
     }
 
     public Kitchen createKitchen() {
-        return new Kitchen(getWidth(), getHeight(), this.level, this.numPlayers, createChefs(), createTiles(), this.lives,
+        return new Kitchen(this.level, this.numPlayers, createChefs(), createTiles(), this.lives,
                 new OrderManager(createOrders(), new ArrayList<>(), orderFrequency(this.level), this.ordersDelivered));
     }
 
@@ -54,12 +55,11 @@ public abstract class KitchenBuilder {
         return chefs;
     }
 
-    private int ordersPerLevel(int level) {
+    private static int ordersPerLevel(int level) {
         return level + 2;
-        //return 2 + (int)(level/(0.3*Math.sqrt(level)));
     }
 
-    private int orderTimeLimit(int level) {
+    private static int orderTimeLimit(int level) {
         double baseSeconds = 40.0;
         double minSeconds  = 15.0;
         double seconds     = baseSeconds - level;
@@ -73,20 +73,11 @@ public abstract class KitchenBuilder {
             return (int)Math.max(7.0*FPS, (baseSeconds - 0.5*level)*FPS);
         else
             return (int)Math.max(5.0*FPS, (baseSeconds - level)*FPS);
-
-        /*
-        double factor1p = 2.6;
-        double factor2p = 4.5;
-        int decay = (int)(factor1p * FPS * Math.log10(level));
-        if (this.numPlayers == 2) decay = (int)(factor2p * FPS * Math.log10(level));
-        return Math.max(10*FPS, 15*FPS - decay);
-        */
     }
 
     private Deque<Order> createOrders() {
-        Deque<Order> res = new ArrayDeque<>(); // empty list
+        Deque<Order> res = new ArrayDeque<>();
         int numOrders = ordersPerLevel(this.level);
-        Random random = new Random();
           
         for (int i = 0; i < numOrders; i++) {
             DishType randomDishType = getRandomDishType(random);
@@ -103,7 +94,7 @@ public abstract class KitchenBuilder {
     }
 
     // constructor for testing, injecting availableDishTypes
-    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes, int ordersDelivered) {
+    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes, int ordersDelivered){
         // After the level 10 the kitchen to be drawn is always the same
         this.level = Math.min(level, 10);
         this.numPlayers = numPlayers;
