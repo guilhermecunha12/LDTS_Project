@@ -10,5 +10,6 @@ public abstract class Interactable extends Tile {
     }
 
     // Each interactable defines what happens to the chef
+    @Override
     public abstract void interact(Chef chef);
 }
