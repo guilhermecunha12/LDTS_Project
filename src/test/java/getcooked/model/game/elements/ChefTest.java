@@ -18,7 +18,6 @@ public class ChefTest {
         grabable = mock(Grabable.class);
     }
 
-
     @Test
     void testGetIndex() {
         assertEquals(0, chef.getIndex());
