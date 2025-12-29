@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.mockito.Mockito.*;
 
-public class CookMenuControllerTest {
+class CookMenuControllerTest {
     private Game game;
     private CookMenu cookedMenu;
     private CookMenuController cookMenuController;
@@ -23,58 +23,78 @@ public class CookMenuControllerTest {
     }
 
     @Test
-    void testPlauerUp() throws IOException {
+    void testUp() throws IOException {
         when(cookedMenu.isSelectedBack()).thenReturn(true);
+
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_UP),0);
+
         verify(cookedMenu,times(1)).previousEntry();
     }
 
     @Test
-    void testPlauerDown1() throws IOException {
+    void testDown1() throws IOException {
         when(cookedMenu.isSelected1Player()).thenReturn(true);
+        when(cookedMenu.isSelected2Player()).thenReturn(false);
+
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_DOWN),0);
+
         verify(cookedMenu,times(1)).previousEntry();
     }
 
     @Test
-    void testPlauerDown2() throws IOException {
+    void testDown2() throws IOException {
+        when(cookedMenu.isSelected1Player()).thenReturn(false);
         when(cookedMenu.isSelected2Player()).thenReturn(true);
+
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_DOWN),0);
+
         verify(cookedMenu,times(1)).nextEntry();
     }
 
     @Test
-    void testPlayerLeft() throws IOException {
-        when(cookedMenu.isSelected2Player()).thenReturn(true);
+    void testLeft() throws IOException {
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_LEFT),0);
+
         verify(cookedMenu,times(1)).previousEntry();
     }
 
     @Test
-    void testPlayerRight() throws IOException {
-        when(cookedMenu.isSelected1Player()).thenReturn(true);
+    void testRight() throws IOException {
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_RIGHT),0);
+
         verify(cookedMenu,times(1)).nextEntry();
     }
 
     @Test
-    void testPlauerSelect1() throws IOException {
+    void testSelect1Player() throws IOException {
         when(cookedMenu.isSelected1Player()).thenReturn(true);
+        when(cookedMenu.isSelected2Player()).thenReturn(false);
+        when(cookedMenu.isSelectedBack()).thenReturn(false);
+
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_SELECT),0);
+
         verify(game,times(1)).changeState(any(getcooked.states.menu.ControlsInfoState.class));
     }
 
     @Test
-    void testPlauerSelect2() throws IOException {
+    void testSelect2Player() throws IOException {
+        when(cookedMenu.isSelected1Player()).thenReturn(false);
         when(cookedMenu.isSelected2Player()).thenReturn(true);
+        when(cookedMenu.isSelectedBack()).thenReturn(false);
+
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_SELECT),0);
+
         verify(game,times(1)).changeState(any(getcooked.states.menu.ControlsInfoState.class));
     }
 
     @Test
-    void testPlauerSelect3() throws IOException {
+    void testSelectBack() throws IOException {
+        when(cookedMenu.isSelected1Player()).thenReturn(false);
+        when(cookedMenu.isSelected2Player()).thenReturn(false);
         when(cookedMenu.isSelectedBack()).thenReturn(true);
+
         cookMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_SELECT),0);
+
         verify(game,times(1)).changeState(any(getcooked.states.menu.MainMenuState.class));
     }
 
