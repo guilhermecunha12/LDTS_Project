@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class SodaDispenserViewer extends ElementViewer<SodaDispenser> {
+public class SodaDispenserViewer implements ElementViewer<SodaDispenser> {
 
 
     @Override

@@ -14,13 +14,10 @@ public class TimedBehaviour implements ExecutionBehaviour {
         Thread.ofVirtual().start(() -> {
             try {
                 Thread.sleep(cookingTime * 1000);
-            } catch (InterruptedException e) {
                 kitchenware.finish();
-                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
-            kitchenware.finish();
         });
     }
-
-
 }

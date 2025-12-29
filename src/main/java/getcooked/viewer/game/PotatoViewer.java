@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class PotatoViewer extends ElementViewer<Potato>{
+public class PotatoViewer implements ElementViewer<Potato>{
     @Override
     public void draw(Potato potato, GUI gui) throws IOException, URISyntaxException, FontFormatException {
 

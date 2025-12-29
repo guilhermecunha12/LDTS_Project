@@ -5,6 +5,7 @@ import getcooked.model.game.OrderManager;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Interactable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Salad;
 import getcooked.model.game.elements.grabable.food.Soda;

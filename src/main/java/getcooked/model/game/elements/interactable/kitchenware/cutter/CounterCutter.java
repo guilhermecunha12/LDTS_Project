@@ -5,16 +5,16 @@ import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.InputBehaviour;
 import getcooked.viewer.game.CounterCutterViewer;
 import getcooked.viewer.game.ElementViewer;
 
-import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
 
-public class CounterCutter extends Cutter {
+public class CounterCutter extends Kitchenware {
     protected Set<Class<? extends Food>> allowedFoods;
 
     public CounterCutter(int x, int y) {

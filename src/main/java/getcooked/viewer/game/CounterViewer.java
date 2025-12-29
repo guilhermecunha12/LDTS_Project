@@ -9,7 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class CounterViewer extends ElementViewer<Counter>{
+public class CounterViewer implements ElementViewer<Counter>{
     @Override
     public void draw(Counter counter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = switch (counter.getType()) {

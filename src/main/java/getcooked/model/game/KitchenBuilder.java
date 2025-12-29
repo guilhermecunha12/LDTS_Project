@@ -1,7 +1,7 @@
 package getcooked.model.game;
 
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.Interactable;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.interactable.DeliverySpot;
@@ -31,12 +31,13 @@ public abstract class KitchenBuilder {
 
     public Kitchen createKitchen() {
         List<Chef> chefs = createChefs();
-        List<Tile> tiles = createTiles();
-        OrderManager orderManager = new OrderManager(createOrders(), new ArrayList<>(), orderFrequency(this.level), this.ordersDelivered);
+        List<Interactable> interactables = createInteractables();
+        OrderManager orderManager = new OrderManager(createOrders(), new ArrayList<>(),
+                orderFrequency(this.level), this.ordersDelivered);
         for(DeliverySpot deliverySpot : deliverySpots) {
             deliverySpot.setOrderManager(orderManager);
         }
-        return new Kitchen(this.level, this.numPlayers, chefs, tiles, this.lives, orderManager);
+        return new Kitchen(this.level, this.numPlayers, chefs, interactables, this.lives, orderManager);
     }
 
     // Creates the kitchen based on the width and the height of the file
@@ -44,7 +45,7 @@ public abstract class KitchenBuilder {
 
     protected abstract int getHeight();
 
-    protected abstract List<Tile> createTiles();
+    protected abstract List<Interactable> createInteractables();
 
     protected void addAvailableDishType(DishType dishType) {
         this.availableDishTypes.add(dishType);

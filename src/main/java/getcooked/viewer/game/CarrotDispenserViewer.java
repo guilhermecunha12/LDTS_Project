@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 
-public class CarrotDispenserViewer extends ElementViewer<CarrotDispenser> {
+public class CarrotDispenserViewer implements ElementViewer<CarrotDispenser> {
 
 
     @Override

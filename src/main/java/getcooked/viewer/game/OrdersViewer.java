@@ -48,7 +48,7 @@ public class OrdersViewer extends Viewer<List<Order>> {
         }
     }
 
-    private String formatString(String string) {
+    private static String formatString(String string) {
         return string.replace("_", " ");
     }
 }

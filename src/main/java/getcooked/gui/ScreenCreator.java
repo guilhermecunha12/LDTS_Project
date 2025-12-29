@@ -9,6 +9,8 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ScreenCreator {
     private int width;
@@ -41,9 +43,15 @@ public class ScreenCreator {
         this.terminal = createTerminal(fontConfig);
 
         Screen screen = new TerminalScreen(terminal);
-        screen.setCursorPosition(null);
-        screen.startScreen();
-        screen.doResizeIfNecessary();
+        try {
+            screen.setCursorPosition(null);
+            screen.startScreen();
+            screen.doResizeIfNecessary();
+            return screen;
+        } catch (IOException e) {
+            Logger.getLogger(ScreenCreator.class.getName()).log(Level.SEVERE, "Screen creation failed", e);
+            screen.close();
+        }
         return screen;
     }
 

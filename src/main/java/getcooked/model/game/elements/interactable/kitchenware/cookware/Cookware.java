@@ -9,7 +9,7 @@ import getcooked.model.game.elements.interactable.kitchenware.behaviour.Executio
 
 import java.util.Set;
 
-public abstract class Cookware extends Kitchenware {
+public abstract class Cookware extends Kitchenware{
 
     protected Set<Class<? extends Food>> allowedFoods;
 

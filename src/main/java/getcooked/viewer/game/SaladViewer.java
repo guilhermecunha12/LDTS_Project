@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class SaladViewer extends ElementViewer<Salad> {
+public class SaladViewer implements ElementViewer<Salad> {
     @Override
     public void draw(Salad salad, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/salad.png");

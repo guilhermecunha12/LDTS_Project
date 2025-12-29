@@ -9,9 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static getcooked.model.game.dish.DishType.*;
-
-public class PlateViewer extends ElementViewer<Plate>{
+public class PlateViewer implements ElementViewer<Plate>{
     @Override
     public void draw(Plate plate, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite;
@@ -19,8 +17,8 @@ public class PlateViewer extends ElementViewer<Plate>{
         Dish dish = plate.getContent();
         if (dish == null){
             sprite = new Sprite("sprites/plate.png");
-        }
-        else{
+
+        } else{
             switch (dish.type()) {
                 case POTATO_SOUP -> sprite = new Sprite("sprites/potato_soup.png");
                 case CARROT_SOUP ->  sprite = new Sprite("sprites/carrot_soup.png");

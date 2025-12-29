@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class KebabCutterViewer extends ElementViewer<KebabCutter>{
+public class KebabCutterViewer implements ElementViewer<KebabCutter>{
     @Override
     public void draw(KebabCutter kebabCutter, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/kebab_cutter.png");
