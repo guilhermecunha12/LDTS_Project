@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.interactable.kitchenware.cookware;
 
+import getcooked.Game;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.grabable.food.Carrot;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Pot extends Cookware {
 
     public Pot(int x, int y){
-        super(x,y, new TimedBehaviour(4));
+        super(x,y, new TimedBehaviour(4*Game.FPS));
         this.allowedFoods = new HashSet<>(Set.of(Potato.class, Carrot.class));
     }
 

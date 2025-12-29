@@ -35,7 +35,7 @@ public class FontManager {
 
     public int bestFontSize(int height, int width) {
         // Function that maps fontSize for each resolution (considering area of the available screen)
-        return Math.max(1,(int) Math.round(-40.78265+3.12953 * Math.log((double)height * (double)width)));
+        return Math.max(1, (int)Math.round(-40.78265 + 3.12953 * Math.log((double)height * (double)width)));
     }
 
     public AWTTerminalFontConfiguration loadPixelFont() throws URISyntaxException, IOException, FontFormatException {

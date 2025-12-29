@@ -5,7 +5,7 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.Interactable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -99,15 +99,15 @@ class ChefControllerTest {
     }
 
     @Test
-    void testChefSelect() throws IOException {
+    void testChefSelect() {
         Position frontPos = new Position(5,4);
-        Tile tile = mock(Tile.class);
+        Interactable interactable = mock(Interactable.class);
 
         when(chef.getFrontPosition()).thenReturn(frontPos);
-        when(kitchen.getTile(frontPos)).thenReturn(tile);
+        when(kitchen.getInteractable(frontPos)).thenReturn(interactable);
 
-        chefController.step(game, Set.of(GUI.ACTION.PLAYER1_SELECT),0);
+        chefController.chefSelect();
 
-        verify(tile,times(1)).interact(chef);
+        verify(interactable,times(1)).interact(chef);
     }
 }

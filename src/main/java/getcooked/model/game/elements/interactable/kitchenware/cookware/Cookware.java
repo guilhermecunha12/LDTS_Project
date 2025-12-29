@@ -55,4 +55,9 @@ public abstract class Cookware extends Kitchenware{
 
     protected abstract boolean accepts(Food food);
     protected abstract Dish createFinishedDish();
+
+    public void update() {
+        if (this.isExecuting())
+            processFood();
+    }
 }

@@ -60,8 +60,4 @@ public abstract class Kitchenware extends Interactable {
     // only if it should do something when chef is holding a plate.
     public void acceptPlateInChef(Plate plate, Chef chef) {}
 
-    @Override
-    public boolean isBlocking() {
-        return true;
-    }
 }

@@ -4,6 +4,7 @@ package getcooked.model.game;
 import getcooked.model.Position;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 
 import java.util.List;
 
@@ -14,16 +15,17 @@ public class Kitchen {
     private final List<Interactable> interactables;
     private int lives;
     private final OrderManager orderManager;
-
+    private final List<Cookware> cookwares;
 
     public Kitchen(int level, int numPlayers, List<Chef> chefs,
-                   List<Interactable> interactables, int lives, OrderManager orderManager) {
+                   List<Interactable> interactables, int lives, OrderManager orderManager, List<Cookware> cookwares) {
         this.level = level;
         this.numPlayers = numPlayers;
         this.chefs = chefs;
         this.interactables = interactables;
         this.lives = lives;
         this.orderManager = orderManager;
+        this.cookwares = cookwares;
     }
 
     public int getLevel() {
@@ -80,6 +82,10 @@ public class Kitchen {
 
     public int getOrdersDelivered() {
         return orderManager.getOrdersDelivered();
+    }
+
+    public List<Cookware> getCookwares() {
+        return cookwares;
     }
 
     public Interactable getInteractable(Position position) {

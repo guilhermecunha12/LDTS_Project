@@ -5,6 +5,7 @@ import getcooked.controller.Controller;
 import getcooked.gui.GUI;
 import getcooked.model.game.*;
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import getcooked.model.menu.EscapeMenu;
 import getcooked.model.menu.GameOverMenu;
 import getcooked.states.game.KitchenState;
@@ -42,6 +43,10 @@ public class KitchenController extends Controller<Kitchen> {
 
         for(ChefController chefController : this.chefControllers) {
             chefController.step(game, actions, time);
+        }
+
+        for (Cookware cookware : kitchen.getCookwares()) {
+            cookware.update();
         }
 
         this.manageOrders();
