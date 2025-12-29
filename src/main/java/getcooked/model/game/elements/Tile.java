@@ -6,4 +6,6 @@ public abstract class Tile extends Element {
     }
 
     public abstract boolean isBlocking();
+
+    public abstract void interact(Chef chef);
 }

@@ -14,6 +14,11 @@ public class Floor extends Tile {
     }
 
     @Override
+    public void interact(Chef chef){
+        // Default implementation ignored
+    }
+
+    @Override
     public ElementViewer<Floor> getViewer() {
         return new FloorViewer();
     }

@@ -53,10 +53,10 @@ public abstract class Kitchenware extends Interactable {
     // part of visitor pattern: default implementation is to do nothing
     // then, each subclass implements this method with specific code
     // only if it should do something when chef is holding food.
-    public void acceptFood(Food food, Chef chef) {}
+    public void acceptFoodInChef(Food food, Chef chef) {}
 
     // part of visitor pattern: default implementation is to do nothing
     // then, each subclass implements this method with specific code
     // only if it should do something when chef is holding a plate.
-    public void acceptPlate(Plate plate, Chef chef) {}
+    public void acceptPlateInChef(Plate plate, Chef chef) {}
 }

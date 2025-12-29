@@ -69,7 +69,7 @@ public class CounterCutter extends Cutter {
     }
 
     @Override
-    public void acceptFood(Food food, Chef chef) {
+    public void acceptFoodInChef(Food food, Chef chef) {
         if (canAdd(food)) {
             chef.drop();
             addContent(food);

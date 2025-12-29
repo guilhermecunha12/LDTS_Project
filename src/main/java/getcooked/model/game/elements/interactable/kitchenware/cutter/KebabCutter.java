@@ -57,7 +57,7 @@ public class KebabCutter extends Cutter {
     }
 
     @Override
-    public void acceptPlate(Plate plate, Chef chef) {
+    public void acceptPlateInChef(Plate plate, Chef chef) {
         if (!plate.hasContent()) {
             plate.setContent(new Dish(content.getCookedDishType()));
             clear();

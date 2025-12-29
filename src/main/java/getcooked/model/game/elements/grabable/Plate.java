@@ -34,6 +34,6 @@ public class Plate extends Grabable {
 
     @Override
     public void interactWithKitchenware(Kitchenware kitchenware, Chef chef) {
-        kitchenware.acceptPlate(this, chef);
+        kitchenware.acceptPlateInChef(this, chef);
     }
 }

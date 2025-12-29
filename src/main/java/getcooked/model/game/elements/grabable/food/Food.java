@@ -26,6 +26,6 @@ public abstract class Food extends Grabable {
 
     @Override
     public void interactWithKitchenware(Kitchenware kitchenware, Chef chef) {
-        kitchenware.acceptFood(this, chef);
+        kitchenware.acceptFoodInChef(this, chef);
     }
 }

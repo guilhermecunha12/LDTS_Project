@@ -7,8 +7,6 @@ import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Tile;
-import getcooked.model.game.elements.interactable.DeliverySpot;
-import getcooked.model.game.elements.interactable.Interactable;
 
 import java.io.IOException;
 import java.util.Set;
@@ -48,13 +46,7 @@ public class ChefController extends Controller<Kitchen> {
     public void chefSelect(){
         Position toInteract = chef.getFrontPosition();
         Tile tileToInteract = getModel().getTile(toInteract);
-
-        if (tileToInteract instanceof Interactable interactable) {
-            if (tileToInteract instanceof DeliverySpot deliverySpot) {
-                deliverySpot.setOrderManager(getModel().getOrderManager());
-            }
-            interactable.interact(chef);
-        }
+        tileToInteract.interact(chef);
     }
 
     @Override
