@@ -24,18 +24,22 @@ class ControlsInfoMenuControllerTest {
     @Test
     void testStepFor1PlayerWaitedFramesForTransition() throws IOException {
         when(controlsInfoMenu.isOnePlayer()).thenReturn(true);
-        for (int i = 0; i <= 150; i++) {
+
+        for (int i = 0; i <= 75; i++) {
             controlsInfoMenuController.step(game, null, 0);
         }
+
         verify(game, times(1)).changeState(any());
     }
 
     @Test
     void testStepFor2PlayersWaitedFramesForTransition() throws IOException {
         when(controlsInfoMenu.isOnePlayer()).thenReturn(false);
-        for (int i = 0; i <= 150; i++) {
+
+        for (int i = 0; i <= 75; i++) {
             controlsInfoMenuController.step(game, null, 0);
         }
+
         verify(game, times(1)).changeState(any());
     }
 }
