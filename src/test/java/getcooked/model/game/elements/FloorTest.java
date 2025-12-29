@@ -29,6 +29,6 @@ class FloorTest {
 
     @Test
     void testGetViewer() {
-        assertTrue(this.floor.getViewer() instanceof FloorViewer);
+        assertInstanceOf(FloorViewer.class, this.floor.getViewer());
     }
 }

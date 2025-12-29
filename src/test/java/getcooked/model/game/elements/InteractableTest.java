@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InteractableTest {
-    private Interactable interactable;
 
     @Test
     void testIsBlocking() {
-
-        this.interactable = new Interactable(0, 0) {
+        Interactable interactable = new Interactable(0, 0) {
             @Override
             public ElementViewer getViewer() {
                 return null;
@@ -23,6 +21,6 @@ class InteractableTest {
             }
         };
 
-        assertTrue(this.interactable.isBlocking());
+        assertTrue(interactable.isBlocking());
     }
 }

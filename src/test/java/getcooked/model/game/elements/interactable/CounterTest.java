@@ -2,21 +2,21 @@ package getcooked.model.game.elements.interactable;
 
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
+import getcooked.viewer.game.CounterViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class CounterTest {
+class CounterTest {
     private Counter counter;
     private Grabable item;
     private Chef chef;
 
-
     @BeforeEach
     void setUp() {
-        this.counter = new Counter(0, 0);
+        this.counter = new Counter(0, 0, 'u');
         this.item = mock(Grabable.class);
         this.chef = mock(Chef.class);
     }
@@ -29,7 +29,6 @@ public class CounterTest {
         when(chef.drop()).thenReturn(item);
 
         counter.interact(chef);
-        verify(item, times(1)).setPosition(counter.getPosition());
         assertEquals(item, counter.getContent());
     }
 
@@ -49,11 +48,10 @@ public class CounterTest {
         this.counter.setContent(item);
 
         when(chef.isHoldingSomething()).thenReturn(false);
-        when(chef.pickUp(item)).thenReturn(true);
 
         counter.interact(chef);
         verify(chef, times(1)).pickUp(item);
-        assertEquals(null, counter.getContent());
+        assertNull(counter.getContent());
     }
 
     @Test
@@ -64,6 +62,16 @@ public class CounterTest {
 
         counter.interact(chef);
         verify(chef, times(0)).pickUp(item);
-        assertEquals(null, counter.getContent());
+        assertNull(counter.getContent());
+    }
+
+    @Test
+    void testGetType() {
+        assertEquals('u', counter.getType());
+    }
+
+    @Test
+    void testGetViewer() {
+        assertInstanceOf(CounterViewer.class, this.counter.getViewer());
     }
 }

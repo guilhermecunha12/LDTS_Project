@@ -1,5 +1,6 @@
 package getcooked.model.game.elements.grabable;
 
+import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
@@ -13,4 +14,7 @@ public abstract class Grabable extends Element {
 
     // Part of visitor pattern
     public abstract void interactWithKitchenware(Kitchenware kitchenware, Chef chef);
+
+    // Convert this grabable to a dish for delivery, returns null if not deliverable
+    public abstract Dish toDeliver();
 }
