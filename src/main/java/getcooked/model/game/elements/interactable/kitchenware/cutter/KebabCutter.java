@@ -33,6 +33,11 @@ public class KebabCutter extends Cutter {
         }
 
         @Override
+        public DishType getCookedDishType() {
+            return DishType.KEBAB;
+        }
+
+        @Override
         public ElementViewer<KebabDummy> getViewer() {
             return null;
         }
@@ -54,8 +59,8 @@ public class KebabCutter extends Cutter {
     @Override
     public void acceptPlate(Plate plate, Chef chef) {
         if (!plate.hasContent()) {
-            plate.setContent(new Dish(DishType.KEBAB));
+            plate.setContent(new Dish(content.getCookedDishType()));
             clear();
-            }
+        }
     }
 }

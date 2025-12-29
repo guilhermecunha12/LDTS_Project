@@ -32,9 +32,7 @@ public class Pot extends Cookware {
 
     @Override
     protected Dish createFinishedDish(){
-        Dish result = null;
-        if (content instanceof Potato) result = new Dish(DishType.POTATO_SOUP);
-        else if (content instanceof Carrot) result = new Dish(DishType.CARROT_SOUP);
-        return result;
+        DishType type  = content.getCookedDishType();
+        return type != null ? new Dish(type) : null;
     }
 }
