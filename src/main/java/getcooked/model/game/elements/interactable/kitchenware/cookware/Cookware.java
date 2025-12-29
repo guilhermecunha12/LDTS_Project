@@ -35,7 +35,7 @@ public abstract class Cookware extends Kitchenware {
     }
 
     @Override
-    public void acceptFood(Food food, Chef chef) {
+    public void acceptFoodInChef(Food food, Chef chef) {
         if (canAdd(food)) {
             chef.drop();
             addContent(food);
@@ -45,7 +45,7 @@ public abstract class Cookware extends Kitchenware {
     }
 
     @Override
-    public void acceptPlate(Plate plate, Chef chef) {
+    public void acceptPlateInChef(Plate plate, Chef chef) {
         if (this.isFinished() && !plate.hasContent()) {
             Dish dish = createFinishedDish();
             plate.setContent(dish);
