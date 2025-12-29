@@ -29,11 +29,15 @@ public class Chef extends Element {
     }
 
     public void pickUp(Grabable item) {
+        assert (this.item == null);
+
         this.item = item;
         item.setPosition(this.getPosition());
     }
 
     public Grabable drop() {
+        assert (this.item != null);
+
         Grabable tmp = this.item;
         tmp.setPosition(getFrontPosition());
         this.item = null;
