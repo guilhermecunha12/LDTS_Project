@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class PlateDispenserViewer extends ElementViewer<PlateDispenser> {
+public class PlateDispenserViewer implements ElementViewer<PlateDispenser> {
     @Override
     public void draw(PlateDispenser element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/plate_dispenser.png");

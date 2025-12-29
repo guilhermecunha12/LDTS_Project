@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class FloorViewer extends ElementViewer<Floor>{
+public class FloorViewer implements ElementViewer<Floor>{
 
     @Override
     public void draw(Floor element, GUI gui) throws IOException, URISyntaxException, FontFormatException {

@@ -1,8 +1,8 @@
 package getcooked.model.game.elements.interactable.dispenser;
 
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Interactable;
 import getcooked.model.game.elements.grabable.Grabable;
-import getcooked.model.game.elements.interactable.Interactable;
 
 public abstract class Dispenser extends Interactable {
 
@@ -18,5 +18,10 @@ public abstract class Dispenser extends Interactable {
             Grabable newItem = this.createItem(getX(), getY());
             chef.pickUp(newItem);
         }
+    }
+
+    @Override
+    public boolean isBlocking() {
+        return true;
     }
 }

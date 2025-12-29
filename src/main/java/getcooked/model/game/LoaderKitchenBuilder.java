@@ -1,7 +1,7 @@
 package getcooked.model.game;
 
 import getcooked.model.game.elements.Floor;
-import getcooked.model.game.elements.Tile;
+import getcooked.model.game.elements.Interactable;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.kitchenware.cutter.KebabCutter;
@@ -54,59 +54,59 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
     }
 
     @Override // public for testing
-    public List<Tile> createTiles() {
-        List<Tile> tiles = new ArrayList<>();
+    public List<Interactable> createInteractables() {
+        List<Interactable> interactables = new ArrayList<>();
 
         for(int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for(int x = 0; x < line.length(); x++) {
                 switch (line.charAt(x)) {
-                    case ' ': tiles.add(new Floor(x, y)); break;
-                    case 'u': tiles.add(new Counter(x, y, 'u')); break;
-                    case 'd': tiles.add(new Counter(x, y, 'd')); break;
-                    case 'l': tiles.add(new Counter(x, y, 'l')); break;
-                    case 'r': tiles.add(new Counter(x, y, 'r')); break;
-                    case '1': tiles.add(new Counter(x, y, '1')); break;
-                    case '2': tiles.add(new Counter(x, y, '2')); break;
-                    case '3': tiles.add(new Counter(x, y, '3')); break;
-                    case '4': tiles.add(new Counter(x, y, '4')); break;
-                    case 'P': tiles.add(new PlateDispenser(x, y)); break;
-                    case 'T': tiles.add(new Trash(x, y)); break;
-                    case 'Q': tiles.add(new Pot(x, y)); break;
-                    case 'K': tiles.add(new CounterCutter(x, y)); break;
-                    case 'B': tiles.add(new BeefDispenser(x, y)); break;
-                    case 'f': tiles.add(new Fryer(x, y,'f')); break;
+                    case ' ': interactables.add(new Floor(x, y)); break;
+                    case 'u': interactables.add(new Counter(x, y, 'u')); break;
+                    case 'd': interactables.add(new Counter(x, y, 'd')); break;
+                    case 'l': interactables.add(new Counter(x, y, 'l')); break;
+                    case 'r': interactables.add(new Counter(x, y, 'r')); break;
+                    case '1': interactables.add(new Counter(x, y, '1')); break;
+                    case '2': interactables.add(new Counter(x, y, '2')); break;
+                    case '3': interactables.add(new Counter(x, y, '3')); break;
+                    case '4': interactables.add(new Counter(x, y, '4')); break;
+                    case 'P': interactables.add(new PlateDispenser(x, y)); break;
+                    case 'T': interactables.add(new Trash(x, y)); break;
+                    case 'Q': interactables.add(new Pot(x, y)); break;
+                    case 'K': interactables.add(new CounterCutter(x, y)); break;
+                    case 'B': interactables.add(new BeefDispenser(x, y)); break;
+                    case 'f': interactables.add(new Fryer(x, y,'f')); break;
                     case 'D':
                         DeliverySpot deliverySpot = new DeliverySpot(x, y);
-                        tiles.add(deliverySpot);
+                        interactables.add(deliverySpot);
                         deliverySpots.add(deliverySpot);
                         break;
                     case 'p':
-                        tiles.add(new PotatoDispenser(x, y));
+                        interactables.add(new PotatoDispenser(x, y));
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
                         break;
                     case 'c':
-                        tiles.add(new CarrotDispenser(x, y));
+                        interactables.add(new CarrotDispenser(x, y));
                         this.addAvailableDishType(DishType.CARROT_SOUP); // for generating orders
                         break;
                     case 'S':
-                        tiles.add(new SaladDispenser(x, y));
+                        interactables.add(new SaladDispenser(x, y));
                         this.addAvailableDishType(DishType.SALAD);
                         break;
                     case 'G':
-                        tiles.add(new Grill(x, y));
+                        interactables.add(new Grill(x, y));
                         this.addAvailableDishType(DishType.STEAK);
                         break;
                     case 's':
-                        tiles.add(new SodaDispenser(x, y));
+                        interactables.add(new SodaDispenser(x, y));
                         this.addAvailableDishType(DishType.SODA);
                         break;
                     case 'k':
-                        tiles.add(new KebabCutter(x, y));
+                        interactables.add(new KebabCutter(x, y));
                         this.addAvailableDishType(DishType.KEBAB);
                         break;
                     case 'F':
-                        tiles.add(new Fryer(x, y,'F'));
+                        interactables.add(new Fryer(x, y,'F'));
                         this.addAvailableDishType(DishType.FRIES);
                         break;
 
@@ -114,6 +114,6 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                 }
             }
         }
-        return tiles;
+        return interactables;
     }
 }

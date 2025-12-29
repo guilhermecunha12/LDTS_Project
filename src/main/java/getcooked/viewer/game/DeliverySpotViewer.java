@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class DeliverySpotViewer extends ElementViewer<DeliverySpot>{
+public class DeliverySpotViewer implements ElementViewer<DeliverySpot>{
 
     @Override
     public void draw(DeliverySpot element, GUI gui) throws IOException, URISyntaxException, FontFormatException {

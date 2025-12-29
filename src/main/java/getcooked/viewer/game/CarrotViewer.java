@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class CarrotViewer extends ElementViewer<Carrot> {
+public class CarrotViewer implements ElementViewer<Carrot> {
 
     @Override
     public void draw(Carrot element, GUI gui) throws IOException, URISyntaxException, FontFormatException {

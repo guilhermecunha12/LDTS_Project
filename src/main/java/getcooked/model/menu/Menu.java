@@ -2,9 +2,9 @@ package getcooked.model.menu;
 
 import java.util.List;
 
-abstract public class Menu {
+public abstract class Menu {
     protected List<String> entries;
-    protected int currentEntry = 0;
+    protected int currentEntry;
 
     protected Menu(List<String> entries) {
         this.entries = entries;

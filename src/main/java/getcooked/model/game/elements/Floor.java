@@ -3,7 +3,7 @@ package getcooked.model.game.elements;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.FloorViewer;
 
-public class Floor extends Tile {
+public class Floor extends Interactable {
     public Floor(int x, int y) {
         super(x,y);
     }

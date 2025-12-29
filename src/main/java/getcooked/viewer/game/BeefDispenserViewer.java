@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class BeefDispenserViewer extends ElementViewer<BeefDispenser> {
+public class BeefDispenserViewer implements ElementViewer<BeefDispenser> {
 
 
     @Override

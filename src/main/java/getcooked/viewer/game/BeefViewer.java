@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class BeefViewer extends ElementViewer<Beef> {
+public class BeefViewer implements ElementViewer<Beef> {
     @Override
     public void draw(Beef element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/raw_beef.png");

@@ -5,11 +5,12 @@ import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
+import getcooked.model.game.elements.interactable.kitchenware.Kitchenware;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.InputBehaviour;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.KebabCutterViewer;
 
-public class KebabCutter extends Cutter {
+public class KebabCutter extends Kitchenware {
 
     public KebabCutter(int x, int y) {
         super(x, y, new InputBehaviour(5));

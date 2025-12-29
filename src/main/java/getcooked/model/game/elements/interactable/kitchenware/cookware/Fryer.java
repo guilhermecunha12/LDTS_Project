@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Fryer extends Cookware {
-    private char type;
+    private final char type;
 
     public Fryer(int x, int y, char type) {
         super(x, y, new TimedBehaviour(4));

@@ -2,6 +2,9 @@ package getcooked.sound;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.Objects;
 
 // Class that manages the all the audio of the game
@@ -11,9 +14,11 @@ public class AudioManager {
     private int currentPercentage;
     private final FloatControl gain;
 
-    public AudioManager() throws Exception {
-        this.backgroundMusicPlayer = new BackgroundMusicPlayer(new MusicLoader().loadSound(AudioSystem.getAudioInputStream
-                (Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/music.wav"))),
+    public AudioManager() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+        this.backgroundMusicPlayer = new BackgroundMusicPlayer(
+                new MusicLoader().loadSound(AudioSystem.getAudioInputStream
+                (Objects.requireNonNull(Thread.currentThread().getContextClassLoader()
+                        .getResource("sounds/music.wav"))),
                 AudioSystem.getClip()));
         this.backgroundMusicOn = true;
         // Initialize gain control (costly operation if done everytime inside setBackgroundVolume
