@@ -4,6 +4,7 @@ import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Tile;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.dish.DishType;
+import getcooked.model.game.elements.interactable.DeliverySpot;
 
 import java.util.*;
 
@@ -16,6 +17,7 @@ public abstract class KitchenBuilder {
     private final int numPlayers;
     private final int ordersDelivered;
     private final Random random = new Random(); // for order generation
+    protected final List<DeliverySpot> deliverySpots; // to later set order manager to each of them
 
     protected KitchenBuilder(int level, int numPlayers, int lives, int ordersDelivered) {
         // After level 10 the kitchen to be drawn is always the same
@@ -24,11 +26,17 @@ public abstract class KitchenBuilder {
         this.lives = lives;
         this.availableDishTypes = new ArrayList<>();
         this.ordersDelivered = ordersDelivered;
+        this.deliverySpots = new ArrayList<>();
     }
 
     public Kitchen createKitchen() {
-        return new Kitchen(this.level, this.numPlayers, createChefs(), createTiles(), this.lives,
-                new OrderManager(createOrders(), new ArrayList<>(), orderFrequency(this.level), this.ordersDelivered));
+        List<Chef> chefs = createChefs();
+        List<Tile> tiles = createTiles();
+        OrderManager orderManager = new OrderManager(createOrders(), new ArrayList<>(), orderFrequency(this.level), this.ordersDelivered);
+        for(DeliverySpot deliverySpot : deliverySpots) {
+            deliverySpot.setOrderManager(orderManager);
+        }
+        return new Kitchen(this.level, this.numPlayers, chefs, tiles, this.lives, orderManager);
     }
 
     // Creates the kitchen based on the width and the height of the file
@@ -101,5 +109,6 @@ public abstract class KitchenBuilder {
         this.lives = lives;
         this.availableDishTypes = availableDishTypes;
         this.ordersDelivered = ordersDelivered;
+        this.deliverySpots = new ArrayList<>();
     }
 }

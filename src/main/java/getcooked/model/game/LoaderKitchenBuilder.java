@@ -14,12 +14,15 @@ import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import getcooked.model.game.elements.interactable.dispenser.*;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class LoaderKitchenBuilder extends KitchenBuilder{
     private final List<String> lines;
@@ -28,7 +31,7 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
         super(level, numPlayers, lives, ordersDelivered);
 
         URL resource = LoaderKitchenBuilder.class.getResource("/kitchen/level" + this.level + ".lvl");
-        BufferedReader br = new BufferedReader(new FileReader(Objects.requireNonNull(resource).getFile()));
+        BufferedReader br = Files.newBufferedReader(Paths.get(Objects.requireNonNull(resource).getFile()), UTF_8);
         lines = readLines(br);
     }
 
@@ -69,12 +72,15 @@ public class LoaderKitchenBuilder extends KitchenBuilder{
                     case '4': tiles.add(new Counter(x, y, '4')); break;
                     case 'P': tiles.add(new PlateDispenser(x, y)); break;
                     case 'T': tiles.add(new Trash(x, y)); break;
-                    case 'D': tiles.add(new DeliverySpot(x, y)); break;
                     case 'Q': tiles.add(new Pot(x, y)); break;
                     case 'K': tiles.add(new CounterCutter(x, y)); break;
                     case 'B': tiles.add(new BeefDispenser(x, y)); break;
                     case 'f': tiles.add(new Fryer(x, y,'f')); break;
-
+                    case 'D':
+                        DeliverySpot deliverySpot = new DeliverySpot(x, y);
+                        tiles.add(deliverySpot);
+                        deliverySpots.add(deliverySpot);
+                        break;
                     case 'p':
                         tiles.add(new PotatoDispenser(x, y));
                         this.addAvailableDishType(DishType.POTATO_SOUP); // for generating orders
