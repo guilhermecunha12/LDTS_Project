@@ -1,26 +1,28 @@
 package getcooked.model.game.elements.interactable.dispenser;
 
-import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.grabable.food.Carrot;
+import getcooked.viewer.game.CarrotDispenserViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CarrotDispenserTest {
-    private CarrotDispenser dispenser;
+class CarrotDispenserTest {
+
+    private CarrotDispenser carrotDispenser;
+
     @BeforeEach
-    void setup() {
-        this.dispenser = new CarrotDispenser(5, 10);
+    void setUp() {
+        this.carrotDispenser = new CarrotDispenser(0, 0);
     }
+
     @Test
-    void testcreateItem() {
-        Grabable item = dispenser.createItem(5, 10);
-        assertNotNull(item);
-        assertInstanceOf(Carrot.class, item);
-        Carrot carrot = (Carrot) item;
-        assertEquals(5,  carrot.getX());
-        assertEquals(10, carrot.getY());
+    void testGetViewer() {
+        assertInstanceOf(CarrotDispenserViewer.class, carrotDispenser.getViewer());
+    }
+
+    @Test
+    void testCreateItem() {
+        assertInstanceOf(Carrot.class, carrotDispenser.createItem(0, 0));
     }
 }

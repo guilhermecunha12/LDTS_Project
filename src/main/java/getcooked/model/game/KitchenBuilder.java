@@ -50,6 +50,7 @@ public abstract class KitchenBuilder {
     protected void addAvailableDishType(DishType dishType) {
         this.availableDishTypes.add(dishType);
     }
+
     private List<Chef> createChefs() {
         List<Chef> chefs = new ArrayList<>();
         int middleY = getHeight()/2;
@@ -78,10 +79,11 @@ public abstract class KitchenBuilder {
 
     private int orderFrequency(int level) { // gets lower each level
         double baseSeconds = 12.0;
-        if (this.numPlayers == 1)
+        if (this.numPlayers == 1){
             return (int)Math.max(7.0*FPS, (baseSeconds - 0.5*level)*FPS);
-        else
+        } else{
             return (int)Math.max(5.0*FPS, (baseSeconds - level)*FPS);
+        }
     }
 
     private Deque<Order> createOrders() {
@@ -100,16 +102,5 @@ public abstract class KitchenBuilder {
     private DishType getRandomDishType(Random random) {
         int randomIndex = random.nextInt(this.availableDishTypes.size());
         return this.availableDishTypes.get(randomIndex);
-    }
-
-    // constructor for testing, injecting availableDishTypes
-    public KitchenBuilder(int level, int numPlayers, int lives, List<DishType> availableDishTypes, int ordersDelivered){
-        // After the level 10 the kitchen to be drawn is always the same
-        this.level = Math.min(level, 10);
-        this.numPlayers = numPlayers;
-        this.lives = lives;
-        this.availableDishTypes = availableDishTypes;
-        this.ordersDelivered = ordersDelivered;
-        this.deliverySpots = new ArrayList<>();
     }
 }

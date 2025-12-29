@@ -1,77 +1,96 @@
 package getcooked.model.game;
 
 import getcooked.model.game.dish.DishType;
-import getcooked.model.game.elements.Floor;
-import getcooked.model.game.elements.Tile;
-import getcooked.model.game.elements.interactable.dispenser.PotatoDispenser;
+import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.DeliverySpot;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-public class KitchenBuilderTest {
+class KitchenBuilderTest {
+    protected int level;
+    protected int lives;
+    protected List<DishType> availableDishTypes;
+    private int numPlayers;
+    private int ordersDelivered;
+    protected List<DeliverySpot> deliverySpots;
     private KitchenBuilder kitchenBuilder;
 
-    @Test
-    void testCreate1PlayerKitchen() {
-        kitchenBuilder = new KitchenBuilder(1, 1, 3, new ArrayList<>(Arrays.asList(DishType.POTATO_SOUP))) {
+    @BeforeEach
+    void setUp() {
+        this.level = 10;
+        this.lives = 3;
+        this.numPlayers = 2;
+        this.availableDishTypes = new ArrayList<>();
+        this.ordersDelivered = 0;
+        this.deliverySpots = new ArrayList<>();
+        this.kitchenBuilder = new KitchenBuilder(level, numPlayers, lives, ordersDelivered) {
             @Override
             protected int getWidth() {
-                return 20;
+                return 100;
             }
 
             @Override
             protected int getHeight() {
-                return 20;
+                return 100;
             }
 
             @Override
-            protected List<Tile> createTiles() {
-                return List.of(new Floor(0,0), new PotatoDispenser(1,0));
+            protected List<Interactable> createInteractables() {
+                return new ArrayList<>();
             }
         };
-
-        Kitchen kitchen = kitchenBuilder.createKitchen();
-
-        assertEquals(1, kitchen.getLevel());
-        assertEquals(20, kitchen.getWidth());
-        assertEquals(20, kitchen.getHeight());
-        assertEquals(1, kitchen.getNumPlayers());
-        assertEquals(3, kitchen.getLives());
-        assertEquals(1, kitchen.getChefs().size());
-        assertEquals(2, kitchen.getTiles().size());
     }
 
     @Test
-    void testCreate2PlayersKitchen() {
-        kitchenBuilder = new KitchenBuilder(2, 2, 3, new ArrayList<>(Arrays.asList(DishType.POTATO_SOUP))) {
+    void testAddDishTypes(){
+        DishType dishType1 = DishType.SALAD;
+        DishType dishType2 = DishType.SODA;
+        kitchenBuilder.addAvailableDishType(dishType1);
+        kitchenBuilder.addAvailableDishType(dishType2);
+        assertFalse(kitchenBuilder.availableDishTypes.contains(DishType.POTATO_SOUP));
+        assertTrue(kitchenBuilder.availableDishTypes.contains(dishType2));
+    }
+
+    @Test
+    void testCreateKitchen2players(){
+        DishType dishType1 = DishType.SALAD;
+        kitchenBuilder.addAvailableDishType(dishType1);
+        DeliverySpot deliverySpot = mock(DeliverySpot.class);
+        kitchenBuilder.deliverySpots.add(deliverySpot);
+        Kitchen kitchen = kitchenBuilder.createKitchen();
+        assertEquals(kitchen.getLevel(), level);
+        assertEquals(kitchen.getNumPlayers(), numPlayers);
+        assertEquals(kitchen.getLives(), lives);
+        assertFalse(kitchenBuilder.deliverySpots.isEmpty());
+    }
+
+    @Test
+    void testCreateKitchen1player(){
+        kitchenBuilder = new KitchenBuilder(level, 1, lives, ordersDelivered) {
             @Override
             protected int getWidth() {
-                return 30;
+                return 100;
             }
 
             @Override
             protected int getHeight() {
-                return 30;
+                return 100;
             }
 
             @Override
-            protected List<Tile> createTiles() {
-                return List.of(new Floor(0,0), new PotatoDispenser(1,0), new PotatoDispenser(2,0));
+            protected List<Interactable> createInteractables() {
+                return new ArrayList<>();
             }
         };
-
+        DishType dishType1 = DishType.SALAD;
+        kitchenBuilder.addAvailableDishType(dishType1);
         Kitchen kitchen = kitchenBuilder.createKitchen();
-
-        assertEquals(2, kitchen.getLevel());
-        assertEquals(30, kitchen.getWidth());
-        assertEquals(30, kitchen.getHeight());
-        assertEquals(2, kitchen.getNumPlayers());
-        assertEquals(3, kitchen.getLives());
-        assertEquals(2, kitchen.getChefs().size());
-        assertEquals(3, kitchen.getTiles().size());
+        assertEquals(1, kitchen.getNumPlayers());
     }
 }

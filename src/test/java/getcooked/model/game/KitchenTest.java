@@ -1,12 +1,8 @@
 package getcooked.model.game;
 
 import getcooked.model.Position;
-import getcooked.model.game.dish.Dish;
-import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Floor;
-import getcooked.model.game.elements.Tile;
-import getcooked.model.game.elements.interactable.Interactable;
+import getcooked.model.game.elements.Interactable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,124 +11,181 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class KitchenTest {
-    private Kitchen kitchen;
+class KitchenTest {
+    private int level;
+    private int numPlayers;
     private List<Chef> chefs;
-    private List<Tile> tiles;
+    private List<Interactable> interactables;
+    private int lives;
+    private OrderManager orderManager;
+    private Kitchen kitchen;
+
 
     @BeforeEach
-    void setUp() {
-       this.tiles = new ArrayList<>(); // can be modified later in tests
-       this.chefs = new ArrayList<>(); // can be modified later in tests
-        Deque<Order> levelOrders = new ArrayDeque<>(Arrays.asList(
-                new Order(new Dish(DishType.POTATO_SOUP), 30),
-                new Order(new Dish(DishType.CARROT_SOUP), 45),
-                new Order(new Dish(DishType.CARROT_SOUP), 60)
-        ));
+    public void setUp() {
+        this.level = 10;
+        this.numPlayers = 2;
+        this.lives = 3;
+        this.chefs = new ArrayList<>();
+        this.interactables = new ArrayList<>();
+        this.orderManager = mock(OrderManager.class);
+        this.kitchen = new Kitchen(level, numPlayers, chefs, interactables, lives,  orderManager);
+    }
 
-       this.kitchen = new Kitchen(10, 10, 1, 1,
-                chefs, tiles, levelOrders,
-                new ArrayList<>(), 3, 0);
+    @Test
+    void testGetInteractableValidPosition(){
+        Interactable interactable = mock(Interactable.class);
+        interactables.add(interactable);
+        Position position = new Position(0, 0);
+        when(interactable.getPosition()).thenReturn(new Position(0, 0));
+        assertEquals(interactable, kitchen.getInteractable(position));
+    }
+
+    @Test
+    void testGetInteractableInvalidPosition(){
+        Interactable interactable = mock(Interactable.class);
+        interactables.add(interactable);
+        Position position = new Position(1, 0);
+        when(interactable.getPosition()).thenReturn(new Position(0, 0));
+        assertNull(kitchen.getInteractable(position));
+    }
+
+    @Test
+    void testEmptyInteractables(){
+        assertNull(kitchen.getInteractable(null));
+    }
+
+    @Test
+    void testIsEmptyNoBlocking(){
+        Interactable interactable = mock(Interactable.class);
+        interactables.add(interactable);
+        Position position = new Position(0, 0);
+        when(interactable.getPosition()).thenReturn(new Position(0,0));
+        when(interactable.isBlocking()).thenReturn(false);
+        assertTrue(kitchen.isEmpty(position));
+    }
+
+    @Test
+    void testIsEmptyBlocking(){
+        Interactable interactable = mock(Interactable.class);
+        interactables.add(interactable);
+        Position position = new Position(1, 0);
+        when(interactable.getPosition()).thenReturn(new Position(0,0));
+        when(interactable.isBlocking()).thenReturn(true);
+        assertTrue(kitchen.isEmpty(position));
+    }
+
+    @Test
+    void testNotEmpty(){
+        Interactable interactable = mock(Interactable.class);
+        interactables.add(interactable);
+        Position position = new Position(0, 0);
+        when(interactable.getPosition()).thenReturn(new Position(0,0));
+        when(interactable.isBlocking()).thenReturn(true);
+        assertFalse(kitchen.isEmpty(position));
+    }
+
+    @Test
+    void testEmptyChefs(){
+        Chef chef = mock(Chef.class);
+        chefs.add(chef);
+        Position position = new Position(1, 0);
+        when(chef.getPosition()).thenReturn(new Position(0, 0));
+        assertTrue(kitchen.isEmpty(position));
+    }
+
+    @Test
+    void testNotEmptyChefs(){
+        Chef chef = mock(Chef.class);
+        chefs.add(chef);
+        Position position = new Position(0, 0);
+        when(chef.getPosition()).thenReturn(new Position(0,0));
+        assertFalse(kitchen.isEmpty(position));
+    }
+
+    @Test
+    void testGetLevel() {
+        assertEquals(10, kitchen.getLevel());
+    }
+
+    @Test
+    void testGetLives() {
+        assertEquals(3, kitchen.getLives());
     }
 
     @Test
     void testDecreaseLives() {
-        assertEquals(3, kitchen.getLives());
         kitchen.decreaseLives();
         assertEquals(2, kitchen.getLives());
-        kitchen.decreaseLives();
-        assertEquals(1, kitchen.getLives());
     }
 
     @Test
-    void testGetLevelOrders() {
-        // convert to list to compare by elements
-        List<Order> expected = Arrays.asList(
-                new Order(new Dish(DishType.POTATO_SOUP), 30),
-                new Order(new Dish(DishType.CARROT_SOUP), 45),
-                new Order(new Dish(DishType.CARROT_SOUP), 60)
-        );
-        assertEquals(expected, new ArrayList<>(kitchen.getLevelOrders()));
+    void testGetNumPlayers() {
+        assertEquals(2, kitchen.getNumPlayers());
+    }
+
+    @Test
+    void testGetInteractables() {
+        Interactable interactable = mock(Interactable.class);
+        interactables.add(interactable);
+        assertEquals(interactables, kitchen.getInteractables());
+    }
+
+    @Test
+    void testGetChefs() {
+        Chef chef = mock(Chef.class);
+        chefs.add(chef);
+        assertEquals(chefs, kitchen.getChefs());
+    }
+
+    @Test
+    void testGetOrderManager() {
+        assertEquals(orderManager, kitchen.getOrderManager());
+    }
+
+    @Test
+    void testMoreOrders() {
+        when(orderManager.moreOrders()).thenReturn(true);
+        assertTrue(kitchen.moreOrders());
     }
 
     @Test
     void testAddActiveOrder() {
-        Order newOrder = new Order(new Dish(DishType.POTATO_SOUP), 30);
-        kitchen.addActiveOrder(newOrder);
-        assertEquals(1, kitchen.getActiveOrders().size());
-        assertEquals(newOrder, kitchen.getActiveOrders().getLast());
+        Order order = mock(Order.class);
+        kitchen.addActiveOrder(order);
+        verify(orderManager, times(1)).addActiveOrder(order);
     }
 
     @Test
     void testRemoveActiveOrder() {
-        Order newOrder1 = new Order(new Dish(DishType.POTATO_SOUP), 30);
-        Order newOrder2 = new Order(new Dish(DishType.CARROT_SOUP), 45);
-        kitchen.addActiveOrder(newOrder1);
-        kitchen.addActiveOrder(newOrder2);
-
-        kitchen.removeActiveOrder(newOrder1);
-        assertEquals(1, kitchen.getActiveOrders().size());
-        assertEquals(newOrder2, kitchen.getActiveOrders().getFirst());
+        Order order = mock(Order.class);
+        kitchen.removeActiveOrder(order);
+        verify(orderManager, times(1)).removeActiveOrder(order);
     }
 
     @Test
     void testGetActiveOrders() {
-        Order newOrder = new Order(new Dish(DishType.POTATO_SOUP), 30);
-        kitchen.addActiveOrder(newOrder);
-        assertEquals(1, kitchen.getActiveOrders().size());
+        List<Order> orders = new ArrayList<>();
+        when(orderManager.getActiveOrders()).thenReturn(orders);
+        assertEquals(orders, kitchen.getActiveOrders());
     }
 
     @Test
     void testGetTimeForNewOrder() {
-        assertEquals(0, kitchen.getTimeForNewOrder());
+        when(orderManager.getTimeForNewOrder()).thenReturn(5);
+        assertEquals(5, kitchen.getTimeForNewOrder());
     }
 
     @Test
     void testSetTimeForNewOrder() {
-        kitchen.setTimeForNewOrder(5);
-        assertEquals(5, kitchen.getTimeForNewOrder());
-    }
-    
-
-    @Test
-    void test_getTile() {
-        Tile mockedTile = mock(Tile.class);
-        Position tilePosition = new Position(1, 1);
-        when(mockedTile.getPosition()).thenReturn(tilePosition);
-
-        tiles.add(mockedTile);
-
-        assertEquals(mockedTile, kitchen.getTile(new Position(1, 1)));
-        assertNull(kitchen.getTile(new Position(0, 0)));
+        kitchen.setTimeForNewOrder();
+        verify(orderManager, times(1)).setTimeForNewOrder();
     }
 
     @Test
-    void test_isEmpty() {
-        // add a floor tile at (2,2)
-        Floor mockedFloor = mock(Floor.class);
-        Position floorPosition = new Position(2, 2);
-        when(mockedFloor.getPosition()).thenReturn(floorPosition);
-
-        tiles.add(mockedFloor);
-
-        // add an interactable at (3,3)
-        Interactable mockedInteractable = mock(Interactable.class);
-        Position interactablePosition = new Position(3, 3);
-        when(mockedInteractable.getPosition()).thenReturn(interactablePosition);
-
-        tiles.add(mockedInteractable);
-
-        // add a chef at (4,4)
-        Chef mockedChef = mock(Chef.class);
-        Position chefPosition = new Position(4, 4);
-        when(mockedChef.getPosition()).thenReturn(chefPosition);
-
-        chefs.add(mockedChef);
-
-        assertTrue(kitchen.isEmpty(new Position(1, 1)));
-        assertTrue(kitchen.isEmpty(new Position(2, 2))); // a floor means the tile is empty
-        assertFalse(kitchen.isEmpty(new Position(3, 3))); // mocked interactable is there
-        assertFalse(kitchen.isEmpty(new Position(4, 4))); // mocked chef is there
+    void testGetOrdersDelivered() {
+        when(orderManager.getOrdersDelivered()).thenReturn(10);
+        assertEquals(10, kitchen.getOrdersDelivered());
     }
 
 }
