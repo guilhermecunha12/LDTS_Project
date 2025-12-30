@@ -21,9 +21,9 @@ This project was developed by *Gabriel Magalhães* (*up202405890@fe.up.pt*), *Gu
   (counters, delivery spots, dispensers, cookwares) are verified.
 - **Grab** - When not holding anything, chefs will grab food and plates by pressing the space bar and enter keys, for player 1 and player 2, respectively.
 - **Drop** - When holding something, chefs will drop food and plates by pressing the space bar and enter keys, for player 1 and player 2, respectively.
-- **Pot cooking** - When the Pot cookware receives a chopped potato or carrot,
-  it will generate a potato soup or a carrot soup which, after 4 seconds, can be collected by a chef holding a plate, and delivered.
-  Grill and Fryer have similar behaviour.
+- **Cookware cooking** - When the Pot cookware receives a chopped potato or carrot, 
+it will generate a potato soup or a carrot soup which, after 4 seconds, can be collected by a chef holding a plate, and delivered.
+Grill and Fryer have similar behaviour.
 - **Trash** - When a chef interacts with a trash bin, all the things he was holding get dumped.
 - **Delivery Spot** - Chefs can only deliver orders in the delivery spots.
 - **Dispensers** - Chefs can get raw foods from dispensers by interacting with them.
@@ -58,87 +58,157 @@ This project was developed by *Gabriel Magalhães* (*up202405890@fe.up.pt*), *Gu
 <br />
 
 <p align="center" justify="center">
+  <img src="gifs/cutting.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 3. Cutting </i></b>
+</p>
+<br>
+<br />
+
+
+<p align="center" justify="center">
   <img src="gifs/order_matching.gif"/>
 </p>
 <p align="center">
-  <b><i>Gif 3. Order Matching  </i></b>
+  <b><i>Gif 4. Order Matching  </i></b>
 </p>
 <br>
 <br />
 
 ### UML DIAGRAMS
 
-These are the UML diagrams of each package of the project.
+These are the UML diagrams of each package of the project. 
 
 <p align="center" justify="center">
-  <img src="images/game.png"/>
+  <img src="images/uml_game.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 3. Game UML  </i></b>
+  <b><i>Fig 1. Game </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/sound.png"/>
+  <img src="images/uml_game_attr.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 4. Music UML  </i></b>
+  <b><i>Fig 2. Game Attributes  </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/gui.png"/>
+  <img src="images/uml_sound.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 5. GUI UML  </i></b>
+  <b><i>Fig 3. Sound </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/game_states.png"/>
+  <img src="images/uml_gui.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 6. States UML  </i></b>
+  <b><i>Fig 4. GUI  </i></b>
+</p>
+<br>
+
+
+<p align="center" justify="center">
+  <img src="images/uml_states.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 5. States  </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/controller.png"/>
+  <img src="images/uml_controller.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 7. Controller UML  </i></b>
+  <b><i>Fig 6. Controller  </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/viewer.png"/>
+  <img src="images/uml_viewer.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 8. Viewer UML  </i></b>
+  <b><i>Fig 7. Viewer  </i></b>
+</p>
+<br>
+
+
+<p align="center" justify="center">
+  <img src="images/uml_menu.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 8. Menu  </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/kitchen.png"/>
+  <img src="images/uml_elementViewer.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 9. Kitchen UML  </i></b>
+  <b><i>Fig 9. Element Viewer  </i></b>
+</p>
+<br>
+
+
+<p align="center" justify="center">
+  <img src="images/uml_kitchen.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 10. Kitchen  </i></b>
+</p>
+<br>
+
+
+<p align="center" justify="center">
+  <img src="images/uml_grabable.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 11. Grabable  </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/elements.png"/>
+  <img src="images/uml_dispenser.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 10. Elements UML  </i></b>
+  <b><i>Fig 12. Dispenser  </i></b>
 </p>
 <br>
 
 <p align="center" justify="center">
-  <img src="images/dish.png"/>
+  <img src="images/uml_kitchenware.png"/>
 </p>
 <p align="center">
-  <b><i>Fig 11. Dish UML  </i></b>
+  <b><i>Fig 13. Kitchenware  </i></b>
+</p>
+<br>
+
+<p align="center" justify="center">
+  <img src="images/uml_interactable.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 14. Interactable  </i></b>
+</p>
+<br>
+
+<p align="center" justify="center">
+  <img src="images/uml_element.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 15. Element  </i></b>
+</p>
+<br>
+
+<p align="center" justify="center">
+  <img src="images/uml_dish.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 16. Dish  </i></b>
 </p>
 <br>
 
@@ -245,7 +315,7 @@ These are the UML diagrams of each package of the project.
   Diagram that represents the State pattern:
 
   <p align="center" justify="center">
-    <img src="images/game_states.png"/>
+    <img src="images/uml_states.png"/>
   </p>
   <p align="center">
     <b><i>Fig 14. State Pattern  </i></b>
