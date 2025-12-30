@@ -39,10 +39,10 @@ class GameOverViewerTest {
 
         verify(gui,times(1)).changeBackgroundColor("#468499");
         verify(gui,times(1)).paint();
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 9, y / 12), "Game Over", "#ffcf40");
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 24, y / 6 + 5), "Delivered dishes: 5", "#ffcf40");
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 23, y / 2 - 10), "Back to Main Menu", "#ffff00");
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 8, y / 2), "Exit", "#000000");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 18, y / 12), "Game Over", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 35, y / 6 + 5), "Delivered dishes: 5", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 32, y / 2 - 10), "Back to Main Menu", "#ffff00");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 17, y / 2), "Exit", "#000000");
     }
 
     @Test
@@ -63,9 +63,9 @@ class GameOverViewerTest {
 
         verify(gui,times(1)).changeBackgroundColor("#468499");
         verify(gui,times(1)).paint();
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 9, y / 12), "Game Over", "#ffcf40");
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 24, y / 6 + 5), "Delivered dishes: 10", "#ffcf40");
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 23, y / 2 - 10), "Back to Main Menu", "#000000");
-        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 8, y / 2), "Exit", "#ffff00");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 18, y / 12), "Game Over", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 35, y / 6 + 5), "Delivered dishes: 10", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 32, y / 2 - 10), "Back to Main Menu", "#000000");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 17, y / 2), "Exit", "#ffff00");
     }
 }
