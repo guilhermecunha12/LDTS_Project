@@ -20,8 +20,9 @@ class CounterCutterViewerTest {
     }
 
     @Test
-    void testDrawDoesNotEmpty() throws Exception {
+    void testDrawCounterCutterEmpty() throws Exception {
         CounterCutter counterCutter = mock(CounterCutter.class);
+
         when(counterCutter.isEmpty()).thenReturn(true);
 
         counterCutterViewer.draw(counterCutter, gui);
@@ -30,22 +31,17 @@ class CounterCutterViewerTest {
     }
 
     @Test
-    void testDrawWithContent() throws Exception {
+    void testDrawCounterCutterWithContent() throws Exception {
         CounterCutter counterCutter = mock(CounterCutter.class);
         Food content = mock(Food.class);
         ElementViewer<Grabable> contentViewer = mock(ElementViewer.class);
 
-        when(counterCutter.getX()).thenReturn(5);
-        when(counterCutter.getY()).thenReturn(10);
         when(counterCutter.isEmpty()).thenReturn(false);
         when(counterCutter.getContent()).thenReturn(content);
         when(content.getViewer()).thenReturn(contentViewer);
 
         counterCutterViewer.draw(counterCutter, gui);
 
-        verify(counterCutter).isEmpty();
-        verify(counterCutter).getContent();
-        verify(content).getViewer();
         verify(contentViewer).draw(content, gui);
         verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }

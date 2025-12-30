@@ -37,7 +37,7 @@ class PlateViewerTest {
     }
 
     @Test
-    void testDrawPlateAllDishTypes() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawPlateWithAllDishTypes() throws IOException, URISyntaxException, FontFormatException {
         DishType[] supportedDishTypes = {
                 DishType.POTATO_SOUP,
                 DishType.CARROT_SOUP,
@@ -65,9 +65,7 @@ class PlateViewerTest {
 
         when(plate.getContent()).thenReturn(dish);
 
-        Exception exception = assertThrows(IOException.class, () -> {
-            plateViewer.draw(plate, gui);
-        });
+        Exception exception = assertThrows(IOException.class, () -> {plateViewer.draw(plate, gui);});
 
         assertEquals("Invalid plate state", exception.getMessage());
     }

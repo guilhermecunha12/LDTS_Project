@@ -24,40 +24,52 @@ class FryerViewerTest {
     }
 
     @Test
-    void testDrawFryerEmptyRight() throws IOException, URISyntaxException, FontFormatException {
-        Fryer fryer = mock(Fryer.class);
+    void testDrawFryerEmptyAllTypes() throws IOException, URISyntaxException, FontFormatException {
+        char[] typesAvailable = {'F','R'};
 
-        when(fryer.isEmpty()).thenReturn(true);
-        when(fryer.getType()).thenReturn('R');
+        for(char type : typesAvailable) {
+            Fryer fryer = mock(Fryer.class);
 
-        fryerViewer.draw(fryer, gui);
+            when(fryer.isEmpty()).thenReturn(true);
+            when(fryer.getType()).thenReturn(type);
 
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            fryerViewer.draw(fryer,gui);
+
+            verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+        }
     }
 
     @Test
-    void testDrawFryerExecutingRight() throws IOException, URISyntaxException, FontFormatException {
-        Fryer fryer = mock(Fryer.class);
+    void testDrawFryerExecutingAllTypes() throws IOException, URISyntaxException, FontFormatException {
+        char[] typesAvailable = {'F','R'};
 
-        when(fryer.isEmpty()).thenReturn(false);
-        when(fryer.isExecuting()).thenReturn(true);
-        when(fryer.getType()).thenReturn('R');
+        for(char type : typesAvailable) {
+            Fryer fryer = mock(Fryer.class);
 
-        fryerViewer.draw(fryer, gui);
+            when(fryer.isEmpty()).thenReturn(false);
+            when(fryer.isExecuting()).thenReturn(true);
+            when(fryer.getType()).thenReturn(type);
 
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            fryerViewer.draw(fryer,gui);
+
+            verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+        }
     }
 
     @Test
-    void testDrawFryerFinishedRIght() throws IOException, URISyntaxException, FontFormatException {
-        Fryer fryer = mock(Fryer.class);
+    void testDrawFryerFinishedAllTypes() throws IOException, URISyntaxException, FontFormatException {
+        char[] typesAvailable = {'F','R'};
 
-        when(fryer.isEmpty()).thenReturn(false);
-        when(fryer.isFinished()).thenReturn(false);
-        when(fryer.getType()).thenReturn('R');
+        for(char type : typesAvailable) {
+            Fryer fryer = mock(Fryer.class);
 
-        fryerViewer.draw(fryer, gui);
+            when(fryer.isEmpty()).thenReturn(false);
+            when(fryer.isExecuting()).thenReturn(false);
+            when(fryer.getType()).thenReturn(type);
 
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            fryerViewer.draw(fryer,gui);
+
+            verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+        }
     }
 }

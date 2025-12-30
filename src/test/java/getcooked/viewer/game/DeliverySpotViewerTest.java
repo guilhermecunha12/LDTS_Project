@@ -22,7 +22,7 @@ class DeliverySpotViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawDeliverySpot() throws IOException, URISyntaxException, FontFormatException {
         DeliverySpot deliverySpot = mock(DeliverySpot.class);
 
         when(deliverySpot.getX()).thenReturn(0);

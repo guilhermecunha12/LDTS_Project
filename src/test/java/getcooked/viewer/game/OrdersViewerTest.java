@@ -21,7 +21,7 @@ class OrdersViewerTest {
     }
 
     @Test
-    void testDrawElements() throws Exception {
+    void testDrawOrders() throws Exception {
         List<Order> orders = new ArrayList<>();
 
         for(DishType type : DishType.values()) {

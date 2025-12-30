@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 
 import static org.mockito.Mockito.mock;
 
-class PotatoDispenserVIewerTest {
+class PotatoDispenserViewerTest {
     private GUI gui;
     private PotatoDispenserViewer potatoDispenserViewer;
 
@@ -22,7 +22,7 @@ class PotatoDispenserVIewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawPotatoDispenser() throws IOException, URISyntaxException, FontFormatException {
         PotatoDispenser potatoDispenser = mock(PotatoDispenser.class);
 
         potatoDispenserViewer.draw(potatoDispenser, gui);

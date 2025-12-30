@@ -4,6 +4,7 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Element;
 import getcooked.model.game.elements.Interactable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,10 +29,10 @@ class KitchenViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawKitchen() throws IOException, URISyntaxException, FontFormatException {
         Interactable interactable = mock(Interactable.class);
         List<Interactable> interactables = List.of(interactable,interactable,interactable,interactable);
-        var interactableViewer = mock(ElementViewer.class);
+        ElementViewer<Element> interactableViewer = mock(ElementViewer.class);
         Chef chef = mock(Chef.class);
         var chefViewer = mock(ChefViewer.class);
 

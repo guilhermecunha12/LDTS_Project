@@ -24,7 +24,7 @@ class TrashViewerTest{
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawTrash() throws IOException, URISyntaxException, FontFormatException {
         Trash trash = mock(Trash.class);
 
         trashViewer.draw(trash, gui);

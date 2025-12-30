@@ -36,9 +36,9 @@ class CarrotViewerTest {
             when(carrot.getState()).thenReturn(foodState);
 
             carrotViewer.draw(carrot, gui);
-        }
 
-        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+            verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+        }
     }
 
 }

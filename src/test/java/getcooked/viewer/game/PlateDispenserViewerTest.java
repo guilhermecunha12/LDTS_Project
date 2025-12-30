@@ -22,10 +22,8 @@ class PlateDispenserViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawPlate() throws IOException, URISyntaxException, FontFormatException {
         PlateDispenser plateDispenser = mock(PlateDispenser.class);
-        when(plateDispenser.getX()).thenReturn(50);
-        when(plateDispenser.getY()).thenReturn(100);
 
         plateDispenserViewer.draw(plateDispenser, gui);
 

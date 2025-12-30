@@ -24,8 +24,8 @@ class KebabCutterViewerTest {
     @Test
     void testDrawKebabCutterNormal() throws IOException, URISyntaxException, FontFormatException {
         KebabCutter kebabCutter = mock(KebabCutter.class);
-        when(kebabCutter.getX()).thenReturn(0);
-        when(kebabCutter.getY()).thenReturn(0);
+
+        when(kebabCutter.isFinished()).thenReturn(false);
 
         kebabCutterViewer.draw(kebabCutter, gui);
 

@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static getcooked.model.game.elements.grabable.food.FoodState.CHOPPED;
+import static getcooked.model.game.elements.grabable.food.FoodState.RAW;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -25,24 +27,17 @@ class PotatoViewerTest{
     }
 
     @Test
-    void testDrawPotatoRaw() throws IOException, URISyntaxException, FontFormatException {
-        Potato potato = mock(Potato.class);
+    void testDrawPotatoAllStates() throws IOException, URISyntaxException, FontFormatException {
+        FoodState[] validStates= {RAW, CHOPPED};
 
-        when(potato.getState()).thenReturn(FoodState.RAW);
+        for(FoodState state : validStates){
+            Potato potato = mock(Potato.class);
 
-        potatoViewer.draw(potato, gui);
+            when(potato.getState()).thenReturn(state);
 
-        org.mockito.Mockito.verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
-    }
+            potatoViewer.draw(potato,gui);
 
-    @Test
-    void testDrawPotatoChopped() throws IOException, URISyntaxException, FontFormatException {
-        Potato potato = mock(Potato.class);
-
-        when(potato.getState()).thenReturn(FoodState.CHOPPED);
-
-        potatoViewer.draw(potato, gui);
-
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+        }
     }
 }

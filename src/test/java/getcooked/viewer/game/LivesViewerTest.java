@@ -25,7 +25,7 @@ class LivesViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawlives() throws IOException, URISyntaxException, FontFormatException {
         when(kitchen.getLives()).thenReturn(1);
 
         livesViewer.draw(gui);

@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 
 import static org.mockito.Mockito.*;
 
-class FloorVIewerTest {
+class FloorViewerTest {
     private FloorViewer floorViewer;
     private GUI gui;
 
@@ -22,11 +22,8 @@ class FloorVIewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawFloor() throws IOException, URISyntaxException, FontFormatException {
         Floor floor = mock(Floor.class);
-
-        when(floor.getX()).thenReturn(0);
-        when(floor.getY()).thenReturn(0);
 
         floorViewer.draw(floor, gui);
 

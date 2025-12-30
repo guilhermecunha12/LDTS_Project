@@ -1,6 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.game.elements.grabable.Grabable;
 import getcooked.model.game.elements.interactable.Counter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,58 +23,38 @@ class CounterViewerTest {
     }
 
     @Test
-    void testDrawEmptyCounterUP() throws IOException, URISyntaxException, FontFormatException {
-        Counter counter = mock(Counter.class);
+    void testDrawCounterEmptyAllTypes() throws IOException, URISyntaxException, FontFormatException {
+        char[] availableTypes = {'u','d','l','r','1','2','3','4'};
 
-        when(counter.getType()).thenReturn('u');
-        when(counter.getX()).thenReturn(0);
-        when(counter.getY()).thenReturn(0);
-        when(counter.getContent()).thenReturn(null);
+        for(char type :  availableTypes){
+            Counter counter = mock(Counter.class);
 
-        counterViewer.draw(counter,gui);
+            when(counter.getType()).thenReturn(type);
+            when(counter.getContent()).thenReturn(null);
 
-        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            counterViewer.draw(counter,gui);
+
+            verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+        }
     }
 
     @Test
-    void testDrawCounterWithItem() throws IOException, URISyntaxException, FontFormatException {
-        Counter counter = mock(Counter.class);
-        var grabable = mock(getcooked.model.game.elements.grabable.Grabable.class);
-        var grabableViewer = mock(getcooked.viewer.game.ElementViewer.class);
+    void testDrawCounterWithContentAllTypes() throws IOException, URISyntaxException, FontFormatException {
+        char[] availableTypes = {'u','d','l','r','1','2','3','4'};
 
-        when(counter.getType()).thenReturn('d');
-        when(counter.getX()).thenReturn(0);
-        when(counter.getY()).thenReturn(0);
-        when(counter.getContent()).thenReturn(grabable);
-        when(grabable.getViewer()).thenReturn(grabableViewer);
+        for(char type :  availableTypes){
+            Counter counter = mock(Counter.class);
+            Grabable grabable = mock(Grabable.class);
+            ElementViewer<Grabable> grabableViewer = mock(ElementViewer.class);
 
-        counterViewer.draw(counter, gui);
+            when(counter.getType()).thenReturn(type);
+            when(counter.getContent()).thenReturn(grabable);
+            when(grabable.getViewer()).thenReturn(grabableViewer);
 
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
-        verify(grabableViewer, times(1)).draw(grabable, gui);
-    }
+            counterViewer.draw(counter,gui);
 
-    @Test
-    void testDrawCounterEmptyBotoomLeft() throws IOException, URISyntaxException, FontFormatException {
-        Counter counter = mock(Counter.class);
-
-        when(counter.getType()).thenReturn('4');
-        when(counter.getContent()).thenReturn(null);
-
-        counterViewer.draw(counter, gui);
-
-        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
-    }
-
-    @Test
-    void testDrawCounterEmptyTopRight() throws IOException, URISyntaxException, FontFormatException {
-        Counter counter = mock(Counter.class);
-
-        when(counter.getType()).thenReturn('2');
-        when(counter.getContent()).thenReturn(null);
-
-        counterViewer.draw(counter, gui);
-
-        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            verify(grabableViewer,times(1)).draw(grabable,gui);
+            verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+        }
     }
 }

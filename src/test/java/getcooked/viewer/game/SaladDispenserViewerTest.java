@@ -22,7 +22,7 @@ class SaladDispenserViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawSaladDispenser() throws IOException, URISyntaxException, FontFormatException {
         SaladDispenser saladDispenser = mock(SaladDispenser.class);
 
         saladDispenserViewer.draw(saladDispenser, gui);

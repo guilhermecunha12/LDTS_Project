@@ -16,7 +16,7 @@ class SpriteTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        sprite = new Sprite("sprites/test_sprite.png");
+        sprite = new Sprite("test_sprite.png");
     }
 
     @Test

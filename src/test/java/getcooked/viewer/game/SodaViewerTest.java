@@ -24,7 +24,7 @@ class SodaViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawSoda() throws IOException, URISyntaxException, FontFormatException {
         Soda soda = mock(Soda.class);
 
         sodaViewer.draw(soda, gui);

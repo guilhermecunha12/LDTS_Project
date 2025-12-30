@@ -23,46 +23,35 @@ class ChefViewerTest {
     }
 
     @Test
-    void testDrawNotHoldingSomething() throws IOException, URISyntaxException, FontFormatException {
-        Chef chef = mock(Chef.class);
+    void testDrawChefNotHoldingSomethingAllDirections() throws IOException, URISyntaxException, FontFormatException {
+        for(Chef.Direction direction : Chef.Direction.values()) {
+            Chef chef = mock(Chef.class);
 
-        when(chef.getDirection()).thenReturn(Chef.Direction.UP);
-        when(chef.isHoldingSomething()).thenReturn(false);
+            when(chef.getDirection()).thenReturn(direction);
+            when(chef.isHoldingSomething()).thenReturn(false);
 
-        chefViewer.draw(chef,gui);
+            chefViewer.draw(chef,gui);
 
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+        }
     }
 
     @Test
-    void testDrawHoldingSomething() throws IOException, URISyntaxException, FontFormatException {
-        Chef chef = mock(Chef.class);
-        Grabable grabable = mock(Grabable.class);
-        ElementViewer<Grabable> grabableViewer = mock(ElementViewer.class);
+    void testDrawChefHoldingSomethingAllDirections() throws IOException, URISyntaxException, FontFormatException {
+        for(Chef.Direction direction : Chef.Direction.values()) {
+            Chef chef = mock(Chef.class);
+            Grabable grabable = mock(Grabable.class);
+            ElementViewer<Grabable> grabableViewer = mock(ElementViewer.class);
 
-        when(chef.getDirection()).thenReturn(Chef.Direction.LEFT);
-        when(chef.isHoldingSomething()).thenReturn(true);
-        when(chef.getItem()).thenReturn(grabable);
-        when(grabable.getViewer()).thenReturn(grabableViewer);
+            when(chef.getDirection()).thenReturn(direction);
+            when(chef.isHoldingSomething()).thenReturn(true);
+            when(chef.getItem()).thenReturn(grabable);
+            when(grabable.getViewer()).thenReturn(grabableViewer);
 
-        chefViewer.draw(chef,gui);
+            chefViewer.draw(chef,gui);
 
-        verify(chef).isHoldingSomething();
-        verify(chef).getItem();
-        verify(grabable).getViewer();
-        verify(grabableViewer).draw(grabable, gui);
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
-    }
-
-    @Test
-    void testDrawChefFacingDown() throws IOException, URISyntaxException, FontFormatException {
-        Chef chef = mock(Chef.class);
-
-        when(chef.getDirection()).thenReturn(Chef.Direction.DOWN);
-        when(chef.isHoldingSomething()).thenReturn(false);
-
-        chefViewer.draw(chef,gui);
-
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            verify(grabableViewer,times(1)).draw(grabable,gui);
+            verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+        }
     }
 }

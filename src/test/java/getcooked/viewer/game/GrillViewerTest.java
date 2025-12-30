@@ -25,8 +25,6 @@ class GrillViewerTest {
     void testDrawGrillEmpty() throws IOException, URISyntaxException, FontFormatException {
         Grill grill = mock(Grill.class);
 
-        when(grill.getX()).thenReturn(0);
-        when(grill.getY()).thenReturn(0);
         when(grill.isEmpty()).thenReturn(true);
 
         grillViewer.draw(grill, gui);
