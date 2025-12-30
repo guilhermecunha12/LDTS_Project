@@ -233,7 +233,7 @@ These are the UML diagrams of each package of the project.
     <img src="images/MVC.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 12. MVC Architetural Design  </i></b>
+    <b><i>Fig 17. MVC Architetural Design  </i></b>
   </p>
   <br>
 - **Consequences**<br>
@@ -264,7 +264,7 @@ These are the UML diagrams of each package of the project.
     <img src="images/game_loop.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 13. Game Loop</i></b>
+    <b><i>Fig 18. Game Loop</i></b>
   </p>
   <br>
 - **Consequences** <br>
@@ -296,8 +296,29 @@ These are the UML diagrams of each package of the project.
   Instead of a generic class it uses an abstract class was implemented, serving as the base class for all visual game elements (Chef, Trash, Carrot,etc.). This class encapsulates the common element proprieties. The base class Element also defines an abstract factory method getViewer(), in charge of specifying the exact ElementViewer to instantiate,
   through overrides in its subclasses.
   </p>
-- **Consequences** <br>
 
+  <p align="center" justify="center">
+    <img src="images/uml_states.png"/>
+  </p>
+  <p align="center">
+    <b><i>Fig 19. State Factory </i></b>
+  </p>
+  <br>
+
+
+
+Diagram showing all ElementViewers
+<p align="center" justify="center">
+    <img src="images/element_viewer.png"/>
+  </p>
+  <p align="center">
+    <b><i>Fig 20. ElementViewer Factory  </i></b>
+  </p>
+  <br>
+
+
+
+- **Consequences** <br>
   - Polymorphism: This approach enables the Game Loop to treat all states polymorphically (calling the same step() method on any active state);
   - Extensibility: Respects the Open/Closed Principle, since its possible to introduce new States and Elements without breaking the existing code;
   - Single Responsibility: Each concrete State and Element is responsible for knowing their according Viewer and Controller(only for State), rather than having the base class containing the instantition logic for all possible types.
@@ -318,7 +339,7 @@ These are the UML diagrams of each package of the project.
     <img src="images/uml_states.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 14. State Pattern  </i></b>
+    <b><i>Fig 21. State Pattern  </i></b>
   </p>
   <br>
 
@@ -328,16 +349,7 @@ These are the UML diagrams of each package of the project.
     <img src="images/state_diagram.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 15. State Diagram  </i></b>
-  </p>
-  <br>
-  
-  Diagram showing all ElementViewers
-<p align="center" justify="center">
-    <img src="images/element_viewer.png"/>
-  </p>
-  <p align="center">
-    <b><i>Fig 16. State Diagram  </i></b>
+    <b><i>Fig 22. State Diagram  </i></b>
   </p>
   <br>
 
@@ -357,10 +369,10 @@ These are the UML diagrams of each package of the project.
   This implementation can be found in the gui package: the general GUI class and the specific LanternaGUI (adapter).
 
 <p align="center" justify="center">
-    <img src="images/gui.png"/>
+    <img src="images/uml_gui.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 16. GUI  </i></b>
+    <b><i>Fig 23. GUI  </i></b>
   </p>
   <br>
 
@@ -369,7 +381,7 @@ These are the UML diagrams of each package of the project.
     <img src="images/adapter.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 17. Adapter Pattern  </i></b>
+    <b><i>Fig 24. Adapter Pattern  </i></b>
   </p>
   <br>
 
@@ -395,7 +407,7 @@ These are the UML diagrams of each package of the project.
     <img src="images/facade.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 18. GUI  </i></b>
+    <b><i>Fig 25. GUI  </i></b>
   </p>
   <br>
 
@@ -404,6 +416,29 @@ These are the UML diagrams of each package of the project.
     - Simplified Interface: LanternaGUI provides a clean and straightforward interface for the rest of the game to interact with, hiding the complexities of screen creation, font management, and input handling.
     - Centralized Control: The Facade pattern centralizes the control of the GUI subsystem, making it easier to manage and modify without affecting other parts of the code.
     - Improved Maintainability: By separating concerns into distinct classes, the code becomes more modular and easier to maintain. Each class has a clear responsibility, adhering to the Single Responsibility Principle.
+
+#### Visitor
+
+- **Problem in Context** <br>
+  Our initial code relied heavily on instanceof checks and type casting to determine the concrete type of Grabable that Chef was carrying. This approach led to several issues.
+  Adding a new Grabable type required modifying multiple parts of the code, violating the Single Responsibility Principle.
+  Interactables also had direct dependencies on specific Grabable types, making the code less modular thus violating the Dependency Inversion Principle.
+
+- **The Pattern** <br>
+  To solve this problem we used the Visitor Pattern. This pattern allows new operations to be added to existing class without modifying their structutre. By seprating the behavior from the object structure, it enables adding new operations without changing the classes of the elements on which it operates.
+
+- **Implementation** <br>
+  We implemented the Visitor Pattern to enable double dispatch between Grabable and Kitchenware objects. It consists of two main components.
+  The First dispatch occurs when chef.getItem().interactWithKitchenware(kitchenware) is called the specific Grabable interactWithKitchenware() method is invoked based on the concrete type of the Grabable type(Food, Plate).
+  The Second dispatch occurs when the Grabable calls back the Kitchenware's type-specific method.
+  For instance, Food calls kitchenware.acceptFood(this, chef) while Plate calls kitchenware.acceptPlate(this, chef), then dispatching the appropriate implementation based on the Kitchenware type.
+  This allows different behaviors for each combination of Grabable and Kitchenware types without instanceof checks or type casting, through polymorphism.
+
+- **Consequences** <br>
+- This approach provided several benefits:
+    - Open/Closed Principle: New Grabable or Kitchenware types can be added without modifying existing classes.
+    - Single Responsibility Principle: Each class focuses on its own behavior without needing to know about other types.
+    - Reduced Complexity: Eliminates instanceof checks and type casting, leading to cleaner and more maintainable code.
 
 #### KNOWN CODE SMELLS
 - **ElementViewer** - In the Element class, getViewer() returns an ElementViewer, giving a warning of
@@ -418,7 +453,7 @@ to correctly position elements on the screen.
     <img src="images/test_coverage.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 19. Test Coverage</i></b>
+    <b><i>Fig 26. Test Coverage</i></b>
   </p>
   <br>
 
@@ -426,7 +461,7 @@ to correctly position elements on the screen.
     <img src="images/jacoco.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 20. Jacoco Test Coverage</i></b>
+    <b><i>Fig 27. Jacoco Test Coverage</i></b>
   </p>
   <br>
 
@@ -434,7 +469,7 @@ to correctly position elements on the screen.
     <img src="images/pit_test.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 21. Pitest Mutation Testing</i></b>
+    <b><i>Fig 28. Pitest Mutation Testing</i></b>
   </p>
   <br>
 
