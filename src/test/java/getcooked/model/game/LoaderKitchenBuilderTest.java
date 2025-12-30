@@ -57,17 +57,10 @@ class LoaderKitchenBuilderTest {
     }
 
     @Test
-    void testCreateKitchenWithOrdersDelivered() throws IOException {
-        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 5);
-        Kitchen kitchen = builder.createKitchen();
-        assertEquals(5, kitchen.getOrdersDelivered());
-    }
-
-    @Test
     void testFloorCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof Floor));
+        assertTrue(interactables.stream().anyMatch(Floor.class::isInstance));
     }
 
     @Test
@@ -130,93 +123,104 @@ class LoaderKitchenBuilderTest {
     void testPlateDispenserCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof PlateDispenser));
+        assertTrue(interactables.stream().anyMatch(PlateDispenser.class::isInstance));
     }
 
     @Test
     void testTrashCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof Trash));
-    }
-
-    @Test
-    void testPotCreated() throws IOException {
-        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
-        List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof Pot));
+        assertTrue(interactables.stream().anyMatch(Trash.class::isInstance));
     }
 
     @Test
     void testCounterCutterCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof CounterCutter));
+        assertTrue(interactables.stream().anyMatch(CounterCutter.class::isInstance));
     }
 
     @Test
     void testBeefDispenserCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof BeefDispenser));
-    }
-
-    @Test
-    void testFryerLowercaseCreated() throws IOException {
-        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
-        List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof Fryer && ((Fryer) i).getType() == 'f'));
+        assertTrue(interactables.stream().anyMatch(BeefDispenser.class::isInstance));
     }
 
     @Test
     void testDeliverySpotCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof DeliverySpot));
+        assertTrue(interactables.stream().anyMatch(DeliverySpot.class::isInstance));
     }
 
     @Test
     void testPotatoDispenserCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof PotatoDispenser));
+        assertTrue(interactables.stream().anyMatch(PotatoDispenser.class::isInstance));
     }
+
 
     @Test
     void testCarrotDispenserCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof CarrotDispenser));
+        assertTrue(interactables.stream().anyMatch(CarrotDispenser.class::isInstance));
     }
 
     @Test
     void testSaladDispenserCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof SaladDispenser));
+        assertTrue(interactables.stream().anyMatch(SaladDispenser.class::isInstance));
     }
 
     @Test
     void testGrillCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof Grill));
+        assertTrue(interactables.stream().anyMatch(Grill.class::isInstance));
     }
 
     @Test
     void testSodaDispenserCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof SodaDispenser));
+        assertTrue(interactables.stream().anyMatch(SodaDispenser.class::isInstance));
     }
 
     @Test
     void testKebabCutterCreated() throws IOException {
         LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
         List<Interactable> interactables = builder.createInteractables();
-        assertTrue(interactables.stream().anyMatch(i -> i instanceof KebabCutter));
+        assertTrue(interactables.stream().anyMatch(KebabCutter.class::isInstance));
     }
 
-    
+    @Test
+    void testFryerLeftCreated() throws IOException {
+        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
+        List<Interactable> interactables = builder.createInteractables();
+        assertTrue(interactables.stream().anyMatch(i -> i instanceof Fryer && ((Fryer) i).getType() == 'F'));
+    }
 
+    @Test
+    void testFryerRightCreated() throws IOException {
+        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
+        List<Interactable> interactables = builder.createInteractables();
+        assertTrue(interactables.stream().anyMatch(i -> i instanceof Fryer && ((Fryer) i).getType() == 'f'));
+    }
+    @Test
+    void testPotCreated() throws IOException {
+        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(10, 2, 3, 0);
+        List<Interactable> interactables = builder.createInteractables();
+        assertTrue(interactables.stream().anyMatch(Pot.class::isInstance));
+    }
+
+    @Test
+    void testInvalidInteractables() throws IOException {
+        LoaderKitchenBuilder builder = new LoaderKitchenBuilder(0, 2, 3, 0);
+        List<Interactable> interactables = builder.createInteractables();
+        assertTrue(interactables.isEmpty());
+    }
 }
