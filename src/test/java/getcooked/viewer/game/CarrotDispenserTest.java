@@ -1,34 +1,32 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.Position;
 import getcooked.model.game.elements.interactable.dispenser.CarrotDispenser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import static org.mockito.Mockito.*;
 
-class CarrotDispenserViewerTest {
+class CarrotDispenserTest {
     private GUI gui;
-    private CarrotDispenser carrotDispenser;
     private CarrotDispenserViewer carrotDispenserViewer;
-
 
     @BeforeEach
     void setUp() {
         gui = mock(GUI.class);
-        carrotDispenser = mock(CarrotDispenser.class);
         carrotDispenserViewer = new CarrotDispenserViewer();
     }
 
     @Test
-    void testDraw() {
-        Position position = mock(Position.class);
-
-        when(carrotDispenser.getPosition()).thenReturn(position);
+    void testDrawCarrotDispenser() throws IOException, URISyntaxException, FontFormatException {
+        CarrotDispenser carrotDispenser = mock(CarrotDispenser.class);
 
         carrotDispenserViewer.draw(carrotDispenser, gui);
 
-        verify(gui,times(1)).drawCarrotDispenser(position);
+        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }
 }

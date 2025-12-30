@@ -1,46 +1,51 @@
 package getcooked.model.game.elements.interactable.dispenser;
 
-
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.grabable.Grabable;
+import getcooked.viewer.game.ElementViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class DispenserTest {
+
     private Dispenser dispenser;
     private Chef chef;
 
     @BeforeEach
     void setUp() {
-
-        dispenser = new Dispenser(1, 2) {
+        this.dispenser = new Dispenser(0, 0) {
             @Override
             protected Grabable createItem(int x, int y) {
-                // Can return any grabable so we mock it
-                return mock(Grabable.class);
+                return null;
+            }
+
+            @Override
+            public ElementViewer getViewer() {
+                return null;
             }
         };
-        chef = mock(Chef.class);
+        this.chef = mock(Chef.class);
     }
 
     @Test
-    void chefCanPickUpItemWhenNotHoldingSomething() {
-        // chef is not holding anything
-        when(chef.isHoldingSomething()).thenReturn(false);
-        when(chef.getX()).thenReturn(1);
-        when(chef.getY()).thenReturn(2);
-        dispenser.interact(chef);
-        verify(chef).pickUp(any(Grabable.class));
-    }
-
-    @Test
-    void chefCanPickUpItemWhenHoldingSomething() {
-        // chef is holding something
+    void testInteractHolding() {
         when(chef.isHoldingSomething()).thenReturn(true);
-        when(chef.getX()).thenReturn(1);
-        when(chef.getY()).thenReturn(2);
         dispenser.interact(chef);
-        verify(chef, never()).pickUp(any(Grabable.class));
+        verify(chef, never()).pickUp(any());
+    }
+
+    @Test
+    void testInteractNotHolding() {
+        when(chef.isHoldingSomething()).thenReturn(false);
+        dispenser.interact(chef);
+        verify(chef, times(1)).pickUp(any());
+    }
+
+    @Test
+    void testIsBlocking() {
+        assertTrue(dispenser.isBlocking());
     }
 }

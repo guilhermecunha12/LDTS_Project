@@ -1,33 +1,32 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.Position;
 import getcooked.model.game.elements.Floor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import static org.mockito.Mockito.*;
 
-public class FloorViewerTest {
-    private GUI gui;
-    private Floor floor;
+class FloorViewerTest {
     private FloorViewer floorViewer;
+    private GUI gui;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         gui = mock(GUI.class);
-        floor = mock(Floor.class);
         floorViewer = new FloorViewer();
     }
 
     @Test
-    void testDraw() {
-        Position position = mock(Position.class);
-
-        when(floor.getPosition()).thenReturn(position);
+    void testDrawFloor() throws IOException, URISyntaxException, FontFormatException {
+        Floor floor = mock(Floor.class);
 
         floorViewer.draw(floor, gui);
 
-        verify(gui,times(1)).drawFloor(position);
+        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
     }
 }

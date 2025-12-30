@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class BeefDispenserViewer implements ElementViewer<BeefDispenser> {
-
-
     @Override
     public void draw(BeefDispenser element, GUI gui) throws IOException, URISyntaxException, FontFormatException {
         Sprite sprite = new Sprite("sprites/beef_dispenser.png");

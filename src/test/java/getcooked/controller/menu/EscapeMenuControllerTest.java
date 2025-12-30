@@ -24,26 +24,35 @@ class EscapeMenuControllerTest {
     }
 
     @Test
-    void testPLayerUp(){
+    void testUp(){
         escapeMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_UP),0);
+
         verify(escapeMenu,times(1)).previousEntry();
     }
 
     @Test
-    void testPLayerDown(){
+    void testDown(){
         escapeMenuController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_DOWN),0);
+
         verify(escapeMenu,times(1)).nextEntry();
     }
 
     @Test
-    void testPlayerSelectExitToMainMenu() {
+    void testSelectExitToMainMenu() {
         when(escapeMenu.isSelectedResume()).thenReturn(false);
         when(escapeMenu.isSelectedExitToMainMenu()).thenReturn(true);
 
-        // Execute
         escapeMenuController.step(game, Set.of(GUI.ACTION.PLAYER2_SELECT), 0);
 
-        // Verify
         verify(game, times(1)).changeState(any(MainMenuState.class));
+    }
+
+    @Test
+    void testSelectResume() {
+        when(escapeMenu.isSelectedResume()).thenReturn(true);
+
+        escapeMenuController.step(game, Set.of(GUI.ACTION.PLAYER2_SELECT), 0);
+
+        verify(game, times(1)).changeState(any());
     }
 }

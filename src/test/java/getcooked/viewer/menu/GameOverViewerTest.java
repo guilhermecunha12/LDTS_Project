@@ -1,4 +1,5 @@
 package getcooked.viewer.menu;
+
 import getcooked.gui.GUI;
 import getcooked.model.menu.GameOverMenu;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,22 +22,50 @@ class GameOverViewerTest {
     }
 
     @Test
-    void testDrawElements() {
-        when(gui.getBackgroundColor()).thenReturn("#468499");
+    void testDrawFirstSelected() {
         int x = 50;
         int y = 50;
-        when(gui.getWidth()).thenReturn(x);
+
         when(gui.getHeight()).thenReturn(y);
+        when(gui.getWidth()).thenReturn(x);
         when(gameOverMenu.getNumberEntries()).thenReturn(2);
-        when(gameOverMenu.getEntry(0)).thenReturn("Play Again");
-        when(gameOverMenu.getEntry(1)).thenReturn("Exit to Main Menu");
+        when(gameOverMenu.getEntry(0)).thenReturn("Back to Main Menu");
+        when(gameOverMenu.getEntry(1)).thenReturn("Exit");
         when(gameOverMenu.isSelected(0)).thenReturn(true);
         when(gameOverMenu.isSelected(1)).thenReturn(false);
+        when(gameOverMenu.getOrdersDelivered()).thenReturn(5);
+
         gameOverViewer.drawElements(gui);
-        verify(gui, times(1)).changeBackgroundColor("#468499");
-        verify(gui, times(1)).paint();
-        verify(gui, times(1)).drawText(new getcooked.model.Position((x / 2) - 4, y / 12), "Game Over", "#ffcf40", "#468499");
-        verify(gui, times(1)).drawTextBox(new getcooked.model.Position((x / 2) - 6, 10), "Play Again", "#000000", "#ffff00", 1);
-        verify(gui, times(1)).drawTextBox(new getcooked.model.Position((x / 2) - 9, 14), "Exit to Main Menu", "#000000", "#a9a9a9", 1);
+
+        verify(gui,times(1)).changeBackgroundColor("#468499");
+        verify(gui,times(1)).paint();
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 9, y / 12), "Game Over", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 24, y / 6 + 5), "Delivered dishes: 5", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 23, y / 2 - 10), "Back to Main Menu", "#ffff00");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 8, y / 2), "Exit", "#000000");
+    }
+
+    @Test
+    void testDrawSecondSelected() {
+        int x = 80;
+        int y = 80;
+
+        when(gui.getHeight()).thenReturn(y);
+        when(gui.getWidth()).thenReturn(x);
+        when(gameOverMenu.getNumberEntries()).thenReturn(2);
+        when(gameOverMenu.getEntry(0)).thenReturn("Back to Main Menu");
+        when(gameOverMenu.getEntry(1)).thenReturn("Exit");
+        when(gameOverMenu.isSelected(0)).thenReturn(false);
+        when(gameOverMenu.isSelected(1)).thenReturn(true);
+        when(gameOverMenu.getOrdersDelivered()).thenReturn(10);
+
+        gameOverViewer.drawElements(gui);
+
+        verify(gui,times(1)).changeBackgroundColor("#468499");
+        verify(gui,times(1)).paint();
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 9, y / 12), "Game Over", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 24, y / 6 + 5), "Delivered dishes: 10", "#ffcf40");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 23, y / 2 - 10), "Back to Main Menu", "#000000");
+        verify(gui,times(1)).drawText(new getcooked.model.Position(x / 2 - 8, y / 2), "Exit", "#ffff00");
     }
 }

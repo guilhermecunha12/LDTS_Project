@@ -25,4 +25,5 @@ public interface GUI { // intermediate class to represent a general GUI
     void clear();
     void refresh() throws IOException;
     void close() throws IOException;
+    String getBackgroundColor();
 }

@@ -36,4 +36,9 @@ public class Plate extends Grabable {
     public void interactWithKitchenware(Kitchenware kitchenware, Chef chef) {
         kitchenware.acceptPlateInChef(this, chef);
     }
+
+    @Override
+    public Dish toDeliver() {
+        return hasContent() ? content : null;
+    }
 }

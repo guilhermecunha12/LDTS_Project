@@ -27,10 +27,14 @@ public class FontManager {
 
     private void setFontSize() {
         // total size of the screen
-        Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
-
-        fontSize = bestFontSize(screenBounds.height, screenBounds.width);
+        try {
+            Rectangle screenBounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                    .getDefaultScreenDevice().getDefaultConfiguration().getBounds();
+            fontSize = bestFontSize(screenBounds.height, screenBounds.width);
+        } catch (HeadlessException e) {
+            // Default size for headless mode (during testing)
+            fontSize = bestFontSize(1080, 1920);
+        }
     }
 
     public int bestFontSize(int height, int width) {
@@ -53,12 +57,12 @@ public class FontManager {
 
     private void loadFontResources() throws IOException {
         // Load font image once
-        URL image = Thread.currentThread().getContextClassLoader().getResource("fonts/font.png");
+        URL image = getClass().getClassLoader().getResource("fonts/font.png");
         this.fontImage = ImageIO.read(Objects.requireNonNull(image));
 
         // Build character position cache once
         this.charPositionCache = new HashMap<>();
-        URL resource = Thread.currentThread().getContextClassLoader().getResource("fonts/font-map.txt");
+        URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
 
         // load charPositionCache with the top left position of each character
         try (BufferedReader br = new BufferedReader(new FileReader(Objects.requireNonNull(resource).getFile()))) {

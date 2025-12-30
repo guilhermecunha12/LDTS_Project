@@ -1,99 +1,106 @@
 package getcooked.model.game.elements.interactable.cookware;
 
-import getcooked.model.game.elements.grabable.food.Carrot;
-import getcooked.model.game.elements.grabable.food.Food;
-import getcooked.model.game.elements.grabable.food.Potato;
+import getcooked.model.game.dish.DishType;
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.grabable.Plate;
+import getcooked.model.game.elements.grabable.food.*;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
+import getcooked.viewer.game.PotViewer;
+import net.jqwik.api.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class PotTest {
+class PotTest {
     private Pot pot;
 
     @BeforeEach
-    void testPotCreation(){
-        pot = new Pot(5,10);
+    void setUp() {
+        pot = new Pot(5, 10);
     }
 
     @Test
-    void testAccepetsPotato(){
+    void testAcceptsPotato() {
+        Potato potato = new Potato(0, 0);
+        potato.setState(FoodState.CHOPPED);
+
+        assertTrue(pot.canAdd(potato));
+    }
+
+    @Test
+    void testAcceptsCarrotAndIsFull() {
+        Carrot carrot = new Carrot(0, 0);
+        carrot.setState(FoodState.CHOPPED);
+
+        assertTrue(pot.canAdd(carrot));
+
+        // After adding the first carrot, the pot should be full
+        pot.addContent(carrot);
+
+        assertFalse(pot.canAdd(carrot));
+    }
+
+    @Test
+    void testDoesNotAcceptInvalidFood() {
+        Salad salad = new Salad(0,0);
+        salad.setState(FoodState.CHOPPED); // this should never happen
+
+        assertFalse(pot.canAdd(salad));
+    }
+
+    @Test
+    void testDoesNotAcceptRawPotato() {
+        Potato potato = new Potato(0, 0);
+        potato.setState(FoodState.RAW);
+
+        assertFalse(pot.canAdd(potato));
+    }
+
+    @Provide
+    Arbitrary<Food> foodsExceptPotatoAndCarrot() {
+        return Arbitraries.of(new Beef(0,0), new Salad(0,0), new Soda(0,0));
+    }
+
+    @Property
+    void testDoesNotAcceptOtherFood(@ForAll("foodsExceptPotatoAndCarrot") Food food) {
+        setUp();
+        assertFalse(pot.canAdd(food));
+    }
+
+    @Test
+    void testCreateFinishedDishPotatoSoup() {
         Potato potato = mock(Potato.class);
-        when(potato.getState()).thenReturn(Food.FoodState.RAW);
+        when(potato.getState()).thenReturn(FoodState.CHOPPED);
+        when(potato.getCookedDishType()).thenReturn(DishType.POTATO_SOUP);
+        Plate plate = mock(Plate.class);
+        when(plate.hasContent()).thenReturn(false);
 
-        assertTrue(pot.tryAdd(potato));
+        pot.addContent(potato);
+        pot.finish();
+        pot.acceptPlateInChef(plate, mock(Chef.class));
+
+        verify(plate, times(1)).setContent(argThat(dish -> dish.type() == DishType.POTATO_SOUP));
     }
 
     @Test
-    void testAccepetsCarrotAndIsFull(){
-        Carrot carrot = mock(Carrot.class);
-        when(carrot.getState()).thenReturn(Food.FoodState.RAW);
-
-        assertTrue(pot.tryAdd(carrot));
-
-        Carrot carrot2 = mock(Carrot.class);
-        when(carrot2.getState()).thenReturn(Food.FoodState.RAW);
-        // content is full now
-        assertFalse(pot.tryAdd(carrot2));
-    }
-
-    @Test
-    void testDoesNotAcceptOtherFood(){
-        Food food = mock(Food.class);
-
-        assertFalse(pot.tryAdd(food));
-    }
-
-    @Test
-    void testTryProcessFood(){
+    void testCreateFinishedDishNull() {
         Potato potato = mock(Potato.class);
-        when(potato.getState()).thenReturn(Food.FoodState.RAW);
+        when(potato.getState()).thenReturn(FoodState.RAW);
+        when(potato.getCookedDishType()).thenReturn(null);
+        Plate plate = mock(Plate.class);
+        when(plate.hasContent()).thenReturn(false);
 
-        pot.tryAdd(potato);
+        pot.addContent(potato);
+        pot.finish();
+        pot.acceptPlateInChef(plate, mock(Chef.class));
 
-        assertTrue(pot.isCooked());
+        verify(plate, times(1)).setContent(null);
     }
 
     @Test
-    void testDoesNotProcessFoodWhenEmpty(){
-        pot.clearCookware();
-        pot.tryCook();
-        assertFalse(pot.isCooked());
-    }
-
-    @Test
-    void testCreateFinishedDishPotatoSoup(){
-        Potato potato = mock(Potato.class);
-        when(potato.getState()).thenReturn(Food.FoodState.RAW);
-
-        pot.tryAdd(potato);
-        pot.tryCook();
-        //cooked = true now
-
-        assertEquals(getcooked.model.game.dish.DishType.POTATO_SOUP,pot.createFinishedDish().type());
-        assertFalse(pot.isCooked());
-    }
-
-    @Test
-    void testCreateFinishedDishCarrotSoup(){
-        Carrot carrot = mock(Carrot.class);
-        when(carrot.getState()).thenReturn(Food.FoodState.RAW);
-
-        pot.tryAdd(carrot);
-        pot.tryCook();
-        //cooked = true now
-
-        assertEquals(getcooked.model.game.dish.DishType.CARROT_SOUP, pot.createFinishedDish().type());
-        assertFalse(pot.isCooked());
-    }
-
-    @Test
-    void testCreateFinishedDishNot(){
-
-        pot.tryCook();
-
-        assertNull(pot.createFinishedDish());
+    void testGetViewer() {
+        assertInstanceOf(PotViewer.class, pot.getViewer());
     }
 }

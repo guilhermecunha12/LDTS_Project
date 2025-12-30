@@ -28,6 +28,14 @@ public class LanternaGUI implements GUI {
         this.backgroundColor = "#ffffff";
     }
 
+    public LanternaGUI(ScreenCreator screenCreator, FontManager fontManager, InputManager inputManager)
+            throws IOException {
+        this.screen = screenCreator.createScreen();
+        this.inputManager = inputManager;
+        this.fontManager = fontManager;
+        this.backgroundColor = "#ffffff";
+    }
+
     @Override
     public int getHeight() {
         return screen.getTerminalSize().getRows();
@@ -93,6 +101,11 @@ public class LanternaGUI implements GUI {
     @Override
     public void changeBackgroundColor(String newColor) {
         this.backgroundColor = newColor;
+    }
+
+    @Override
+    public String getBackgroundColor() {
+        return this.backgroundColor;
     }
 
     @Override

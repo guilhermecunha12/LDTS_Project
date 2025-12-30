@@ -1,54 +1,58 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.Position;
-import getcooked.model.game.elements.grabable.food.Carrot;
-import getcooked.model.game.elements.grabable.food.Potato;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Pot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import static org.mockito.Mockito.*;
 
-public class PotViewerTest {
+class PotViewerTest {
     private GUI gui;
-    private Pot pot;
     private PotViewer potViewer;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         gui = mock(GUI.class);
-        pot = mock(Pot.class);
         potViewer = new PotViewer();
     }
 
     @Test
-    void testDrawPotatoSoup() {
-        Position position = mock(Position.class);
-        Potato potato = mock(Potato.class);
+    void testDrawPotEmpty() throws IOException, URISyntaxException, FontFormatException {
+        Pot pot = mock(Pot.class);
 
-        when(pot.getContent()).thenReturn(potato);
-        when(pot.getPosition()).thenReturn(position);
-        when(pot.isCooked()).thenReturn(true);
+        when(pot.isEmpty()).thenReturn(true);
 
         potViewer.draw(pot, gui);
 
-        verify(gui,times(1)).drawPot(position);
-        verify(gui,times(1)).drawPotatoSoup(position);
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }
 
     @Test
-    void testDrawCarrotSoup() {
-        Position position = mock(Position.class);
-        Carrot carrot = mock(Carrot.class);
+    void testDrawPotExecuting() throws IOException, URISyntaxException, FontFormatException {
+        Pot pot = mock(Pot.class);
 
-        when(pot.getContent()).thenReturn(carrot);
-        when(pot.getPosition()).thenReturn(position);
-        when(pot.isCooked()).thenReturn(true);
+        when(pot.isEmpty()).thenReturn(false);
+        when(pot.isExecuting()).thenReturn(true);
 
-        potViewer.draw(pot, gui);
+        potViewer.draw(pot,gui);
 
-        verify(gui,times(1)).drawPot(position);
-        verify(gui,times(1)).drawCarrotSoup(position);
+        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+    }
+
+    @Test
+    void testDrawPotFinished() throws IOException, URISyntaxException, FontFormatException {
+        Pot pot = mock(Pot.class);
+
+        when(pot.isEmpty()).thenReturn(false);
+        when(pot.isExecuting()).thenReturn(false);
+
+        potViewer.draw(pot,gui);
+
+        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
     }
 }

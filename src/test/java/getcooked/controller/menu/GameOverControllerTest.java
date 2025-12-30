@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static org.mockito.Mockito.*;
 
-public class GameOverControllerTest {
+class GameOverControllerTest {
     private Game game;
     private GameOverMenu gameOverMenu;
     private GameOverController gameOverController;
@@ -22,14 +22,16 @@ public class GameOverControllerTest {
     }
 
     @Test
-    void testPlayerUp() throws Exception {
+    void testUp() throws Exception {
         gameOverController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_UP), 0);
+
         verify(gameOverMenu, times(1)).previousEntry();
     }
 
     @Test
-    void testPlayerDown() throws Exception {
+    void testDown() throws Exception {
         gameOverController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_DOWN), 0);
+
         verify(gameOverMenu, times(1)).nextEntry();
     }
 
@@ -39,6 +41,7 @@ public class GameOverControllerTest {
         when(gameOverMenu.isSelectedExitGame()).thenReturn(false);
 
         gameOverController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_SELECT), 0);
+
         verify(game, times(1)).changeState(any(getcooked.states.menu.MainMenuState.class));
     }
 
@@ -48,6 +51,7 @@ public class GameOverControllerTest {
         when(gameOverMenu.isSelectedExitGame()).thenReturn(true);
 
         gameOverController.step(game, Set.of(getcooked.gui.GUI.ACTION.PLAYER2_SELECT), 0);
+
         verify(game, times(1)).changeState(null);
     }
 }

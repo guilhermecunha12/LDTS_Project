@@ -7,13 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OrderTest {
+class OrderTest {
     private Order order;
+    private Dish dish;
 
     @BeforeEach
     void setUp() {
-        Dish dish = new Dish(DishType.POTATO_SOUP);
-        order = new Order(dish, 30);
+        this.dish = new Dish(DishType.POTATO_SOUP);
+        this.order = new Order(dish, 30);
     }
 
     @Test
@@ -45,5 +46,34 @@ public class OrderTest {
             order.tick();
         }
         assertTrue(order.isExpired());
+    }
+
+
+    @Test
+    void testEqualsSameObject(){
+        assertTrue(order.equals(order));
+    }
+
+    @Test
+    void testEqualsNull(){
+        assertFalse(order.equals(null));
+    }
+
+    @Test
+    void testEqualsDifferentClass(){
+        assertFalse(order.equals(new Object()));
+    }
+
+    @Test
+    void testEqualsSameContent(){
+        Order order1 = new Order(dish, 30);
+        assertTrue(order.equals(order1));
+    }
+
+
+    @Test
+    void testHashCode(){
+        Order order1 = new Order(dish, 30);
+        assertEquals(order.hashCode(), order1.hashCode());
     }
 }
