@@ -1,7 +1,6 @@
 package getcooked.model.game.elements.interactable;
 
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Interactable;
 import getcooked.viewer.game.ElementViewer;
 import getcooked.viewer.game.TrashViewer;
 

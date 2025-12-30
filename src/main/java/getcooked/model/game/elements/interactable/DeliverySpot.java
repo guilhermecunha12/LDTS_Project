@@ -4,7 +4,6 @@ import getcooked.model.game.Order;
 import getcooked.model.game.OrderManager;
 import getcooked.model.game.dish.Dish;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Interactable;
 import getcooked.viewer.game.DeliverySpotViewer;
 import getcooked.viewer.game.ElementViewer;
 

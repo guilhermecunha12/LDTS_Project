@@ -1,5 +1,6 @@
 package getcooked.model.game.elements;
 
+import getcooked.model.game.elements.interactable.Floor;
 import getcooked.viewer.game.FloorViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

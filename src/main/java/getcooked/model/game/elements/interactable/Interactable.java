@@ -1,4 +1,7 @@
-package getcooked.model.game.elements;
+package getcooked.model.game.elements.interactable;
+
+import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.Element;
 
 public abstract class Interactable extends Element {
     protected Interactable(int x, int y) {

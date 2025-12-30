@@ -4,7 +4,7 @@ import getcooked.gui.GUI;
 import getcooked.model.Position;
 import getcooked.model.game.Kitchen;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.viewer.Viewer;
 
 import java.awt.*;

@@ -1,7 +1,7 @@
 package getcooked.model.game;
 
-import getcooked.model.game.elements.Floor;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Floor;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.dish.DishType;
 import getcooked.model.game.elements.interactable.Counter;
 import getcooked.model.game.elements.interactable.kitchenware.cutter.KebabCutter;

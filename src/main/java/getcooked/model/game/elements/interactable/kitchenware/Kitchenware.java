@@ -1,7 +1,7 @@
 package getcooked.model.game.elements.interactable.kitchenware;
 
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.elements.grabable.Plate;
 import getcooked.model.game.elements.grabable.food.Food;
 import getcooked.model.game.elements.interactable.kitchenware.behaviour.ExecutionBehaviour;

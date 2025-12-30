@@ -1,7 +1,7 @@
 package getcooked.model.game;
 
 import getcooked.model.game.dish.DishType;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
