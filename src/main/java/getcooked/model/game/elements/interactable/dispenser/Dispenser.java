@@ -1,7 +1,7 @@
 package getcooked.model.game.elements.interactable.dispenser;
 
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.elements.grabable.Grabable;
 
 public abstract class Dispenser extends Interactable {

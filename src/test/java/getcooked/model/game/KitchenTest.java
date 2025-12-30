@@ -2,7 +2,7 @@ package getcooked.model.game;
 
 import getcooked.model.Position;
 import getcooked.model.game.elements.Chef;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

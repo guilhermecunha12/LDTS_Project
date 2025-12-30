@@ -1,7 +1,7 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.game.elements.Floor;
+import getcooked.model.game.elements.interactable.Floor;
 import getcooked.viewer.Sprite;
 
 import java.awt.*;

@@ -1,5 +1,6 @@
 package getcooked.model.game.elements;
 
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.viewer.game.ElementViewer;
 import org.junit.jupiter.api.Test;
 

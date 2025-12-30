@@ -1,7 +1,7 @@
 package getcooked.model.game;
 
-import getcooked.model.game.elements.Floor;
-import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.Floor;
+import getcooked.model.game.elements.interactable.Interactable;
 import getcooked.model.game.elements.interactable.*;
 import getcooked.model.game.elements.interactable.dispenser.*;
 import getcooked.model.game.elements.interactable.kitchenware.cookware.Fryer;
