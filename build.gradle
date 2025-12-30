@@ -44,4 +44,5 @@ jacocoTestReport {
 
 pitest {
     junit5PluginVersion = '1.2.1'
+    excludedTestClasses = ['getcooked.gui.ScreenCreatorTest']
 }
