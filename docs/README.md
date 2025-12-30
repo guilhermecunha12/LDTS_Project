@@ -381,7 +381,7 @@ By using the Adapter pattern, we avoid spreading Lanterna code throughout the pr
   <br>
 
 <p align="center" justify="center">
-    <img src="images/pit_test.png"/>
+    <img src="images/pitest.png"/>
   </p>
   <p align="center">
     <b><i>Fig 19. Pitest Mutation Testing</i></b>
