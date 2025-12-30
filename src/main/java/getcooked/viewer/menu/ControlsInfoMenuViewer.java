@@ -56,7 +56,7 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
         Sprite spriteControls = new Sprite("sprites/wasdcontrols.png");
         Sprite spriteSpace = new Sprite("sprites/space.png");
         spriteControls.draw(gui, (middleX - 70) / SCALE, (middleY - 25) / SCALE, 0, 0);
-        spriteSpace.draw(gui,  (middleX - 70) / SCALE,(middleY + 5) / SCALE, 0, 0);
+        spriteSpace.draw(gui,  (middleX - 70) / SCALE, middleY / SCALE, 20, 15);
 
     }
 
@@ -92,11 +92,11 @@ public class ControlsInfoMenuViewer extends Viewer<ControlsInfoMenu> {
         Sprite spritePlayer1 = new Sprite("sprites/wasdcontrols.png");
         Sprite spriteSpace = new Sprite("sprites/space.png");
         spritePlayer1.draw(gui,  (middleX - 100) / SCALE, (middleY - 25) / SCALE, 0, 0);
-        spriteSpace.draw(gui,  (middleX - 100) / SCALE,  (middleY + 5) / SCALE, 0, 0);
+        spriteSpace.draw(gui,  (middleX - 100) / SCALE,  middleY / SCALE, 20, 15);
         Sprite spritePlayer2 = new Sprite("sprites/arrowscontrols.png");
         Sprite spriteEnter = new Sprite("sprites/enter.png");
         spritePlayer2.draw(gui,(middleX + 50) / SCALE,(middleY - 25) /SCALE, 0, 0);
-        spriteEnter.draw(gui,(middleX + 65) / SCALE, (middleY + 5) / SCALE, 0, 0);
+        spriteEnter.draw(gui,(middleX + 65) / SCALE, middleY/ SCALE, 15, 10);
     }
 }
 

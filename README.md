@@ -11,7 +11,7 @@ For a more detailed version of this description click [here](./docs/README.md).
 
 ## Screenshots
 
-The following screenshots ilustrate the general look of our game.
+The following screenshots illustrate the general look of our game.
 ### Game preview
 
 <p align="center" justify="center">
