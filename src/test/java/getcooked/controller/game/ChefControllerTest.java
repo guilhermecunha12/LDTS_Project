@@ -95,11 +95,11 @@ class ChefControllerTest {
 
         chefController.moveChef(currentPos);
 
-        verify(chef,times(0)).setPosition(currentPos);
+        verify(chef,never()).setPosition(currentPos);
     }
 
     @Test
-    void testChefSelect() throws IOException {
+    void testChef1Select() throws IOException {
         Position frontPos = new Position(5,4);
         Interactable frontInteractable = mock(Interactable.class);
 
@@ -109,5 +109,17 @@ class ChefControllerTest {
         chefController.step(game, Set.of(GUI.ACTION.PLAYER1_SELECT),0);
 
         verify(frontInteractable,times(1)).interact(chef);
+    }
+
+    @Test
+    void testChef2SelectWithNothingToInteract() throws IOException {
+        Position frontPos = new Position(5,4);
+
+        when(chef.getIndex()).thenReturn(1);
+        when(chef.getFrontPosition()).thenReturn(frontPos);
+        when(kitchen.getInteractable(frontPos)).thenReturn(null);
+
+        chefController.step(game, Set.of(GUI.ACTION.PLAYER2_SELECT),0);
+
     }
 }
