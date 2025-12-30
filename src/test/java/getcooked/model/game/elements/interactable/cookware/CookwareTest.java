@@ -22,7 +22,7 @@ class CookwareTest{
     private ExecutionBehaviour executionBehaviour;
 
     @BeforeEach
-    void beforeEach() {
+    void setUp() {
         chef = mock(Chef.class);
         item = mock(Grabable.class);
         when(chef.getItem()).thenReturn(item);
