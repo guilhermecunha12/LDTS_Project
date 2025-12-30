@@ -13,23 +13,47 @@ import static org.mockito.Mockito.*;
 
 class GrillViewerTest {
     private GUI gui;
-    private GrillViewer grilViewer;
+    private GrillViewer grillViewer;
 
     @BeforeEach
     void setUp() {
         gui = mock(GUI.class);
-        grilViewer = new GrillViewer();
+        grillViewer = new GrillViewer();
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawGrillEmpty() throws IOException, URISyntaxException, FontFormatException {
         Grill grill = mock(Grill.class);
 
         when(grill.getX()).thenReturn(0);
         when(grill.getY()).thenReturn(0);
         when(grill.isEmpty()).thenReturn(true);
 
-        grilViewer.draw(grill, gui);
+        grillViewer.draw(grill, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawGrillExecuting() throws IOException, URISyntaxException, FontFormatException {
+        Grill grill = mock(Grill.class);
+
+        when(grill.isEmpty()).thenReturn(false);
+        when(grill.isExecuting()).thenReturn(true);
+
+        grillViewer.draw(grill, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawGrillFinished() throws IOException, URISyntaxException, FontFormatException {
+        Grill grill = mock(Grill.class);
+
+        when(grill.isEmpty()).thenReturn(false);
+        when(grill.isExecuting()).thenReturn(false);
+
+        grillViewer.draw(grill, gui);
 
         verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }

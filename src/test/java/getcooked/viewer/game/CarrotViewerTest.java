@@ -1,10 +1,17 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
+import getcooked.model.game.elements.grabable.food.Carrot;
 import getcooked.model.game.elements.grabable.food.FoodState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static getcooked.model.game.elements.grabable.food.FoodState.CHOPPED;
+import static getcooked.model.game.elements.grabable.food.FoodState.RAW;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -20,12 +27,18 @@ class CarrotViewerTest {
     }
 
     @Test
-    void testDraw() throws Exception {
-        getcooked.model.game.elements.grabable.food.Carrot carrot = org.mockito.Mockito.mock(getcooked.model.game.elements.grabable.food.Carrot.class);
-        when(carrot.getState()).thenReturn(FoodState.RAW);
+    void testDrawCarrotAllStates() throws IOException, URISyntaxException, FontFormatException {
+        FoodState[] validStates= {RAW, CHOPPED};
 
-        carrotViewer.draw(carrot, gui);
+        for(FoodState foodState : validStates) {
+            Carrot carrot = mock(Carrot.class);
 
-        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+            when(carrot.getState()).thenReturn(foodState);
+
+            carrotViewer.draw(carrot, gui);
+        }
+
+        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
     }
+
 }

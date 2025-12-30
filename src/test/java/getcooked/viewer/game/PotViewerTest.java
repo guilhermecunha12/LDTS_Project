@@ -22,7 +22,7 @@ class PotViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawPotEmpty() throws IOException, URISyntaxException, FontFormatException {
         Pot pot = mock(Pot.class);
 
         when(pot.isEmpty()).thenReturn(true);
@@ -30,5 +30,29 @@ class PotViewerTest {
         potViewer.draw(pot, gui);
 
         verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawPotExecuting() throws IOException, URISyntaxException, FontFormatException {
+        Pot pot = mock(Pot.class);
+
+        when(pot.isEmpty()).thenReturn(false);
+        when(pot.isExecuting()).thenReturn(true);
+
+        potViewer.draw(pot,gui);
+
+        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
+    }
+
+    @Test
+    void testDrawPotFinished() throws IOException, URISyntaxException, FontFormatException {
+        Pot pot = mock(Pot.class);
+
+        when(pot.isEmpty()).thenReturn(false);
+        when(pot.isExecuting()).thenReturn(false);
+
+        potViewer.draw(pot,gui);
+
+        verify(gui,atLeastOnce()).drawPixel(anyInt(),anyInt(),any());
     }
 }

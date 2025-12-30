@@ -22,7 +22,7 @@ class BeefViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawBeef() throws IOException, URISyntaxException, FontFormatException {
         Beef beef = mock(Beef.class);
 
         beefViewer.draw(beef, gui);

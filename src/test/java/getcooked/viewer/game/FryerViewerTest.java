@@ -24,13 +24,37 @@ class FryerViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawFryerEmptyRight() throws IOException, URISyntaxException, FontFormatException {
         Fryer fryer = mock(Fryer.class);
 
         when(fryer.isEmpty()).thenReturn(true);
-        when(fryer.getType()).thenReturn('F');
-        when(fryer.getX()).thenReturn(0);
-        when(fryer.getY()).thenReturn(0);
+        when(fryer.getType()).thenReturn('R');
+
+        fryerViewer.draw(fryer, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawFryerExecutingRight() throws IOException, URISyntaxException, FontFormatException {
+        Fryer fryer = mock(Fryer.class);
+
+        when(fryer.isEmpty()).thenReturn(false);
+        when(fryer.isExecuting()).thenReturn(true);
+        when(fryer.getType()).thenReturn('R');
+
+        fryerViewer.draw(fryer, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawFryerFinishedRIght() throws IOException, URISyntaxException, FontFormatException {
+        Fryer fryer = mock(Fryer.class);
+
+        when(fryer.isEmpty()).thenReturn(false);
+        when(fryer.isFinished()).thenReturn(false);
+        when(fryer.getType()).thenReturn('R');
 
         fryerViewer.draw(fryer, gui);
 

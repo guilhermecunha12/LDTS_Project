@@ -7,34 +7,38 @@ import getcooked.model.game.dish.DishType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
 
 class OrdersViewerTest {
     private GUI gui;
-    private OrdersViewer ordersViewer;
-    private List<Order> orders;
 
     @BeforeEach
     void setUp() {
         gui = mock(GUI.class);
-
-        Order order = mock(Order.class);
-        Dish desiredDish = new Dish(DishType.SALAD);
-
-        when(order.getDesiredDish()).thenReturn(desiredDish);
-        when(order.getRemainingTime()).thenReturn(120); // 2 seconds if FPS = 60
-
-        orders = List.of(order);
-        ordersViewer = new OrdersViewer(orders);
     }
 
     @Test
     void testDrawElements() throws Exception {
-        ordersViewer.drawElements(gui);
+        List<Order> orders = new ArrayList<>();
 
-        verify(gui, atLeastOnce()).drawText(any(), anyString(), anyString());
+        for(DishType type : DishType.values()) {
+            Order order = mock(Order.class);
+            Dish dish = new Dish(type);
+
+            when(order.getDesiredDish()).thenReturn(dish);
+            when(order.getRemainingTime()).thenReturn(20);
+
+            orders.add(order);
+        }
+
+        OrdersViewer ordersViewer = new OrdersViewer(orders);
+
+        ordersViewer.draw(gui);
+
+        verify(gui, atLeast(orders.size())).drawPixel(anyInt(), anyInt(), any());
     }
 
 }

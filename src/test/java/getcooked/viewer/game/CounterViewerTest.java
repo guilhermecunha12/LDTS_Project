@@ -22,7 +22,7 @@ class CounterViewerTest {
     }
 
     @Test
-    void testDrawEmptyCounter() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawEmptyCounterUP() throws IOException, URISyntaxException, FontFormatException {
         Counter counter = mock(Counter.class);
 
         when(counter.getType()).thenReturn('u');
@@ -51,5 +51,29 @@ class CounterViewerTest {
 
         verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
         verify(grabableViewer, times(1)).draw(grabable, gui);
+    }
+
+    @Test
+    void testDrawCounterEmptyBotoomLeft() throws IOException, URISyntaxException, FontFormatException {
+        Counter counter = mock(Counter.class);
+
+        when(counter.getType()).thenReturn('4');
+        when(counter.getContent()).thenReturn(null);
+
+        counterViewer.draw(counter, gui);
+
+        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawCounterEmptyTopRight() throws IOException, URISyntaxException, FontFormatException {
+        Counter counter = mock(Counter.class);
+
+        when(counter.getType()).thenReturn('2');
+        when(counter.getContent()).thenReturn(null);
+
+        counterViewer.draw(counter, gui);
+
+        verify(gui,atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }
 }

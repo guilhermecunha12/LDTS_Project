@@ -53,4 +53,16 @@ class ChefViewerTest {
         verify(grabableViewer).draw(grabable, gui);
         verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }
+
+    @Test
+    void testDrawChefFacingDown() throws IOException, URISyntaxException, FontFormatException {
+        Chef chef = mock(Chef.class);
+
+        when(chef.getDirection()).thenReturn(Chef.Direction.DOWN);
+        when(chef.isHoldingSomething()).thenReturn(false);
+
+        chefViewer.draw(chef,gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
 }

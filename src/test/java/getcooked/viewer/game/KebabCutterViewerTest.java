@@ -22,10 +22,21 @@ class KebabCutterViewerTest {
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawKebabCutterNormal() throws IOException, URISyntaxException, FontFormatException {
         KebabCutter kebabCutter = mock(KebabCutter.class);
         when(kebabCutter.getX()).thenReturn(0);
         when(kebabCutter.getY()).thenReturn(0);
+
+        kebabCutterViewer.draw(kebabCutter, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawKebabCutterFinished() throws IOException, URISyntaxException, FontFormatException {
+        KebabCutter kebabCutter = mock(KebabCutter.class);
+
+        when(kebabCutter.isFinished()).thenReturn(true);
 
         kebabCutterViewer.draw(kebabCutter, gui);
 

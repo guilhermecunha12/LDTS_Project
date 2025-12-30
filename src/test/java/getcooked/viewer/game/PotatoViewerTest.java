@@ -25,12 +25,24 @@ class PotatoViewerTest{
     }
 
     @Test
-    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+    void testDrawPotatoRaw() throws IOException, URISyntaxException, FontFormatException {
         Potato potato = mock(Potato.class);
 
         when(potato.getState()).thenReturn(FoodState.RAW);
+
         potatoViewer.draw(potato, gui);
 
         org.mockito.Mockito.verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
+    }
+
+    @Test
+    void testDrawPotatoChopped() throws IOException, URISyntaxException, FontFormatException {
+        Potato potato = mock(Potato.class);
+
+        when(potato.getState()).thenReturn(FoodState.CHOPPED);
+
+        potatoViewer.draw(potato, gui);
+
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }
 }
