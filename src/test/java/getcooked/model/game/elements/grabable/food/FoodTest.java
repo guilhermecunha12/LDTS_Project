@@ -49,4 +49,52 @@ class FoodTest {
         food.interactWithKitchenware(kitchenware, chef);
         verify(kitchenware, times(1)).acceptFoodInChef(food, chef);
     }
+
+    @Test
+    void testToDeliverSoda(){
+        Food sodaFood = new Food(0, 0) {
+            @Override
+            public DishType getCookedDishType() {
+                return DishType.SODA;
+            }
+
+            @Override
+            public ElementViewer getViewer() {
+                return null;
+            }
+        };
+        assertNotNull(sodaFood.toDeliver());
+    }
+
+    @Test
+    void testToDeliverSalad(){
+        Food saladFood = new Food(0, 0) {
+            @Override
+            public DishType getCookedDishType() {
+                return DishType.SALAD;
+            }
+
+            @Override
+            public ElementViewer getViewer() {
+                return null;
+            }
+        };
+        assertNotNull(saladFood.toDeliver());
+    }
+
+    @Test
+    void testToDeliverOtherDish(){
+        Food otherFood = new Food(0, 0) {
+            @Override
+            public DishType getCookedDishType() {
+                return DishType.KEBAB;
+            }
+
+            @Override
+            public ElementViewer getViewer() {
+                return null;
+            }
+        };
+        assertNull(otherFood.toDeliver());
+    }
 }

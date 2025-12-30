@@ -27,6 +27,15 @@ public class AudioManager {
         setBackgroundVolume(70);
     }
 
+    public AudioManager(BackgroundMusicPlayer backgroundMusicPlayer, FloatControl gain,
+                        boolean backgroundMusicOn, int currentPercentage) {
+        this.backgroundMusicPlayer = backgroundMusicPlayer;
+        this.gain = gain;
+        this.backgroundMusicOn = backgroundMusicOn;
+        this.currentPercentage = currentPercentage;
+
+    }
+
     public void playBackgroundMusic() {
         backgroundMusicPlayer.start();
         backgroundMusicOn = true;

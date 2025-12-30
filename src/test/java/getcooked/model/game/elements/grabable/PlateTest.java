@@ -58,4 +58,16 @@ class PlateTest {
         plate.interactWithKitchenware(kitchenware, chef);
         verify(kitchenware, times(1)).acceptPlateInChef(plate, chef);
     }
+
+    @Test
+    void testToDeliverWithContent() {
+        Dish dish = new Dish(DishType.SALAD);
+        plate.setContent(dish);
+        assertEquals(dish, plate.toDeliver());
+    }
+
+    @Test
+    void testToDeliverWithoutContent() {
+        assertNull(plate.toDeliver());
+    }
 }
