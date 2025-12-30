@@ -1,33 +1,35 @@
 package getcooked.viewer.game;
 
 import getcooked.gui.GUI;
-import getcooked.model.Position;
 import getcooked.model.game.elements.interactable.DeliverySpot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import static org.mockito.Mockito.*;
 
-public class DeliverySpotViewerTest {
+class DeliverySpotViewerTest {
     private GUI gui;
-    private DeliverySpot deliverySpot;
     private DeliverySpotViewer deliverySpotViewer;
 
     @BeforeEach
-    void setUp() {
-        this.gui = mock(GUI.class);
-        this.deliverySpot = mock(DeliverySpot.class);
-        this.deliverySpotViewer = new DeliverySpotViewer();
+    void setUp(){
+        gui = mock(GUI.class);
+        deliverySpotViewer = new DeliverySpotViewer();
     }
 
     @Test
-    void testDrawDeliverySpot(){
-        Position position = mock(getcooked.model.Position.class);
+    void testDraw() throws IOException, URISyntaxException, FontFormatException {
+        DeliverySpot deliverySpot = mock(DeliverySpot.class);
 
-        when(deliverySpot.getPosition()).thenReturn(position);
+        when(deliverySpot.getX()).thenReturn(0);
+        when(deliverySpot.getY()).thenReturn(0);
 
         deliverySpotViewer.draw(deliverySpot, gui);
 
-        verify(gui,times(1)).drawDelivery(position);
+        verify(gui, atLeastOnce()).drawPixel(anyInt(), anyInt(), any());
     }
 }
