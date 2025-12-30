@@ -7,6 +7,7 @@ import getcooked.model.game.Kitchen;
 import getcooked.model.game.Order;
 import getcooked.model.game.OrderManager;
 import getcooked.model.game.elements.Chef;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import getcooked.states.menu.EscapeMenuState;
 import getcooked.states.menu.GameOverState;
 import org.junit.jupiter.api.BeforeEach;
@@ -112,5 +113,19 @@ class KitchenControllerTest {
         kitchenController.step(game, Set.of(), 0);
 
         verify(orderManager, times(1)).setTimeForNewOrder(Game.FPS);
+    }
+
+    @Test
+    void testCookwareUpdateCalled() throws IOException {
+        Cookware cookware = mock(Cookware.class);
+
+        when(kitchen.getCookwares()).thenReturn(List.of(cookware));
+        when(kitchen.getOrderManager()).thenReturn(mock(OrderManager.class));
+        when(kitchen.getActiveOrders()).thenReturn(Collections.emptyList());
+        when(kitchen.getLives()).thenReturn(1);
+
+        kitchenController.step(game, Set.of(), 0);
+
+        verify(cookware).update();
     }
 }
