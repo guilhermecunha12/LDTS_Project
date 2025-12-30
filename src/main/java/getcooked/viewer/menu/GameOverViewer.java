@@ -17,12 +17,12 @@ public class GameOverViewer extends Viewer<GameOverMenu> {
         gui.paint();
 
         int middleX = gui.getWidth() / 2;
-        gui.drawText(new Position(middleX - 9, gui.getHeight()/12), "Game Over", "#ffcf40");
-        gui.drawText(new Position(middleX - 24, gui.getHeight()/6 + 5), "Delivered dishes: "
+        gui.drawText(new Position(middleX - 18, gui.getHeight()/12), "Game Over", "#ffcf40");
+        gui.drawText(new Position(middleX - 35, gui.getHeight()/6 + 5), "Delivered dishes: "
                 + getModel().getOrdersDelivered(), "#ffcf40");
 
-        Position posBackToMainMenu = new Position(middleX - 23, gui.getHeight()/2 - 10);
-        Position posExit = new Position(middleX - 8, gui.getHeight()/2);
+        Position posBackToMainMenu = new Position(middleX - 32, gui.getHeight()/2 - 10);
+        Position posExit = new Position(middleX - 17, gui.getHeight()/2);
 
         for(int i = 0; i < getModel().getNumberEntries(); i++) {
             Position curPos = posBackToMainMenu;
