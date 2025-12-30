@@ -99,15 +99,15 @@ class ChefControllerTest {
     }
 
     @Test
-    void testChefSelect() {
+    void testChefSelect() throws IOException {
         Position frontPos = new Position(5,4);
-        Interactable interactable = mock(Interactable.class);
+        Interactable frontInteractable = mock(Interactable.class);
 
         when(chef.getFrontPosition()).thenReturn(frontPos);
-        when(kitchen.getInteractable(frontPos)).thenReturn(interactable);
+        when(kitchen.getInteractable(frontPos)).thenReturn(frontInteractable);
 
-        chefController.chefSelect();
+        chefController.step(game, Set.of(GUI.ACTION.PLAYER1_SELECT),0);
 
-        verify(interactable,times(1)).interact(chef);
+        verify(frontInteractable,times(1)).interact(chef);
     }
 }
