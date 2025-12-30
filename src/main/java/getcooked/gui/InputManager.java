@@ -23,6 +23,12 @@ public class InputManager {
         addKeyListener(terminal);
     }
 
+    public InputManager(Set<Integer> activeInputs, Set<Integer> previousInputs, Map<Integer, Long> lastActionTimes) {
+        this.activeInputs = activeInputs;
+        this.previousInputs = previousInputs;
+        this.lastActionTimes = lastActionTimes;
+    }
+
     // Static key-to-action mapping for all available keybinds
     private static final Map<Integer, GUI.ACTION> KEY_MAPPINGS = Map.ofEntries(
             // PLAYER 1

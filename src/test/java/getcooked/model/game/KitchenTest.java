@@ -3,6 +3,7 @@ package getcooked.model.game;
 import getcooked.model.Position;
 import getcooked.model.game.elements.Chef;
 import getcooked.model.game.elements.Interactable;
+import getcooked.model.game.elements.interactable.kitchenware.cookware.Cookware;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,7 @@ class KitchenTest {
     private int lives;
     private OrderManager orderManager;
     private Kitchen kitchen;
+    private List<Cookware> cookwares;
 
 
     @BeforeEach
@@ -29,7 +31,7 @@ class KitchenTest {
         this.chefs = new ArrayList<>();
         this.interactables = new ArrayList<>();
         this.orderManager = mock(OrderManager.class);
-        this.kitchen = new Kitchen(level, numPlayers, chefs, interactables, lives,  orderManager);
+        this.kitchen = new Kitchen(level, numPlayers, chefs, interactables, lives, orderManager, cookwares);
     }
 
     @Test
