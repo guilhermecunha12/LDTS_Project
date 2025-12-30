@@ -8,20 +8,35 @@ Alone or with a friend you must prepare dishes to satisfy food orders, that will
 This project was developed by *Gabriel Magalhães* (*up202405890@fe.up.pt*), *Guilherme Cunha* (*up202405961@fe.up.pt*) and *Pedro Pires* (*up202405967@fe.up.pt*) for LDTS 2025⁄26.
 
 ### IMPLEMENTED FEATURES
-
-- **Connected Menus** - The user has the capability of browsing through the different menus including in game ones, using interactive buttons (ex: Main Menu, Cook Menu, Settings, Escape Menu). Once the player(s) lose, a Game Over Menu is prompted with options to exit the game and to return to the Main Menu.
-- **Background Music** - The game has background music that can be turned on or off in the Settings Menu.
-- **Collisions detection** - Collisions between the chef and interactables (counters, delivery spots, dispensers, cookwares) or the other chef are verified.
+- **Single Player and Two-Player Modes** - The game can be played by one or two players, in the same device (locally),
+with customized difficulty.
+- **Connected Menus** - The user has the capability of browsing through the different menus including in game ones, using 
+interactive buttons (ex: Main Menu, Cook Menu, Settings, Escape Menu). 
+Once the player(s) lose, a Game Over Menu is prompted, showing the total number of orders fulfilled and options to 
+exit the game and to return to the Main Menu.
+- **Background Music** - The game has background music with adjustable volume level 
+and can be turned on or off in the Settings Menu.
+- **Collisions detection** - Collisions between chef's and interactables 
+(counters, delivery spots, dispensers, cookwares) are verified.
 - **Grab** - When not holding anything, chefs will grab food and plates by pressing the space bar and enter keys, for player 1 and player 2, respectively.
 - **Drop** - When holding something, chefs will drop food and plates by pressing the space bar and enter keys, for player 1 and player 2, respectively.
-- **Pot cooking** - When the Pot cookware receives a potato or a carrot, it will generate a potato soup or a carrot soup, which can later be collected by a chef holding a plate.
+- **Pot cooking** - When the Pot cookware receives a chopped potato or carrot, 
+it will generate a potato soup or a carrot soup which, after 4 seconds, can be collected by a chef holding a plate, and delivered.
+Grill and Fryer have similar behaviour.
 - **Trash** - When a chef interacts with a trash bin, all the things he was holding get dumped.
 - **Delivery Spot** - Chefs can only deliver orders in the delivery spots.
+- **Dispensers** - Chefs can get raw foods from dispensers by interacting with them.
+- **Cutter** - Chefs can chop raw foods  by interacting with cutters pressing space or enter 5 times. 
+CounterCutter and KebabCutter share this behaviour, even though a plate is needed to collect the ready kebab.
+- **Counters** - Chefs can place grabables on counters and pick them up from there.
 - **Order Generation** - Orders are randomly generated in accordance to the existent foods and interactables in the current kitchen map.
 - **Order Matching** - Chefs can only fulfill orders that are currently active. Once an active order is fulfilled, it will leave the active orders queue.
 - **Orders by level** - A higher level means more orders per level and a higher frequency of orders (orders come faster).
 - **Lives** - The playing session ends when there are no more lives left.
-
+- **Sprites** - The game uses sprites for enhanced game visuals.
+- **Game Progression** - The game gets progressively harder as the player(s) advance through levels,
+    with more orders to fulfill, with greater diversity and less time to do so.
+- **Enhanced Resolution** - The game's resolution adapts to the pc's screen resolution.
 
 <p align="center" justify="center">
   <img src="gifs/menu_navigation.gif"/>
@@ -50,19 +65,6 @@ This project was developed by *Gabriel Magalhães* (*up202405890@fe.up.pt*), *Gu
 <br>
 <br />
 
-
-### PLANNED FEATURES
-
-- **Sprites use** - Use sprites to enhance game visuals.
-- **New foods** - Add beef, salad, soda and kebab and their corresponding dispensers.
-- **New interactables** - Add grill for beefs, a counterCutter for potatoes and carrots (then the pot will only accept chopped potatoes and chopped carrots) and a fryer for potatoes.
-- **Add cooking behaviours** - Implement distinct cooking behaviours for different interactables: grills, fryers, and pots will require time to cook food and the counterCutter and the kebab dispenser will require player input (chopping actions) to cut food.     
-- **New kitchen maps** - Create a set of 10 kitchen maps that are introduced progressively as levels increase and have increasingly more foods and interactables available.
-- **Difficulty adjustment** - Adjust the game difficulty according to the selected game mode (single player or two-player).
-- **Number of orders delivered** - Present the number of orders delivered during and at the end of the game.
-- **Order time limit decrement** - Decrement orders time limit each level, to make the level even harder.
-- **Volume level** - Implement volume level.
-- **Enhance Resolution** - Make game's resolution match the pc's screen.
 
 <p align="center" justify="center">
   <img src="images/volume_mockup.png"/>
