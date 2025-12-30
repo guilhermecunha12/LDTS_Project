@@ -26,7 +26,7 @@ it will generate a potato soup or a carrot soup which, after 4 seconds, can be c
 Grill and Fryer have similar behaviour.
 - **Trash** - When a chef interacts with a trash bin, all the things he was holding get dumped.
 - **Delivery Spot** - Chefs can only deliver orders in the delivery spots.
-- **Dispensers** - Chefs can get raw foods from dispensers by interacting with them.
+- **Dispensers** - Chefs can get raw foods or plates from dispensers by interacting with them.
 - **Cutter** - Chefs can chop raw foods  by interacting with cutters pressing space or enter 5 times.
   CounterCutter and KebabCutter share this behaviour, even though a plate is needed to collect the ready kebab.
 - **Counters** - Chefs can place grabables on counters and pick them up from there.
@@ -35,7 +35,7 @@ Grill and Fryer have similar behaviour.
 - **Orders by level** - A higher level means more orders per level and a higher frequency of orders (orders come faster).
 - **Lives** - The playing session ends when there are no more lives left.
 - **Sprites** - The game uses sprites for enhanced game visuals.
-- **Game Progression** - The game gets progressively harder as the player(s) advance through levels,
+- **Game Progression** - The game gets progressively harder as the player(s) advance(s) through levels,
   with more orders to fulfill, with greater diversity and less time to do so.
 - **Enhanced Resolution** - The game's resolution adapts to the pc's screen resolution.
 
@@ -78,7 +78,7 @@ Grill and Fryer have similar behaviour.
 
 ### UML DIAGRAMS
 
-These are the UML diagrams of each package of the project. 
+These are the UML diagrams of the project. 
 
 <p align="center" justify="center">
   <img src="images/uml_game.png"/>
@@ -273,7 +273,7 @@ These are the UML diagrams of each package of the project.
 #### Factory
 
 - **Problem in Context** <br>
-  The Factory Pattern is used throughout our project in two concrete Classes:
+  The **Factory** Pattern is used throughout our project in two concrete Classes:
 
   - <p> State: The game comprises multiple distinct execution states such as MainMenuState, SettingsMenuState, and KitchenState (the active gameplay state). To manage these effectively, we needed a design that balanced customization with code reuse.<br>
     While each State requires unique Viewers and Controllers tailored to the specific needs of that State, they all share the same underlying architecture: the Model-Viewer-Controller (MVC).<br>
@@ -281,11 +281,11 @@ These are the UML diagrams of each package of the project.
     </p>
   - <p> Element: The game features multiple visual components such as Delivery Spot, Trash, and various Food items(Potato, Beef, etc.) that needed to be rendered on screen.<br>
     Every Element demands its own concrete rendering logic, yet all Elements fundamentally represent the same, objects positioned in the Kitchen.<br>
-    We needed an approach that allows each Element to determine its own Viewer implementation while maintaining the rendering system consistent and generic enough so that it could be used for all Elements, improving maintainability and extensebility.
+    We needed an approach that allows each Element to determine its own Viewer implementation while maintaining the rendering system consistent and generic enough so that it could be used for all Elements, improving maintainability and extensibility.
 
   </p>
 - **The Pattern**<br>
-  The identified solution was the Factory design pattern. This pattern provides a way to create objects without specifying their exact classes. Instead, it defines an abstract creator class with a method for the object creation.
+  The identified solution was the **Factory** design pattern. This pattern provides a way to create objects without specifying their exact classes. Instead, it defines an abstract creator class with a method for the object creation.
 - **Implementation** <br>
 
   <p>State:
@@ -307,12 +307,12 @@ These are the UML diagrams of each package of the project.
 
 
 
-Diagram showing all ElementViewers
+Diagram showing all Elements
 <p align="center" justify="center">
-    <img src="images/element_viewer.png"/>
+    <img src="images/elements_factory.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 20. ElementViewer Factory  </i></b>
+    <b><i>Fig 20. Elements Factory  </i></b>
   </p>
   <br>
 
@@ -320,7 +320,7 @@ Diagram showing all ElementViewers
 
 - **Consequences** <br>
   - Polymorphism: This approach enables the Game Loop to treat all states polymorphically (calling the same step() method on any active state);
-  - Extensibility: Respects the Open/Closed Principle, since its possible to introduce new States and Elements without breaking the existing code;
+  - Extensibility: Respects the Open-Closed Principle, since its possible to introduce new States and Elements without breaking the existing code;
   - Single Responsibility: Each concrete State and Element is responsible for knowing their according Viewer and Controller(only for State), rather than having the base class containing the instantition logic for all possible types.
   - Although introducing a factory method added some initial complexity, the game architecture significantly benefited from the structural clarity and decoupling provided by this pattern.
 
@@ -356,7 +356,7 @@ Diagram showing all ElementViewers
 - **Consequences**<br>
   This approach provided several benefits:
   - Keeping the code well organized and respecting the Single Responsibility Principle.
-  - Adding new states can be done without modifying existing states. This allows the code to be more modular, following a Open/Closed Principle.
+  - Adding new states can be done without modifying existing states. This allows the code to be more modular, following a Open-Closed Principle.
   - Switching between states becomes simple and very consistent, reducing risks of errors.
 
 #### GUI
@@ -368,20 +368,12 @@ Diagram showing all ElementViewers
 - **Implementation**<br>
   This implementation can be found in the gui package: the general GUI class and the specific LanternaGUI (adapter).
 
-<p align="center" justify="center">
-    <img src="images/uml_gui.png"/>
-  </p>
-  <p align="center">
-    <b><i>Fig 23. GUI  </i></b>
-  </p>
-  <br>
-
 
 <p align="center" justify="center">
     <img src="images/adapter.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 24. Adapter Pattern  </i></b>
+    <b><i>Fig 23. Adapter Pattern  </i></b>
   </p>
   <br>
 
@@ -401,59 +393,65 @@ Diagram showing all ElementViewers
   To implement this pattern, we changed LanternaGUI to act as a Facade and created 3 new classes FontManager, InputManager and ScreenCreator.<br>
   LanternaGUI delegates screen initialization to ScreenCreator, which encapsulates the complexity of configuring and creating the terminal screen. ScreenCreator handles all the calculations and settings required to set up the screen properly.<br>
   The FontManager class manages all font-related operations, such as setting the correct font size to be used by the Lanterna Terminal and loading and drawing the pixel font used by all menus.<br>
-  The keyboard inputs are managed by the InputManager class, which encapsulates the logic for handling key presses and releases. LanternaGUI simply calls inputManager.getNextAction() to retrieve the next user action without needing to know how the input is processed.
+  The keyboard inputs are managed by the InputManager class, which encapsulates the logic for handling key presses and releases. LanternaGUI simply calls inputManager.getNextAction() to retrieve the next user action without needing to know how the input is processed, delegating this responsibility to InputManager.
 
 <p align="center" justify="center">
     <img src="images/facade.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 25. GUI  </i></b>
+    <b><i>Fig 24. Facade  </i></b>
   </p>
   <br>
 
 - **Consequences** <br>
-  By implementing the Facade pattern, we avoid having a large and complex LanternaGUI class, providing several benefits:
+  By implementing the **Facade** pattern, we avoid having a large and complex LanternaGUI class, providing several benefits:
     - Simplified Interface: LanternaGUI provides a clean and straightforward interface for the rest of the game to interact with, hiding the complexities of screen creation, font management, and input handling.
-    - Centralized Control: The Facade pattern centralizes the control of the GUI subsystem, making it easier to manage and modify without affecting other parts of the code.
+    - Centralized Control: The **Facade** pattern centralizes the control of the GUI subsystem, making it easier to manage and modify without affecting other parts of the code.
     - Improved Maintainability: By separating concerns into distinct classes, the code becomes more modular and easier to maintain. Each class has a clear responsibility, adhering to the Single Responsibility Principle.
 
 #### Visitor
 
 - **Problem in Context** <br>
   Our initial code relied heavily on instanceof checks and type casting to determine the concrete type of Grabable that Chef was carrying. This approach led to several issues.
-  Adding a new Grabable type required modifying multiple parts of the code, violating the Single Responsibility Principle.
+  Adding a new Grabable type required modifying multiple parts of the code, violating the Open-Closed Principle.
   Interactables also had direct dependencies on specific Grabable types, making the code less modular thus violating the Dependency Inversion Principle.
 
 - **The Pattern** <br>
-  To solve this problem we used the Visitor Pattern. This pattern allows new operations to be added to existing class without modifying their structutre. By seprating the behavior from the object structure, it enables adding new operations without changing the classes of the elements on which it operates.
+  To solve this problem we used the **Visitor** Pattern. This pattern allows new operations to be added to existing class without modifying their structure. By separating the behavior from the object structure, it enables adding new operations without changing the classes of the elements on which it operates.
 
 - **Implementation** <br>
-  We implemented the Visitor Pattern to enable double dispatch between Grabable and Kitchenware objects. It consists of two main components.
-  The First dispatch occurs when chef.getItem().interactWithKitchenware(kitchenware) is called the specific Grabable interactWithKitchenware() method is invoked based on the concrete type of the Grabable type(Food, Plate).
-  The Second dispatch occurs when the Grabable calls back the Kitchenware's type-specific method.
+  We implemented the **Visitor** Pattern to enable double dispatch between Grabable and Kitchenware objects. It consists of two main components.
+  The first dispatch occurs when chef.getItem().interactWithKitchenware(kitchenware, chef) is called on the specific Grabable's interactWithKitchenware() method which is invoked based on the concrete type of the Grabable type(Food, Plate).
+  The second dispatch occurs when the Grabable calls back the Kitchenware's type-specific method.
   For instance, Food calls kitchenware.acceptFood(this, chef) while Plate calls kitchenware.acceptPlate(this, chef), then dispatching the appropriate implementation based on the Kitchenware type.
   This allows different behaviors for each combination of Grabable and Kitchenware types without instanceof checks or type casting, through polymorphism.
 
 - **Consequences** <br>
 - This approach provided several benefits:
-    - Open/Closed Principle: New Grabable or Kitchenware types can be added without modifying existing classes.
+    - Open-Closed Principle: New Grabable or Kitchenware types can be added without modifying existing classes.
     - Single Responsibility Principle: Each class focuses on its own behavior without needing to know about other types.
     - Reduced Complexity: Eliminates instanceof checks and type casting, leading to cleaner and more maintainable code.
 
 #### KNOWN CODE SMELLS
-- **ElementViewer** - In the Element class, getViewer() returns an ElementViewer, giving a warning of
-raw parameterized use. We tried to mitigate this error by parameterizing the return value but a solution was not found.
-- **LoaderKitchenBuilder** - The createinteractables() method is long due to only wanting to read the file once
-  (only one loop) and the switch case is quite long given the diversity of interactables.
-- **Magic Numbers** - Some classes, especially menu Viewers, contain magic numbers, only meaningful 
-to correctly position elements on the screen.
+- **Deep Inheritance Hierarchies** - Cookwares have deep inheritance hierarchies (5 parents including Object class). However, the complexity of the game justifies this design choice.
+- **ElementViewer** - In the Element class, getViewer() returns an ElementViewer, which triggers a warning about raw parameterized use. 
+We thoroughly tried to mitigate this error by parameterizing the return value, but a solution was not found. 
+This is mainly due to the complex inheritance and generic relationships between elements and their viewers, 
+which makes it difficult to fully type the method without causing further issues elsewhere in the codebase. 
+As a result, we accepted the warning to maintain flexibility and avoid excessive boilerplate code. 
+Future improvements could involve refactoring the viewer system to better leverage generics or introducing a more robust type-safe factory mechanism.
+- **LoaderKitchenBuilder** - The createInteractables() method is long due to only wanting to read the file once (only one loop), and the switch case is quite long given the diversity of interactables. 
+This design choice was made to optimize performance and avoid multiple file reads, but it results in a method that is harder to maintain and extend.
+- **Magic Numbers** - Some classes, especially menu Viewers, contain magic numbers, which are only meaningful for correctly drawing on the screen. 
+These numbers are often related to layout, spacing, or positioning of UI elements. 
+While they serve their purpose, they reduce code clarity and make future adjustments more error-prone.
 
 ### TESTING
 <p align="center" justify="center">
     <img src="images/test_coverage.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 26. Test Coverage</i></b>
+    <b><i>Fig 25. Test Coverage</i></b>
   </p>
   <br>
 
@@ -461,7 +459,7 @@ to correctly position elements on the screen.
     <img src="images/jacoco.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 27. Jacoco Test Coverage</i></b>
+    <b><i>Fig 26. Jacoco Test Coverage</i></b>
   </p>
   <br>
 
@@ -469,7 +467,7 @@ to correctly position elements on the screen.
     <img src="images/pitest.png"/>
   </p>
   <p align="center">
-    <b><i>Fig 28. Pitest Mutation Testing</i></b>
+    <b><i>Fig 27. Pitest Mutation Testing</i></b>
   </p>
   <br>
 
