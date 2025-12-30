@@ -466,7 +466,7 @@ to correctly position elements on the screen.
   <br>
 
 <p align="center" justify="center">
-    <img src="images/pit_test.png"/>
+    <img src="images/pitest.png"/>
   </p>
   <p align="center">
     <b><i>Fig 28. Pitest Mutation Testing</i></b>
