@@ -7,13 +7,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FontManager {
     private int fontSize;
@@ -65,7 +68,7 @@ public class FontManager {
         URL resource = getClass().getClassLoader().getResource("fonts/font-map.txt");
 
         // load charPositionCache with the top left position of each character
-        try (BufferedReader br = new BufferedReader(new FileReader(Objects.requireNonNull(resource).getFile()))) {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(Objects.requireNonNull(resource).getFile()), UTF_8)) {
             int mapY = 0;
             for (String line; (line = br.readLine()) != null; mapY++) {
                 for (int mapX = 0; mapX < line.length(); mapX++) {

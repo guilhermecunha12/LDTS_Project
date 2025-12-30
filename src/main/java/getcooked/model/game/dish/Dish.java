@@ -12,11 +12,10 @@ public class Dish {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if(obj == null) return false;
+        if (!(obj instanceof Dish dish)) return false;
 
-        Dish dish = (Dish) obj;
-        return type == dish.type;
+        return this.type == dish.type;
     }
 
     public DishType type() {
