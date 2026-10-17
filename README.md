@@ -1,4 +1,4 @@
-# LDTS_T05_G01 - GET COOKED
+# Get Cooked
 
 ## Game Description
 
