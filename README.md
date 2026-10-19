@@ -93,4 +93,11 @@ The following screenshots illustrate the general look of our game.
 <br>
 <br />
 
+## Developers
+
+This project was developed by:
+
+* Gabriel Magalhães (<up202405890@up.pt>)
+* Guilherme Cunha (<up202405961@up.pt>)
+* Pedro Pires (<up202405967@up.pt>)
 
